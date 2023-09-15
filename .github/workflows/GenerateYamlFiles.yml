@@ -1,0 +1,54 @@
+name: GenerateYamlFiles
+
+on: 
+  workflow_dispatch:
+  pull_request:
+    branches:
+      - main
+    paths:
+      - .github/workflows/GenerateYamlFiles.yml
+
+env:
+  test_model_name: GenerateYamlFiles
+  GITHUB_TOKEN: ${{ secrets.WORKFLOW_TOKEN }}
+jobs:
+  deploy-model-job:
+    runs-on: ubuntu-latest
+    steps:
+    - name: check-out-repo-step
+      uses: actions/checkout@v3
+      with:
+        lfs: true
+        repository: Azure/azureml-oss-models
+        branh: main
+        token: ${{ secrets.WORKFLOW_TOKEN }} # `GH_PAT` is a secret that contains your PAT
+    - name: azure-login-step
+      uses: azure/login@v1
+      with:
+        creds: ${{secrets.AZURE_CREDENTIALS}}
+    - name: pip-install-azure-ai-ml
+      run: pip install azure-ai-ml
+    - name: pip install pyyaml
+      run: pip install pyyaml
+    - name: jq
+      run: pip install jq
+    - name: pip-install-python-box
+      run: pip install python-box 
+    - name: deploy-model-step
+      id: deploy-model-step
+      run: python create_queue.py
+      working-directory: tests/setup
+    - name: Commit files
+      id: commit
+      run: | 
+        git config user.email "${{ secrets.USER_EMAIL }}"           
+        git config user.name "${{ secrets.USER_NAME }}"
+        git add --all
+        git commit -m --all          
+        git push
+    - name: trigger-next-model-step
+      env:
+        GITHUB_TOKEN: ${{ secrets.WORKFLOW_TOKEN }}
+      if: ${{ env.test_trigger_next_model == 'true' && steps.deploy-model-step.outputs.NEXT_MODEL != '' && (success() || failure())}}
+      run: gh workflow run ${{ steps.deploy-model-step.outputs.NEXT_MODEL }} --ref ${{ github.ref_name }}
+      
