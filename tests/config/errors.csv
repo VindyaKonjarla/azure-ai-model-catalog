@@ -1,0 +1,12 @@
+parse_string,error_category,
+'OSError:',transformers
+'ValueError:',transformers
+'ImportError:',transformers
+'TypeError:',transformers
+'ModuleNotFoundError:',transformers
+'Not enough quota',azureml
+'OperationDuplicationConflict',azureml
+'MmsOperation',azureml
+'Could not create endpoint',azureml
+'Code: FailedIdentityOperation',azureml
+'AMLComputeError:',azureml

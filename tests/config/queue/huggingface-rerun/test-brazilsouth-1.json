@@ -1,0 +1,10 @@
+{
+    "queue_name": "test-brazilsouth-1",
+    "models": [
+        "ilyagusev-fred-t5-ru-turbo-alpaca"
+    ],
+    "workspace": "test-brazilsouth",
+    "subscription": "c11df4e4-eb38-4e11-b3dd-e8874de77d0a",
+    "resource_group": "huggingface-registry-test",
+    "registry": "HuggingFace"
+}
