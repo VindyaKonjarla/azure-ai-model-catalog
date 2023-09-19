@@ -13,6 +13,7 @@ from azure.ai.ml.entities import (
     AzureMLOnlineInferencingServer
 )
 from utils.logging import get_logger
+from fetch_task import HfTask
 import mlflow
 from box import ConfigBox
 import re
@@ -268,7 +269,13 @@ class ModelInferenceAndDeployemnt:
             model_name = self.test_model_name
         latest_model = self.get_latest_model_version(
             self.workspace_ml_client, model_name)
-        task = latest_model.flavors["transformers"]["task"]
+        try:
+            task = latest_model.flavors["transformers"]["task"]
+        except Exception as e:
+            logger.warning(f"::warning::From the transformer flavour we are not able to extract the task for this model : {latest_model}")
+            logger.info(f"Following Alternate approach to getch task....")
+            hfApi = HfTask(model_name=self.test_model_name)
+            task = hfApi.get_task()
         logger.info(f"latest_model: {latest_model}")
         logger.info(f"Task is : {task}")
         scoring_file, scoring_input = self.get_task_specified_input(task=task)
