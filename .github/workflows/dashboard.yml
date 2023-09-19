@@ -58,7 +58,7 @@ jobs:
             echo "No changes to commit or there was an error. Skipping commit and push."
           fi
           
-      - name: Add Generated File
+      - name: Add Generated File to Archive with datestamp
         run: |
           git config user.email "${{ secrets.USER_EMAIL }}"
           git config user.name "${{ secrets.USER_NAME }}"
