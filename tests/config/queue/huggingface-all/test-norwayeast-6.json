@@ -1,5 +1,5 @@
 {
-    "queue_name": "test-norwayeast-4",
+    "queue_name": "test-norwayeast-6",
     "models": [
        
         "MLFlow-benjamin/wtp-bert-mini",
