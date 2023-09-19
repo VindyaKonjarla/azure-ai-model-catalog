@@ -12,7 +12,7 @@ class Dashboard():
         #self.github_token = "API_TOKEN"
         self.token = Auth.Token(self.github_token)
         self.auth = Github(auth=self.token)
-        self.repo = self.auth.get_repo("Konjarla-Vindya/son-azureml-oss-models")
+        self.repo = self.auth.get_repo("Azure/azure-ai-model-catalog")
         self.repo_full_name = self.repo.full_name
         self.data = {
             "workflow_id": [], "workflow_name": [], "last_runid": [], "created_at": [],
@@ -22,7 +22,7 @@ class Dashboard():
 
     def get_all_workflow_names(self):
         workflow_name = ["MLFlow-codellama/CodeLlama-13b-Instruct-hf","MLFlow-mosaicml/mpt-7b-storywriter","MLFlow-microsoft/MiniLM-L12-H384-uncased"]
-        # API = "https://api.github.com/repos/Konjarla-Vindya/son-azureml-oss-models/actions/workflows"
+        # API = "https://api.github.com/repos/Azure/azure-ai-model-catalog/actions/workflows"
         # print (f"Getting github workflows from {API}")
         # total_pages = None
         # current_page = 1
@@ -122,7 +122,8 @@ class Dashboard():
                 models_entry = {
                     "Model": workflow_name.replace(".yml", ""),
                     # "Status": "<span style='background-color: #00FF00; padding: 2px 6px; border-radius: 3px;'>PASS</span>" if last_run["conclusion"] == "success" else "<span style='background-color: #FF0000; padding: 2px 6px; border-radius: 3px;'>FAIL</span>",
-                    "Status": " ✅ PASS" if last_run["conclusion"] == "success" else "❌ FAIL",
+                    # "Status": " ✅ PASS" if last_run["conclusion"] == "success" elif last_run["conclusion"] == "failure" "❌ FAIL",
+                    "Status": f"{'✅ PASS' if last_run['conclusion'] == 'success' else '❌ FAIL' if last_run['conclusion'] == 'failure' else '🚫 CANCELLED' if last_run['conclusion'] == 'cancelled' else '⏳ RUNNING'}",
                     "Link": f"[Run Link]({run_link})",
                     "LastRun_Timestamp": last_run["created_at"]
                 }
@@ -139,7 +140,7 @@ class Dashboard():
         return self.data
 
     def results(self, last_runs_dict):
-        results_dict = {"total": 0, "success": 0, "failure": 0, "cancelled": 0, "not_tested": 0, "total_duration": 0}
+        results_dict = {"total": 0, "success": 0, "failure": 0, "cancelled": 0,"running":0, "not_tested": 0, "total_duration": 0}
         summary = []
 
  
@@ -149,17 +150,20 @@ class Dashboard():
         results_dict["success"] = df.loc[(df['status'] == 'completed') & (df['conclusion'] == 'success')]['workflow_id'].count()
         results_dict["failure"] = df.loc[(df['status'] == 'completed') & (df['conclusion'] == 'failure')]['workflow_id'].count()
         results_dict["cancelled"] = df.loc[(df['status'] == 'completed') & (df['conclusion'] == 'cancelled')]['workflow_id'].count()
+        results_dict["running"] = df.loc[df['status'] == 'in_progress']['workflow_id'].count()  # Add running count
+
 
         success_rate = results_dict["success"]/results_dict["total"]*100.00
         failure_rate = results_dict["failure"]/results_dict["total"]*100.00
         cancel_rate = results_dict["cancelled"]/results_dict["total"]*100.00
+        running_rate = results_dict["running"] / results_dict["total"] * 100.00  # Calculate running rate
 
  
 
-        summary.append("🚀Total|✅Success|❌Failure|🚫Cancelled|")
-        summary.append("-----|-------|-------|-------|")
-        summary.append(f"{results_dict['total']}|{results_dict['success']}|{results_dict['failure']}|{results_dict['cancelled']}|")
-        summary.append(f"100.0%|{success_rate:.2f}%|{failure_rate:.2f}%|{cancel_rate:.2f}%|")
+        summary.append("🚀Total|✅Success|❌Failure|🚫Cancelled|⏳Running|")
+        summary.append("-----|-------|-------|-------|-------|")
+        summary.append(f"{results_dict['total']}|{results_dict['success']}|{results_dict['failure']}|{results_dict['cancelled']}|{results_dict['running']}|")
+        summary.append(f"100.0%|{success_rate:.2f}%|{failure_rate:.2f}%|{cancel_rate:.2f}%|{running_rate:.2f}%|")
 
  
 
