@@ -17,7 +17,7 @@ jobs:
         with:
         # # ref: main
             lfs: true
-            repository: Konjarla-Vindya/son-azureml-oss-models
+            repository: Azure/azure-ai-model-catalog
             branch: main
         # #     git config global init.defaultBranch main
             token: ${{ secrets.WORKFLOW_TOKEN }}
