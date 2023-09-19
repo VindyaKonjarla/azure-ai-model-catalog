@@ -7,7 +7,7 @@ env:
   test_model_name: scite/ms-marco-MiniLM-L-12-v2-onnx-optimized
   test_sku_type: cpu
   test_trigger_next_model: true
-  test_queue: test-eastus-3
+  test_queue: test-southafricanorth-0
   test_set: huggingface-all
   test_keep_looping: false
 
