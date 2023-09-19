@@ -101,16 +101,17 @@ class ModelInferenceAndDeployemnt:
         logger.info("In create_model_package...")
         try:
             model_configuration = ModelConfiguration(mode="download")
-            latest_model_name = self.get_model_name(
-                latest_model_name=latest_model.name)
-            package_name = f"package-v2-{latest_model_name}"
+            # latest_model_name = self.get_model_name(
+            #     latest_model_name=latest_model.name)
+            logger.info(f"Registered model name is this : {latest_model.name}")
+            package_name = f"package-v2-{latest_model.name}"
             package_config = ModelPackage(
                 target_environment_name=package_name,
                 inferencing_server=AzureMLOnlineInferencingServer(),
                 model_configuration=model_configuration
             )
             model_package = self.workspace_ml_client.models.package(
-                latest_model_name,
+                latest_model.name,
                 latest_model.version,
                 package_config
             )
@@ -253,7 +254,18 @@ class ModelInferenceAndDeployemnt:
         print("My outupt is this : ", output)
 
     def model_infernce_and_deployment(self, instance_type):
-        model_name = self.test_model_name.replace("/", "-")
+        expression_to_ignore = ["/", "\\", "|", "@", "#", ".",
+                                "$", "%", "^", "&", "*", "<", ">", "?", "!", "~"]
+        # Create the regular expression to ignore
+        regx_for_expression = re.compile(
+            '|'.join(map(re.escape, expression_to_ignore)))
+        # Check the model_name contains any of there character
+        expression_check = re.findall(regx_for_expression, self.test_model_name)
+        if expression_check:
+            # Replace the expression with hyphen
+            model_name = regx_for_expression.sub("-", self.test_model_name)
+        else:
+            model_name = self.test_model_name
         latest_model = self.get_latest_model_version(
             self.workspace_ml_client, model_name)
         task = latest_model.flavors["transformers"]["task"]

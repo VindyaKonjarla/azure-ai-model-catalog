@@ -150,7 +150,7 @@ if __name__ == "__main__":
     logger.info (f"test_trigger_next_model: {test_trigger_next_model}")
     logger.info (f"test_queue: {test_queue}")
     logger.info (f"test_set: {test_set}")
-    logger.info("Here is my test model name : ", test_model_name)
+    logger.info(f"Here is my test model name : {test_model_name}")
     try:
         credential = DefaultAzureCredential()
         credential.get_token("https://management.azure.com/.default")

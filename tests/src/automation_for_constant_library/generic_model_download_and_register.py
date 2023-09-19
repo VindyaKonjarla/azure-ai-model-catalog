@@ -272,8 +272,19 @@ if __name__ == "__main__":
     # Get the sample input data
     scoring_input = model.get_sample_input_data(task=task)
     logger.info(f"This is the task associated to the model : {task}")
-    # If threr will be model namr with / then replace it
-    registered_model_name = test_model_name.replace("/", "-")
+    expression_to_ignore = ["/", "\\", "|", "@", "#", ".",
+                                "$", "%", "^", "&", "*", "<", ">", "?", "!", "~"]
+    # Create the regular expression to ignore
+    regx_for_expression = re.compile(
+        '|'.join(map(re.escape, expression_to_ignore)))
+    # Check the model_name contains any of there character
+    expression_check = re.findall(regx_for_expression, test_model_name)
+    if expression_check:
+        # Replace the expression with hyphen
+        registered_model_name = regx_for_expression.sub("-", test_model_name)
+    else:
+        # If threr will be model namr with / then replace it
+        registered_model_name = test_model_name
     client = MlflowClient()
     model.download_and_register_model(
         task=task, scoring_input=scoring_input, registered_model_name=registered_model_name, client=client)
