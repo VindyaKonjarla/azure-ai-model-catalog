@@ -1,13 +1,13 @@
-name: MLFlow-Salesforce/codegen25-7b-multi
+name: MLFlow-Salesforce-codegen25-7b-multi
 
 on: 
   workflow_dispatch:
 
 env:
-  test_model_name: Salesforce/codegen25-7b-multi
+  test_model_name: Salesforce-codegen25-7b-multi
   test_sku_type: cpu
   test_trigger_next_model: true
-  test_queue: test-southcentralus-1
+  test_queue: test-northcentralus-0
   test_set: huggingface-all
   test_keep_looping: false
 
