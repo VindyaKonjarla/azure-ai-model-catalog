@@ -1,19 +1,10 @@
 {
     "queue_name": "test-northcentralus-2",
     "models": [
-        "MLFlow-mosaicml/mpt-7b-8k-instruct",
-        "MLFlow-NumbersStation/nsql-llama-2-7B",
-        "MLFlow-Deci/DeciCoder-1b",
-        "MLFlow-aubmindlab/bert-base-arabertv2",
-        "MLFlow-NousResearch/GPT4-x-Vicuna-13b-fp16",
-        "MLFlow-WizardLM/WizardCoder-Python-34B-V1.0",
-        "MLFlow-facebook/opt-13b",
-        "MLFlow-microsoft/deberta-xlarge-mnli",
-        "MLFlow-microsoft/BiomedNLP-PubMedBERT-base-uncased-abstract",
-        "MLFlow-baichuan-inc/Baichuan-13B-Chat",
-        "MLFlow-Salesforce/codegen-16B-nl",
-        "MLFlow-shibing624/chinese-alpaca-plus-13b-hf",
-        "MLFlow-hatmimoha/arabic-ner"
+        "MLFlow-microsoft/mpnet-base",
+        "MLFlow-Qwen/Qwen-7B",
+        "MLFlow-anas-awadalla/mpt-7b",
+        "MLFlow-TheBloke/WizardCoder-15B-1.0-GPTQ"
     ],
     "workspace": "test-northcentralus",
     "subscription": "80c77c76-74ba-4c8c-8229-4c3b2957990c",

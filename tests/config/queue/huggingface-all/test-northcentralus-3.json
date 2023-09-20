@@ -1,19 +1,9 @@
 {
     "queue_name": "test-northcentralus-3",
     "models": [
-        "MLFlow-TheBloke/Wizard-Vicuna-30B-Uncensored-GPTQ",
-        "MLFlow-stabilityai/stablecode-instruct-alpha-3b",
-        "MLFlow-KoboldAI/LLaMA2-13B-Holomax-GPTQ",
-        "MLFlow-codellama/CodeLlama-34b-Python-hf",
-        "MLFlow-TheBloke/WizardLM-1.0-Uncensored-Llama2-13B-GPTQ",
-        "MLFlow-Open-Orca/OpenOrca-Platypus2-13B",
-        "MLFlow-huggyllama/llama-65b",
-        "MLFlow-czurita/nsql-llama-2-7B-sharded-bf16-2GB",
-        "MLFlow-cl-tohoku/bert-base-japanese-char",
-        "MLFlow-huggyllama/llama-7b",
-        "MLFlow-microsoft/deberta-v3-small",
-        "MLFlow-felflare/bert-restore-punctuation",
-        "MLFlow-kit-nlp/bert-base-japanese-sentiment-irony"
+        "MLFlow-liuhaotian/llava-v1-0719-336px-lora-merge-vicuna-13b-v1.3",
+        "MLFlow-decapoda-research/llama-7b-hf",
+        "MLFlow-codellama/CodeLlama-13b-hf"
     ],
     "workspace": "test-northcentralus",
     "subscription": "80c77c76-74ba-4c8c-8229-4c3b2957990c",
