@@ -5,14 +5,14 @@
         "MLFlow-TheBloke/WizardLM-7B-uncensored-GPTQ",
         "MLFlow-ichitaka/falcon-40b-instruct-8bit",
         "MLFlow-explosion-testing/bert-test",
-        "MLFlow-TheBloke/WizardCoder-15B-1.0-GPTQ",
         "MLFlow-OpenAssistant/oasst-sft-4-pythia-12b-epoch-3.5",
         "MLFlow-ayameRushia/roberta-base-indonesian-1.5G-sentiment-analysis-smsa",
         "MLFlow-mdhugol/indonesia-bert-sentiment-classification",
         "MLFlow-dmis-lab/biobert-base-cased-v1.2",
         "MLFlow-baichuan-inc/Baichuan-13B-Base",
         "MLFlow-ctrl",
-        "MLFlow-lmsys/vicuna-13b-v1.5-16k"
+        "MLFlow-lmsys/vicuna-13b-v1.5-16k",
+        "MLFlow-TheBloke/WizardCoder-15B-1.0-GPTQ"
     ],
     "workspace": "test-southafricanorth",
     "subscription": "80c77c76-74ba-4c8c-8229-4c3b2957990c",
