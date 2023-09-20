@@ -24,4 +24,4 @@ EleutherAI/polyglot-ko-5.8b
 NousResearch/Nous-Hermes-Llama2-13b
 hf-internal-testing/tiny-random-MptForCausalLM
 Phind/Phind-CodeLlama-34B-Python-v1
-TheBloke/WizardCoder-15B-1.0-GPTQ 
+TheBloke/WizardCoder-15B-1.0-GPTQ
