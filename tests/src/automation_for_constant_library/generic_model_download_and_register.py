@@ -169,7 +169,7 @@ class Model:
         # Load the library from the transformer
         model_library = getattr(transformers, model_library_name)
         # From the library load the model
-        model = model_library.from_pretrained(self.model_name)
+        model = model_library.from_pretrained(self.model_name, trust_remote_code=True)
         tokenizer = AutoTokenizer.from_pretrained(self.model_name)
         model_and_tokenizer = {"model": model, "tokenizer": tokenizer}
         return model_and_tokenizer
