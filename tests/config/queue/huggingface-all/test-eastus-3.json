@@ -1,7 +1,7 @@
 {
     "queue_name": "test-eastus-3",
     "models": [
-        "MLFlow-TheBloke-falcon-7b-instruct-GPTQ"
+        "MLFlow-TheBloke/falcon-7b-instruct-GPTQ"
     ],
     "workspace": "test-eastus",
     "subscription": "80c77c76-74ba-4c8c-8229-4c3b2957990c",

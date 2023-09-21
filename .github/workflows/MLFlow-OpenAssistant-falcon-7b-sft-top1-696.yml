@@ -1,10 +1,10 @@
-name: MLFlow-OpenAssistant-falcon-7b-sft-top1-696
+name: MLFlow-OpenAssistant/falcon-7b-sft-top1-696
 
 on: 
   workflow_dispatch:
 
 env:
-  test_model_name: OpenAssistant-falcon-7b-sft-top1-696
+  test_model_name: OpenAssistant/falcon-7b-sft-top1-696
   test_sku_type: cpu
   test_trigger_next_model: true
   test_queue: test-koreacentral-1
