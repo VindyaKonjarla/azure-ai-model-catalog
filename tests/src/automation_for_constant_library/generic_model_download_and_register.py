@@ -12,6 +12,7 @@ from mlflow.store.artifact.models_artifact_repo import ModelsArtifactRepository
 from transformers import pipeline
 from huggingface_hub import HfApi
 from utils.logging import get_logger
+from huggingface_hub import login
 import pandas as pd
 import os
 import mlflow
@@ -177,6 +178,7 @@ class Model:
         except Exception as e:
             logger.warning(
                 f"::warning:: This model : {self.model_name} needs trust remote code as true and authentication token to load the model")
+            login(token=ACCESS_TOKEN)
             model = model_library.from_pretrained(self.model_name, trust_remote_code=True, token=ACCESS_TOKEN)
             tokenizer = AutoTokenizer.from_pretrained(self.model_name, trust_remote_code=True, token=ACCESS_TOKEN)
         model_and_tokenizer = {"model": model, "tokenizer": tokenizer}
