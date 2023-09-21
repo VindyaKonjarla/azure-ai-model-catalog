@@ -1,19 +1,7 @@
 {
     "queue_name": "test-koreacentral-0",
     "models": [
-        "MLFlow-WizardLM/WizardCoder-Python-13B-V1.0",
-        "MLFlow-The-Face-Of-Goonery/Huginn-13b-v1.2",
-        "MLFlow-rajkumarrrk/gpt2-fine-tuned-on-imdb-positive-reviews",
-        "MLFlow-TheBloke/vicuna-13B-v1.5-16K-GPTQ",
-        "MLFlow-KoboldAI/GPT-Neo-2.7B-Shinen",
-        "MLFlow-qilowoq/AbLang_heavy",
-        "MLFlow-facebook/opt-30b",
-        "MLFlow-TheBloke/MythoMax-L2-13B-GPTQ",
-        "MLFlow-meta-llama/Llama-2-13b-hf",
-        "MLFlow-EleutherAI/gpt-j-6b",
-        "MLFlow-NousResearch/Llama-2-13b-hf",
-        "MLFlow-stabilityai/StableBeluga-13B",
-        "MLFlow-internlm/internlm-7b"
+        "MLFlow-OpenAssistant-falcon-7b-sft-mix-2000"
     ],
     "workspace": "test-koreacentral",
     "subscription": "80c77c76-74ba-4c8c-8229-4c3b2957990c",

@@ -1,13 +1,13 @@
-name: MLFlow-cerebras/btlm-3b-8k-base
+name: MLFlow-cerebras-btlm-3b-8k-base
 
 on: 
   workflow_dispatch:
 
 env:
-  test_model_name: cerebras/btlm-3b-8k-base
+  test_model_name: cerebras-btlm-3b-8k-base
   test_sku_type: cpu
   test_trigger_next_model: true
-  test_queue: test-northcentralus-0
+  test_queue: test-japaneast-3
   test_set: huggingface-all
   test_keep_looping: false
 

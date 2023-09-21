@@ -1,19 +1,7 @@
 {
     "queue_name": "test-southafricanorth-1",
     "models": [
-        "MLFlow-NousResearch/Llama-2-13b-chat-hf",
-        "MLFlow-microsoft/BiomedVLP-CXR-BERT-specialized",
-        "MLFlow-EleutherAI/pythia-2.8b",
-        "MLFlow-h2oai/h2ogpt-gm-oasst1-en-2048-falcon-40b-v2",
-        "MLFlow-codellama/CodeLlama-13b-Python-hf",
-        "MLFlow-trl-internal-testing/tiny-random-BloomForCausalLM",
-        "MLFlow-lmsys/vicuna-13b-v1.5",
-        "MLFlow-meta-llama/Llama-2-70b-hf",
-        "MLFlow-TheBloke/Wizard-Vicuna-7B-Uncensored-GPTQ",
-        "MLFlow-lmsys/vicuna-7b-v1.1",
-        "MLFlow-cerebras/Cerebras-GPT-13B",
-        "MLFlow-Austism/chronos-hermes-13b-v2",
-        "MLFlow-julien-c/dummy-unknown"
+        "MLFlow-h2oai-h2ogpt-gm-oasst1-en-2048-falcon-40b-v2"
     ],
     "workspace": "test-southafricanorth",
     "subscription": "80c77c76-74ba-4c8c-8229-4c3b2957990c",

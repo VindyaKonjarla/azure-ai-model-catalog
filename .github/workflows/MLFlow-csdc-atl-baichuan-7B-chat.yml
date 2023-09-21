@@ -1,13 +1,13 @@
-name: MLFlow-csdc-atl/baichuan-7B-chat
+name: MLFlow-csdc-atl-baichuan-7B-chat
 
 on: 
   workflow_dispatch:
 
 env:
-  test_model_name: csdc-atl/baichuan-7B-chat
+  test_model_name: csdc-atl-baichuan-7B-chat
   test_sku_type: cpu
   test_trigger_next_model: true
-  test_queue: test-eastus-1
+  test_queue: test-northcentralus-0
   test_set: huggingface-all
   test_keep_looping: false
 

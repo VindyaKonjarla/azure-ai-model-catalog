@@ -1,19 +1,7 @@
 {
     "queue_name": "test-southcentralus-3",
     "models": [
-        "MLFlow-bigcode/starcoderplus",
-        "MLFlow-TheBloke/Llama-2-7B-GPTQ",
-        "MLFlow-ai-forever/rugpt3large_based_on_gpt2",
-        "MLFlow-TheBloke/Llama-2-70B-GPTQ",
-        "MLFlow-cyberagent/open-calm-1b",
-        "MLFlow-lucadiliello/BLEURT-20",
-        "MLFlow-liuhaotian/llava-v1-0719-336px-lora-merge-vicuna-13b-v1.3",
-        "MLFlow-LinkSoul/Chinese-LLaVA-Baichuan",
-        "MLFlow-lmsys/vicuna-7b-v1.5",
-        "MLFlow-mosaicml/mpt-7b",
-        "MLFlow-tiiuae/falcon-7b",
-        "MLFlow-sambanovasystems/BLOOMChat-176B-v1",
-        "MLFlow-Phind/Phind-CodeLlama-34B-Python-v1"
+        "MLFlow-OpenAssistant-falcon-40b-sft-top1-560"
     ],
     "workspace": "test-southcentralus",
     "subscription": "80c77c76-74ba-4c8c-8229-4c3b2957990c",

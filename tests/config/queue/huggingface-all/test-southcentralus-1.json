@@ -1,19 +1,7 @@
 {
     "queue_name": "test-southcentralus-1",
     "models": [
-        "MLFlow-TigerResearch/tigerbot-13b-base",
-        "MLFlow-eachadea/vicuna-13b-1.1",
-        "MLFlow-hf-internal-testing/test-two-configs",
-        "MLFlow-h2oai/h2ogpt-4096-llama2-70b-chat",
-        "MLFlow-nandwalritik/sql_classifier",
-        "MLFlow-KoboldAI/GPT-Neo-2.7B-Janeway",
-        "MLFlow-replit/replit-code-v1-3b",
-        "MLFlow-facebook/nllb-200-distilled-600M",
-        "MLFlow-Salesforce/xgen-7b-8k-inst",
-        "MLFlow-decapoda-research/llama-7b-hf",
-        "MLFlow-PascalNotin/Tranception_Small",
-        "MLFlow-codellama/CodeLlama-13b-hf",
-        "MLFlow-NousResearch/Nous-Hermes-Llama2-13b"
+        "MLFlow-Lurunchik-nf-cats"
     ],
     "workspace": "test-southcentralus",
     "subscription": "80c77c76-74ba-4c8c-8229-4c3b2957990c",

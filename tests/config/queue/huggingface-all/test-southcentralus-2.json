@@ -1,19 +1,7 @@
 {
     "queue_name": "test-southcentralus-2",
     "models": [
-        "MLFlow-OpenAssistant/falcon-7b-sft-top1-696",
-        "MLFlow-liuhaotian/LLaVA-Lightning-MPT-7B-preview",
-        "MLFlow-Phind/Phind-CodeLlama-34B-v1",
-        "MLFlow-tblard/tf-allocine",
-        "MLFlow-KoboldAI/OPT-13B-Nerybus-Mix",
-        "MLFlow-explosion-testing/mpt-test",
-        "MLFlow-EleutherAI/polyglot-ko-1.3b",
-        "MLFlow-trl-internal-testing/tiny-random-GPTNeoXForCausalLM",
-        "MLFlow-stabilityai/StableBeluga-7B",
-        "MLFlow-tiiuae/falcon-7b-instruct",
-        "MLFlow-mosaicml/mpt-7b-instruct",
-        "MLFlow-t5-11b",
-        "MLFlow-hf-internal-testing/tiny-random-MptForCausalLM"
+        "MLFlow-NousResearch-Yarn-Llama-2-7b-64k"
     ],
     "workspace": "test-southcentralus",
     "subscription": "80c77c76-74ba-4c8c-8229-4c3b2957990c",

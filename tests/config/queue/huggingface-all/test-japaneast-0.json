@@ -1,19 +1,7 @@
 {
     "queue_name": "test-japaneast-0",
     "models": [
-        "MLFlow-cerebras/Cerebras-GPT-1.3B",
-        "MLFlow-TheBloke/WizardLM-13B-V1.2-GPTQ",
-        "MLFlow-microsoft/deberta-base-mnli",
-        "MLFlow-NousResearch/Nous-Hermes-llama-2-7b",
-        "MLFlow-TheBloke/Llama-2-70B-Chat-fp16",
-        "MLFlow-arpanghoshal/EmoRoBERTa",
-        "MLFlow-trl-internal-testing/tiny-random-OPTForCausalLM",
-        "MLFlow-NousResearch/Yarn-Llama-2-7b-64k",
-        "MLFlow-EleutherAI/gpt-neox-20b",
-        "MLFlow-bigscience/bloomz-1b1",
-        "MLFlow-TheBloke/airoboros-l2-70B-gpt4-1.4.1-GPTQ",
-        "MLFlow-Qwen/Qwen-VL-Chat",
-        "MLFlow-raynardj/ner-disease-ncbi-bionlp-bc5cdr-pubmed"
+        "MLFlow-baichuan-inc-Baichuan-13B-Chat"
     ],
     "workspace": "test-japaneast",
     "subscription": "80c77c76-74ba-4c8c-8229-4c3b2957990c",

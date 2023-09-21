@@ -1,19 +1,7 @@
 {
     "queue_name": "test-koreacentral-2",
     "models": [
-        "MLFlow-TheBloke/WizardLM-30B-Uncensored-GPTQ",
-        "MLFlow-AdamG012/chat-opt-1.3b-sft-deepspeed",
-        "MLFlow-staka/fugumt-en-ja",
-        "MLFlow-microsoft/deberta-xlarge",
-        "MLFlow-dandelin/vilt-b32-mlm",
-        "MLFlow-jondurbin/airoboros-l2-13b-gpt4-m2.0",
-        "MLFlow-KoboldAI/OPT-13B-Nerys-v2",
-        "MLFlow-ai-forever/ruGPT-3.5-13B",
-        "MLFlow-koheiduck/bert-japanese-finetuned-sentiment",
-        "MLFlow-tiiuae/falcon-40b-instruct",
-        "MLFlow-benjamin/wtp-canine-s-1l",
-        "MLFlow-transfo-xl-wt103",
-        "MLFlow-yahma/llama-7b-hf"
+        "MLFlow-Salesforce-codegen2-1B"
     ],
     "workspace": "test-koreacentral",
     "subscription": "80c77c76-74ba-4c8c-8229-4c3b2957990c",

@@ -1,13 +1,13 @@
-name: MLFlow-baichuan-inc/Baichuan-13B-Chat
+name: MLFlow-baichuan-inc-Baichuan-13B-Chat
 
 on: 
   workflow_dispatch:
 
 env:
-  test_model_name: baichuan-inc/Baichuan-13B-Chat
+  test_model_name: baichuan-inc-Baichuan-13B-Chat
   test_sku_type: cpu
   test_trigger_next_model: true
-  test_queue: test-northcentralus-2
+  test_queue: test-japaneast-0
   test_set: huggingface-all
   test_keep_looping: false
 

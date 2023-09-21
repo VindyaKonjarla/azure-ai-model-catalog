@@ -1,19 +1,7 @@
 {
     "queue_name": "test-eastus-0",
     "models": [
-        "MLFlow-facebook/mbart-large-en-ro",
-        "MLFlow-internlm/internlm-chat-7b",
-        "MLFlow-ssbuild/baichuan-13b-chat-int4",
-        "MLFlow-OpenAssistant/oasst-sft-1-pythia-12b",
-        "MLFlow-microsoft/deberta-v2-xxlarge",
-        "MLFlow-beomi/KoAlpaca-Polyglot-5.8B",
-        "MLFlow-mosaicml/mpt-30b",
-        "MLFlow-KoboldAI/OPT-6.7B-Nerybus-Mix",
-        "MLFlow-microsoft/deberta-v2-xlarge",
-        "MLFlow-microsoft/deberta-large-mnli",
-        "MLFlow-rinna/japanese-gpt-neox-3.6b-instruction-ppo",
-        "MLFlow-EleutherAI/polyglot-ko-12.8b",
-        "MLFlow-TheBloke/airoboros-l2-70B-GPT4-2.0-GPTQ"
+        "MLFlow-Salesforce-xgen-7b-8k-inst"
     ],
     "workspace": "test-eastus",
     "subscription": "80c77c76-74ba-4c8c-8229-4c3b2957990c",

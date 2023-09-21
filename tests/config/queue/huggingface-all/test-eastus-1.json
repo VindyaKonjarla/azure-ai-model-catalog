@@ -1,19 +1,7 @@
 {
     "queue_name": "test-eastus-1",
     "models": [
-        "MLFlow-TheBloke/WizardLM-33B-V1.0-Uncensored-GPTQ",
-        "MLFlow-TheBloke/Nous-Hermes-13B-GPTQ",
-        "MLFlow-explosion-testing/llama2-kv-sharing",
-        "MLFlow-OpenAssistant/pythia-12b-sft-v8-7k-steps",
-        "MLFlow-jondurbin/airoboros-13b-gpt4-1.4",
-        "MLFlow-stabilityai/japanese-stablelm-base-alpha-7b",
-        "MLFlow-TheBloke/llama-2-70b-Guanaco-QLoRA-GPTQ",
-        "MLFlow-bigcode/starcoder",
-        "MLFlow-microsoft/deberta-v3-large",
-        "MLFlow-meta-llama/Llama-2-7b-chat-hf",
-        "MLFlow-zhihan1996/DNABERT-2-117M",
-        "MLFlow-mosaicml/mpt-30b-chat",
-        "MLFlow-csdc-atl/baichuan-7B-chat"
+        "MLFlow-TheBloke-Llama-2-7B-32K-Instruct-GPTQ"
     ],
     "workspace": "test-eastus",
     "subscription": "80c77c76-74ba-4c8c-8229-4c3b2957990c",

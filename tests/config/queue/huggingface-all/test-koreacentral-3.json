@@ -1,19 +1,7 @@
 {
     "queue_name": "test-koreacentral-3",
     "models": [
-        "MLFlow-codellama/CodeLlama-7b-Python-hf",
-        "MLFlow-LinkSoul/Chinese-Llama-2-7b",
-        "MLFlow-citizenlab/distilbert-base-multilingual-cased-toxicity",
-        "MLFlow-nlpai-lab/kullm-polyglot-5.8b-v2",
-        "MLFlow-jphme/Llama-2-13b-chat-german",
-        "MLFlow-defog/sqlcoder",
-        "MLFlow-TigerResearch/tigerbot-13b-chat",
-        "MLFlow-anas-awadalla/mpt-1b-redpajama-200b",
-        "MLFlow-optimum/t5-small",
-        "MLFlow-microsoft/deberta-v3-base",
-        "MLFlow-jplu/tf-camembert-base",
-        "MLFlow-bigscience/bloom",
-        "MLFlow-togethercomputer/LLaMA-2-7B-32K"
+        "MLFlow-Salesforce-xgen-7b-8k-base"
     ],
     "workspace": "test-koreacentral",
     "subscription": "80c77c76-74ba-4c8c-8229-4c3b2957990c",

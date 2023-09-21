@@ -1,19 +1,7 @@
 {
     "queue_name": "test-koreacentral-1",
     "models": [
-        "MLFlow-TheBloke/StableBeluga-7B-GPTQ",
-        "MLFlow-microsoft/graphcodebert-base",
-        "MLFlow-mosaicml/mpt-7b-storywriter",
-        "MLFlow-Open-Orca/OpenOrcaxOpenChat-Preview2-13B",
-        "MLFlow-upstage/llama-30b-instruct-2048",
-        "MLFlow-ncfrey/ChemGPT-4.7M",
-        "MLFlow-TinyPixel/Llama-2-7B-bf16-sharded",
-        "MLFlow-togethercomputer/Llama-2-7B-32K-Instruct",
-        "MLFlow-Vamsi/T5_Paraphrase_Paws",
-        "MLFlow-cl-tohoku/bert-base-japanese-whole-word-masking",
-        "MLFlow-microsoft/deberta-base",
-        "MLFlow-tiiuae/falcon-rw-1b",
-        "MLFlow-d4data/biomedical-ner-all"
+        "MLFlow-OpenAssistant-falcon-7b-sft-top1-696"
     ],
     "workspace": "test-koreacentral",
     "subscription": "80c77c76-74ba-4c8c-8229-4c3b2957990c",

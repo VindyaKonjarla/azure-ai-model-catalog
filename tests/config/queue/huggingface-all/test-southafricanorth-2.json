@@ -1,18 +1,7 @@
 {
     "queue_name": "test-southafricanorth-2",
     "models": [
-        "MLFlow-TheBloke/Llama-2-13B-fp16",
-        "MLFlow-codellama/CodeLlama-34b-hf",
-        "MLFlow-daryl149/llama-2-7b-chat-hf",
-        "MLFlow-ziqingyang/chinese-alpaca-2-7b",
-        "MLFlow-decapoda-research/llama-30b-hf",
-        "MLFlow-TheBloke/Llama-2-70B-chat-GPTQ",
-        "MLFlow-lmsys/vicuna-13b-v1.3",
-        "MLFlow-HuggingFaceH4/starchat-beta",
-        "MLFlow-microsoft/infoxlm-large",
-        "MLFlow-YeungNLP/firefly-baichuan-13b",
-        "MLFlow-WizardLM/WizardLM-13B-V1.2",
-        "MLFlow-pszemraj/led-large-book-summary"
+        "MLFlow-h2oai-h2ogpt-gm-oasst1-en-2048-falcon-7b-v3"
     ],
     "workspace": "test-southafricanorth",
     "subscription": "80c77c76-74ba-4c8c-8229-4c3b2957990c",

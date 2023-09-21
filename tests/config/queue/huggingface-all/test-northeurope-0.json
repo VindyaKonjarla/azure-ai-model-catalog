@@ -1,19 +1,7 @@
 {
     "queue_name": "test-northeurope-0",
     "models": [
-        "MLFlow-OpenAssistant/falcon-40b-sft-top1-560",
-        "MLFlow-EleutherAI/pythia-2.8b-deduped",
-        "MLFlow-facebook/xmod-base",
-        "MLFlow-georgesung/llama2_7b_chat_uncensored",
-        "MLFlow-noamwies/llama-test-gqa-with-better-transformer",
-        "MLFlow-cyberagent/open-calm-7b",
-        "MLFlow-xverse/XVERSE-13B-Chat",
-        "MLFlow-h2oai/h2ogpt-gm-oasst1-en-2048-falcon-7b-v3",
-        "MLFlow-HooshvareLab/bert-base-parsbert-ner-uncased",
-        "MLFlow-microsoft/BiomedNLP-PubMedBERT-base-uncased-abstract-fulltext",
-        "MLFlow-microsoft/infoxlm-base",
-        "MLFlow-optimum/gpt2",
-        "MLFlow-togethercomputer/RedPajama-INCITE-Chat-3B-v1"
+        "MLFlow-YeungNLP-firefly-baichuan-13b"
     ],
     "workspace": "test-northeurope",
     "subscription": "80c77c76-74ba-4c8c-8229-4c3b2957990c",

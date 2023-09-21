@@ -1,19 +1,7 @@
 {
     "queue_name": "test-japaneast-3",
     "models": [
-        "MLFlow-garage-bAInd/Platypus2-70B-instruct",
-        "MLFlow-microsoft/codebert-base-mlm",
-        "MLFlow-julien-c/dummy-diff-tokenizer",
-        "MLFlow-abeja/gpt-neox-japanese-2.7b",
-        "MLFlow-InstaDeepAI/nucleotide-transformer-500m-human-ref",
-        "MLFlow-mosaicml/mpt-30b-instruct",
-        "MLFlow-nlpai-lab/kullm-polyglot-12.8b-v2",
-        "MLFlow-facebook/nllb-200-3.3B",
-        "MLFlow-amazon/FalconLite",
-        "MLFlow-ckiplab/bert-base-chinese-ner",
-        "MLFlow-stabilityai/japanese-stablelm-instruct-alpha-7b",
-        "MLFlow-bigcode/starcoderbase",
-        "MLFlow-WizardLM/WizardCoder-15B-V1.0"
+        "MLFlow-cerebras-btlm-3b-8k-base"
     ],
     "workspace": "test-japaneast",
     "subscription": "80c77c76-74ba-4c8c-8229-4c3b2957990c",
