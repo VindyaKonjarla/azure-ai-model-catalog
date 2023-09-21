@@ -1,7 +1,8 @@
 {
     "queue_name": "test-japaneast-2",
     "models": [
-        "MLFlow-bigcode/santacoder"
+        "MLFlow-cerebras/btlm-3b-8k-base",
+        "MLFlow-togethercomputer/LLaMA-2-7B-32K"
     ],
     "workspace": "test-japaneast",
     "subscription": "80c77c76-74ba-4c8c-8229-4c3b2957990c",

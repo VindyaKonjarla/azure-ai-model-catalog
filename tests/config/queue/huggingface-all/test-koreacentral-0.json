@@ -1,7 +1,8 @@
 {
     "queue_name": "test-koreacentral-0",
     "models": [
-        "MLFlow-OpenAssistant/falcon-7b-sft-mix-2000"
+        "MLFlow-OpenAssistant/falcon-7b-sft-top1-696",
+        "MLFlow-mosaicml/mpt-7b-8k-instruct"
     ],
     "workspace": "test-koreacentral",
     "subscription": "80c77c76-74ba-4c8c-8229-4c3b2957990c",

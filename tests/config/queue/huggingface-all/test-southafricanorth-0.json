@@ -1,7 +1,8 @@
 {
     "queue_name": "test-southafricanorth-0",
     "models": [
-        "MLFlow-h2oai/h2ogpt-gm-oasst1-en-2048-falcon-40b-v2"
+        "MLFlow-h2oai/h2ogpt-gm-oasst1-en-2048-falcon-40b-v2",
+        "MLFlow-zhihan1996/DNA_bert_6"
     ],
     "workspace": "test-southafricanorth",
     "subscription": "80c77c76-74ba-4c8c-8229-4c3b2957990c",
