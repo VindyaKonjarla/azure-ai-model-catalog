@@ -179,8 +179,8 @@ class Model:
             logger.warning(
                 f"::warning:: This model : {self.model_name} needs trust remote code as true and authentication token to load the model")
             login(token=ACCESS_TOKEN)
-            model = model_library.from_pretrained(self.model_name, trust_remote_code=True, token=ACCESS_TOKEN)
-            tokenizer = AutoTokenizer.from_pretrained(self.model_name, trust_remote_code=True, token=ACCESS_TOKEN)
+            model = model_library.from_pretrained(self.model_name, trust_remote_code=True)
+            tokenizer = AutoTokenizer.from_pretrained(self.model_name, trust_remote_code=True)
         model_and_tokenizer = {"model": model, "tokenizer": tokenizer}
         return model_and_tokenizer
 
