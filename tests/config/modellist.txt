@@ -1,4 +1,3 @@
-Deci/DeciCoder-1b
 Lurunchik/nf-cats
 NousResearch/Yarn-Llama-2-7b-64k
 OpenAssistant/falcon-40b-sft-top1-560
