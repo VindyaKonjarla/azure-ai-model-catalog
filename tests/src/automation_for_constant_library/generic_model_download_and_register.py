@@ -31,6 +31,7 @@ TASK_NAME = ['fill-mask', 'token-classification', 'question-answering',
              'summarization', 'text-generation', 'text-classification', 'translation']
 STRING_TO_CHECK = 'transformers'
 FILE_NAME = "task_and_library.json"
+ACCESS_TOKEN = "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"
 
 test_model_name = os.environ.get('test_model_name')
 logger = get_logger(__name__)
@@ -166,13 +167,18 @@ class Model:
         # Get the library name from this method from which we will load the model
         model_library_name = self.get_library_to_load_model(task=task)
         logger.info(f"Library name is this one : {model_library_name}")
-        # Load the library from the transformer
-        model_library = getattr(transformers, model_library_name)
-        # From the library load the model
-        #model = model_library.from_pretrained(self.model_name, trust_remote_code=True)
-        model = model_library.from_pretrained(self.model_name)
-        #tokenizer = AutoTokenizer.from_pretrained(self.model_name, trust_remote_code=True)
-        tokenizer = AutoTokenizer.from_pretrained(self.model_name)
+        try:
+            # Load the library from the transformer
+            model_library = getattr(transformers, model_library_name)
+            logger.info("Started loading the model from library")
+            # From the library load the model
+            model = model_library.from_pretrained(self.model_name)
+            tokenizer = AutoTokenizer.from_pretrained(self.model_name)
+        except Exception as e:
+            logger.warning(
+                f"::warning:: This model : {self.model_name} needs trust remote code as true and authentication token to load the model")
+            model = model_library.from_pretrained(self.model_name, trust_remote_code=True, token=ACCESS_TOKEN)
+            tokenizer = AutoTokenizer.from_pretrained(self.model_name, trust_remote_code=True, token=ACCESS_TOKEN)
         model_and_tokenizer = {"model": model, "tokenizer": tokenizer}
         return model_and_tokenizer
 
@@ -248,7 +254,8 @@ class Model:
         registered_model_detail = client.get_latest_versions(
             name=registered_model_name, stages=["None"])
         model_detail = registered_model_detail[0]
-        logger.info(f"Latest registered model version is : {model_detail.version}")
+        logger.info(
+            f"Latest registered model version is : {model_detail.version}")
         loaded_model_pipeline = mlflow.transformers.load_model(
             model_uri=model_detail.source, return_type="pipeline")
 
@@ -275,7 +282,7 @@ if __name__ == "__main__":
     scoring_input = model.get_sample_input_data(task=task)
     logger.info(f"This is the task associated to the model : {task}")
     expression_to_ignore = ["/", "\\", "|", "@", "#", ".",
-                                "$", "%", "^", "&", "*", "<", ">", "?", "!", "~"]
+                            "$", "%", "^", "&", "*", "<", ">", "?", "!", "~"]
     # Create the regular expression to ignore
     regx_for_expression = re.compile(
         '|'.join(map(re.escape, expression_to_ignore)))
