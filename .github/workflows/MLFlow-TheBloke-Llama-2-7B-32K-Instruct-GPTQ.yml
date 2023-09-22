@@ -43,6 +43,8 @@ jobs:
       run: pip install sentencepiece
     - name: pip-install-fugashi[unidic-lite]
       run: pip install fugashi[unidic-lite]  
+    - name: pip-install einops
+      run: pip install einops
     - name: deploy-model-step
       id: deploy-model-step
       run: python generic_initial_automation.py
