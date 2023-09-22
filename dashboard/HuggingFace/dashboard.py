@@ -20,40 +20,40 @@ class Dashboard():
         }
         self.models_data = []  # Initialize models_data as an empty list
 
-    def get_all_workflow_names(self):
+    def get_all_workflow_names(self,limit=30):
         #workflow_name = ["MLFlow-codellama/CodeLlama-13b-Instruct-hf","MLFlow-mosaicml/mpt-7b-storywriter","MLFlow-microsoft/MiniLM-L12-H384-uncased"]
         API = "https://api.github.com/repos/Azure/azure-ai-model-catalog/actions/workflows"
         print (f"Getting github workflows from {API}")
-        total_pages = None
-        current_page = 1
-        per_page = 100
+        # total_pages = None
+        # current_page = 1
+        # per_page = 100
         workflow_name = []
-        while total_pages is None or current_page <= total_pages:
+        # while total_pages is None or current_page <= total_pages:
 
-            headers = {
-                "Authorization": f"Bearer {self.github_token}",
-                "Accept": "application/vnd.github.v3+json"
-            }
-            params = { "per_page": per_page, "page": current_page }
-            response = requests.get(API, headers=headers, params=params)
-            if response.status_code == 200:
-                workflows = response.json()
-                # append workflow_runs to runs list
-                for workflow in workflows["workflows"]:
-                    if workflow["name"].lower().startswith("mlflow"):
-                        workflow_name.append(workflow["name"])
-                if not workflows["workflows"]:
-                    break
-                # workflow_name.extend(json_response['workflows["name"]'])
-                if current_page == 1:
-                # divide total_count by per_page and round up to get total_pages
-                    total_pages = int(workflows['total_count'] / per_page) + 1
-                current_page += 1
-                # print a single dot to show progress
-                print (f"\rWorkflows fetched: {len(workflow_name)}", end="", flush=True)
-            else:
-                print (f"Error: {response.status_code} {response.text}")
-                exit(1)
+        headers = {
+            "Authorization": f"Bearer {self.github_token}",
+            "Accept": "application/vnd.github.v3+json"
+        }
+        params = { "per_page": limit}
+        response = requests.get(API, headers=headers, params=params)
+        if response.status_code == 200:
+            workflows = response.json()
+            # append workflow_runs to runs list
+            for workflow in workflows["workflows"]:
+                if workflow["name"].lower().startswith("mlflow"):
+                    workflow_name.append(workflow["name"])
+            # if not workflows["workflows"]:
+            #     break
+            # workflow_name.extend(json_response['workflows["name"]'])
+            # if current_page == 1:
+            # # divide total_count by per_page and round up to get total_pages
+            #     total_pages = int(workflows['total_count'] / per_page) + 1
+            # current_page += 1
+            # print a single dot to show progress
+            print (f"\rWorkflows fetched: {len(workflow_name)}", end="", flush=True)
+        else:
+            print (f"Error: {response.status_code} {response.text}")
+            exit(1)
         print (f"\n")
         #create ../logs/get_github_workflows/ if it does not exist
         # if not os.path.exists("../logs/get_all_workflow_names"):
@@ -61,14 +61,18 @@ class Dashboard():
         # # dump runs as json file in ../logs/get_github_workflows folder with filename as DDMMMYYYY-HHMMSS.json
         # with open(f"../logs/get_all_workflow_names/{datetime.now().strftime('%d%b%Y-%H%M%S')}.json", "w") as f:
         #     json.dump(workflow_name, f, indent=4)
+        print(workflow_name)
         return workflow_name
 
 
 
     def workflow_last_run(self): 
         workflows_to_include = self.get_all_workflow_names()
-        normalized_workflows = [workflow_name.replace("/", "-") for workflow_name in workflows_to_include]
-
+        normalized_workflows = [workflow_name.replace("/","-") for workflow_name in workflows_to_include]
+        # normalized_workflows = [hf_name for hf_name in workflows_to_include]
+        # hf_name = [hf_name for hf_name in workflows_to_include]
+        #print(workflow_name)
+        # print(hf_name)
         for workflow_name in normalized_workflows:
             try:
                 workflow_runs_url = f"https://api.github.com/repos/{self.repo_full_name}/actions/workflows/{workflow_name}.yml/runs"
@@ -120,12 +124,13 @@ class Dashboard():
                     #self.data["badge"].append(f"[![{workflow_name}]({badge_url})]({url})")
                 run_link = f"https://github.com/{self.repo_full_name}/actions/runs/{last_run['id']}"
                 models_entry = {
-                    "Model": workflow_name.replace(".yml", ""),
+                    "Model": workflows_to_include.replace("MLFlow-",""),
+                    # "HFLink": f"[Link](https://huggingface.co/{workflow_name.replace(".yml", "").replace("MLFlow-","")})",
                     # "Status": "<span style='background-color: #00FF00; padding: 2px 6px; border-radius: 3px;'>PASS</span>" if last_run["conclusion"] == "success" else "<span style='background-color: #FF0000; padding: 2px 6px; border-radius: 3px;'>FAIL</span>",
                     # "Status": " ✅ PASS" if last_run["conclusion"] == "success" elif last_run["conclusion"] == "failure" "❌ FAIL",
                     "Status": f"{'✅ PASS' if last_run['conclusion'] == 'success' else '❌ FAIL' if last_run['conclusion'] == 'failure' else '🚫 CANCELLED' if last_run['conclusion'] == 'cancelled' else '⏳ RUNNING'}",
-                    "Link": f"[Run Link]({run_link})",
-                    "LastRun_Timestamp": last_run["created_at"]
+                    "LastRunLink": f"[Link]({run_link})",
+                    "LastRunTimestamp": last_run["created_at"]
                 }
 
                 self.models_data.append(models_entry)
@@ -136,7 +141,8 @@ class Dashboard():
                 print(f"An error occurred while fetching run information for workflow '{workflow_name}': {e}")
 
  
-
+        # self.models_data.sort(key=lambda x: x["Status"])
+        self.models_data.sort(key=lambda x: (x["Status"] != "❌ FAIL", x["Status"]))
         return self.data
 
     def results(self, last_runs_dict):
@@ -146,6 +152,7 @@ class Dashboard():
  
 
         df = pandas.DataFrame.from_dict(last_runs_dict)
+        # df = df.sort_values(by=['status'], ascending=['failure' in df['status'].values])
         results_dict["total"] = df["workflow_id"].count()
         results_dict["success"] = df.loc[(df['status'] == 'completed') & (df['conclusion'] == 'success')]['workflow_id'].count()
         results_dict["failure"] = df.loc[(df['status'] == 'completed') & (df['conclusion'] == 'failure')]['workflow_id'].count()
