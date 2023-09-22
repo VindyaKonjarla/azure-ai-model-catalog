@@ -1,8 +1,23 @@
 {
     "queue_name": "test-koreacentral-1",
     "models": [
-        "MLFlow-bigcode/starcoder",
-        "MLFlow-abnersampaio/sentiment"
+        "MLFlow-facebook/opt-350m",
+        "MLFlow-TheBloke/WizardLM-13B-V1.2-GPTQ",
+        "MLFlow-TheBloke/CodeLlama-34B-Instruct-GPTQ",
+        "MLFlow-TheBloke/Mythalion-13B-GPTQ",
+        "MLFlow-openthaigpt/openthaigpt-1.0.0-beta-7b-chat-ckpt-hf",
+        "MLFlow-TheBloke/airoboros-l2-13b-gpt4-2.0-GPTQ",
+        "MLFlow-Davlan/afro-xlmr-large-75L",
+        "MLFlow-TheBloke/CodeLlama-13B-Instruct-GGUF",
+        "MLFlow-entropy/gpt2_zinc_87m",
+        "MLFlow-TheBloke/Airoboros-L2-13B-2.2-GPTQ",
+        "MLFlow-alexandrainst/da-subjectivivity-classification-base",
+        "MLFlow-hasibul1ah/finetuned_bloom_trained_model_bangladataset",
+        "MLFlow-edukom/Serbian-GPT-2",
+        "MLFlow-arkin04/loyaltymodel",
+        "MLFlow-TheBloke/Airochronos-L2-13B-GPTQ",
+        "MLFlow-TheBloke/Airolima-Chronos-Grad-L2-13B-GPTQ",
+        "MLFlow-avatarcontinues/imagedata"
     ],
     "workspace": "test-koreacentral",
     "subscription": "80c77c76-74ba-4c8c-8229-4c3b2957990c",

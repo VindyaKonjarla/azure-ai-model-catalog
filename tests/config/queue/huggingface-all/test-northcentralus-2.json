@@ -1,7 +1,23 @@
 {
     "queue_name": "test-northcentralus-2",
     "models": [
-        "MLFlow-Qwen/Qwen-7B"
+        "MLFlow-TheBloke/OpenOrca-Platypus2-13B-GPTQ",
+        "MLFlow-internlm/internlm-chat-7b-8k",
+        "MLFlow-NousResearch/Llama-2-70b-chat-hf",
+        "MLFlow-ValiantLabs/ShiningValiant",
+        "MLFlow-TheBloke/Stable-Platypus2-13B-GPTQ",
+        "MLFlow-flozi00/Llama-2-13b-german-assistant-v7",
+        "MLFlow-TheBloke/Vicuna-13B-CoT-GPTQ",
+        "MLFlow-TheBloke/CodeLlama-7B-GGUF",
+        "MLFlow-TheBloke/Guanaco-33B-SuperHOT-8K-GPTQ",
+        "MLFlow-TheBloke/Llama-2-Coder-7B-GPTQ",
+        "MLFlow-TheBloke/Huginn-v3-13B-GPTQ",
+        "MLFlow-SergeyTW/conversation_model",
+        "MLFlow-Open-Orca/oo-phi-1_5",
+        "MLFlow-TheBloke/Stheno-L2-13B-GPTQ",
+        "MLFlow-Finnish-NLP/llama-3b-finnish",
+        "MLFlow-ronit33/distilbert-base-uncased-finetuned-emotion-dataset",
+        "MLFlow-asas-ai/nllb-200-distilled-600M-finetuned_augmented_MT_ar-to-en"
     ],
     "workspace": "test-northcentralus",
     "subscription": "80c77c76-74ba-4c8c-8229-4c3b2957990c",

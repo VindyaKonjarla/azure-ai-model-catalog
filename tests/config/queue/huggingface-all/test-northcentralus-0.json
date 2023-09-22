@@ -1,7 +1,23 @@
 {
     "queue_name": "test-northcentralus-0",
     "models": [
-        "MLFlow-Qwen/Qwen-7B-Chat-Int4"
+        "MLFlow-togethercomputer/LLaMA-2-7B-32K",
+        "MLFlow-TheBloke/Lemur-70B-Chat-v1-GPTQ",
+        "MLFlow-internlm/internlm-chat-7b-v1_1",
+        "MLFlow-TigerResearch/tigerbot-13b-base",
+        "MLFlow-TheBloke/PuddleJumper-13B-GPTQ",
+        "MLFlow-TheBloke/llama2-7b-chat-codeCherryPop-qLoRA-GPTQ",
+        "MLFlow-TigerResearch/tigerbot-70b-chat",
+        "MLFlow-TheBloke/Llama2-70B-OASST-SFT-v10-GPTQ",
+        "MLFlow-firqaaa/Madina-7b-chat-QLoRA-8k",
+        "MLFlow-Faradaylab/ARIA-70B-V2",
+        "MLFlow-TheBloke/CodeLlama-13B-GGUF",
+        "MLFlow-TheBloke/Spicyboros-70B-2.2-GPTQ",
+        "MLFlow-TheBloke/qCammel-70-x-GPTQ",
+        "MLFlow-TeamResearch/sentiment-model-saagie",
+        "MLFlow-TheBloke/VicUnlocked-30B-LoRA-GPTQ",
+        "MLFlow-TheBloke/Vigogne-2-13B-Instruct-GGUF",
+        "MLFlow-TheBloke/llama-2-7B-Guanaco-QLoRA-GGUF"
     ],
     "workspace": "test-northcentralus",
     "subscription": "80c77c76-74ba-4c8c-8229-4c3b2957990c",

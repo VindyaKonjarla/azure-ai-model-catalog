@@ -1,8 +1,23 @@
 {
     "queue_name": "test-eastus-1",
     "models": [
-        "MLFlow-bigcode/starpii",
-        "MLFlow-psmathur/orca_mini_v3_70b"
+        "MLFlow-facebook/opt-2.7b",
+        "MLFlow-TheBloke/Wizard-Vicuna-30B-Uncensored-GPTQ",
+        "MLFlow-TheBloke/WizardLM-30B-Uncensored-GPTQ",
+        "MLFlow-NYTK/PULI-GPTrio",
+        "MLFlow-jhu-clsp/bibert-ende",
+        "MLFlow-Deci/DeciLM-6b",
+        "MLFlow-TheBloke/WizardLM-7B-V1.0-Uncensored-GPTQ",
+        "MLFlow-TheBloke/Mythalion-13B-GGUF",
+        "MLFlow-TheBloke/Airoboros-L2-70B-2.1-Creative-GPTQ",
+        "MLFlow-TheBloke/LLaMA-65B-GPTQ",
+        "MLFlow-TabbyML/CodeLlama-7B",
+        "MLFlow-SergeyTW/action_model",
+        "MLFlow-uer/roberta-base-wwm-chinese-cluecorpussmall",
+        "MLFlow-asas-ai/nllb-200-distilled-600M-finetuned_augmented_synthetic_ar-to-en",
+        "MLFlow-alayaran/bodo-roberta-base",
+        "MLFlow-TheBloke/Marcoroni-7b-GPTQ",
+        "MLFlow-heegyu/polyglot-ko-3.8b-chat"
     ],
     "workspace": "test-eastus",
     "subscription": "80c77c76-74ba-4c8c-8229-4c3b2957990c",

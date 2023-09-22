@@ -1,7 +1,22 @@
 {
     "queue_name": "test-norwayeast-2",
     "models": [
-        "MLFlow-TheBloke/Llama-2-70B-GPTQ"
+        "MLFlow-medicalai/ClinicalBERT",
+        "MLFlow-TheBloke/vicuna-13B-v1.5-16K-GPTQ",
+        "MLFlow-nielsr/layoutlmv3-finetuned-funsd",
+        "MLFlow-TheBloke/CodeLlama-13B-GPTQ",
+        "MLFlow-dicta-il/dictalm-7b-instruct",
+        "MLFlow-TheBloke/CodeLlama-7B-Instruct-GGUF",
+        "MLFlow-cenkersisman/gpt2-turkish-900m",
+        "MLFlow-MuneK/bert-large-japanese-v2-finetuned-wrime",
+        "MLFlow-utterworks/agent-customer-cls",
+        "MLFlow-boda/ANER",
+        "MLFlow-TheBloke/Manticore-13B-GPTQ",
+        "MLFlow-TheBloke/Synthia-70B-v1.2-GPTQ",
+        "MLFlow-TheBloke/minotaur-13B-fixed-GPTQ",
+        "MLFlow-TheBloke/Unholy-v1-10l-13B-GPTQ",
+        "MLFlow-Samuael/llama-2-7b-tebot-amharic_tuned_2",
+        "MLFlow-TheBloke/OpenOrca-Platypus2-13B-GGUF"
     ],
     "workspace": "test-norwayeast",
     "subscription": "80c77c76-74ba-4c8c-8229-4c3b2957990c",

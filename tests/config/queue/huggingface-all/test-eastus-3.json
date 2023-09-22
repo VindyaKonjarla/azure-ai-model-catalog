@@ -1,7 +1,23 @@
 {
     "queue_name": "test-eastus-3",
     "models": [
-        "MLFlow-meta-llama/Llama-2-13b-hf"
+        "MLFlow-stabilityai/StableBeluga2",
+        "MLFlow-TheBloke/WizardLM-33B-V1.0-Uncensored-GPTQ",
+        "MLFlow-TheBloke/orca_mini_v3_7B-GPTQ",
+        "MLFlow-TinyPixel/lima-test",
+        "MLFlow-TigerResearch/tigerbot-70b-base",
+        "MLFlow-TheBloke/LLaMA-7b-GPTQ",
+        "MLFlow-nielsr/layoutxlm-finetuned-xfund-fr",
+        "MLFlow-TheBloke/Dolphin-Llama-13B-GPTQ",
+        "MLFlow-beomi/kobert",
+        "MLFlow-TheBloke/Airoboros-L2-7B-2.2-GPTQ",
+        "MLFlow-dominguesm/canarim-7b-vestibulaide",
+        "MLFlow-irodkin/gpt2-wiki2",
+        "MLFlow-UDE-SE/BERTForReturnTypeClassification",
+        "MLFlow-TheBloke/30B-Epsilon-GPTQ",
+        "MLFlow-qmeeus/whisper-small-ner-combined",
+        "MLFlow-MUmairAB/python-code-generator",
+        "MLFlow-QuophyDzifa/Sentiment-Analysis-Model"
     ],
     "workspace": "test-eastus",
     "subscription": "80c77c76-74ba-4c8c-8229-4c3b2957990c",

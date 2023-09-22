@@ -1,8 +1,23 @@
 {
     "queue_name": "test-southcentralus-1",
     "models": [
-        "MLFlow-NousResearch/Yarn-Llama-2-7b-64k",
-        "MLFlow-mosaicml/mpt-30b-instruct"
+        "MLFlow-facebook/opt-1.3b",
+        "MLFlow-TheBloke/Platypus2-70B-Instruct-GPTQ",
+        "MLFlow-jojo0217/step3_mk7",
+        "MLFlow-TheBloke/EverythingLM-13B-16K-GPTQ",
+        "MLFlow-CreativeLang/metaphor_detection_roberta_seq",
+        "MLFlow-StudentLLM/Alpagasus-2-13b-QLoRA-merged",
+        "MLFlow-TheBloke/airoboros-l2-7B-gpt4-2.0-GPTQ",
+        "MLFlow-TheBloke/CodeLlama-13B-oasst-sft-v10-GPTQ",
+        "MLFlow-dijon-ai/distilroberta-base-jobs-clasf",
+        "MLFlow-TomatenMarc/TACO",
+        "MLFlow-TheBloke/CodeLlama-34B-Instruct-GGUF",
+        "MLFlow-TheBloke/Pygmalion-2-7B-GGUF",
+        "MLFlow-malhajar/llama-2-70b-hf-chat-turkish-gptq",
+        "MLFlow-UDE-SE/SantaCoderForReturnTypeClassification",
+        "MLFlow-TheBloke/Spring-Dragon-GPTQ",
+        "MLFlow-shazinho10/llama-2-7b-rayn",
+        "MLFlow-Tanor/SRGPTSENTPOS4"
     ],
     "workspace": "test-southcentralus",
     "subscription": "80c77c76-74ba-4c8c-8229-4c3b2957990c",

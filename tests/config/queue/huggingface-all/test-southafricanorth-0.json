@@ -1,7 +1,23 @@
 {
     "queue_name": "test-southafricanorth-0",
     "models": [
-        "MLFlow-TheBloke/WizardLM-70B-V1.0-GPTQ"
+        "MLFlow-mosaicml/mpt-30b-chat",
+        "MLFlow-TheBloke/WizardCoder-Python-34B-V1.0-GPTQ",
+        "MLFlow-Voicelab/trurl-2-7b",
+        "MLFlow-TheBloke/Vigogne-2-13B-Instruct-GPTQ",
+        "MLFlow-BAAI/bge-reranker-base",
+        "MLFlow-TheBloke/Chronos-Beluga-v2-13B-GPTQ",
+        "MLFlow-colinglab/BureauBERTo",
+        "MLFlow-TheBloke/Yarn-Llama-2-13B-64K-GPTQ",
+        "MLFlow-TheBloke/Llama2-22B-Daydreamer-v3-GPTQ",
+        "MLFlow-TheBloke/Samantha-1.11-70B-GPTQ",
+        "MLFlow-lrei/roberta-base-emolit",
+        "MLFlow-mgju/softmax-sentiment",
+        "MLFlow-Chantland/Hraf_MultiLabel",
+        "MLFlow-etri-xainlp/polyglot-ko-12.8b-instruct",
+        "MLFlow-TheBloke/Llama-2-13B-LoRA-Assemble-GPTQ",
+        "MLFlow-Suchinthana/Sinhala-Translate-and-Dolly-Llama-7b",
+        "MLFlow-agonh/phi-1_5"
     ],
     "workspace": "test-southafricanorth",
     "subscription": "80c77c76-74ba-4c8c-8229-4c3b2957990c",

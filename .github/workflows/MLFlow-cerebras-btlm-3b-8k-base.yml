@@ -7,7 +7,7 @@ env:
   test_model_name: cerebras/btlm-3b-8k-base
   test_sku_type: cpu
   test_trigger_next_model: true
-  test_queue: test-japaneast-2
+  test_queue: test-eastus-2
   test_set: huggingface-all
   test_keep_looping: false
 
@@ -43,8 +43,6 @@ jobs:
       run: pip install sentencepiece
     - name: pip-install-fugashi[unidic-lite]
       run: pip install fugashi[unidic-lite]  
-    - name: pip-install einops
-      run: pip install einops
     - name: deploy-model-step
       id: deploy-model-step
       run: python generic_initial_automation.py
