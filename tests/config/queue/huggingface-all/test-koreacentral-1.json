@@ -1,7 +1,6 @@
 {
     "queue_name": "test-koreacentral-1",
     "models": [
-        "MLFlow-Salesforce/codegen2-1B",
         "MLFlow-mosaicml/mpt-7b-8k"
     ],
     "workspace": "test-koreacentral",

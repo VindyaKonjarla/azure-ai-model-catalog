@@ -171,19 +171,21 @@ class Model:
         try:
             # Load the library from the transformer
             model_library = getattr(transformers, model_library_name)
+            login(token=ACCESS_TOKEN)
             logger.info("Started loading the model from library")
             # From the library load the model
-            model = model_library.from_pretrained(self.model_name)
-            tokenizer = AutoTokenizer.from_pretrained(self.model_name)
-        except Exception as e:
-            logger.warning(
-                f"::warning:: This model : {self.model_name} needs trust remote code as true and authentication token to load the model")
-            login(token=ACCESS_TOKEN)
+            # model = model_library.from_pretrained(self.model_name)
+            # tokenizer = AutoTokenizer.from_pretrained(self.model_name)
+            model = model_library.from_pretrained(
+                self.model_name, trust_remote_code=True, use_auth_token=True)
+            tokenizer = AutoTokenizer.from_pretrained(
+                self.model_name, trust_remote_code=True, use_auth_token=True)
+        except Exception as ex:
+            logger.error(
+                f"::Error:: This model : {self.model_name} or related tokenizer can not downloaded from the AutoModel or Autotokenizer\n {ex}")
+            raise Exception(ex)
             # model = model_library.from_pretrained(self.model_name, trust_remote_code=True, token=ACCESS_TOKEN)
             # tokenizer = AutoTokenizer.from_pretrained(self.model_name, trust_remote_code=True, token=ACCESS_TOKEN)
-            logger.info("Model downloading is baout to start")
-            model = model_library.from_pretrained(self.model_name, trust_remote_code=True, use_auth_token=True)
-            tokenizer = AutoTokenizer.from_pretrained(self.model_name, trust_remote_code=True, use_auth_token=True)
         model_and_tokenizer = {"model": model, "tokenizer": tokenizer}
         return model_and_tokenizer
 
