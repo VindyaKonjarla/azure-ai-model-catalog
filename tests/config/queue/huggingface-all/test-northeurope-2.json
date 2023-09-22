@@ -1,8 +1,7 @@
 {
     "queue_name": "test-northeurope-2",
     "models": [
-        "MLFlow-baichuan-inc/Baichuan-13B-Base",
-        "MLFlow-tiiuae/falcon-40b-instruct"
+        "MLFlow-meta-llama/Llama-2-7b-chat-hf"
     ],
     "workspace": "test-northeurope",
     "subscription": "80c77c76-74ba-4c8c-8229-4c3b2957990c",

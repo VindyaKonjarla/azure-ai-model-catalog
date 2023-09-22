@@ -1,8 +1,7 @@
 {
     "queue_name": "test-northcentralus-2",
     "models": [
-        "MLFlow-fxmarty/tiny-mpt-random-remote-code",
-        "MLFlow-ybelkada/falcon-7b-sharded-bf16"
+        "MLFlow-Qwen/Qwen-7B"
     ],
     "workspace": "test-northcentralus",
     "subscription": "80c77c76-74ba-4c8c-8229-4c3b2957990c",

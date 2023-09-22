@@ -1,8 +1,7 @@
 {
     "queue_name": "test-northeurope-1",
     "models": [
-        "MLFlow-anas-awadalla/mpt-1b-redpajama-200b",
-        "MLFlow-syzymon/long_llama_3b"
+        "MLFlow-meta-llama/Llama-2-70b-hf"
     ],
     "workspace": "test-northeurope",
     "subscription": "80c77c76-74ba-4c8c-8229-4c3b2957990c",

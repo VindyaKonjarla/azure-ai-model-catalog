@@ -1,13 +1,13 @@
-name: MLFlow-abhishek-llama-2-7b-hf-small-shards
+name: MLFlow-abhishek/llama-2-7b-hf-small-shards
 
 on: 
   workflow_dispatch:
 
 env:
-  test_model_name: abhishek-llama-2-7b-hf-small-shards
+  test_model_name: abhishek/llama-2-7b-hf-small-shards
   test_sku_type: cpu
   test_trigger_next_model: true
-  test_queue: test-northcentralus-0
+  test_queue: test-koreacentral-0
   test_set: huggingface-all
   test_keep_looping: false
 
