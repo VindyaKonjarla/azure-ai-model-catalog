@@ -110,7 +110,10 @@ class Dashboard():
             csv_reader = csv.reader(csv_data)
             
             # Assuming the first column contains the data you want to retrieve
-            return [row[0] for row in csv_reader]
+            mlflow_prefixed_data = ["MLFlow-" + row[0] for row in csv_reader]
+            
+            return mlflow_prefixed_data
+            
             
         except Exception as e:
             print(f"Error fetching or parsing content from GitHub: {e}")
