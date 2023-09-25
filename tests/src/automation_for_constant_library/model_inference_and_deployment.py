@@ -227,16 +227,16 @@ class ModelInferenceAndDeployemnt:
             exit(0)
 
     def get_task_specified_input(self, task):
-        scoring_file = f"../../config/sample_inputs/{self.registry}/{task}.json"
-        #scoring_file = f"sample_inputs/{task}.json"
+        #scoring_file = f"../../config/sample_inputs/{self.registry}/{task}.json"
+        scoring_file = f"sample_inputs/{task}.json"
         # check of scoring_file exists
         try:
             with open(scoring_file) as f:
                 scoring_input = ConfigBox(json.load(f))
                 logger.info(f"scoring_input file:\n\n {scoring_input}\n\n")
         except Exception as e:
-            logger.warning(
-                f"::warning:: Could not find scoring_file: {scoring_file}. Finishing without sample scoring: \n{e}")
+            logger.error(
+                f"::Error:: Could not find scoring_file: {scoring_file}. Finishing without sample scoring: \n{e}")
         return scoring_file, scoring_input
 
     def local_inference(self, task, latest_model, scoring_input):
