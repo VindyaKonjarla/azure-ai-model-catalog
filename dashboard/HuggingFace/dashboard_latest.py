@@ -99,7 +99,7 @@ class Dashboard():
 
     def get_workflow_names_from_github(self):
         # Fetch the content of modellist.csv from your GitHub repository
-        file_path = "tests/config/modellist.csv"  # Update this with the actual path
+        file_path = "tests/config/WeeklySnapshot_ModelList.csv"  # Update this with the actual path
         try:
             url = f"https://raw.githubusercontent.com/{self.repo_full_name}/master/{file_path}"
             response = requests.get(url)
