@@ -96,7 +96,7 @@ class ModelInferenceAndDeployemnt:
                 print(f'```', file=fh)
         except Exception as e:
             logger.error(f"::error:: Could not invoke endpoint: \n")
-            logger.info(f"{e}\n\n check logs:\n\n")
+            logger.info(f"::error::The exception here is this : \n {e}")
 
     def create_model_package(self, latest_model, endpoint):
         logger.info("In create_model_package...")
