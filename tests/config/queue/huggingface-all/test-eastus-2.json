@@ -1,23 +1,7 @@
 {
     "queue_name": "test-eastus-2",
     "models": [
-        "MLFlow-cerebras/btlm-3b-8k-base",
-        "MLFlow-TheBloke/WizardLM-1.0-Uncensored-Llama2-13B-GPTQ",
-        "MLFlow-AIDC-ai-business/Luban-13B",
-        "MLFlow-NbAiLab/nb-gpt-j-6B-alpaca",
-        "MLFlow-TheBloke/OpenBuddy-Llama2-13B-v11.1-GPTQ",
-        "MLFlow-hadifar/eventclassifier",
-        "MLFlow-ksjpswaroop/immiGPT",
-        "MLFlow-AI-Sweden-Models/bert-large-nordic-pile-1M-steps",
-        "MLFlow-cmarkea/bloomz-7b1-mt-sft-chat",
-        "MLFlow-TheBloke/Synthia-13B-GPTQ",
-        "MLFlow-TheBloke/Chronorctypus-Limarobormes-13b-GPTQ",
-        "MLFlow-konverner/distilcamembert-base-ner-address",
-        "MLFlow-Venkatesh4342/distilbert-helpdesk-sentiment",
-        "MLFlow-thegoodfellas/tgf-xlm-roberta-base-pt-br",
-        "MLFlow-Brillibits/Instruct_Llama70B_Dolly15k",
-        "MLFlow-MuneK/bert-large-japanese-v2-finetuned-jed",
-        "MLFlow-Tanor/SRGPTSENTNEG4"
+        "MLFlow-MPgpt2"
     ],
     "workspace": "test-eastus",
     "subscription": "80c77c76-74ba-4c8c-8229-4c3b2957990c",
