@@ -1,7 +1,22 @@
 {
     "queue_name": "test-norwayeast-0",
     "models": [
-        "MLFlow-MPgpt2-medium"
+        "MLFlow-TheBloke/Llama-2-13B-GPTQ",
+        "MLFlow-TheBloke/WizardCoder-Python-13B-V1.0-GPTQ",
+        "MLFlow-TheBloke/WizardLM-Uncensored-SuperCOT-StoryTelling-30B-GPTQ",
+        "MLFlow-TheBloke/Zarablend-L2-7B-GPTQ",
+        "MLFlow-TheBloke/Llama-2-70B-OASST-1-200-GPTQ",
+        "MLFlow-TheBloke/ORCA_LLaMA_70B_QLoRA-GPTQ",
+        "MLFlow-TheBloke/Firefly-Llama2-13B-v1.2-GPTQ",
+        "MLFlow-TheBloke/WizardMath-13B-V1.0-GPTQ",
+        "MLFlow-TheBloke/Phind-CodeLlama-34B-Python-v1-GPTQ",
+        "MLFlow-TheBloke/LLaMA-13b-GPTQ",
+        "MLFlow-TheBloke/Chronohermes-Grad-L2-13B-GPTQ",
+        "MLFlow-indiejoseph/bert-base-cantonese",
+        "MLFlow-projecte-aina/multiner_ceil",
+        "MLFlow-ZahrizhalAli/calgpt-falcon-7b-finetuned-mental-health",
+        "MLFlow-muhtasham/bert-tiny-finetuned-finer",
+        "MLFlow-TheBloke/13B-Ouroboros-GPTQ"
     ],
     "workspace": "test-norwayeast",
     "subscription": "80c77c76-74ba-4c8c-8229-4c3b2957990c",

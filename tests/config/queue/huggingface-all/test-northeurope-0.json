@@ -1,7 +1,23 @@
 {
     "queue_name": "test-northeurope-0",
     "models": [
-        "MLFlow-MPdistilgpt2"
+        "MLFlow-TheBloke/Llama-2-70B-chat-GPTQ",
+        "MLFlow-PygmalionAI/pygmalion-2-13b",
+        "MLFlow-TheBloke/orca_mini_v3_13B-GPTQ",
+        "MLFlow-TheBloke/guanaco-7B-GPTQ",
+        "MLFlow-TheBloke/Llama-2-7b-Chat-GGUF",
+        "MLFlow-TheBloke/Vigogne-2-7B-Instruct-GPTQ",
+        "MLFlow-TheBloke/Samantha-1.11-CodeLlama-34B-GPTQ",
+        "MLFlow-TheBloke/Kimiko-v2-13B-GPTQ",
+        "MLFlow-Xenova/llama2.c-stories15M",
+        "MLFlow-TheBloke/Hermes-LLongMA-2-13B-8K-GPTQ",
+        "MLFlow-CofeAI/FLM-101B",
+        "MLFlow-NbAiLab/nb-gpt-j-6B",
+        "MLFlow-annahaz/xlm-roberta-base-misogyny-sexism-tweets",
+        "MLFlow-TheBloke/tulu-13B-GPTQ",
+        "MLFlow-alexandrainst/da-emotion-classification-base",
+        "MLFlow-Mahmoud22/my_autotrain_llm",
+        "MLFlow-judy93536/RoBERTa-perigon-news"
     ],
     "workspace": "test-northeurope",
     "subscription": "80c77c76-74ba-4c8c-8229-4c3b2957990c",

@@ -1,7 +1,23 @@
 {
     "queue_name": "test-japaneast-1",
     "models": [
-        "MLFlow-MPbert-large-cased"
+        "MLFlow-microsoft/mpnet-base",
+        "MLFlow-bert-base-cased-finetuned-mrpc",
+        "MLFlow-TheBloke/CodeUp-Llama-2-13B-Chat-HF-GPTQ",
+        "MLFlow-codefuse-ai/CodeFuse-CodeLlama-34B",
+        "MLFlow-TheBloke/llama-2-13B-Guanaco-QLoRA-GPTQ",
+        "MLFlow-TheBloke/CodeLlama-34B-Python-GPTQ",
+        "MLFlow-TabbyML/StarCoder-1B",
+        "MLFlow-TheBloke/Airoboros-c34B-2.1-GPTQ",
+        "MLFlow-TheBloke/Kimiko-13B-GPTQ",
+        "MLFlow-shibing624/ziya-llama-13b-medical-merged",
+        "MLFlow-sauce1337/BerrySauce-L2-13b",
+        "MLFlow-TheBloke/CodeLlama-13B-Python-GGUF",
+        "MLFlow-TheBloke/MLewdBoros-L2-13B-GPTQ",
+        "MLFlow-TheBloke/based-13b-GPTQ",
+        "MLFlow-schnabear/DialoGPT-small-FinalFantasyDialogue",
+        "MLFlow-TheBloke/Zarablend-MX-L2-7B-GPTQ",
+        "MLFlow-cmarkea/bloomz-560m-sft-chat"
     ],
     "workspace": "test-japaneast",
     "subscription": "80c77c76-74ba-4c8c-8229-4c3b2957990c",

@@ -1,7 +1,23 @@
 {
     "queue_name": "test-japaneast-0",
     "models": [
-        "MLFlow-MPcamembert-base"
+        "MLFlow-microsoft/phi-1_5",
+        "MLFlow-TheBloke/orca_mini_v3_70B-GPTQ",
+        "MLFlow-PygmalionAI/pygmalion-2-7b",
+        "MLFlow-TheBloke/airoboros-l2-13B-gpt4-1.4.1-GPTQ",
+        "MLFlow-TheBloke/Speechless-Llama2-Hermes-Orca-Platypus-WizardLM-13B-GPTQ",
+        "MLFlow-TheBloke/model_007-70B-GPTQ",
+        "MLFlow-TheBloke/Luban-13B-GPTQ",
+        "MLFlow-anzorq/m2m100_418M_ft_ru-kbd_44K",
+        "MLFlow-TheBloke/HermesLimaRP-L2-7B-GPTQ",
+        "MLFlow-nikolasmoya/question-or-statement",
+        "MLFlow-TheBloke/MythoLogic-Mini-7B-GPTQ",
+        "MLFlow-TheBloke/CodeLlama-34B-GGUF",
+        "MLFlow-Sandiago21/falcon-7b-prompt-answering",
+        "MLFlow-ganeshkharad/gk-hinglish-sentiment",
+        "MLFlow-TheBloke/Camel-Platypus2-13B-GPTQ",
+        "MLFlow-TheBloke/tulu-7B-GPTQ",
+        "MLFlow-bllin001/test-ner"
     ],
     "workspace": "test-japaneast",
     "subscription": "80c77c76-74ba-4c8c-8229-4c3b2957990c",

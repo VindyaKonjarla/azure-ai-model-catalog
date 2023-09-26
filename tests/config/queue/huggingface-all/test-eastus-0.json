@@ -1,7 +1,23 @@
 {
     "queue_name": "test-eastus-0",
     "models": [
-        "MLFlow-MPmicrosoft-deberta-base-mnli"
+        "MLFlow-TheBloke/MythoMax-L2-13B-GPTQ",
+        "MLFlow-TheBloke/StableBeluga-7B-GPTQ",
+        "MLFlow-Voicelab/trurl-2-13b",
+        "MLFlow-Rachneet/gpt2-xl-alpaca",
+        "MLFlow-TheBloke/upstage-llama-30b-instruct-2048-GPTQ",
+        "MLFlow-TheBloke/manticore-13b-chat-pyg-GPTQ",
+        "MLFlow-TheBloke/LLaMA-30b-GPTQ",
+        "MLFlow-22h/open-cabrita3b",
+        "MLFlow-TheBloke/airochronos-33B-GPTQ",
+        "MLFlow-tillschwoerer/roberta-base-finetuned-toxic-comment-detection",
+        "MLFlow-TheBloke/Camel-Platypus2-70B-GPTQ",
+        "MLFlow-Recag/BharatAI",
+        "MLFlow-TheBloke/Synthia-7B-GPTQ",
+        "MLFlow-TheBloke/MythoLogic-13B-GPTQ",
+        "MLFlow-gonchisi/roberta-base-bne-finetuned-new_or_used_title",
+        "MLFlow-TheBloke/Airoboros-L2-13B-2_1-YaRN-64K-GPTQ",
+        "MLFlow-TheBloke/13B-BlueMethod-GPTQ"
     ],
     "workspace": "test-eastus",
     "subscription": "80c77c76-74ba-4c8c-8229-4c3b2957990c",

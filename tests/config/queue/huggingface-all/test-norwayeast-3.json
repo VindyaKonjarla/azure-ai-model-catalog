@@ -1,7 +1,22 @@
 {
     "queue_name": "test-norwayeast-3",
     "models": [
-        "MLFlow-MPdistilbert-base-uncased"
+        "MLFlow-TheBloke/Wizard-Vicuna-13B-Uncensored-GPTQ",
+        "MLFlow-TheBloke/Airoboros-L2-70B-2.1-GPTQ",
+        "MLFlow-entropy/roberta_zinc_480m",
+        "MLFlow-hegelty/KcBERT-Base-finetuned-hate",
+        "MLFlow-jphme/phi-1_5_Wizard_Vicuna_uncensored",
+        "MLFlow-crodri/falcon_aguila_meteocat",
+        "MLFlow-TheBloke/WizardMath-7B-V1.0-GPTQ",
+        "MLFlow-TheBloke/Athena-v1-GPTQ",
+        "MLFlow-codefuse-ai/CodeFuse-13B",
+        "MLFlow-rasmodev/Covid-19_Sentiment_Analysis_RoBERTa_Model",
+        "MLFlow-chanifrusydi/t5-dialogue-summarization",
+        "MLFlow-TIGER-Lab/MAmmoTH-Coder-7B",
+        "MLFlow-beomi/llama-2-ko-70b",
+        "MLFlow-TheBloke/LlongOrca-7B-16K-GGUF",
+        "MLFlow-TheBloke/Pygmalion-2-13B-SuperCOT-GGUF",
+        "MLFlow-TheBloke/Llama-2-7B-LoRA-Assemble-GPTQ"
     ],
     "workspace": "test-norwayeast",
     "subscription": "80c77c76-74ba-4c8c-8229-4c3b2957990c",

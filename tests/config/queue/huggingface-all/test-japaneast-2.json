@@ -1,7 +1,23 @@
 {
     "queue_name": "test-japaneast-2",
     "models": [
-        "MLFlow-MPbert-base-uncased"
+        "MLFlow-beomi/KoAlpaca-Polyglot-12.8B",
+        "MLFlow-TheBloke/airoboros-l2-70B-gpt4-1.4.1-GPTQ",
+        "MLFlow-TheBloke/wizard-vicuna-13B-GPTQ",
+        "MLFlow-TheBloke/llama-2-7B-Guanaco-QLoRA-GPTQ",
+        "MLFlow-TheBloke/Nous-Hermes-Llama2-70B-GPTQ",
+        "MLFlow-KETI-AIR-Downstream/long-ke-t5-base-translation-aihub-bidirection",
+        "MLFlow-TheBloke/Zarafusionex-1.1-L2-7B-GPTQ",
+        "MLFlow-AIDC-ai-business/Marcoroni-70B",
+        "MLFlow-ku-nlp/deberta-v2-base-japanese-with-auto-jumanpp",
+        "MLFlow-TheBloke/Pygmalion-2-13B-SuperCOT-GPTQ",
+        "MLFlow-TheBloke/Uni-TianYan-70B-GPTQ",
+        "MLFlow-monsoon-nlp/mGPT-quantized",
+        "MLFlow-pszemraj/pythia-31m-goodwiki-deduped-2048-scratch",
+        "MLFlow-juancopi81/lmd-8bars-2048-epochs40_v4",
+        "MLFlow-pszemraj/pythia-31m-simplewiki-scratch-bf16",
+        "MLFlow-TheBloke/fiction.live-Kimiko-V2-70B-GPTQ",
+        "MLFlow-serdarcaglar/roberta-base-biomedical-es"
     ],
     "workspace": "test-japaneast",
     "subscription": "80c77c76-74ba-4c8c-8229-4c3b2957990c",

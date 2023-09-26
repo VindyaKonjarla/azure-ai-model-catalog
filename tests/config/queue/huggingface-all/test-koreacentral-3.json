@@ -1,7 +1,23 @@
 {
     "queue_name": "test-koreacentral-3",
     "models": [
-        "MLFlow-MPmicrosoft-deberta-large"
+        "MLFlow-TheBloke/Llama-2-13B-chat-GPTQ",
+        "MLFlow-cis-lmu/glot500-base",
+        "MLFlow-TheBloke/CodeLlama-13B-Instruct-GPTQ",
+        "MLFlow-TheBloke/medalpaca-13B-GPTQ",
+        "MLFlow-TheBloke/Yarn-Llama-2-13B-128K-GPTQ",
+        "MLFlow-BAAI/bge-reranker-large",
+        "MLFlow-TheBloke/airoboros-l2-7b-gpt4-1.4.1-GPTQ",
+        "MLFlow-TheBloke/EverythingLM-13b-V2-16K-GPTQ",
+        "MLFlow-Xenova/llama2.c-stories110M",
+        "MLFlow-sjrhuschlee/deberta-v3-large-nli-v1",
+        "MLFlow-TheBloke/AlpacaCielo-13B-GPTQ",
+        "MLFlow-TheBloke/CodeUp-Alpha-13B-HF-GPTQ",
+        "MLFlow-Sandiago21/falcon-40b-prompt-answering",
+        "MLFlow-TheBloke/hippogriff-30b-chat-GPTQ",
+        "MLFlow-dahara1/ELYZA-japanese-Llama-2-7b-instruct-AWQ",
+        "MLFlow-TheBloke/Samantha-1.1-70B-GPTQ",
+        "MLFlow-TheBloke/MythoBoros-13B-GPTQ"
     ],
     "workspace": "test-koreacentral",
     "subscription": "80c77c76-74ba-4c8c-8229-4c3b2957990c",

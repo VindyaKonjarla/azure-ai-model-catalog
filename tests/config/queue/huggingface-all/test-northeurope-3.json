@@ -1,7 +1,23 @@
 {
     "queue_name": "test-northeurope-3",
     "models": [
-        "MLFlow-MPdatabricks-dolly-v2-12b"
+        "MLFlow-facebook/wmt19-en-de",
+        "MLFlow-TheBloke/WizardLM-7B-uncensored-GPTQ",
+        "MLFlow-TheBloke/OpenOrcaxOpenChat-Preview2-13B-GPTQ",
+        "MLFlow-kimsan0622/gpt2-medium",
+        "MLFlow-TheBloke/Dolphin-Llama2-7B-GPTQ",
+        "MLFlow-OpenBuddy/openbuddy-llama2-34b-v11.1-bf16",
+        "MLFlow-TheBloke/MythoMax-L2-Kimiko-v2-13B-GPTQ",
+        "MLFlow-TheBloke/Spicyboros-13B-2.2-GPTQ",
+        "MLFlow-Xenova/llama2.c-stories42M",
+        "MLFlow-TheBloke/Llama-2-13B-GGUF",
+        "MLFlow-TheBloke/WizardMath-70B-V1.0-GPTQ",
+        "MLFlow-TheBloke/Synthia-70B-v1.1-GPTQ",
+        "MLFlow-vaiv/kobigbird-roberta-large",
+        "MLFlow-TigerResearch/tigerbot-13b-chat-v1",
+        "MLFlow-TheBloke/OpenAssistant-Llama2-13B-Orca-8K-3319-GGUF",
+        "MLFlow-TheBloke/SuperPlatty-30B-GPTQ",
+        "MLFlow-intlsy/opt-175b-hyperparam"
     ],
     "workspace": "test-northeurope",
     "subscription": "80c77c76-74ba-4c8c-8229-4c3b2957990c",
