@@ -209,22 +209,47 @@ class Model:
                 scoring_input.input_data[index] = scoring_input.input_data[index].replace(
                     "<mask>", pipeline_tokenizer.mask_token).replace("[MASK]", pipeline_tokenizer.mask_token)
 
-        # Generate the transformer model output for that particular model
-        output = generate_signature_output(
-            model_pipeline, scoring_input.input_data)
-        # It will infer the signature directly from input and output
-        signature = infer_signature(scoring_input.input_data, output)
-
         artifact_path = registered_model_name + "-artifact"
-        # With the help of mlflow log and register the model in the workspace
-        mlflow.transformers.log_model(
-            transformers_model=model_pipeline,
-            task=task,
-            artifact_path=artifact_path,
-            registered_model_name=registered_model_name,
-            signature=signature,
-            input_example=scoring_input.input_data
-        )
+        try:
+            # Generate the transformer model output for that particular model
+            output = generate_signature_output(
+                model_pipeline, scoring_input.input_data)
+            # It will infer the signature directly from input and output
+            signature = infer_signature(scoring_input.input_data, output)
+
+            # With the help of mlflow log and register the model in the workspace
+            mlflow.transformers.log_model(
+                transformers_model=model_pipeline,
+                task=task,
+                artifact_path=artifact_path,
+                registered_model_name=registered_model_name,
+                signature=signature,
+                input_example=scoring_input.input_data
+            )
+        except IndexError as ex:
+            logger.warning(
+                f"::warning::Reaching in the index error block as model is not compaitable with our input and the exception is : \n {ex}")
+            # Get the output from the pipeline to check which input is nor working
+            output_from_pipeline = model_pipeline(scoring_input.input_data)
+            for index in range(len(output_from_pipeline)):
+                if len(output_from_pipeline[index]) != 0:
+                    logger.info(f"This index input is working with the model: {index}")
+                    # Generate the transformer model output for that particular model
+                    output = generate_signature_output(
+                        pipeline, scoring_input.input_data[index])
+                    # It will infer the signature directly from input and output
+                    signature = infer_signature(
+                        scoring_input.input_data[index], output)
+                    # With the help of mlflow log and register the model in the workspace
+                    mlflow.transformers.log_model(
+                        transformers_model=pipeline,
+                        task=task,
+                        artifact_path=artifact_path,
+                        registered_model_name=registered_model_name,
+                        signature=signature,
+                        input_example=scoring_input.input_data[index]
+                    )
+            
         registered_model_list = client.get_latest_versions(
             name=registered_model_name, stages=["None"])
         model_detail = registered_model_list[0]
