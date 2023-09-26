@@ -1,10 +1,10 @@
-name: MLFlow-DI-bert-large-uncased
+name: MLFlow-DI-bert-base-uncased
 
 on: 
   workflow_dispatch:
 
 env:
-  test_model_name: bert-large-uncased
+  test_model_name: bert-base-uncased
   test_sku_type: cpu
   test_trigger_next_model: true
   test_queue: test-japaneast-1
