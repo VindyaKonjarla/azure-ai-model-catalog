@@ -226,6 +226,7 @@ class Model:
                 signature=signature,
                 input_example=scoring_input.input_data
             )
+            logger.info("MLFlow logging and registerring is completed")
         except IndexError as ex:
             logger.warning(
                 f"::warning::Reaching in the index error block as model is not compaitable with our input and the exception is : \n {ex}")
@@ -233,7 +234,7 @@ class Model:
             output_from_pipeline = model_pipeline(scoring_input.input_data)
             for index in range(len(output_from_pipeline)):
                 if len(output_from_pipeline[index]) != 0:
-                    logger.info(f"This index input is working with the model: {index}")
+                    logger.info(f"This model is giving output in this index: {index}")
                     # Generate the transformer model output for that particular model
                     output = generate_signature_output(
                         pipeline, scoring_input.input_data[index])
@@ -242,13 +243,14 @@ class Model:
                         scoring_input.input_data[index], output)
                     # With the help of mlflow log and register the model in the workspace
                     mlflow.transformers.log_model(
-                        transformers_model=pipeline,
-                        task=task,
-                        artifact_path=artifact_path,
-                        registered_model_name=registered_model_name,
-                        signature=signature,
-                        input_example=scoring_input.input_data[index]
-                    )
+                            transformers_model=model_pipeline,
+                            task=task,
+                            artifact_path=artifact_path,
+                            registered_model_name=registered_model_name,
+                            signature=signature,
+                            input_example=scoring_input.input_data[index]
+                        )
+                    logger.info("MLFlow logging and registerring is completed")
             
         registered_model_list = client.get_latest_versions(
             name=registered_model_name, stages=["None"])
