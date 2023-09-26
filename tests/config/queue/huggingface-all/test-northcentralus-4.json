@@ -1,5 +1,5 @@
 {
-    "queue_name": "test-northcentralus-0",
+    "queue_name": "test-northcentralus-4",
     "models": [
         "MLFlow-MP-cl-tohoku/bert-base-japanese-char",
         "MLFlow-MP-cl-tohoku/bert-base-japanese"
