@@ -1,4 +1,4 @@
-name: MLFlow-cl-tohoku/bert-base-japanese
+name: MLFlow-MLFlow-cl-tohoku/bert-base-japanesecl-tohoku/bert-base-japanese
 
 on: 
   workflow_dispatch:
