@@ -1,23 +1,7 @@
 {
     "queue_name": "test-koreacentral-0",
     "models": [
-        "MLFlow-TheBloke/Llama-2-70B-GPTQ",
-        "MLFlow-TheBloke/WizardLM-70B-V1.0-GPTQ",
-        "MLFlow-TigerResearch/tigerbot-13b-chat-v2",
-        "MLFlow-TheBloke/Airoboros-L2-13B-2.1-GPTQ",
-        "MLFlow-TheBloke/CodeLlama-34B-GPTQ",
-        "MLFlow-TheBloke/GodziLLa2-70B-GPTQ",
-        "MLFlow-zoukagh/bert-base-iz-spain-uncased",
-        "MLFlow-quantumaikr/plankton-100M",
-        "MLFlow-TheBloke/Platypus2-70B-GPTQ",
-        "MLFlow-nielsr/layoutlmv3-finetuned-cord",
-        "MLFlow-Voicelab/trurl-2-13b-8bit",
-        "MLFlow-ajibawa-2023/Uncensored-Frank-7B",
-        "MLFlow-TheBloke/LLongMA-2-7B-GPTQ",
-        "MLFlow-mystic-leung/pegasus-medcord19",
-        "MLFlow-nthngdy/headless-pythia-owt2-70m-raw",
-        "MLFlow-TheBloke/Chronolima-Airo-Grad-L2-13B-GPTQ",
-        "MLFlow-msislam/code-mixed-language-detection-XLMRoberta"
+        "MLFlow-MProberta-base"
     ],
     "workspace": "test-koreacentral",
     "subscription": "80c77c76-74ba-4c8c-8229-4c3b2957990c",

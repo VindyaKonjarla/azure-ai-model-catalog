@@ -1,22 +1,7 @@
 {
     "queue_name": "test-southafricanorth-1",
     "models": [
-        "MLFlow-internlm/internlm-7b",
-        "MLFlow-openchat/openchat_v3.2",
-        "MLFlow-TheBloke/wizard-mega-13B-GPTQ",
-        "MLFlow-NotXia/longformer-bio-ext-summ",
-        "MLFlow-alexandrainst/da-sentiment-base",
-        "MLFlow-TheBloke/LosslessMegaCoder-Llama2-13B-Mini-GPTQ",
-        "MLFlow-TheBloke/llama-2-13B-German-Assistant-v2-GPTQ",
-        "MLFlow-TheBloke/airoboros-l2-7B-gpt4-m2.0-GPTQ",
-        "MLFlow-TheBloke/Nous-Puffin-70B-GPTQ",
-        "MLFlow-Helsinki-NLP/opus-tatoeba-en-ja",
-        "MLFlow-achimoraites/roberta-base_ag_news",
-        "MLFlow-TheBloke/Upstage-Llama1-65B-Instruct-GPTQ",
-        "MLFlow-TheBloke/Llama-2-70B-Orca-200k-GGUF",
-        "MLFlow-pszemraj/pythia-31m-KI_v1-2048-scratch",
-        "MLFlow-TheBloke/MythoLogic-L2-13B-GPTQ",
-        "MLFlow-Laksitha/autotrain-tosdr_tldr_legal_summarisation_v1-1434353657"
+        "MLFlow-MPdistilbert-base-uncased-distilled-squad"
     ],
     "workspace": "test-southafricanorth",
     "subscription": "80c77c76-74ba-4c8c-8229-4c3b2957990c",

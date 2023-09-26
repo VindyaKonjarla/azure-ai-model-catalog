@@ -1,23 +1,7 @@
 {
     "queue_name": "test-southcentralus-3",
     "models": [
-        "MLFlow-smallcloudai/Refact-1_6B-fim",
-        "MLFlow-NousResearch/Nous-Hermes-llama-2-7b",
-        "MLFlow-TigerResearch/tigerbot-13b-chat",
-        "MLFlow-ctheodoris/Geneformer",
-        "MLFlow-TheBloke/guanaco-65B-GPTQ",
-        "MLFlow-XuYipei/kw-cutegpt-13b-ift",
-        "MLFlow-TheBloke/Llama-2-70B-chat-GGUF",
-        "MLFlow-TheBloke/LosslessMegaCoder-Llama2-7B-Mini-GPTQ",
-        "MLFlow-TigerResearch/tigerbot-70b-chat-v1",
-        "MLFlow-Finnish-NLP/llama-7b-finnish",
-        "MLFlow-wu981526092/Sentence-Level-Stereotype-Detector",
-        "MLFlow-iblfe/webnesday",
-        "MLFlow-TheBloke/Speechless-Llama2-13B-GPTQ",
-        "MLFlow-lloorree/mythxl-70b",
-        "MLFlow-TIGER-Lab/MAmmoTH-Coder-13B",
-        "MLFlow-TheBloke/openchat_v3.2_super-GPTQ",
-        "MLFlow-uer/roberta-xlarge-wwm-chinese-cluecorpussmall"
+        "MLFlow-MProberta-base-openai-detector"
     ],
     "workspace": "test-southcentralus",
     "subscription": "80c77c76-74ba-4c8c-8229-4c3b2957990c",
