@@ -73,7 +73,7 @@ def set_next_trigger_model(queue):
 # file the index of test_model_name in models list queue dictionary
     model_list = list(queue.models)
     #model_name_without_slash = test_model_name.replace('/', '-')
-    check_mlflow_model = "MLFlow-"+test_model_name
+    check_mlflow_model = "MLFlow-DI-"+test_model_name
     index = model_list.index(check_mlflow_model)
     #index = model_list.index(test_model_name)
     logger.info(f"index of {test_model_name} in queue: {index}")
@@ -185,9 +185,9 @@ if __name__ == "__main__":
     latest_env = workspace_ml_client.environments.get(
         name=queue.environment, version=str(latest_version))
     logger.info(f"Latest Environment : {latest_env}")
-    command_job = run_azure_ml_job(code="./", command_to_run="python generic_model_download_and_register.py",
-                                   environment=latest_env, compute=queue.compute, environment_variables=environment_variables)
-    create_and_get_job_studio_url(command_job, workspace_ml_client)
+    # command_job = run_azure_ml_job(code="./", command_to_run="python generic_model_download_and_register.py",
+    #                                environment=latest_env, compute=queue.compute, environment_variables=environment_variables)
+    # create_and_get_job_studio_url(command_job, workspace_ml_client)
 
     InferenceAndDeployment = ModelInferenceAndDeployemnt(
         test_model_name=test_model_name,
