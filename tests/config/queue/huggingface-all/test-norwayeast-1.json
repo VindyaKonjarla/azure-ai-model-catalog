@@ -1,22 +1,7 @@
 {
     "queue_name": "test-norwayeast-1",
     "models": [
-        "MLFlow-TheBloke/Llama-2-7B-32K-Instruct-GPTQ",
-        "MLFlow-TheBloke/llama2_7b_chat_uncensored-GPTQ",
-        "MLFlow-vicgalle/gpt2-alpaca-gpt4",
-        "MLFlow-TheBloke/Llama-2-13B-German-Assistant-v4-GPTQ",
-        "MLFlow-TheBloke/vicuna-7B-v1.5-16K-GPTQ",
-        "MLFlow-ku-nlp/deberta-v2-large-japanese-char-wwm",
-        "MLFlow-efederici/ipt-350m",
-        "MLFlow-TigerResearch/tigerbot-7b-chat",
-        "MLFlow-TheBloke/llama-2-13B-chat-limarp-v2-merged-GPTQ",
-        "MLFlow-TheBloke/OpenBuddy-Llama2-70b-v10.1-GPTQ",
-        "MLFlow-wu981526092/Token-Level-Stereotype-Detector",
-        "MLFlow-TheBloke/chronos-33b-GPTQ",
-        "MLFlow-uer/roberta-small-wwm-chinese-cluecorpussmall",
-        "MLFlow-TheBloke/Speechless-Llama2-13B-GGUF",
-        "MLFlow-YSKartal/bert-base-turkish-cased-turkish_offensive_trained_model",
-        "MLFlow-TheBloke/Unholy-v1-12L-13B-GPTQ"
+        "MLFlow-MP-finiteautomata-bertweet-base-sentiment-analysis"
     ],
     "workspace": "test-norwayeast",
     "subscription": "80c77c76-74ba-4c8c-8229-4c3b2957990c",

@@ -1,22 +1,7 @@
 {
     "queue_name": "test-southafricanorth-3",
     "models": [
-        "MLFlow-defog/sqlcoder",
-        "MLFlow-TheBloke/Phind-CodeLlama-34B-v2-GPTQ",
-        "MLFlow-TheBloke/StableBeluga2-70B-GPTQ",
-        "MLFlow-TheBloke/Chronoboros-33B-GPTQ",
-        "MLFlow-TheBloke/CodeLlama-13B-Python-GPTQ",
-        "MLFlow-TheBloke/Llama-2-13B-chat-GGUF",
-        "MLFlow-TheBloke/Pygmalion-2-7B-GPTQ",
-        "MLFlow-TheBloke/Vigogne-2-7B-Chat-GPTQ",
-        "MLFlow-beomi/KoAlpaca-KoRWKV-6B",
-        "MLFlow-TheBloke/wizardLM-13B-1.0-GPTQ",
-        "MLFlow-Henok21/test_trainer",
-        "MLFlow-TheBloke/Chronoboros-Grad-L2-13B-GPTQ",
-        "MLFlow-Geotrend/bert-base-15lang-cased",
-        "MLFlow-sakuraumi/Sakura-13B-Galgame",
-        "MLFlow-lloorree/mythxl-70b-gptq",
-        "MLFlow-juancopi81/mutopia_guitar_mmm"
+        "MLFlow-MP-roberta-large-openai-detector"
     ],
     "workspace": "test-southafricanorth",
     "subscription": "80c77c76-74ba-4c8c-8229-4c3b2957990c",

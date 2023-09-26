@@ -1,23 +1,7 @@
 {
     "queue_name": "test-koreacentral-2",
     "models": [
-        "MLFlow-TheBloke/Llama-2-7b-Chat-GPTQ",
-        "MLFlow-PY007/TinyLlama-1.1B-step-50K-105b",
-        "MLFlow-TheBloke/Upstage-Llama-2-70B-instruct-v2-GPTQ",
-        "MLFlow-TheBloke/chronos-wizardlm-uc-scot-st-13B-GPTQ",
-        "MLFlow-KETI-AIR-Downstream/long-ke-t5-base-translation-aihub-en2ko",
-        "MLFlow-TheBloke/Yarn-Llama-2-7B-128K-GPTQ",
-        "MLFlow-tangger/Qwen-7B-Chat",
-        "MLFlow-TheBloke/Phind-CodeLlama-34B-v1-GPTQ",
-        "MLFlow-TheBloke/Hermes-LLongMA-2-7B-8K-GPTQ",
-        "MLFlow-TheBloke/Chronos-70B-v2-GPTQ",
-        "MLFlow-TheBloke/gorilla-7B-GPTQ",
-        "MLFlow-filipealmeida/open-llama-3b-v2-pii-transform",
-        "MLFlow-nthngdy/headless-bert-bs64-owt2",
-        "MLFlow-csdc-atl/Baichuan2-7B-Chat-GPTQ-Int4",
-        "MLFlow-TheBloke/Spicyboros-c34b-2.2-GPTQ",
-        "MLFlow-TheBloke/13B-Thorns-L2-GPTQ",
-        "MLFlow-khoantap/Terminator-v1"
+        "MLFlow-MP-microsoft-deberta-large-mnli"
     ],
     "workspace": "test-koreacentral",
     "subscription": "80c77c76-74ba-4c8c-8229-4c3b2957990c",

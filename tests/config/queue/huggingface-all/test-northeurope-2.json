@@ -1,23 +1,7 @@
 {
     "queue_name": "test-northeurope-2",
     "models": [
-        "MLFlow-TheBloke/llama-2-70b-Guanaco-QLoRA-GPTQ",
-        "MLFlow-internlm/internlm-chat-7b",
-        "MLFlow-TheBloke/WizardLM-13B-V1.1-GPTQ",
-        "MLFlow-TheBloke/Nous-Hermes-Llama-2-7B-GPTQ",
-        "MLFlow-TheBloke/ReMM-SLERP-L2-13B-GPTQ",
-        "MLFlow-TheBloke/Pygmalion-2-13B-GPTQ",
-        "MLFlow-TheBloke/Redmond-Puffin-13B-GPTQ",
-        "MLFlow-universeTBD/astrollama",
-        "MLFlow-nicholasKluge/Aira-2-774M",
-        "MLFlow-WGNW/Llama-2-ko-7b-Chat-auto-gptq-4bit",
-        "MLFlow-Kriyans/my_awesome_wnut_model",
-        "MLFlow-TheBloke/Carl-Llama-2-13B-GPTQ",
-        "MLFlow-TheBloke/tulu-30B-GPTQ",
-        "MLFlow-gonchisi/roberta-base-bne-finetuned-new_or_used_warranty",
-        "MLFlow-TheBloke/Mythical-Destroyer-L2-13B-GPTQ",
-        "MLFlow-TheBloke/fin-llama-33B-GPTQ",
-        "MLFlow-Sarmila/pubmed-bert-mlm"
+        "MLFlow-MP-deepset-roberta-base-squad2"
     ],
     "workspace": "test-northeurope",
     "subscription": "80c77c76-74ba-4c8c-8229-4c3b2957990c",

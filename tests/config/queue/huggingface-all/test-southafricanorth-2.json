@@ -1,22 +1,7 @@
 {
     "queue_name": "test-southafricanorth-2",
     "models": [
-        "MLFlow-TheBloke/Llama-2-7B-GPTQ",
-        "MLFlow-TheBloke/Nous-Hermes-Llama2-GPTQ",
-        "MLFlow-openchat/openchat_v3.2_super",
-        "MLFlow-microsoft/git-base-vatex",
-        "MLFlow-TheBloke/airoboros-l2-13b-gpt4-m2.0-GPTQ",
-        "MLFlow-TheBloke/LoKuS-13B-GPTQ",
-        "MLFlow-TheBloke/Spicyboros-7B-2.2-GPTQ",
-        "MLFlow-TheBloke/chronos-hermes-13B-GPTQ",
-        "MLFlow-TheBloke/Pygmalion-2-13B-GGUF",
-        "MLFlow-mwz/urdu-bert-small",
-        "MLFlow-TheBloke/OpenBuddy-Llama2-13B-v11.1-GGUF",
-        "MLFlow-TheBloke/ReMM-v2-L2-13B-GPTQ",
-        "MLFlow-flytech/togetherchat-dev-7b-v2",
-        "MLFlow-Dezzpil/otus-fw-roberta",
-        "MLFlow-vlsp-2023-vllm/hoa-7b",
-        "MLFlow-TheBloke/Airoboros-L2-70b-2.2-GPTQ"
+        "MLFlow-MP-bert-large-uncased"
     ],
     "workspace": "test-southafricanorth",
     "subscription": "80c77c76-74ba-4c8c-8229-4c3b2957990c",

@@ -1,23 +1,7 @@
 {
     "queue_name": "test-northcentralus-3",
     "models": [
-        "MLFlow-TheBloke/airoboros-l2-70B-GPT4-2.0-GPTQ",
-        "MLFlow-TheBloke/CodeLlama-7B-Instruct-GPTQ",
-        "MLFlow-PygmalionAI/mythalion-13b",
-        "MLFlow-alexandrainst/da-hatespeech-detection-small",
-        "MLFlow-TheBloke/MythoMix-L2-13B-GPTQ",
-        "MLFlow-KETI-AIR-Downstream/long-ke-t5-base-translation-aihub-ko2en",
-        "MLFlow-TheBloke/Yarn-Llama-2-7B-64K-GPTQ",
-        "MLFlow-NewstaR/Starlight-7B",
-        "MLFlow-sjrhuschlee/flan-t5-large-squad2",
-        "MLFlow-TheBloke/Nous-Hermes-13B-Code-GPTQ",
-        "MLFlow-TheBloke/Platypus2-13B-GPTQ",
-        "MLFlow-xDAN2099/xDAN-L3-70B-shareChat-0911-Qlora-ckp15",
-        "MLFlow-AkimfromParis/NER-Luxury",
-        "MLFlow-TheBloke/orca_mini_v3_7B-GGUF",
-        "MLFlow-TheBloke/Mythical-Destroyer-V2-L2-13B-GPTQ",
-        "MLFlow-TheBloke/CAMEL-33B-Combined-Data-GPTQ",
-        "MLFlow-lyogavin/Anima-7B-100K"
+        "MLFlow-MP-gpt2-large"
     ],
     "workspace": "test-northcentralus",
     "subscription": "80c77c76-74ba-4c8c-8229-4c3b2957990c",

@@ -1,23 +1,7 @@
 {
     "queue_name": "test-japaneast-3",
     "models": [
-        "MLFlow-facebook/wmt19-de-en",
-        "MLFlow-TheBloke/Genz-70b-GPTQ",
-        "MLFlow-TheBloke/CodeLlama-7B-GPTQ",
-        "MLFlow-alexandrainst/da-ner-base",
-        "MLFlow-TigerResearch/tigerbot-13b-base-v1",
-        "MLFlow-TheBloke/Llama-2-7B-GGUF",
-        "MLFlow-TheBloke/WizardLM-1.0-Uncensored-CodeLlama-34B-GPTQ",
-        "MLFlow-NewstaR/Starlight-13B",
-        "MLFlow-TheBloke/Llama-2-70B-Orca-200k-GPTQ",
-        "MLFlow-Jzuluaga/bert-base-token-classification-for-atc-en-uwb-atcc",
-        "MLFlow-TheBloke/Kuchiki-L2-7B-GPTQ",
-        "MLFlow-TheBloke/MythoMax-Kimiko-Mix-GPTQ",
-        "MLFlow-mediabiasgroup/DA-RoBERTa-pretrained",
-        "MLFlow-aisyahhrazak/distilbert-mooc-review-sentiment",
-        "MLFlow-GautamR/akai_flow_classifier_pest_seed_scheme",
-        "MLFlow-TheBloke/13B-Legerdemain-L2-GPTQ",
-        "MLFlow-TheBloke/fiction.live-Kimiko-V2-70B-GGUF"
+        "MLFlow-MP-bert-base-cased"
     ],
     "workspace": "test-japaneast",
     "subscription": "80c77c76-74ba-4c8c-8229-4c3b2957990c",
