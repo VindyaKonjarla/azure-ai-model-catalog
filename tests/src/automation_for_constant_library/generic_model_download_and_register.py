@@ -237,7 +237,7 @@ class Model:
                     logger.info(f"This model is giving output in this index: {index}")
                     # Generate the transformer model output for that particular model
                     output = generate_signature_output(
-                        pipeline, scoring_input.input_data[index])
+                        model_pipeline, scoring_input.input_data[index])
                     # It will infer the signature directly from input and output
                     signature = infer_signature(
                         scoring_input.input_data[index], output)
