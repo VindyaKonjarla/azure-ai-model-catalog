@@ -1,4 +1,4 @@
-name: MLFlow-csdc-atl/baichuan-7B-chat
+name: MLFlow-MP-csdc-atl/baichuan-7B-chat
 
 on: 
   workflow_dispatch:
