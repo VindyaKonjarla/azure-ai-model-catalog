@@ -179,7 +179,7 @@ def write_single_workflow_file(model, q, secret_name):
     # workflowname=model.replace('/','-')
     # os.system(f"sed -i 's/name: .*/name: {model}/g' {args.workflow_template}")
     workflow_file=f"{args.workflow_dir}/{workflowname}.yml"
-    os.system(f"rm -rf {args.workflow_dir}/MLFlow-MP{workflowname}.yml") 
+    # os.system(f"rm -rf {args.workflow_dir}/MLFlow-MP{workflowname}.yml") 
     # print("yml file----------------------------------------",workflow_file)
     # # print(workflow_file['env']['test_queue'])
     print (f"Generating workflow file: {workflow_file}")
@@ -187,8 +187,8 @@ def write_single_workflow_file(model, q, secret_name):
     test_Model=model.replace("MLFlow-MP-"," ")
     test_model_name=test_Model.strip()
     print(test_model_name)
-    MLmodel="MLFlow-MP-"+model
-    print("MLmodel:",model)
+    # MLmodel="MLFlow-MP-"+model
+    # print("MLmodel:",model)
     os.system(f"sed -i s/name: .*/name: {model}/g' {workflow_file}")
     # replace <test_queue> with q
     os.system(f"sed -i 's/test_queue: .*/test_queue: {q}/g' {workflow_file}")
