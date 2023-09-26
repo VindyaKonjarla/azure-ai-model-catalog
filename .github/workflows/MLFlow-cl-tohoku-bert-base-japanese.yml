@@ -33,6 +33,8 @@ jobs:
       run: pip install transformers[torch]
     - name: pip-install-ipadic
       run: pip install ipadic
+    - name: pip-install-packaging
+      run: pip install packaging
     - name: pip-install-mecab-python3
       run: pip install mecab-python3
     - name: pip-install-torchvision
