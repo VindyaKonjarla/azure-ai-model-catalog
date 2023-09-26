@@ -86,14 +86,14 @@ class ModelInferenceAndDeployemnt:
             output = json.dumps(response_json, indent=2)
             logger.info(f"response: \n\n{output}")
             with open(os.environ['GITHUB_STEP_SUMMARY'], 'a') as fh:
-                logger.info(f'####Sample input', file=fh)
-                logger.info(f'```json', file=fh)
-                logger.info(f'{scoring_input}', file=fh)
-                logger.info(f'```', file=fh)
-                logger.info(f'####Sample output', file=fh)
-                logger.info(f'```json', file=fh)
-                logger.info(f'{output}', file=fh)
-                logger.info(f'```', file=fh)
+                print(f'####Sample input', file=fh)
+                print(f'```json', file=fh)
+                print(f'{scoring_input}', file=fh)
+                print(f'```', file=fh)
+                print(f'####Sample output', file=fh)
+                print(f'```json', file=fh)
+                print(f'{output}', file=fh)
+                print(f'```', file=fh)
         except Exception as e:
             logger.error(f"::error:: Could not invoke endpoint: \n")
             logger.info(f"{e}\n\n check logs:\n\n")
@@ -214,8 +214,8 @@ class ModelInferenceAndDeployemnt:
             exit(0)
 
     def get_task_specified_input(self, task):
-        scoring_file = f"../../config/sample_inputs/{self.registry}/{task}.json"
-        #scoring_file = f"sample_inputs/{task}.json"
+        # scoring_file = f"../../config/sample_inputs/{self.registry}/{task}.json"
+        scoring_file = f"sample_inputs/{task}.json"
         # check of scoring_file exists
         try:
             with open(scoring_file) as f:
@@ -270,10 +270,10 @@ class ModelInferenceAndDeployemnt:
             instance_type=instance_type,
             endpoint=endpoint
         )
-        # self.cloud_inference(
-        #     scoring_file=scoring_file,
-        #     scoring_input=scoring_input,
-        #     online_endpoint_name=online_endpoint_name,
-        #     deployment_name=deployment_name
-        # )
+        self.cloud_inference(
+            scoring_file=scoring_file,
+            scoring_input=scoring_input,
+            online_endpoint_name=online_endpoint_name,
+            deployment_name=deployment_name
+        )
         self.delete_online_endpoint(online_endpoint_name=online_endpoint_name)
