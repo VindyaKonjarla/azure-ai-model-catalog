@@ -1,12 +1,12 @@
 {
     "queue_name": "test-northeurope-3",
     "models": [
-        "MLFlow-MP-HooshvareLab/bert-base-parsbert-ner-uncased",
-        "MLFlow-MP-bigcode/starpii",
-        "MLFlow-MP-ckiplab/albert-tiny-chinese-ner",
-        "MLFlow-MP-d4data/biomedical-ner-all",
-        "MLFlow-MP-hatmimoha/arabic-ner",
-        "MLFlow-MP-ml6team/keyphrase-extraction-distilbert-inspec"
+        "MLFlow-HooshvareLab/bert-base-parsbert-ner-uncased",
+        "MLFlow-bigcode/starpii",
+        "MLFlow-ckiplab/albert-tiny-chinese-ner",
+        "MLFlow-d4data/biomedical-ner-all",
+        "MLFlow-hatmimoha/arabic-ner",
+        "MLFlow-ml6team/keyphrase-extraction-distilbert-inspec"
     ],
     "workspace": "test-northeurope",
     "subscription": "80c77c76-74ba-4c8c-8229-4c3b2957990c",
