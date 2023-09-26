@@ -1,10 +1,7 @@
 {
     "queue_name": "test-germanywestcentral-2",
     "models": [
-        "MLFlow-MP-togethercomputer/LLaMA-2-7B-32K",
-        "MLFlow-MP-togethercomputer/Llama-2-7B-32K-Instruct",
-        "MLFlow-MP-Salesforce/codegen25-7b-multi",
-        "MLFlow-MP-Salesforce/xgen-7b-8k-base"
+        "MLFlow-mosaicml/mpt-7b-instruct"
     ],
     "workspace": "test-germanywestcentral",
     "subscription": "80c77c76-74ba-4c8c-8229-4c3b2957990c",
