@@ -1,8 +1,8 @@
 {
     "queue_name": "test-southcentralus-0",
     "models": [
-        "MLFlow-DI-TheBloke/Airoboros-L2-13B-2_1-YaRN-64K-GPTQ",
-        "MLFlow-DI-TheBloke/13B-BlueMethod-GPTQ"
+        "MLFlow-TheBloke/Airoboros-L2-13B-2_1-YaRN-64K-GPTQ",
+        "MLFlow-TheBloke/13B-BlueMethod-GPTQ"
     ],
     "workspace": "test-southcentralus",
     "subscription": "80c77c76-74ba-4c8c-8229-4c3b2957990c",
