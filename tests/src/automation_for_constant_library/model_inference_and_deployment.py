@@ -135,6 +135,8 @@ class ModelInferenceAndDeployemnt:
             except Exception as ex:
                 logger.warning(
                     "::warning:: Trying to invoking the endpoint again by changing the input data and file")
+                logger.warning(
+                    f"::warning:: This is failed due to this :\n {ex}")
                 dic_obj = self.get_model_output(
                     task=task, latest_model=latest_model, scoring_input=scoring_input)
                 logger.info(f"Our new input is this one: {dic_obj}")
