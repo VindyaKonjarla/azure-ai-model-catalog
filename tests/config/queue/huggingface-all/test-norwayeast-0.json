@@ -1,7 +1,7 @@
 {
     "queue_name": "test-norwayeast-0",
     "models": [
-        "MLFlow-DI-gpt2-medium"
+        "MLFlow-DI-msislam/code-mixed-language-detection-XLMRoberta"
     ],
     "workspace": "test-norwayeast",
     "subscription": "80c77c76-74ba-4c8c-8229-4c3b2957990c",
