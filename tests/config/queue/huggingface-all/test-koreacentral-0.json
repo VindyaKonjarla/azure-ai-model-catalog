@@ -1,8 +1,8 @@
 {
     "queue_name": "test-koreacentral-0",
     "models": [
-        "MLFlow-DI-Mahmoud22/my_autotrain_llm",
-        "MLFlow-DI-judy93536/RoBERTa-perigon-news"
+        "MLFlow-Mahmoud22/my_autotrain_llm",
+        "MLFlow-judy93536/RoBERTa-perigon-news"
     ],
     "workspace": "test-koreacentral",
     "subscription": "80c77c76-74ba-4c8c-8229-4c3b2957990c",
