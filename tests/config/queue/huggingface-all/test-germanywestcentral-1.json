@@ -1,7 +1,8 @@
 {
     "queue_name": "test-germanywestcentral-1",
     "models": [
-        "MLFlow-Salesforce/codegen25-7b-multi"
+        "MLFlow-mosaicml/mpt-7b",
+        "MLFlow-tiiuae/falcon-7b"
     ],
     "workspace": "test-germanywestcentral",
     "subscription": "80c77c76-74ba-4c8c-8229-4c3b2957990c",
