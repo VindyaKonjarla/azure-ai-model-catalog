@@ -146,6 +146,7 @@ class ModelInferenceAndDeployemnt:
                     deployment_name=deployment_name,
                     request_file=json_file_name,
                 )
+                logger.info(f"Getting the reposne from the endpoint is this one : {response}")
                 self.delete_file(file_name=json_file_name)
             response_json = json.loads(response)
             output = json.dumps(response_json, indent=2)
