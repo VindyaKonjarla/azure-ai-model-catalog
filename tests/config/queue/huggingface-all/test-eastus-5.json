@@ -1,5 +1,5 @@
 {
-    "queue_name": "test-eastus-0",
+    "queue_name": "test-eastus-5",
     "models": [
         "MLFlow-DI-microsoft/deberta-base-mnli"
     ],
