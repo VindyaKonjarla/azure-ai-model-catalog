@@ -7,7 +7,7 @@ env:
   test_model_name: koheiduck/bert-japanese-finetuned-sentiment
   test_sku_type: cpu
   test_trigger_next_model: true
-  test_queue: test-koreacentral-2
+  test_queue: test-eastus-5
   test_set: huggingface-all
   test_keep_looping: false
 
@@ -29,6 +29,12 @@ jobs:
       run: pip install azureml-mlflow==1.53.0
     - name: pip-install-transformers
       run: pip install transformers
+    - name: pip-install-ipadic
+      run: pip install ipadic
+    - name: pip-install-packaging
+      run: pip install packaging
+    - name: pip-install-mecab-python3
+      run: pip install mecab-python3
     - name: pip-install-transformers[torch]
       run: pip install transformers[torch]
     - name: pip-install-torchvision
