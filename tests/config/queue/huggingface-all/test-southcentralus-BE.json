@@ -2,7 +2,6 @@
     "queue_name": "test-southcentralus-BE",
     "models": [
         "bert-base-cased",
-        "distilbert-base-uncased",
         "xlnet-base-cased"
     ],
     "workspace": "sonata-test-ws",
