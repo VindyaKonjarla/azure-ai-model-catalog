@@ -1,8 +1,8 @@
 {
     "queue_name": "test-koreacentral-0",
     "models": [
-        "MLFlow-Mahmoud22/my_autotrain_llm",
-        "MLFlow-judy93536/RoBERTa-perigon-news"
+        "MLFlow-TheBloke/CodeLlama-34B-GPTQ",
+        "MLFlow-nthngdy/headless-pythia-owt2-70m-raw"
     ],
     "workspace": "test-koreacentral",
     "subscription": "80c77c76-74ba-4c8c-8229-4c3b2957990c",

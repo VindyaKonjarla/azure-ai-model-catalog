@@ -1,8 +1,8 @@
 {
     "queue_name": "test-japaneast-0",
     "models": [
-        "MLFlow-Suchinthana/Sinhala-Translate-and-Dolly-Llama-7b",
-        "MLFlow-agonh/phi-1_5"
+        "MLFlow-TheBloke/Phind-CodeLlama-34B-Python-v1-GPTQ",
+        "MLFlow-serdarcaglar/roberta-base-biomedical-es"
     ],
     "workspace": "test-japaneast",
     "subscription": "80c77c76-74ba-4c8c-8229-4c3b2957990c",
