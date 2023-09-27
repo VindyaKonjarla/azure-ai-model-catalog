@@ -1,4 +1,4 @@
-name: BE-test
+name: MLFlow-Batch-bert-base-uncased
 
 on: 
   workflow_dispatch:
@@ -20,7 +20,7 @@ jobs:
     - name: azure-login-step
       uses: azure/login@v1
       with:
-        creds: ${{secrets.AZURE_CREDENTIALS}}
+        creds: ${{secrets.AZ_CRED}}
     - name: pip-install-azure-ai-ml
       run: pip install azure-ai-ml
     - name: pip-install-azureml-core
@@ -45,10 +45,10 @@ jobs:
       run: pip install fugashi[unidic-lite]  
     - name: deploy-model-step
       id: deploy-model-step
-      run: python BE_single.py
-      working-directory: tests/src/automation_for_constant_library
+      run: python Batch_Endpoint.py
+      working-directory: tests/src/Batch_Endpoint
     - name: trigger-next-model-step
       env:
-        GITHUB_TOKEN: ${{ secrets.API_TOKEN }}
+        GITHUB_TOKEN: ${{ secrets.WORKFLOW_TOKEN }}
       if: ${{ env.test_trigger_next_model == 'true' && steps.deploy-model-step.outputs.NEXT_MODEL != '' && (success() || failure())}}
       run: gh workflow run ${{ steps.deploy-model-step.outputs.NEXT_MODEL }} --ref ${{ github.ref_name }}
