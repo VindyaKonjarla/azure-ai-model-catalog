@@ -1,8 +1,8 @@
 {
     "queue_name": "test-southcentralus-1",
     "models": [
-        "MLFlow-TheBloke/Marcoroni-7b-GPTQ",
-        "MLFlow-heegyu/polyglot-ko-3.8b-chat"
+        "MLFlow-TheBloke/CodeLlama-7B-GPTQ",
+        "MLFlow-csdc-atl/Baichuan2-7B-Chat-GPTQ-Int4"
     ],
     "workspace": "test-southcentralus",
     "subscription": "80c77c76-74ba-4c8c-8229-4c3b2957990c",

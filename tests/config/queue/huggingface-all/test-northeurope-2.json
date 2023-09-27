@@ -1,8 +1,8 @@
 {
     "queue_name": "test-northeurope-2",
     "models": [
-        "MLFlow-ronit33/distilbert-base-uncased-finetuned-emotion-dataset",
-        "MLFlow-asas-ai/nllb-200-distilled-600M-finetuned_augmented_MT_ar-to-en"
+        "MLFlow-TheBloke/Platypus2-70B-GPTQ",
+        "MLFlow-TheBloke/MythoBoros-13B-GPTQ"
     ],
     "workspace": "test-northeurope",
     "subscription": "80c77c76-74ba-4c8c-8229-4c3b2957990c",
