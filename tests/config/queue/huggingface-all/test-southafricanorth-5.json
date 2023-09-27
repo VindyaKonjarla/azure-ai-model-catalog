@@ -1,5 +1,5 @@
 {
-    "queue_name": "test-eastus-5",
+    "queue_name": "test-southafricanorth-5",
     "models": [
         "MLFlow-cl-tohoku/bert-base-japanese-whole-word-masking",
         "MLFlow-kit-nlp/bert-base-japanese-sentiment-irony"
