@@ -85,7 +85,7 @@ class ModelInferenceAndDeployemnt:
                     "<mask>", pipeline_tokenizer.mask_token).replace("[MASK]", pipeline_tokenizer.mask_token)
 
         output_from_pipeline = loaded_model_pipeline(scoring_input.input_data)
-        print(f"My outupt is this :  {output_from_pipeline}")
+        logger.info(f"My outupt is this :  {output_from_pipeline}")
         #output_from_pipeline = model_pipeline(scoring_input.input_data)
         for index in range(len(output_from_pipeline)):
             if len(output_from_pipeline[index]) != 0:
@@ -139,7 +139,8 @@ class ModelInferenceAndDeployemnt:
                     task=task, latest_model=latest_model, scoring_input=scoring_input)
                 logger.info(f"Our new input is this one: {dic_obj}")
                 json_file_name, scoring_input = self.create_json_file(
-                    file_name=deployment_name)
+                    file_name=deployment_name, dicitonary=dic_obj)
+                logger.info("Online endpoint invoking satrted...")
                 response = self.workspace_ml_client.online_endpoints.invoke(
                     endpoint_name=online_endpoint_name,
                     deployment_name=deployment_name,
@@ -159,6 +160,9 @@ class ModelInferenceAndDeployemnt:
                 print(f'{output}', file=fh)
                 print(f'```', file=fh)
         except Exception as e:
+            if os.path.exists(json_file_name):
+                logger.info(f"Deleting the json file : {json_file_name}")
+                self.delete_file(file_name=json_file_name)
             logger.error(f"::error:: Could not invoke endpoint: \n")
             logger.info(f"::error::The exception here is this : \n {e}")
 
