@@ -116,7 +116,7 @@ def assign_models_to_queues(models, workspace_list):
                         print("queue[workspace]",queue[workspace])
                     if thread not in queue[workspace]:
                         queue[workspace][thread] = []
-                    queue[workspace][thread].append("MLFlow-"+models[i])
+                    queue[workspace][thread].append("MLFlow-Batch-"+models[i])
                     print("queue[workspace][thread]",queue[workspace][thread])
                     i=i+1
                     #print (f"Adding model {models[i]} at index {i} to queue {workspace}-{thread}")
@@ -179,12 +179,12 @@ def write_single_workflow_file(model, q, secret_name):
     # workflowname=model.replace('/','-')
     # os.system(f"sed -i 's/name: .*/name: {model}/g' {args.workflow_template}")
     workflow_file=f"{args.workflow_dir}/{workflowname}.yml"
-    # os.system(f"rm -rf {args.workflow_dir}/MLFlow-{workflowname}.yml") 
+    # os.system(f"rm -rf {args.workflow_dir}/MLFlow-Batch-{workflowname}.yml") 
     # print("yml file----------------------------------------",workflow_file)
     # # print(workflow_file['env']['test_queue'])
     print (f"Generating workflow file: {workflow_file}")
     os.system(f"cp {args.workflow_template} {workflow_file}")
-    test_Model=model.replace("MLFlow-"," ")
+    test_Model=model.replace("MLFlow-Batch-"," ")
     test_model_name=test_Model.strip()
     print(test_model_name)
     os.system(f"sed -i s/name: .*/name: {model}/g' {workflow_file}")
