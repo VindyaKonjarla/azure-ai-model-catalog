@@ -1,7 +1,8 @@
 {
     "queue_name": "test-japanwest-1",
     "models": [
-        "MLFlow-baichuan-inc/Baichuan-13B-Chat"
+        "MLFlow-Salesforce/xgen-7b-8k-base",
+        "MLFlow-Salesforce/xgen-7b-8k-inst"
     ],
     "workspace": "test-japanwest",
     "subscription": "80c77c76-74ba-4c8c-8229-4c3b2957990c",
