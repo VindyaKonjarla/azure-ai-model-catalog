@@ -1,7 +1,7 @@
 {
     "queue_name": "test-northcentralus-0",
     "models": [
-        "MLFlow-DI-t5-base"
+        "MLFlow-DI-TheBloke/13B-Ouroboros-GPTQ"
     ],
     "workspace": "test-northcentralus",
     "subscription": "80c77c76-74ba-4c8c-8229-4c3b2957990c",
