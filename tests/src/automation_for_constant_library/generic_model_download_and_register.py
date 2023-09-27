@@ -117,7 +117,7 @@ class Model:
         """
         scoring_file = f"sample_inputs/{task}.json"
         # check of scoring_file exists
-       print("task:---------:",task)
+        print("task:---------:",task)
         try:
             with open(scoring_file) as f:
                 scoring_input = ConfigBox(json.load(f))
