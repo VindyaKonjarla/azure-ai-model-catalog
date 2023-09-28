@@ -100,7 +100,7 @@ class Dashboard():
                # badge_url = f"https://github.com/{self.repo_full_name}/actions/workflows/{workflow_name}.yml/badge.svg"
                 html_url = jobs_data["jobs"][0]["html_url"] if jobs_data.get("jobs") else ""
                 job_url = jobs_data["jobs"][0]["html_url"]
-                error_messages = self.extract_error_messages(job_url)
+                
 
  
 
@@ -129,7 +129,7 @@ class Dashboard():
                     "Status": f"{'✅ PASS' if last_run['conclusion'] == 'success' else '❌ FAIL' if last_run['conclusion'] == 'failure' else '🚫 CANCELLED' if last_run['conclusion'] == 'cancelled' else '⏳ RUNNING'}",
                     "LastRunLink": f"[Link]({run_link})",
                     "LastRunTimestamp": last_run["created_at"],
-                    "Error Message": error_messages
+                    
                 }
 
                 self.models_data.append(models_entry)
