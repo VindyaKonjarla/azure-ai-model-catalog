@@ -163,7 +163,7 @@ class Dashboard():
         running_percentage = (running_count / total_dynamic_installation_count) * 100 if total_dynamic_installation_count > 0 else 0
         not_tested_percentage = (not_tested_count / total_dynamic_installation_count) * 100 if total_dynamic_installation_count > 0 else 0
         summary = []
-        summary.append("Category | 🚀Total Models | ✅ Success | Success % | ❌Failure | Failure % | 🚫Cancelled | ⏳Running/In Progress | ❗️Not Tested|") 
+        summary.append("Category|🚀Total|✅Success|Success %|❌Failure|Failure %|🚫Cancelled|⏳Running/In Progress|❗Not Tested|") 
         summary.append("-------- | ----------- | ---- | ------- | ------- | ---------- | --------- | ------------------- | ----------|")
         # summary.append(f"Online Endpoint Deployment - Dynamic Installation | {total_dynamic_installation_count} | {dynamic_installation_statuses["success"]} | {success_percentage:.2f}% | {dynamic_installation_statuses["failure"]} | {failure_percentage:.2f}% | {dynamic_installation_statuses["cancelled"]} | {dynamic_installation_statuses["running"]} | {dynamic_installation_statuses["not_tested"]}|")      
         summary.append(f"Online Endpoint Deployment - Dynamic Installation | {total_dynamic_installation_count} | {dynamic_installation_statuses['success']} | {(dynamic_installation_statuses['success'] / total_dynamic_installation_count) * 100}% | {dynamic_installation_statuses['failure']} | {failure_percentage:.2f}% | {dynamic_installation_statuses['cancelled']} | {dynamic_installation_statuses['running']} | {dynamic_installation_statuses['not_tested']}|")
