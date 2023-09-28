@@ -184,7 +184,7 @@ class Dashboard():
         current_date = datetime.now().strftime('%Y%m%d')
     
         # Create a README file with the current datetime in the filename
-        readme_filename = f"Readme-MI-DI.md_{current_date}.md"
+        readme_filename = f"Readme-MP-DI.md_{current_date}.md"
 
  
 
@@ -194,7 +194,7 @@ class Dashboard():
             f.write(os.linesep)
             f.write(models_md)
 
-        with open("Readme-MI-DI.md", "w", encoding="utf-8") as f:
+        with open("Readme-MP-DI.md", "w", encoding="utf-8") as f:
             f.write(summary_text)
             f.write(os.linesep)
             f.write(os.linesep)
