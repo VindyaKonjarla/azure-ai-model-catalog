@@ -130,7 +130,8 @@ class Dashboard():
                     # "Status": " ✅ PASS" if last_run["conclusion"] == "success" elif last_run["conclusion"] == "failure" "❌ FAIL",
                     "Status": f"{'✅ PASS' if last_run['conclusion'] == 'success' else '❌ FAIL' if last_run['conclusion'] == 'failure' else '🚫 CANCELLED' if last_run['conclusion'] == 'cancelled' else '⏳ RUNNING'}",
                     "LastRunLink": f"[Link]({run_link})",
-                    "LastRunTimestamp": last_run["created_at"]
+                    "LastRunTimestamp": last_run["created_at"],
+                    "Model Package/Dynamic Installation": f"""{'Model Package' if workflow_name.startswith("MLFlow-MP") == True else 'Dynamic Installation' if workflow_name.startswith("MLFlow-DI") == True else 'None' }"""
                 }
 
                 self.models_data.append(models_entry)
