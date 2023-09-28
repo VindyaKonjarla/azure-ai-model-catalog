@@ -64,15 +64,12 @@ class Dashboard():
         return workflow_name
 
 
-
     def workflow_last_run(self): 
         workflows_to_include = self.get_all_workflow_names()
         normalized_workflows = [workflow_name.replace("/","-") for workflow_name in workflows_to_include]
-        # normalized_workflows = [hf_name for hf_name in workflows_to_include]
-        # hf_name = [hf_name for hf_name in workflows_to_include]
-        #print(workflow_name)
-        # print(hf_name)
-        for workflow_name in normalized_workflows:
+        workflow_actual_name = [workflow_actual_name for workflow_actual_name in workflows_to_include]
+        workflow_actual_names = [name.replace("MLFlow-", "") for name in workflow_actual_name]
+        for workflow_actual_name, workflow_name in zip(workflow_actual_names, normalized_workflows):
             try:
                 workflow_runs_url = f"https://api.github.com/repos/{self.repo_full_name}/actions/workflows/{workflow_name}.yml/runs"
                 response = requests.get(workflow_runs_url, headers={"Authorization": f"Bearer {self.github_token}", "Accept": "application/vnd.github.v3+json"})
@@ -102,6 +99,8 @@ class Dashboard():
 
                # badge_url = f"https://github.com/{self.repo_full_name}/actions/workflows/{workflow_name}.yml/badge.svg"
                 html_url = jobs_data["jobs"][0]["html_url"] if jobs_data.get("jobs") else ""
+                job_url = jobs_data["jobs"][0]["html_url"]
+                error_messages = self.extract_error_messages(job_url)
 
  
 
@@ -122,14 +121,15 @@ class Dashboard():
                     #url = f"https://github.com/{self.repo_full_name}/actions/workflows/{workflow_name}.yml"
                     #self.data["badge"].append(f"[![{workflow_name}]({badge_url})]({url})")
                 run_link = f"https://github.com/{self.repo_full_name}/actions/runs/{last_run['id']}"
+                # job_link  = f"https://github.com/{self.repo_full_name}/actions/runs/{last_run['id']}/jobs/"
+                HF_Link = f"https://huggingface.co/{workflow_actual_name}"
                 models_entry = {
-                    "Model": workflow_name.replace(".yml", "").replace("MLFlow-",""),
-                    # "HFLink": f"[Link](https://huggingface.co/{workflow_name.replace(".yml", "").replace("MLFlow-","")})",
-                    # "Status": "<span style='background-color: #00FF00; padding: 2px 6px; border-radius: 3px;'>PASS</span>" if last_run["conclusion"] == "success" else "<span style='background-color: #FF0000; padding: 2px 6px; border-radius: 3px;'>FAIL</span>",
-                    # "Status": " ✅ PASS" if last_run["conclusion"] == "success" elif last_run["conclusion"] == "failure" "❌ FAIL",
+                    "Model": workflow_actual_name,
+                    "HF_Link": f"[Link]({HF_Link})",
                     "Status": f"{'✅ PASS' if last_run['conclusion'] == 'success' else '❌ FAIL' if last_run['conclusion'] == 'failure' else '🚫 CANCELLED' if last_run['conclusion'] == 'cancelled' else '⏳ RUNNING'}",
                     "LastRunLink": f"[Link]({run_link})",
-                    "LastRunTimestamp": last_run["created_at"]
+                    "LastRunTimestamp": last_run["created_at"],
+                    "Error Message": error_messages
                 }
 
                 self.models_data.append(models_entry)
@@ -143,7 +143,7 @@ class Dashboard():
         # self.models_data.sort(key=lambda x: x["Status"])
         self.models_data.sort(key=lambda x: (x["Status"] != "❌ FAIL", x["Status"]))
         return self.data
-
+    
     def results(self, last_runs_dict):
         results_dict = {"total": 0, "success": 0, "failure": 0, "cancelled": 0,"running":0, "not_tested": 0, "total_duration": 0}
         summary = []
