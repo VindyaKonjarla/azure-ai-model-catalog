@@ -34,7 +34,7 @@ class Dashboard():
              
              # Assuming the first column contains the data you want to retrieve
              mlflow_prefixed_data = ["MLFlow-" + row[0] for row in csv_reader]
-             
+             print(mlflow_prefixed_data)
              return mlflow_prefixed_data
              
              
