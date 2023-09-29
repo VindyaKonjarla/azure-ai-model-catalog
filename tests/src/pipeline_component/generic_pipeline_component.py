@@ -41,6 +41,7 @@ test_keep_looping = os.environ.get('test_keep_looping')
 # the queue file contains the list of models to test with with a specific workspace
 # the queue file also contains the details of the workspace, registry, subscription, resource group
 
+FILE_NAME = "pipeline_task.json"
 
 def get_test_queue() -> ConfigBox:
     queue_file = f"../../config/queue/{test_set}/{test_queue}.json"
@@ -122,6 +123,16 @@ def get_dataset(task, data_path):
     attribute = getattr(LoadDataset, task)
     return attribute(load_dataset)
 
+def get_pipeline_task(task):
+    try:
+        with open(FILE_NAME) as f:
+            pipeline_task = ConfigBox(json.load(f))
+            logger.info(
+                f"Library name based on its task :\n\n {pipeline_task}\n\n")
+    except Exception as e:
+        logger.error(
+        f"::Error:: Could not find library from here :{pipeline_task}.Here is the exception\n{e}")
+    return pipeline_task.get(task)
 
 if __name__ == "__main__":
     # if any of the above are not set, exit with error
@@ -188,10 +199,11 @@ if __name__ == "__main__":
         test_model_name=test_model_name)
     data_path = get_file_path(task=task)
     res = get_dataset(task=task, data_path=data_path)
+    pieline_task = get_pipeline_task(task)
     azure_pipeline = AzurePipeline(
         workspace_ml_client=workspace_ml_client,
         registry_ml_client=registry_ml_client,
-        task=task
+        task=pieline_task
     )
     pipeline_jobs = azure_pipeline.run_pipeline(
         data_path=data_path, foundation_model=latest_model)
