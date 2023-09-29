@@ -178,14 +178,14 @@ class Model:
             # model = model_library.from_pretrained(self.model_name)
             # tokenizer = AutoTokenizer.from_pretrained(self.model_name)
             model = model_library.from_pretrained(
-                self.model_name, trust_remote_code=True, use_auth_token=True)
+                self.model_name, trust_remote_code=True, ignore_mismatched_sizes=True,use_auth_token=True)
             tokenizer = AutoTokenizer.from_pretrained(
                 self.model_name, trust_remote_code=True, use_auth_token=True)
         except Exception as ex:
             logger.error(
                 f"::Error:: This model : {self.model_name} or related tokenizer can not downloaded from the AutoModel or Autotokenizer\n {ex}")
             raise Exception(ex)
-            # model = model_library.from_pretrained(self.model_name, trust_remote_code=True, token=ACCESS_TOKEN)
+            # model = model_library.from_pretrained(self.model_name, trust_remote_code=True,ignore_mismatched_sizes=True, token=ACCESS_TOKEN)
             # tokenizer = AutoTokenizer.from_pretrained(self.model_name, trust_remote_code=True, token=ACCESS_TOKEN)
         model_and_tokenizer = {"model": model, "tokenizer": tokenizer}
         return model_and_tokenizer
