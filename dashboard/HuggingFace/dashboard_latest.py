@@ -29,7 +29,9 @@ class Dashboard():
             df = pd.read_excel(url)
             # Sort the data by downloads in descending order
             df = df.sort_values(by="downloads", ascending=False)
-            return df["models"].tolist()
+            models_with_prefix = df["models"].apply(lambda x: "MLFlow-" + x)
+            return models_with_prefix.tolist()
+            
         except Exception as e:
             print(f"Error fetching or parsing content from GitHub: {e}")
             return [] 
