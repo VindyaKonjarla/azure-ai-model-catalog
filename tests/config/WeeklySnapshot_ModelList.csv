@@ -1,537 +1,538 @@
-facebook/opt-125m,
-facebook/opt-1.3b,
-TheBloke/Wizard-Vicuna-7B-Uncensored-GPTQ,
-smallcloudai/Refact-1_6B-fim,
-TheBloke/Llama-2-70B-GPTQ,
-facebook/opt-350m,
-TheBloke/Llama-2-7b-Chat-GPTQ,
-TheBloke/Llama-2-13B-chat-GPTQ,
-TheBloke/MythoMax-L2-13B-GPTQ,
-facebook/opt-2.7b,
-cerebras/btlm-3b-8k-base,
-stabilityai/StableBeluga2,
-TheBloke/Llama-2-70B-chat-GPTQ,
-Davlan/afro-xlmr-large-61L,
-TheBloke/llama-2-70b-Guanaco-QLoRA-GPTQ,
-facebook/wmt19-en-de,
-microsoft/phi-1_5,
-microsoft/mpnet-base,
-beomi/KoAlpaca-Polyglot-12.8B,
-facebook/wmt19-de-en,
-togethercomputer/LLaMA-2-7B-32K,
-Open-Orca/OpenOrca-Platypus2-13B,
-TheBloke/OpenOrca-Platypus2-13B-GPTQ,
-TheBloke/airoboros-l2-70B-GPT4-2.0-GPTQ,
-mosaicml/mpt-30b-chat,
-internlm/internlm-7b,
-TheBloke/Llama-2-7B-GPTQ,
-defog/sqlcoder,
-TheBloke/Llama-2-13B-GPTQ,
-TheBloke/Llama-2-7B-32K-Instruct-GPTQ,
-medicalai/ClinicalBERT,
-TheBloke/Wizard-Vicuna-13B-Uncensored-GPTQ,
-TheBloke/vicuna-7B-v1.5-GPTQ,
-TheBloke/Platypus2-70B-Instruct-GPTQ,
-Deci/DeciCoder-1b,
-NousResearch/Nous-Hermes-llama-2-7b,
-TheBloke/WizardLM-70B-V1.0-GPTQ,
-TheBloke/WizardLM-13B-V1.2-GPTQ,
-PY007/TinyLlama-1.1B-step-50K-105b,
-cis-lmu/glot500-base,
-TheBloke/StableBeluga-7B-GPTQ,
-TheBloke/Wizard-Vicuna-30B-Uncensored-GPTQ,
-TheBloke/WizardLM-1.0-Uncensored-Llama2-13B-GPTQ,
-TheBloke/WizardLM-33B-V1.0-Uncensored-GPTQ,
-PygmalionAI/pygmalion-2-13b,
-beomi/KoAlpaca-Polyglot-5.8B,
-internlm/internlm-chat-7b,
-TheBloke/WizardLM-7B-uncensored-GPTQ,
-TheBloke/orca_mini_v3_70B-GPTQ,
-bert-base-cased-finetuned-mrpc,
-TheBloke/airoboros-l2-70B-gpt4-1.4.1-GPTQ,
-TheBloke/Genz-70b-GPTQ,
-TheBloke/Lemur-70B-Chat-v1-GPTQ,
-kfkas/Llama-2-ko-7b-Chat,
-internlm/internlm-chat-7b-8k,
-TheBloke/CodeLlama-7B-Instruct-GPTQ,
-TheBloke/WizardCoder-Python-34B-V1.0-GPTQ,
-openchat/openchat_v3.2,
-TheBloke/Nous-Hermes-Llama2-GPTQ,
-TheBloke/Phind-CodeLlama-34B-v2-GPTQ,
-TheBloke/WizardCoder-Python-13B-V1.0-GPTQ,
-TheBloke/llama2_7b_chat_uncensored-GPTQ,
-TheBloke/vicuna-13B-v1.5-16K-GPTQ,
-TheBloke/Airoboros-L2-70B-2.1-GPTQ,
-openchat/openchat_v3.1,
-jojo0217/step3_mk7,
-TheBloke/vicuna-13B-v1.5-GPTQ,
-TigerResearch/tigerbot-13b-chat,
-TigerResearch/tigerbot-13b-chat-v2,
-TheBloke/CodeLlama-34B-Instruct-GPTQ,
-TheBloke/Upstage-Llama-2-70B-instruct-v2-GPTQ,
-TheBloke/CodeLlama-13B-Instruct-GPTQ,
-Voicelab/trurl-2-13b,
-TheBloke/WizardLM-30B-Uncensored-GPTQ,
-AIDC-ai-business/Luban-13B,
-TheBloke/orca_mini_v3_7B-GPTQ,
-TheBloke/orca_mini_v3_13B-GPTQ,
-TheBloke/CodeLlama-7B-Python-GPTQ,
-TheBloke/WizardLM-13B-V1.1-GPTQ,
-TheBloke/OpenOrcaxOpenChat-Preview2-13B-GPTQ,
-PygmalionAI/pygmalion-2-7b,
-TheBloke/CodeUp-Llama-2-13B-Chat-HF-GPTQ,
-TheBloke/wizard-vicuna-13B-GPTQ,
-TheBloke/CodeLlama-7B-GPTQ,
-internlm/internlm-chat-7b-v1_1,
-TigerResearch/tigerbot-7b-base,
-NousResearch/Llama-2-70b-chat-hf,
-PygmalionAI/mythalion-13b,
-Voicelab/trurl-2-7b,
-TheBloke/wizard-mega-13B-GPTQ,
-openchat/openchat_v3.2_super,
-TheBloke/StableBeluga2-70B-GPTQ,
-TheBloke/WizardLM-Uncensored-SuperCOT-StoryTelling-30B-GPTQ,
-vicgalle/gpt2-alpaca-gpt4,
-nielsr/layoutlmv3-finetuned-funsd,
-entropy/roberta_zinc_480m,
-TheBloke/guanaco-33B-GPTQ,
-TheBloke/EverythingLM-13B-16K-GPTQ,
-heegyu/WizardVicuna-open-llama-3b-v2,
-ctheodoris/Geneformer,
-TheBloke/Airoboros-L2-13B-2.1-GPTQ,
-TheBloke/Mythalion-13B-GPTQ,
-TheBloke/chronos-wizardlm-uc-scot-st-13B-GPTQ,
-TheBloke/medalpaca-13B-GPTQ,
-Rachneet/gpt2-xl-alpaca,
-NYTK/PULI-GPTrio,
-NbAiLab/nb-gpt-j-6B-alpaca,
-TinyPixel/lima-test,
-TheBloke/guanaco-7B-GPTQ,
-TheBloke/llama2_70b_chat_uncensored-GPTQ,
-TheBloke/Nous-Hermes-Llama-2-7B-GPTQ,
-kimsan0622/gpt2-medium,
-TheBloke/airoboros-l2-13B-gpt4-1.4.1-GPTQ,
-codefuse-ai/CodeFuse-CodeLlama-34B,
-TheBloke/llama-2-7B-Guanaco-QLoRA-GPTQ,
-alexandrainst/da-ner-base,
-TigerResearch/tigerbot-13b-base,
-TheBloke/OpenAssistant-Llama2-13B-Orca-8K-3319-GPTQ,
-ValiantLabs/ShiningValiant,
-alexandrainst/da-hatespeech-detection-small,
-TheBloke/Vigogne-2-13B-Instruct-GPTQ,
-NotXia/longformer-bio-ext-summ,
-microsoft/git-base-vatex,
-TheBloke/Chronoboros-33B-GPTQ,
-TheBloke/Zarablend-L2-7B-GPTQ,
-TheBloke/Llama-2-13B-German-Assistant-v4-GPTQ,
-TheBloke/CodeLlama-13B-GPTQ,
-hegelty/KcBERT-Base-finetuned-hate,
-TheBloke/Luna-AI-Llama2-Uncensored-GPTQ,
-CreativeLang/metaphor_detection_roberta_seq,
-TheBloke/StableBeluga-13B-GPTQ,
-TheBloke/guanaco-65B-GPTQ,
-TheBloke/CodeLlama-34B-GPTQ,
-openthaigpt/openthaigpt-1.0.0-beta-7b-chat-ckpt-hf,
-KETI-AIR-Downstream/long-ke-t5-base-translation-aihub-en2ko,
-TheBloke/Yarn-Llama-2-13B-128K-GPTQ,
-TheBloke/upstage-llama-30b-instruct-2048-GPTQ,
-jhu-clsp/bibert-ende,
-TheBloke/OpenBuddy-Llama2-13B-v11.1-GPTQ,
-TigerResearch/tigerbot-70b-base,
-TheBloke/Llama-2-7b-Chat-GGUF,
-TheBloke/WizardLM-13B-V1.0-Uncensored-GPTQ,
-TheBloke/ReMM-SLERP-L2-13B-GPTQ,
-TheBloke/Dolphin-Llama2-7B-GPTQ,
-TheBloke/Speechless-Llama2-Hermes-Orca-Platypus-WizardLM-13B-GPTQ,
-TheBloke/llama-2-13B-Guanaco-QLoRA-GPTQ,
-TheBloke/Nous-Hermes-Llama2-70B-GPTQ,
-TigerResearch/tigerbot-13b-base-v1,
-TheBloke/PuddleJumper-13B-GPTQ,
-shauray/Llava-Llama-2-7B-hf,
-TheBloke/Stable-Platypus2-13B-GPTQ,
-TheBloke/MythoMix-L2-13B-GPTQ,
-BAAI/bge-reranker-base,
-alexandrainst/da-sentiment-base,
-TheBloke/airoboros-l2-13b-gpt4-m2.0-GPTQ,
-TheBloke/CodeLlama-13B-Python-GPTQ,
-TheBloke/Llama-2-70B-OASST-1-200-GPTQ,
-TheBloke/vicuna-7B-v1.5-16K-GPTQ,
-dicta-il/dictalm-7b-instruct,
-jphme/phi-1_5_Wizard_Vicuna_uncensored,
-alexandrainst/da-discourse-coherence-base,
-StudentLLM/Alpagasus-2-13b-QLoRA-merged,
-TheBloke/Airoboros-L2-7B-2.1-GPTQ,
-XuYipei/kw-cutegpt-13b-ift,
-TheBloke/GodziLLa2-70B-GPTQ,
-TheBloke/airoboros-l2-13b-gpt4-2.0-GPTQ,
-TheBloke/Yarn-Llama-2-7B-128K-GPTQ,
-BAAI/bge-reranker-large,
-TheBloke/manticore-13b-chat-pyg-GPTQ,
-Deci/DeciLM-6b,
-hadifar/eventclassifier,
-TheBloke/LLaMA-7b-GPTQ,
-TheBloke/Vigogne-2-7B-Instruct-GPTQ,
-TheBloke/LlongOrca-7B-16K-GPTQ,
-TheBloke/Pygmalion-2-13B-GPTQ,
-OpenBuddy/openbuddy-llama2-34b-v11.1-bf16,
-TheBloke/model_007-70B-GPTQ,
-TheBloke/CodeLlama-34B-Python-GPTQ,
-KETI-AIR-Downstream/long-ke-t5-base-translation-aihub-bidirection,
-TheBloke/Llama-2-7B-GGUF,
-TheBloke/llama2-7b-chat-codeCherryPop-qLoRA-GPTQ,
-bugdaryan/Code-Llama-2-13B-instruct-text2sql,
-flozi00/Llama-2-13b-german-assistant-v7,
-KETI-AIR-Downstream/long-ke-t5-base-translation-aihub-ko2en,
-TheBloke/Chronos-Beluga-v2-13B-GPTQ,
-TheBloke/LosslessMegaCoder-Llama2-13B-Mini-GPTQ,
-TheBloke/LoKuS-13B-GPTQ,
-TheBloke/Llama-2-13B-chat-GGUF,
-TheBloke/ORCA_LLaMA_70B_QLoRA-GPTQ,
-ku-nlp/deberta-v2-large-japanese-char-wwm,
-TheBloke/CodeLlama-7B-Instruct-GGUF,
-crodri/falcon_aguila_meteocat,
-Voicelab/trurl-2-7b-8bit,
-TheBloke/airoboros-l2-7B-gpt4-2.0-GPTQ,
-Deci/DeciLM-6b-instruct,
-TheBloke/Llama-2-70B-chat-GGUF,
-zoukagh/bert-base-iz-spain-uncased,
-Davlan/afro-xlmr-large-75L,
-tangger/Qwen-7B-Chat,
-TheBloke/airoboros-l2-7b-gpt4-1.4.1-GPTQ,
-TheBloke/LLaMA-30b-GPTQ,
-TheBloke/WizardLM-7B-V1.0-Uncensored-GPTQ,
-ksjpswaroop/immiGPT,
-nielsr/layoutxlm-finetuned-xfund-fr,
-TheBloke/Samantha-1.11-CodeLlama-34B-GPTQ,
-akahana/indonesia-emotion-roberta,
-TheBloke/Redmond-Puffin-13B-GPTQ,
-TheBloke/MythoMax-L2-Kimiko-v2-13B-GPTQ,
-TheBloke/Luban-13B-GPTQ,
-TabbyML/StarCoder-1B,
-TheBloke/Zarafusionex-1.1-L2-7B-GPTQ,
-TheBloke/WizardLM-1.0-Uncensored-CodeLlama-34B-GPTQ,
-TigerResearch/tigerbot-70b-chat,
-TheBloke/Trurl-2-13B-GPTQ,
-TheBloke/Vicuna-13B-CoT-GPTQ,
-TheBloke/Yarn-Llama-2-7B-64K-GPTQ,
-colinglab/BureauBERTo,
-TheBloke/llama-2-13B-German-Assistant-v2-GPTQ,
-TheBloke/Spicyboros-7B-2.2-GPTQ,
-TheBloke/Pygmalion-2-7B-GPTQ,
-TheBloke/Firefly-Llama2-13B-v1.2-GPTQ,
-efederici/ipt-350m,
-cenkersisman/gpt2-turkish-900m,
-TheBloke/WizardMath-7B-V1.0-GPTQ,
-KETI-AIR-Downstream/long-ke-t5-base-translation-aihub-bidirection_e1,
-TheBloke/CodeLlama-13B-oasst-sft-v10-GPTQ,
-TheBloke/Kimiko-7B-GPTQ,
-TheBloke/LosslessMegaCoder-Llama2-7B-Mini-GPTQ,
-quantumaikr/plankton-100M,
-TheBloke/CodeLlama-13B-Instruct-GGUF,
-TheBloke/Phind-CodeLlama-34B-v1-GPTQ,
-TheBloke/EverythingLM-13b-V2-16K-GPTQ,
-22h/open-cabrita3b,
-TheBloke/Mythalion-13B-GGUF,
-AI-Sweden-Models/bert-large-nordic-pile-1M-steps,
-TheBloke/Dolphin-Llama-13B-GPTQ,
-TheBloke/Kimiko-v2-13B-GPTQ,
-TheBloke/Airoboros-L2-70B-GPT4-m2.0-GPTQ,
-universeTBD/astrollama,
-TheBloke/Spicyboros-13B-2.2-GPTQ,
-anzorq/m2m100_418M_ft_ru-kbd_44K,
-TheBloke/Airoboros-c34B-2.1-GPTQ,
-AIDC-ai-business/Marcoroni-70B,
-NewstaR/Starlight-13B,
-TheBloke/Llama2-70B-OASST-SFT-v10-GPTQ,
-maastrichtlawtech/legal-camembert-base,
-TheBloke/CodeLlama-7B-GGUF,
-NewstaR/Starlight-7B,
-TheBloke/Yarn-Llama-2-13B-64K-GPTQ,
-TheBloke/airoboros-l2-7B-gpt4-m2.0-GPTQ,
-TheBloke/chronos-hermes-13B-GPTQ,
-TheBloke/Vigogne-2-7B-Chat-GPTQ,
-TheBloke/WizardMath-13B-V1.0-GPTQ,
-TigerResearch/tigerbot-7b-chat,
-MuneK/bert-large-japanese-v2-finetuned-wrime,
-TheBloke/Athena-v1-GPTQ,
-alexandrainst/da-hatespeech-detection-base,
-dijon-ai/distilroberta-base-jobs-clasf,
-TheBloke/Samantha-1.11-13B-GPTQ,
-TigerResearch/tigerbot-70b-chat-v1,
-TheBloke/Platypus2-70B-GPTQ,
-entropy/gpt2_zinc_87m,
-TheBloke/Hermes-LLongMA-2-7B-8K-GPTQ,
-Xenova/llama2.c-stories110M,
-TheBloke/airochronos-33B-GPTQ,
-TheBloke/Airoboros-L2-70B-2.1-Creative-GPTQ,
-cmarkea/bloomz-7b1-mt-sft-chat,
-beomi/kobert,
-Xenova/llama2.c-stories15M,
-TheBloke/Trurl-2-7B-GPTQ,
-nicholasKluge/Aira-2-774M,
-Xenova/llama2.c-stories42M,
-TheBloke/HermesLimaRP-L2-7B-GPTQ,
-TheBloke/Kimiko-13B-GPTQ,
-ku-nlp/deberta-v2-base-japanese-with-auto-jumanpp,
-TheBloke/Llama-2-70B-Orca-200k-GPTQ,
-firqaaa/Madina-7b-chat-QLoRA-8k,
-teknium/Phi-Hermes-1.3B,
-TheBloke/Guanaco-33B-SuperHOT-8K-GPTQ,
-sjrhuschlee/flan-t5-large-squad2,
-TheBloke/Llama2-22B-Daydreamer-v3-GPTQ,
-TheBloke/Nous-Puffin-70B-GPTQ,
-TheBloke/Pygmalion-2-13B-GGUF,
-beomi/KoAlpaca-KoRWKV-6B,
-TheBloke/Phind-CodeLlama-34B-Python-v1-GPTQ,
-TheBloke/llama-2-13B-chat-limarp-v2-merged-GPTQ,
-utterworks/agent-customer-cls,
-codefuse-ai/CodeFuse-13B,
-quantumaikr/plankton-500M,
-TomatenMarc/TACO,
-malhajar/llama-2-70b-hf-chat-turkish,
-Finnish-NLP/llama-7b-finnish,
-nielsr/layoutlmv3-finetuned-cord,
-TheBloke/Airoboros-L2-13B-2.2-GPTQ,
-TheBloke/Chronos-70B-v2-GPTQ,
-sjrhuschlee/deberta-v3-large-nli-v1,
-tillschwoerer/roberta-base-finetuned-toxic-comment-detection,
-TheBloke/LLaMA-65B-GPTQ,
-TheBloke/Synthia-13B-GPTQ,
-TheBloke/Airoboros-L2-7B-2.2-GPTQ,
-TheBloke/Hermes-LLongMA-2-13B-8K-GPTQ,
-TheBloke/CodeLlama-7B-Python-GGUF,
-WGNW/Llama-2-ko-7b-Chat-auto-gptq-4bit,
-TheBloke/Llama-2-13B-GGUF,
-nikolasmoya/question-or-statement,
-shibing624/ziya-llama-13b-medical-merged,
-TheBloke/Pygmalion-2-13B-SuperCOT-GPTQ,
-Jzuluaga/bert-base-token-classification-for-atc-en-uwb-atcc,
-Faradaylab/ARIA-70B-V2,
-TheBloke/AlpacaCielo2-7B-8K-GPTQ,
-TheBloke/Llama-2-Coder-7B-GPTQ,
-TheBloke/Nous-Hermes-13B-Code-GPTQ,
-TheBloke/Samantha-1.11-70B-GPTQ,
-Helsinki-NLP/opus-tatoeba-en-ja,
-mwz/urdu-bert-small,
-TheBloke/wizardLM-13B-1.0-GPTQ,
-TheBloke/LLaMA-13b-GPTQ,
-TheBloke/OpenBuddy-Llama2-70b-v10.1-GPTQ,
-boda/ANER,
-rasmodev/Covid-19_Sentiment_Analysis_RoBERTa_Model,
-TheBloke/Huginn-13B-GPTQ,
-TheBloke/CodeLlama-34B-Instruct-GGUF,
-TheBloke/Llama2-13B-MegaCode2-OASST-GPTQ,
-wu981526092/Sentence-Level-Stereotype-Detector,
-Voicelab/trurl-2-13b-8bit,
-alexandrainst/da-subjectivivity-classification-base,
-TheBloke/gorilla-7B-GPTQ,
-TheBloke/AlpacaCielo-13B-GPTQ,
-TheBloke/Camel-Platypus2-70B-GPTQ,
-TabbyML/CodeLlama-7B,
-TheBloke/Chronorctypus-Limarobormes-13b-GPTQ,
-dominguesm/canarim-7b-vestibulaide,
-CofeAI/FLM-101B,
-TheBloke/Vicuna-7B-CoT-GPTQ,
-Kriyans/my_awesome_wnut_model,
-TheBloke/WizardMath-70B-V1.0-GPTQ,
-TheBloke/MythoLogic-Mini-7B-GPTQ,
-sauce1337/BerrySauce-L2-13b,
-TheBloke/Uni-TianYan-70B-GPTQ,
-TheBloke/Kuchiki-L2-7B-GPTQ,
-TheBloke/CodeLlama-13B-GGUF,
-huyen89/MGTDetectionModel,
-TheBloke/Huginn-v3-13B-GPTQ,
-TheBloke/Platypus2-13B-GPTQ,
-lrei/roberta-base-emolit,
-achimoraites/roberta-base_ag_news,
-TheBloke/OpenBuddy-Llama2-13B-v11.1-GGUF,
-Henok21/test_trainer,
-TheBloke/Chronohermes-Grad-L2-13B-GPTQ,
-wu981526092/Token-Level-Stereotype-Detector,
-TheBloke/Manticore-13B-GPTQ,
-chanifrusydi/t5-dialogue-summarization,
-alexandrainst/da-binary-emotion-classification-base,
-TheBloke/Pygmalion-2-7B-GGUF,
-SergeyTW/get_data_model,
-iblfe/webnesday,
-ajibawa-2023/Uncensored-Frank-7B,
-hasibul1ah/finetuned_bloom_trained_model_bangladataset,
-filipealmeida/open-llama-3b-v2-pii-transform,
-TheBloke/CodeUp-Alpha-13B-HF-GPTQ,
-Recag/BharatAI,
-SergeyTW/action_model,
-konverner/distilcamembert-base-ner-address,
-irodkin/gpt2-wiki2,
-NbAiLab/nb-gpt-j-6B,
-NTIS/KoRnDAlpaca-Polyglot-12.8B,
-TheBloke/Carl-Llama-2-13B-GPTQ,
-TheBloke/Synthia-70B-v1.1-GPTQ,
-TheBloke/CodeLlama-34B-GGUF,
-TheBloke/CodeLlama-13B-Python-GGUF,
-monsoon-nlp/mGPT-quantized,
-TheBloke/MythoMax-Kimiko-Mix-GPTQ,
-TheBloke/Spicyboros-70B-2.2-GPTQ,
-TheBloke/CodeLlama-34B-Python-GGUF,
-SergeyTW/conversation_model,
-xDAN2099/xDAN-L3-70B-shareChat-0911-Qlora-ckp15,
-mgju/softmax-sentiment,
-TheBloke/Upstage-Llama1-65B-Instruct-GPTQ,
-TheBloke/ReMM-v2-L2-13B-GPTQ,
-TheBloke/Chronoboros-Grad-L2-13B-GPTQ,
-indiejoseph/bert-base-cantonese,
-TheBloke/chronos-33b-GPTQ,
-TheBloke/Synthia-70B-v1.2-GPTQ,
-TIGER-Lab/MAmmoTH-Coder-7B,
-TheBloke/huginnv1.2-GPTQ,
-malhajar/llama-2-70b-hf-chat-turkish-gptq,
-ekshat/Llama-2-7b-chat-finetune-for-text2sql,
-TheBloke/Speechless-Llama2-13B-GPTQ,
-TheBloke/LLongMA-2-7B-GPTQ,
-edukom/Serbian-GPT-2,
-nthngdy/headless-bert-bs64-owt2,
-Sandiago21/falcon-40b-prompt-answering,
-TheBloke/Synthia-7B-GPTQ,
-uer/roberta-base-wwm-chinese-cluecorpussmall,
-Venkatesh4342/distilbert-helpdesk-sentiment,
-UDE-SE/BERTForReturnTypeClassification,
-annahaz/xlm-roberta-base-misogyny-sexism-tweets,
-ajibawa-2023/Uncensored-Frank-13B,
-TheBloke/tulu-30B-GPTQ,
-vaiv/kobigbird-roberta-large,
-Sandiago21/falcon-7b-prompt-answering,
-TheBloke/MLewdBoros-L2-13B-GPTQ,
-pszemraj/pythia-31m-goodwiki-deduped-2048-scratch,
-mediabiasgroup/DA-RoBERTa-pretrained,
-TheBloke/qCammel-70-x-GPTQ,
-pszemraj/pythia-31m-simplepile-lite-2048-scratch-2e,
-Open-Orca/oo-phi-1_5,
-AkimfromParis/NER-Luxury,
-Chantland/Hraf_MultiLabel,
-TheBloke/Llama-2-70B-Orca-200k-GGUF,
-flytech/togetherchat-dev-7b-v2,
-Geotrend/bert-base-15lang-cased,
-projecte-aina/multiner_ceil,
-uer/roberta-small-wwm-chinese-cluecorpussmall,
-TheBloke/minotaur-13B-fixed-GPTQ,
-beomi/llama-2-ko-70b,
-TheBloke/AppleSauce-L2-13B-GPTQ,
-UDE-SE/SantaCoderForReturnTypeClassification,
-pszemraj/mega-ar-large-2048-simplewiki,
-lloorree/mythxl-70b,
-mystic-leung/pegasus-medcord19,
-arkin04/loyaltymodel,
-csdc-atl/Baichuan2-7B-Chat-GPTQ-Int4,
-TheBloke/hippogriff-30b-chat-GPTQ,
-TheBloke/MythoLogic-13B-GPTQ,
-asas-ai/nllb-200-distilled-600M-finetuned_augmented_synthetic_ar-to-en,
-thegoodfellas/tgf-xlm-roberta-base-pt-br,
-TheBloke/30B-Epsilon-GPTQ,
-TheBloke/tulu-13B-GPTQ,
-TheBloke/Synthia-70B-GPTQ,
-gonchisi/roberta-base-bne-finetuned-new_or_used_warranty,
-TigerResearch/tigerbot-13b-chat-v1,
-ganeshkharad/gk-hinglish-sentiment,
-TheBloke/based-13b-GPTQ,
-juancopi81/lmd-8bars-2048-epochs40_v4,
-aisyahhrazak/distilbert-mooc-review-sentiment,
-TeamResearch/sentiment-model-saagie,
-cmarkea/bloomz-3b-sft-chat,
-TheBloke/Stheno-L2-13B-GPTQ,
-TheBloke/orca_mini_v3_7B-GGUF,
-etri-xainlp/polyglot-ko-12.8b-instruct,
-pszemraj/pythia-31m-KI_v1-2048-scratch,
-Dezzpil/otus-fw-roberta,
-sakuraumi/Sakura-13B-Galgame,
-ZahrizhalAli/calgpt-falcon-7b-finetuned-mental-health,
-TheBloke/Speechless-Llama2-13B-GGUF,
-TheBloke/Unholy-v1-10l-13B-GPTQ,
-TheBloke/LlongOrca-7B-16K-GGUF,
-TheBloke/llama2-22B-daydreamer-v2-GPTQ,
-TheBloke/Spring-Dragon-GPTQ,
-l3cube-pune/marathi-roberta,
-TIGER-Lab/MAmmoTH-Coder-13B,
-nthngdy/headless-pythia-owt2-70m-raw,
-TheBloke/Airochronos-L2-13B-GPTQ,
-TheBloke/Spicyboros-c34b-2.2-GPTQ,
-dahara1/ELYZA-japanese-Llama-2-7b-instruct-AWQ,
-gonchisi/roberta-base-bne-finetuned-new_or_used_title,
-alayaran/bodo-roberta-base,
-Brillibits/Instruct_Llama70B_Dolly15k,
-qmeeus/whisper-small-ner-combined,
-alexandrainst/da-emotion-classification-base,
-TheBloke/GPlatty-30B-GPTQ,
-TheBloke/Mythical-Destroyer-L2-13B-GPTQ,
-TheBloke/OpenAssistant-Llama2-13B-Orca-8K-3319-GGUF,
-TheBloke/Camel-Platypus2-13B-GPTQ,
-schnabear/DialoGPT-small-FinalFantasyDialogue,
-pszemraj/pythia-31m-simplewiki-scratch-bf16,
-GautamR/akai_flow_classifier_pest_seed_scheme,
-TheBloke/VicUnlocked-30B-LoRA-GPTQ,
-TheBloke/Platypus-30B-GPTQ,
-Finnish-NLP/llama-3b-finnish,
-TheBloke/Mythical-Destroyer-V2-L2-13B-GPTQ,
-TheBloke/Llama-2-13B-LoRA-Assemble-GPTQ,
-TheBloke/MythoLogic-L2-13B-GPTQ,
-vlsp-2023-vllm/hoa-7b,
-lloorree/mythxl-70b-gptq,
-muhtasham/bert-tiny-finetuned-finer,
-YSKartal/bert-base-turkish-cased-turkish_offensive_trained_model,
-Samuael/llama-2-7b-tebot-amharic_tuned_2,
-TheBloke/Pygmalion-2-13B-SuperCOT-GGUF,
-uer/roberta-large-wwm-chinese-cluecorpussmall,
-shazinho10/llama-2-7b-rayn,
-TheBloke/Huginn-13B-v4.5-GPTQ,
-TheBloke/openchat_v3.2_super-GPTQ,
-TheBloke/Chronolima-Airo-Grad-L2-13B-GPTQ,
-TheBloke/Airolima-Chronos-Grad-L2-13B-GPTQ,
-TheBloke/13B-Thorns-L2-GPTQ,
-TheBloke/Samantha-1.1-70B-GPTQ,
-TheBloke/Airoboros-L2-13B-2_1-YaRN-64K-GPTQ,
-TheBloke/Marcoroni-7b-GPTQ,
-MuneK/bert-large-japanese-v2-finetuned-jed,
-MUmairAB/python-code-generator,
-Mahmoud22/my_autotrain_llm,
-nfliu/MiniLMv2-L6-H768-distilled-from-RoBERTa-Large_boolq,
-TheBloke/fin-llama-33B-GPTQ,
-TheBloke/SuperPlatty-30B-GPTQ,
-TheBloke/tulu-7B-GPTQ,
-TheBloke/Zarablend-MX-L2-7B-GPTQ,
-TheBloke/fiction.live-Kimiko-V2-70B-GPTQ,
-TheBloke/13B-Legerdemain-L2-GPTQ,
-TheBloke/Vigogne-2-13B-Instruct-GGUF,
-TheBloke/Marcoroni-13B-GPTQ,
-ronit33/distilbert-base-uncased-finetuned-emotion-dataset,
-TheBloke/CAMEL-33B-Combined-Data-GPTQ,
-Suchinthana/Sinhala-Translate-and-Dolly-Llama-7b,
-Laksitha/autotrain-tosdr_tldr_legal_summarisation_v1-1434353657,
-TheBloke/Airoboros-L2-70b-2.2-GPTQ,
-juancopi81/mutopia_guitar_mmm,
-TheBloke/13B-Ouroboros-GPTQ,
-TheBloke/Unholy-v1-12L-13B-GPTQ,
-TheBloke/OpenOrca-Platypus2-13B-GGUF,
-TheBloke/Llama-2-7B-LoRA-Assemble-GPTQ,
-TheBloke/qCammel-13-GPTQ,
-Tanor/SRGPTSENTPOS4,
-jennyc/ip_rating,
-uer/roberta-xlarge-wwm-chinese-cluecorpussmall,
-msislam/code-mixed-language-detection-XLMRoberta,
-avatarcontinues/imagedata,
-khoantap/Terminator-v1,
-TheBloke/MythoBoros-13B-GPTQ,
-TheBloke/13B-BlueMethod-GPTQ,
-heegyu/polyglot-ko-3.8b-chat,
-Tanor/SRGPTSENTNEG4,
-QuophyDzifa/Sentiment-Analysis-Model,
-judy93536/RoBERTa-perigon-news,
-casperhansen/opt-125m-awq,
-Sarmila/pubmed-bert-mlm,
-intlsy/opt-175b-hyperparam,
-bllin001/test-ner,
-cmarkea/bloomz-560m-sft-chat,
-serdarcaglar/roberta-base-biomedical-es,
-TheBloke/fiction.live-Kimiko-V2-70B-GGUF,
-TheBloke/llama-2-7B-Guanaco-QLoRA-GGUF,
-asas-ai/opus-mt-ar-en-finetuned_augmented_synthetic-ar-to-en,
-asas-ai/nllb-200-distilled-600M-finetuned_augmented_MT_ar-to-en,
-lyogavin/Anima-7B-100K,
-agonh/phi-1_5,
+models	downloads
+hasibul1ah/finetuned_bloom_trained_model_bangladataset	45
+Dezzpil/otus-fw-roberta	20
+XuYipei/kw-cutegpt-13b-ift	425
+hadifar/eventclassifier	392
+qmeeus/whisper-small-ner-combined	18
+vicgalle/gpt2-alpaca-gpt4	1710
+shazinho10/llama-2-7b-rayn	15
+quantumaikr/plankton-500M	106
+cerebras/btlm-3b-8k-base	88282
+Open-Orca/oo-phi-1_5	29
+msislam/code-mixed-language-detection-XLMRoberta	11
+CreativeLang/metaphor_detection_roberta_seq	757
+Open-Orca/OpenOrca-Platypus2-13B	17324
+NousResearch/Llama-2-70b-chat-hf	1977
+avatarcontinues/imagedata	11
+firqaaa/Madina-7b-chat-QLoRA-8k	115
+annahaz/xlm-roberta-base-misogyny-sexism-tweets	32
+Venkatesh4342/distilbert-helpdesk-sentiment	33
+iblfe/webnesday	46
+cenkersisman/gpt2-turkish-900m	224
+internlm/internlm-chat-7b	6358
+internlm/internlm-chat-7b-8k	5185
+internlm/internlm-chat-7b-v1_1	2020
+internlm/internlm-7b	11234
+chanifrusydi/t5-dialogue-summarization	48
+jphme/phi-1_5_Wizard_Vicuna_uncensored	449
+smallcloudai/Refact-1_6B-fim	286694
+jojo0217/step3_mk7	3346
+sakuraumi/Sakura-13B-Galgame	20
+TheBloke/Guanaco-33B-SuperHOT-8K-GPTQ	114
+mediabiasgroup/DA-RoBERTa-pretrained	30
+YSKartal/bert-base-turkish-cased-turkish_offensive_trained_model	16
+irodkin/gpt2-wiki2	44
+cmarkea/bloomz-7b1-mt-sft-chat	129
+Deci/DeciCoder-1b	8397
+GautamR/akai_flow_classifier_pest_seed_scheme	17
+BAAI/bge-reranker-large	410
+Mahmoud22/my_autotrain_llm	14
+nfliu/MiniLMv2-L6-H768-distilled-from-RoBERTa-Large_boolq	14
+monsoon-nlp/mGPT-quantized	40
+khoantap/Terminator-v1	11
+ctheodoris/Geneformer	1576
+Samuael/llama-2-7b-tebot-amharic_tuned_2	16
+dijon-ai/distilroberta-base-jobs-clasf	147
+ajibawa-2023/Uncensored-Frank-7B	46
+ajibawa-2023/Uncensored-Frank-13B	32
+Chantland/Hraf_MultiLabel	28
+flozi00/Llama-2-13b-german-assistant-v7	340
+shauray/Llava-Llama-2-7B-hf	520
+AkimfromParis/NER-Luxury	29
+nthngdy/headless-bert-bs64-owt2	34
+nthngdy/headless-pythia-owt2-70m-raw	19
+Rachneet/gpt2-xl-alpaca	1527
+mwz/urdu-bert-small	73
+TeamResearch/sentiment-model-saagie	21
+alexandrainst/da-emotion-classification-base	18
+alexandrainst/da-ner-base	1205
+alexandrainst/da-hatespeech-detection-small	1088
+alexandrainst/da-sentiment-base	503
+alexandrainst/da-binary-emotion-classification-base	48
+alexandrainst/da-hatespeech-detection-base	152
+alexandrainst/da-subjectivivity-classification-base	68
+alexandrainst/da-discourse-coherence-base	448
+Davlan/afro-xlmr-large-75L	287
+Davlan/afro-xlmr-large-61L	30948
+TheBloke/airoboros-l2-7B-gpt4-m2.0-GPTQ	168
+TheBloke/airoboros-l2-7B-gpt4-2.0-GPTQ	298
+TheBloke/airoboros-l2-13b-gpt4-m2.0-GPTQ	502
+ganeshkharad/gk-hinglish-sentiment	22
+TheBloke/LLaMA-65B-GPTQ	91
+NYTK/PULI-GPTrio	1512
+TheBloke/WizardLM-13B-V1.1-GPTQ	2383
+TheBloke/wizardLM-13B-1.0-GPTQ	73
+TheBloke/Upstage-Llama1-65B-Instruct-GPTQ	39
+TheBloke/upstage-llama-30b-instruct-2048-GPTQ	687
+TheBloke/guanaco-7B-GPTQ	1401
+TheBloke/guanaco-65B-GPTQ	737
+TheBloke/guanaco-33B-GPTQ	1690
+TheBloke/wizard-mega-13B-GPTQ	1787
+TheBloke/minotaur-13B-fixed-GPTQ	26
+TheBloke/Manticore-13B-GPTQ	50
+TheBloke/manticore-13b-chat-pyg-GPTQ	404
+TheBloke/hippogriff-30b-chat-GPTQ	24
+TheBloke/VicUnlocked-30B-LoRA-GPTQ	17
+TheBloke/WizardLM-Uncensored-SuperCOT-StoryTelling-30B-GPTQ	1724
+TheBloke/LLaMA-7b-GPTQ	391
+TheBloke/LLaMA-30b-GPTQ	277
+TheBloke/LLaMA-13b-GPTQ	73
+TheBloke/medalpaca-13B-GPTQ	1542
+TheBloke/Platypus-30B-GPTQ	17
+TheBloke/GPlatty-30B-GPTQ	18
+TheBloke/Vicuna-7B-CoT-GPTQ	61
+TheBloke/Vicuna-13B-CoT-GPTQ	245
+TheBloke/wizard-vicuna-13B-GPTQ	2121
+TheBloke/Chronoboros-33B-GPTQ	960
+TheBloke/airochronos-33B-GPTQ	135
+TheBloke/MythoLogic-13B-GPTQ	24
+TheBloke/MythoBoros-13B-GPTQ	11
+TheBloke/gorilla-7B-GPTQ	66
+TheBloke/chronos-33b-GPTQ	37
+TheBloke/WizardLM-7B-V1.0-Uncensored-GPTQ	271
+TheBloke/WizardLM-7B-uncensored-GPTQ	6300
+TheBloke/WizardLM-33B-V1.0-Uncensored-GPTQ	7013
+TheBloke/WizardLM-30B-Uncensored-GPTQ	2697
+TheBloke/WizardLM-13B-V1.0-Uncensored-GPTQ	605
+TheBloke/Wizard-Vicuna-7B-Uncensored-GPTQ	453158
+TheBloke/Wizard-Vicuna-30B-Uncensored-GPTQ	7128
+TheBloke/Wizard-Vicuna-13B-Uncensored-GPTQ	9344
+TheBloke/Dolphin-Llama-13B-GPTQ	194
+TheBloke/based-13b-GPTQ	22
+TheBloke/CAMEL-33B-Combined-Data-GPTQ	13
+TheBloke/30B-Epsilon-GPTQ	23
+TheBloke/13B-Ouroboros-GPTQ	12
+TheBloke/13B-BlueMethod-GPTQ	11
+TheBloke/fin-llama-33B-GPTQ	14
+kfkas/Llama-2-ko-7b-Chat	5211
+TheBloke/chronos-wizardlm-uc-scot-st-13B-GPTQ	1543
+TheBloke/chronos-hermes-13B-GPTQ	167
+TheBloke/SuperPlatty-30B-GPTQ	14
+TheBloke/tulu-7B-GPTQ	14
+TheBloke/tulu-30B-GPTQ	32
+NbAiLab/nb-gpt-j-6B	44
+NbAiLab/nb-gpt-j-6B-alpaca	1452
+cmarkea/bloomz-560m-sft-chat	10
+cmarkea/bloomz-3b-sft-chat	21
+TigerResearch/tigerbot-70b-base	648
+OpenBuddy/openbuddy-llama2-34b-v11.1-bf16	369
+TigerResearch/tigerbot-13b-base	1161
+ZahrizhalAli/calgpt-falcon-7b-finetuned-mental-health	20
+TigerResearch/tigerbot-7b-base	1990
+openthaigpt/openthaigpt-1.0.0-beta-7b-chat-ckpt-hf	722
+beomi/llama-2-ko-70b	26
+TigerResearch/tigerbot-13b-chat	3038
+TigerResearch/tigerbot-70b-chat	251
+TigerResearch/tigerbot-7b-chat	160
+vaiv/kobigbird-roberta-large	32
+heegyu/polyglot-ko-3.8b-chat	11
+TheBloke/tulu-13B-GPTQ	23
+juancopi81/lmd-8bars-2048-epochs40_v4	22
+serdarcaglar/roberta-base-biomedical-es	10
+Finnish-NLP/llama-7b-finnish	105
+Finnish-NLP/llama-3b-finnish	17
+TheBloke/Llama2-70B-OASST-SFT-v10-GPTQ	178
+TheBloke/airoboros-l2-70B-gpt4-1.4.1-GPTQ	6025
+TheBloke/OpenOrcaxOpenChat-Preview2-13B-GPTQ	2383
+Sandiago21/falcon-7b-prompt-answering	32
+Sandiago21/falcon-40b-prompt-answering	34
+TheBloke/airoboros-l2-13b-gpt4-2.0-GPTQ	412
+TheBloke/airoboros-l2-13B-gpt4-1.4.1-GPTQ	1240
+TheBloke/airoboros-l2-7b-gpt4-1.4.1-GPTQ	282
+TheBloke/Llama-2-7b-Chat-GPTQ	114713
+TheBloke/Llama-2-7b-Chat-GGUF	648
+Deci/DeciLM-6b	401
+Deci/DeciLM-6b-instruct	298
+sauce1337/BerrySauce-L2-13b	58
+TheBloke/Nous-Hermes-Llama2-70B-GPTQ	565
+TheBloke/Llama-2-Coder-7B-GPTQ	78
+Kriyans/my_awesome_wnut_model	60
+ksjpswaroop/immiGPT	271
+TheBloke/Carl-Llama-2-13B-GPTQ	43
+colinglab/BureauBERTo	243
+TheBloke/Upstage-Llama-2-70B-instruct-v2-GPTQ	2943
+TheBloke/Uni-TianYan-70B-GPTQ	58
+TheBloke/AlpacaCielo-13B-GPTQ	65
+TheBloke/huginnv1.2-GPTQ	36
+TheBloke/Zarafusionex-1.1-L2-7B-GPTQ	254
+TheBloke/Zarablend-MX-L2-7B-GPTQ	14
+TheBloke/Zarablend-L2-7B-GPTQ	893
+TheBloke/Kuchiki-L2-7B-GPTQ	58
+TheBloke/Firefly-Llama2-13B-v1.2-GPTQ	238
+TheBloke/HermesLimaRP-L2-7B-GPTQ	117
+TheBloke/Trurl-2-13B-GPTQ	249
+TheBloke/Speechless-Llama2-Hermes-Orca-Platypus-WizardLM-13B-GPTQ	578
+TheBloke/Trurl-2-7B-GPTQ	121
+TheBloke/Speechless-Llama2-13B-GGUF	20
+TheBloke/Speechless-Llama2-13B-GPTQ	35
+TheBloke/Unholy-v1-12L-13B-GPTQ	12
+TheBloke/Unholy-v1-10l-13B-GPTQ	20
+TheBloke/StableBeluga2-70B-GPTQ	1746
+TheBloke/ReMM-SLERP-L2-13B-GPTQ	590
+TheBloke/ReMM-v2-L2-13B-GPTQ	39
+TheBloke/Nous-Hermes-13B-Code-GPTQ	76
+TheBloke/MythoMax-L2-Kimiko-v2-13B-GPTQ	260
+TheBloke/MLewdBoros-L2-13B-GPTQ	31
+malhajar/llama-2-70b-hf-chat-turkish-gptq	36
+TheBloke/PuddleJumper-13B-GPTQ	532
+TheBloke/EverythingLM-13b-V2-16K-GPTQ	203
+TheBloke/EverythingLM-13B-16K-GPTQ	1660
+TheBloke/AlpacaCielo2-7B-8K-GPTQ	79
+TheBloke/llama2-7b-chat-codeCherryPop-qLoRA-GPTQ	344
+TheBloke/Huginn-v3-13B-GPTQ	56
+TheBloke/Llama-2-7B-32K-Instruct-GPTQ	10124
+TheBloke/Huginn-13B-v4.5-GPTQ	15
+TheBloke/Huginn-13B-GPTQ	71
+TheBloke/Chronos-Beluga-v2-13B-GPTQ	323
+TheBloke/MythoMax-Kimiko-Mix-GPTQ	40
+TheBloke/Luna-AI-Llama2-Uncensored-GPTQ	763
+TheBloke/StableBeluga-13B-GPTQ	747
+TheBloke/AppleSauce-L2-13B-GPTQ	26
+TheBloke/StableBeluga-7B-GPTQ	7170
+TheBloke/Stheno-L2-13B-GPTQ	21
+Helsinki-NLP/opus-tatoeba-en-ja	74
+TheBloke/Mythical-Destroyer-V2-L2-13B-GPTQ	17
+TheBloke/Mythical-Destroyer-L2-13B-GPTQ	18
+openchat/openchat_v3.2_super	1775
+TheBloke/Lemur-70B-Chat-v1-GPTQ	5591
+TheBloke/Pygmalion-2-13B-SuperCOT-GPTQ	83
+TheBloke/Pygmalion-2-13B-SuperCOT-GGUF	16
+TheBloke/OpenBuddy-Llama2-70b-v10.1-GPTQ	72
+TheBloke/LosslessMegaCoder-Llama2-13B-Mini-GPTQ	323
+TheBloke/LosslessMegaCoder-Llama2-7B-Mini-GPTQ	215
+TheBloke/fiction.live-Kimiko-V2-70B-GGUF	10
+TheBloke/fiction.live-Kimiko-V2-70B-GPTQ	14
+TheBloke/Phind-CodeLlama-34B-v2-GPTQ	4830
+Suchinthana/Sinhala-Translate-and-Dolly-Llama-7b	13
+TheBloke/Phind-CodeLlama-34B-v1-GPTQ	205
+TheBloke/Phind-CodeLlama-34B-Python-v1-GPTQ	107
+sjrhuschlee/flan-t5-large-squad2	114
+sjrhuschlee/deberta-v3-large-nli-v1	95
+TheBloke/openchat_v3.2_super-GPTQ	15
+TheBloke/OpenBuddy-Llama2-13B-v11.1-GGUF	53
+TheBloke/OpenBuddy-Llama2-13B-v11.1-GPTQ	666
+TheBloke/OpenAssistant-Llama2-13B-Orca-8K-3319-GPTQ	1158
+TheBloke/OpenAssistant-Llama2-13B-Orca-8K-3319-GGUF	18
+TheBloke/Llama2-13B-MegaCode2-OASST-GPTQ	70
+TheBloke/CodeLlama-13B-oasst-sft-v10-GPTQ	217
+TheBloke/OpenOrca-Platypus2-13B-GPTQ	16393
+TheBloke/OpenOrca-Platypus2-13B-GGUF	12
+TheBloke/Llama-2-13B-LoRA-Assemble-GPTQ	17
+TheBloke/LlongOrca-7B-16K-GGUF	20
+TheBloke/LlongOrca-7B-16K-GPTQ	381
+TheBloke/Llama-2-7B-LoRA-Assemble-GPTQ	12
+TheBloke/Kimiko-7B-GPTQ	216
+TheBloke/Kimiko-v2-13B-GPTQ	193
+TheBloke/Kimiko-13B-GPTQ	117
+TheBloke/Yarn-Llama-2-13B-64K-GPTQ	171
+TheBloke/llama-2-70b-Guanaco-QLoRA-GPTQ	30621
+TheBloke/Yarn-Llama-2-13B-128K-GPTQ	700
+TheBloke/Yarn-Llama-2-7B-64K-GPTQ	244
+TheBloke/Yarn-Llama-2-7B-128K-GPTQ	411
+TheBloke/Synthia-70B-GPTQ	23
+TheBloke/Llama2-22B-Daydreamer-v3-GPTQ	113
+quantumaikr/plankton-100M	215
+TheBloke/Synthia-70B-v1.2-GPTQ	37
+TheBloke/Synthia-70B-v1.1-GPTQ	42
+TheBloke/GodziLLa2-70B-GPTQ	414
+TheBloke/llama2-22B-daydreamer-v2-GPTQ	20
+AIDC-ai-business/Marcoroni-70B	180
+TheBloke/llama-2-13B-Guanaco-QLoRA-GPTQ	573
+TheBloke/llama-2-7B-Guanaco-QLoRA-GPTQ	1206
+TheBloke/llama-2-7B-Guanaco-QLoRA-GGUF	10
+TheBloke/Synthia-7B-GPTQ	34
+TheBloke/orca_mini_v3_70B-GPTQ	6279
+TheBloke/model_007-70B-GPTQ	360
+TheBloke/Synthia-13B-GPTQ	91
+TheBloke/llama2_70b_chat_uncensored-GPTQ	1390
+TheBloke/Llama-2-70B-OASST-1-200-GPTQ	486
+bert-base-cased-finetuned-mrpc	6118
+TheBloke/Pygmalion-2-7B-GPTQ	240
+TheBloke/Pygmalion-2-7B-GGUF	48
+filipealmeida/open-llama-3b-v2-pii-transform	45
+TheBloke/Pygmalion-2-13B-GPTQ	374
+TheBloke/Pygmalion-2-13B-GGUF	109
+TheBloke/Mythalion-13B-GPTQ	1557
+TheBloke/Mythalion-13B-GGUF	199
+TinyPixel/lima-test	1449
+Laksitha/autotrain-tosdr_tldr_legal_summarisation_v1-1434353657	13
+facebook/wmt19-de-en	19380
+TheBloke/orca_mini_v3_7B-GPTQ	2528
+TheBloke/orca_mini_v3_7B-GGUF	21
+TheBloke/orca_mini_v3_13B-GPTQ	2457
+TheBloke/Chronolima-Airo-Grad-L2-13B-GPTQ	15
+maastrichtlawtech/legal-camembert-base	178
+TheBloke/Chronoboros-Grad-L2-13B-GPTQ	39
+TheBloke/Airolima-Chronos-Grad-L2-13B-GPTQ	15
+TheBloke/Airochronos-L2-13B-GPTQ	19
+TheBloke/Nous-Puffin-70B-GPTQ	112
+TheBloke/LoKuS-13B-GPTQ	322
+TheBloke/Athena-v1-GPTQ	157
+TheBloke/ORCA_LLaMA_70B_QLoRA-GPTQ	317
+TheBloke/Spring-Dragon-GPTQ	20
+TheBloke/MythoMix-L2-13B-GPTQ	511
+TheBloke/MythoMax-L2-13B-GPTQ	96022
+TheBloke/MythoLogic-L2-13B-GPTQ	17
+nielsr/layoutlmv3-finetuned-cord	102
+teknium/Phi-Hermes-1.3B	115
+TheBloke/MythoLogic-Mini-7B-GPTQ	59
+TheBloke/Llama-2-70B-Orca-200k-GPTQ	116
+TheBloke/Llama-2-70B-Orca-200k-GGUF	28
+TheBloke/llama2_7b_chat_uncensored-GPTQ	4439
+TheBloke/Llama-2-13B-German-Assistant-v4-GPTQ	838
+TheBloke/llama-2-13B-German-Assistant-v2-GPTQ	242
+TheBloke/Redmond-Puffin-13B-GPTQ	264
+TheBloke/Genz-70b-GPTQ	5635
+TheBloke/Nous-Hermes-Llama2-GPTQ	4867
+TheBloke/llama-2-13B-chat-limarp-v2-merged-GPTQ	107
+TheBloke/Nous-Hermes-Llama-2-7B-GPTQ	1304
+TheBloke/Chronohermes-Grad-L2-13B-GPTQ	52
+TheBloke/CodeUp-Llama-2-13B-Chat-HF-GPTQ	2165
+TheBloke/CodeUp-Alpha-13B-HF-GPTQ	45
+TheBloke/Hermes-LLongMA-2-13B-8K-GPTQ	90
+TheBloke/Chronos-70B-v2-GPTQ	97
+TheBloke/LLongMA-2-7B-GPTQ	35
+TheBloke/Hermes-LLongMA-2-7B-8K-GPTQ	139
+TheBloke/Chronorctypus-Limarobormes-13b-GPTQ	64
+TheBloke/13B-Legerdemain-L2-GPTQ	14
+TheBloke/13B-Thorns-L2-GPTQ	15
+TheBloke/Samantha-1.11-70B-GPTQ	76
+TheBloke/Samantha-1.1-70B-GPTQ	15
+TheBloke/Vigogne-2-13B-Instruct-GPTQ	1009
+TheBloke/Vigogne-2-13B-Instruct-GGUF	14
+TheBloke/Vigogne-2-7B-Instruct-GPTQ	384
+TheBloke/Vigogne-2-7B-Chat-GPTQ	164
+TheBloke/vicuna-7B-v1.5-GPTQ	8673
+TheBloke/WizardLM-1.0-Uncensored-CodeLlama-34B-GPTQ	254
+TheBloke/vicuna-7B-v1.5-16K-GPTQ	466
+TheBloke/Samantha-1.11-CodeLlama-34B-GPTQ	266
+TheBloke/vicuna-13B-v1.5-GPTQ	3059
+TheBloke/vicuna-13B-v1.5-16K-GPTQ	4135
+TheBloke/WizardLM-1.0-Uncensored-Llama2-13B-GPTQ	7077
+TheBloke/Spicyboros-70B-2.2-GPTQ	40
+TheBloke/Samantha-1.11-13B-GPTQ	147
+TheBloke/Airoboros-L2-70B-GPT4-m2.0-GPTQ	192
+TheBloke/Dolphin-Llama2-7B-GPTQ	581
+TheBloke/Airoboros-L2-70b-2.2-GPTQ	13
+TheBloke/airoboros-l2-70B-GPT4-2.0-GPTQ	15733
+TheBloke/Spicyboros-c34b-2.2-GPTQ	19
+TheBloke/Airoboros-L2-70B-2.1-Creative-GPTQ	134
+TheBloke/Airoboros-L2-70B-2.1-GPTQ	4116
+TheBloke/Spicyboros-7B-2.2-GPTQ	241
+TheBloke/Spicyboros-13B-2.2-GPTQ	187
+TheBloke/Airoboros-L2-7B-2.2-GPTQ	91
+TheBloke/Airoboros-L2-7B-2.1-GPTQ	434
+TheBloke/qCammel-70-x-GPTQ	30
+TheBloke/Airoboros-L2-13B-2.2-GPTQ	99
+TheBloke/WizardMath-70B-V1.0-GPTQ	60
+TheBloke/Airoboros-L2-13B-2.1-GPTQ	1563
+TheBloke/Airoboros-c34B-2.1-GPTQ	183
+TheBloke/Platypus2-70B-GPTQ	144
+TheBloke/Platypus2-70B-Instruct-GPTQ	8443
+TheBloke/WizardLM-70B-V1.0-GPTQ	7743
+TheBloke/Camel-Platypus2-70B-GPTQ	65
+TheBloke/Airoboros-L2-13B-2_1-YaRN-64K-GPTQ	15
+TheBloke/qCammel-13-GPTQ	12
+TheBloke/Stable-Platypus2-13B-GPTQ	518
+TheBloke/Platypus2-13B-GPTQ	56
+TheBloke/WizardCoder-Python-34B-V1.0-GPTQ	4987
+TheBloke/WizardMath-13B-V1.0-GPTQ	164
+TheBloke/Camel-Platypus2-13B-GPTQ	18
+akahana/indonesia-emotion-roberta	266
+Tanor/SRGPTSENTNEG4	11
+TheBloke/WizardMath-7B-V1.0-GPTQ	222
+TheBloke/CodeLlama-34B-Python-GGUF	40
+TheBloke/CodeLlama-34B-Python-GPTQ	350
+TheBloke/WizardLM-13B-V1.2-GPTQ	7667
+TheBloke/WizardCoder-Python-13B-V1.0-GPTQ	4677
+TheBloke/Llama-2-70B-chat-GPTQ	38017
+TheBloke/Llama-2-70B-chat-GGUF	296
+TheBloke/Llama-2-70B-GPTQ	234514
+22h/open-cabrita3b	203
+TheBloke/CodeLlama-34B-GPTQ	725
+TheBloke/CodeLlama-34B-GGUF	42
+TheBloke/CodeLlama-7B-Python-GGUF	88
+TheBloke/CodeLlama-7B-Python-GPTQ	2410
+TheBloke/CodeLlama-34B-Instruct-GGUF	71
+TheBloke/CodeLlama-34B-Instruct-GPTQ	2986
+TheBloke/Marcoroni-7b-GPTQ	15
+vlsp-2023-vllm/hoa-7b	17
+TheBloke/CodeLlama-7B-Instruct-GGUF	306
+TheBloke/CodeLlama-7B-Instruct-GPTQ	5014
+TheBloke/CodeLlama-7B-GGUF	175
+TheBloke/CodeLlama-7B-GPTQ	2081
+TheBloke/Marcoroni-13B-GPTQ	14
+TheBloke/CodeLlama-13B-GPTQ	816
+TheBloke/CodeLlama-13B-GGUF	58
+TheBloke/CodeLlama-13B-Instruct-GGUF	212
+TheBloke/CodeLlama-13B-Instruct-GPTQ	2942
+TheBloke/CodeLlama-13B-Python-GGUF	42
+TheBloke/CodeLlama-13B-Python-GPTQ	490
+TheBloke/Luban-13B-GPTQ	258
+NTIS/KoRnDAlpaca-Polyglot-12.8B	44
+TheBloke/Llama-2-13B-chat-GPTQ	110811
+TheBloke/Llama-2-13B-chat-GGUF	318
+TheBloke/Llama-2-13B-GPTQ	10461
+TheBloke/Llama-2-13B-GGUF	87
+TheBloke/Llama-2-7B-GGUF	346
+TheBloke/Llama-2-7B-GPTQ	10816
+entropy/roberta_zinc_480m	1691
+Tanor/SRGPTSENTPOS4	12
+ValiantLabs/ShiningValiant	1147
+dicta-il/dictalm-7b-instruct	461
+cis-lmu/glot500-base	7376
+nicholasKluge/Aira-2-774M	120
+anzorq/m2m100_418M_ft_ru-kbd_44K	187
+stabilityai/StableBeluga2	83431
+utterworks/agent-customer-cls	107
+TomatenMarc/TACO	106
+codefuse-ai/CodeFuse-13B	107
+codefuse-ai/CodeFuse-CodeLlama-34B	1209
+Voicelab/trurl-2-13b-8bit	69
+Voicelab/trurl-2-13b	2725
+boda/ANER	72
+Voicelab/trurl-2-7b	1934
+Voicelab/trurl-2-7b-8bit	300
+UDE-SE/SantaCoderForReturnTypeClassification	26
+UDE-SE/BERTForReturnTypeClassification	33
+l3cube-pune/marathi-roberta	20
+csdc-atl/Baichuan2-7B-Chat-GPTQ-Int4	25
+SergeyTW/conversation_model	40
+SergeyTW/get_data_model	47
+Recag/BharatAI	45
+SergeyTW/action_model	45
+nielsr/layoutxlm-finetuned-xfund-fr	269
+togethercomputer/LLaMA-2-7B-32K	17993
+TabbyML/CodeLlama-7B	65
+ekshat/Llama-2-7b-chat-finetune-for-text2sql	36
+CofeAI/FLM-101B	62
+etri-xainlp/polyglot-ko-12.8b-instruct	21
+heegyu/WizardVicuna-open-llama-3b-v2	1645
+hegelty/KcBERT-Base-finetuned-hate	805
+wu981526092/Sentence-Level-Stereotype-Detector	70
+wu981526092/Token-Level-Stereotype-Detector	52
+KETI-AIR-Downstream/long-ke-t5-base-translation-aihub-bidirection_e1	221
+KETI-AIR-Downstream/long-ke-t5-base-translation-aihub-ko2en	325
+KETI-AIR-Downstream/long-ke-t5-base-translation-aihub-bidirection	350
+KETI-AIR-Downstream/long-ke-t5-base-translation-aihub-en2ko	707
+kimsan0622/gpt2-medium	1282
+Jzuluaga/bert-base-token-classification-for-atc-en-uwb-atcc	83
+QuophyDzifa/Sentiment-Analysis-Model	11
+mosaicml/mpt-30b-chat	13934
+pszemraj/mega-ar-large-2048-simplewiki	26
+jhu-clsp/bibert-ende	681
+NousResearch/Nous-Hermes-llama-2-7b	8046
+NewstaR/Starlight-7B	172
+asas-ai/nllb-200-distilled-600M-finetuned_augmented_synthetic_ar-to-en	24
+asas-ai/opus-mt-ar-en-finetuned_augmented_synthetic-ar-to-en	10
+asas-ai/nllb-200-distilled-600M-finetuned_augmented_MT_ar-to-en	10
+lloorree/mythxl-70b-gptq	17
+lloorree/mythxl-70b	26
+rasmodev/Covid-19_Sentiment_Analysis_RoBERTa_Model	72
+AIDC-ai-business/Luban-13B	2555
+WGNW/Llama-2-ko-7b-Chat-auto-gptq-4bit	88
+indiejoseph/bert-base-cantonese	38
+dahara1/ELYZA-japanese-Llama-2-7b-instruct-AWQ	19
+MuneK/bert-large-japanese-v2-finetuned-jed	15
+Xenova/llama2.c-stories110M	139
+Xenova/llama2.c-stories42M	120
+Xenova/llama2.c-stories15M	127
+universeTBD/astrollama	192
+efederici/ipt-350m	228
+Faradaylab/ARIA-70B-V2	83
+gonchisi/roberta-base-bne-finetuned-new_or_used_warranty	23
+thegoodfellas/tgf-xlm-roberta-base-pt-br	24
+gonchisi/roberta-base-bne-finetuned-new_or_used_title	19
+zoukagh/bert-base-iz-spain-uncased	289
+alayaran/bodo-roberta-base	19
+dominguesm/canarim-7b-vestibulaide	64
+lrei/roberta-base-emolit	56
+MUmairAB/python-code-generator	15
+nielsr/layoutlmv3-finetuned-funsd	1697
+Henok21/test_trainer	53
+TabbyML/StarCoder-1B	257
+PY007/TinyLlama-1.1B-step-50K-105b	7426
+jennyc/ip_rating	12
+lyogavin/Anima-7B-100K	10
+NewstaR/Starlight-13B	179
+edukom/Serbian-GPT-2	35
+microsoft/phi-1_5	25526
+PygmalionAI/mythalion-13b	1967
+PygmalionAI/pygmalion-2-7b	2178
+PygmalionAI/pygmalion-2-13b	6866
+microsoft/git-base-vatex	963
+konverner/distilcamembert-base-ner-address	45
+entropy/gpt2_zinc_87m	142
+Brillibits/Instruct_Llama70B_Dolly15k	19
+defog/sqlcoder	10581
+achimoraites/roberta-base_ag_news	54
+xDAN2099/xDAN-L3-70B-shareChat-0911-Qlora-ckp15	40
+muhtasham/bert-tiny-finetuned-finer	17
+TIGER-Lab/MAmmoTH-Coder-13B	20
+malhajar/llama-2-70b-hf-chat-turkish	106
+TIGER-Lab/MAmmoTH-Coder-7B	37
+AI-Sweden-Models/bert-large-nordic-pile-1M-steps	195
+mystic-leung/pegasus-medcord19	26
+facebook/opt-125m	1030696
+facebook/opt-350m	164178
+facebook/opt-1.3b	627149
+facebook/opt-2.7b	90319
+flytech/togetherchat-dev-7b-v2	28
+facebook/wmt19-en-de	29579
+pszemraj/pythia-31m-KI_v1-2048-scratch	21
+judy93536/RoBERTa-perigon-news	11
+microsoft/mpnet-base	24159
+nikolasmoya/question-or-statement	87
+ronit33/distilbert-base-uncased-finetuned-emotion-dataset	14
+juancopi81/mutopia_guitar_mmm	13
+uer/roberta-xlarge-wwm-chinese-cluecorpussmall	12
+uer/roberta-large-wwm-chinese-cluecorpussmall	16
+uer/roberta-base-wwm-chinese-cluecorpussmall	34
+uer/roberta-small-wwm-chinese-cluecorpussmall	27
+casperhansen/opt-125m-awq	11
+schnabear/DialoGPT-small-FinalFantasyDialogue	18
+bugdaryan/Code-Llama-2-13B-instruct-text2sql	341
+BAAI/bge-reranker-base	511
+Sarmila/pubmed-bert-mlm	11
+medicalai/ClinicalBERT	10041
+shibing624/ziya-llama-13b-medical-merged	84
+crodri/falcon_aguila_meteocat	301
+Geotrend/bert-base-15lang-cased	28
+openchat/openchat_v3.1	3752
+openchat/openchat_v3.2	4938
+arkin04/loyaltymodel	26
+StudentLLM/Alpagasus-2-13b-QLoRA-merged	448
+NotXia/longformer-bio-ext-summ	995
+TigerResearch/tigerbot-13b-chat-v1	23
+TigerResearch/tigerbot-13b-base-v1	534
+TigerResearch/tigerbot-70b-chat-v1	145
+TigerResearch/tigerbot-13b-chat-v2	3038
+agonh/phi-1_5	10
+tillschwoerer/roberta-base-finetuned-toxic-comment-detection	95
+intlsy/opt-175b-hyperparam	11
+projecte-aina/multiner_ceil	28
+tangger/Qwen-7B-Chat	284
+pszemraj/pythia-31m-simplewiki-scratch-bf16	18
+MuneK/bert-large-japanese-v2-finetuned-wrime	158
+huyen89/MGTDetectionModel	58
+ku-nlp/deberta-v2-large-japanese-char-wwm	312
+ku-nlp/deberta-v2-base-japanese-with-auto-jumanpp	117
+mgju/softmax-sentiment	40
+pszemraj/pythia-31m-simplepile-lite-2048-scratch-2e	30
+pszemraj/pythia-31m-goodwiki-deduped-2048-scratch	31
+beomi/kobert	128
+beomi/KoAlpaca-Polyglot-12.8B	22781
+beomi/KoAlpaca-Polyglot-5.8B	6498
+beomi/KoAlpaca-KoRWKV-6B	108
+aisyahhrazak/distilbert-mooc-review-sentiment	22
+bllin001/test-ner	11
