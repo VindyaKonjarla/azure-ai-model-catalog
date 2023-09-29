@@ -1,20 +1,12 @@
 {
     "queue_name": "test-southcentralus-10",
     "models": [
-        "MLFlow-noamwies/llama-test-gqa-with-better-transformer",
+      
         "MLFlow-meta-llama/Llama-2-13b-chat-hf",
         "MLFlow-meta-llama/Llama-2-13b-hf",
         "MLFlow-meta-llama/Llama-2-70b-chat-hf",
         "MLFlow-meta-llama/Llama-2-70b-hf",
-        "MLFlow-meta-llama/Llama-2-7b-chat-hf",
-        "MLFlow-meta-llama/Llama-2-7b-hf",
-        "MLFlow-explosion-testing/llama2-fewer-kv-heads",
-        "MLFlow-explosion-testing/llama2-kv-sharing",
-        "WizardLM/WizardCoder-Python-34B-V1.0",
-        "Phind/Phind-CodeLlama-34B-v1",
-        "codellama/CodeLlama-34b-Python-hf",
-        "codellama/CodeLlama-34b-hf"
-
+        "MLFlow-meta-llama/Llama-2-7b-chat-hf"
     ],
     "workspace": "test-southcentralus",
     "subscription": "80c77c76-74ba-4c8c-8229-4c3b2957990c",
