@@ -178,27 +178,7 @@ class Dashboard():
         # summary.append(f"Import | 0 | 0 | 0.00% | 0 | 0.00% | 0 | 0 | 0 |")
         # summary.append(f"Inference with Parameters | 0 | 0 | 0.00% | 0 | 0.00% | 0 | 0 | 0 |")
         
-        # #summary.append("🚀Total|✅Success|❌Failure|🚫Cancelled|⏳Running|")
-        # #summary.append("-----|-------|-------|-------|-------|")
-        # summary.append(f"Online Endpoint Deployment - Dynamic Installation|{results_dict['total_di']}|{results_dict['success_di']}|{results_dict['failure_di']}|{results_dict['cancelled_di']}|{results_dict['running_di']}|")
-        # summary.append(f"Online Endpoint Deployment - Model Packaging|{results_dict['total_mp']}|{results_dict['success_mp']}|{results_dict['failure_mp']}|{results_dict['cancelled_mp']}|{results_dict['running_mp']}|")
-    
-        # Create and print the matrix table with the "Category" column
-        # matrix_table = f"""
-        # |Category | Total Model | Pass | Pass % | Failure | Failure % | Cancelled | Running/In Progress | Not Tested|
-        # |-------- | ----------- | ---- | ------- | ------- | ---------- | --------- | ------------------- | ----------|
-        # |Online Endpoint Deployment - Dynamic Installation | {total_dynamic_installation_count} | {dynamic_installation_statuses["success"]} | {success_percentage:.2f}% | {dynamic_installation_statuses["failure"]} | {failure_percentage:.2f}% | {dynamic_installation_statuses["cancelled"]} | {dynamic_installation_statuses["running"]} | {dynamic_installation_statuses["not_tested"]}|
-        # |Online Endpoint Deployment - Packaging | {total_packaging_count} | {packaging_statuses["success"]} | {success_percentage:.2f}% | {packaging_statuses["failure"]} | {failure_percentage:.2f}% | {packaging_statuses["cancelled"]} | {packaging_statuses["running"]} | {packaging_statuses["not_tested"]} |
-        # |Batch Endpoint Deployment | 0 | 0 | 0.00% | 0 | 0.00% | 0 | 0 | 0 |
-        # |Finetune | 0 | 0 | 0.00% | 0 | 0.00% | 0 | 0 | 0 |
-        # |Evaluation | 0 | 0 | 0.00% | 0 | 0.00% | 0 | 0 | 0 |
-        # |FT Model Online Endpoint Deployment - Dynamic Installation | 0 | 0 | 0.00% | 0 | 0.00% | 0 | 0 | 0 |
-        # |FT Model Online Endpoint Deployment - Packaging | 0 | 0 | 0.00% | 0 | 0.00% | 0 | 0 | 0 |
-        # |FT Model Batch EndPoint Deployment | 0 | 0 | 0.00% | 0 | 0.00% | 0 | 0 | 0 |
-        # |FT Model Evaluation | 0 | 0 | 0.00% | 0 | 0.00% | 0 | 0 | 0 |
-        # |Import | 0 | 0 | 0.00% | 0 | 0.00% | 0 | 0 | 0 |
-        # |Inference with Parameters | 0 | 0 | 0.00% | 0 | 0.00% | 0 | 0 | 0 |
-        # """
+       
         summary_text = "\n".join(summary)
         print (summary_text)   
         return summary_text
