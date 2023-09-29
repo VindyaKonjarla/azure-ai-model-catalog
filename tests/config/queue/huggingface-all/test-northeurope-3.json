@@ -1,8 +1,19 @@
 {
     "queue_name": "test-northeurope-3",
     "models": [
-        "MLFlow-TheBloke/Trurl-2-7B-GPTQ",
-        "MLFlow-casperhansen/opt-125m-awq"
+        "MLFlow-ArnaudHureaux/Llama-2-70b-chat-hf-miniguanaco",
+        "MLFlow-TheBloke/Llama-2-13B-Ensemble-v5-GPTQ",
+        "MLFlow-TheBloke/OpenAssistant-Llama2-13B-Orca-8K-3319-AWQ",
+        "MLFlow-TheBloke/Synthia-70B-v1.2-GPTQ",
+        "MLFlow-TheBloke/model_007-70B-GPTQ",
+        "MLFlow-TheBloke/PuddleJumper-13B-GPTQ",
+        "MLFlow-TheBloke/llama2_70b_chat_uncensored-GPTQ",
+        "MLFlow-TheBloke/Llama-2-70B-GPTQ",
+        "MLFlow-Kriyans/Bert-NER",
+        "MLFlow-openchat/openchat_v3.2_super",
+        "MLFlow-timoneda/covid_roberta_80_masked",
+        "MLFlow-NousResearch/Nous-Hermes-llama-2-7b",
+        "MLFlow-AIDC-ai-business/Marcoroni-13B"
     ],
     "workspace": "test-northeurope",
     "subscription": "80c77c76-74ba-4c8c-8229-4c3b2957990c",

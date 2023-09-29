@@ -1,8 +1,19 @@
 {
     "queue_name": "test-eastus-1",
     "models": [
-        "MLFlow-akahana/indonesia-emotion-roberta",
-        "MLFlow-TheBloke/13B-Thorns-L2-GPTQ"
+        "MLFlow-Ransaka/SinhalaRoberta",
+        "MLFlow-microsoft/phi-1",
+        "MLFlow-TheBloke/Xwin-LM-13B-V0.1-AWQ",
+        "MLFlow-TheBloke/Unholy-v1-12L-13B-GPTQ",
+        "MLFlow-TheBloke/MythoMax-L2-Kimiko-v2-13B-GPTQ",
+        "MLFlow-TheBloke/CodeLlama-13B-Instruct-GGUF",
+        "MLFlow-TheBloke/WizardLM-1.0-Uncensored-Llama2-13B-GPTQ",
+        "MLFlow-TheBloke/llama-2-70b-Guanaco-QLoRA-GPTQ",
+        "MLFlow-TheBloke/Wizard-Vicuna-7B-Uncensored-GPTQ",
+        "MLFlow-eduagarcia-temp/ptcrawl_base_v1_5__checkpoint_last",
+        "MLFlow-Yukang/Llama-2-13b-longlora-32k-ft",
+        "MLFlow-teknium/OpenHermes-7B",
+        "MLFlow-migtissera/Synthia-70B-v1.2b"
     ],
     "workspace": "test-eastus",
     "subscription": "80c77c76-74ba-4c8c-8229-4c3b2957990c",

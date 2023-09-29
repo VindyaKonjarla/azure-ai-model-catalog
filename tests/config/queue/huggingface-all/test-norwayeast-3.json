@@ -1,7 +1,19 @@
 {
     "queue_name": "test-norwayeast-3",
     "models": [
-        "MLFlow-projecte-aina/multiner_ceil"
+        "MLFlow-Qwen/Qwen-14B-Chat",
+        "MLFlow-TheBloke/Llama-2-7B-Chat-GGML",
+        "MLFlow-TheBloke/Synthia-34B-v1.2-GPTQ",
+        "MLFlow-TheBloke/OpenBuddy-Llama2-13B-v11.1-GPTQ",
+        "MLFlow-TheBloke/CodeLlama-34B-GPTQ",
+        "MLFlow-TheBloke/MythoMax-L2-13B-GPTQ",
+        "MLFlow-TheBloke/StableBeluga-13B-GPTQ",
+        "MLFlow-TheBloke/chronos-wizardlm-uc-scot-st-13B-GPTQ",
+        "MLFlow-Sandy0909/finance_sentiment",
+        "MLFlow-Undi95/MLewd-ReMM-L2-Chat-20B",
+        "MLFlow-acrastt/Bean-3B",
+        "MLFlow-cmarkea/bloomz-560m-sft-chat",
+        "MLFlow-speechlessai/speechless-codellama-airoboros-orca-platypus-13b"
     ],
     "workspace": "test-norwayeast",
     "subscription": "80c77c76-74ba-4c8c-8229-4c3b2957990c",

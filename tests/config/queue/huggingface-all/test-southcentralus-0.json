@@ -1,8 +1,20 @@
 {
     "queue_name": "test-southcentralus-0",
     "models": [
-        "MLFlow-TigerResearch/tigerbot-13b-chat-v2",
-        "MLFlow-mystic-leung/pegasus-medcord19"
+        "MLFlow-smallcloudai/Refact-1_6B-fim",
+        "MLFlow-Qwen/Qwen-14B",
+        "MLFlow-TheBloke/Llama-2-7B-GGML",
+        "MLFlow-TheBloke/Chinese-Llama-2-7B-GPTQ",
+        "MLFlow-TheBloke/Speechless-Llama2-Hermes-Orca-Platypus-WizardLM-13B-GPTQ",
+        "MLFlow-TheBloke/CodeLlama-34B-Instruct-GPTQ",
+        "MLFlow-TheBloke/Platypus2-70B-Instruct-GPTQ",
+        "MLFlow-TheBloke/Nous-Hermes-Llama-2-7B-GPTQ",
+        "MLFlow-TheBloke/chronos-33b-GPTQ",
+        "MLFlow-dicta-il/dictalm-7b-instruct",
+        "MLFlow-JosephusCheung/Qwen-LLaMAfied-7B-Chat",
+        "MLFlow-acrastt/OmegLLaMA-3B",
+        "MLFlow-cmarkea/bloomz-3b-sft-chat",
+        "MLFlow-quantumaikr/plankton-500M"
     ],
     "workspace": "test-southcentralus",
     "subscription": "80c77c76-74ba-4c8c-8229-4c3b2957990c",

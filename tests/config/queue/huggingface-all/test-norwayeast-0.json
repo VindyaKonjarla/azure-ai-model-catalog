@@ -1,7 +1,19 @@
 {
     "queue_name": "test-norwayeast-0",
     "models": [
-        "MLFlow-TheBloke/LLongMA-2-7B-GPTQ"
+        "MLFlow-Qwen/Qwen-7B-Chat",
+        "MLFlow-TheBloke/Kimiko-13B-fp16",
+        "MLFlow-TheBloke/WizardCoder-Python-7B-V1.0-GPTQ",
+        "MLFlow-TheBloke/Llama-2-13B-chat-GGUF",
+        "MLFlow-TheBloke/WizardCoder-Python-34B-V1.0-GPTQ",
+        "MLFlow-TheBloke/OpenOrca-Platypus2-13B-GPTQ",
+        "MLFlow-TheBloke/Vigogne-2-13B-Instruct-GPTQ",
+        "MLFlow-TheBloke/WizardLM-7B-V1.0-Uncensored-GPTQ",
+        "MLFlow-Intel/fid_flan_t5_base_nq",
+        "MLFlow-42dot/42dot_LLM-PLM-1.3B",
+        "MLFlow-acrastt/Puma-3B",
+        "MLFlow-Xenova/llama2.c-stories42M",
+        "MLFlow-vicgalle/gpt2-alpaca-gpt4"
     ],
     "workspace": "test-norwayeast",
     "subscription": "80c77c76-74ba-4c8c-8229-4c3b2957990c",

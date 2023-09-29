@@ -1,7 +1,19 @@
 {
     "queue_name": "test-southafricanorth-3",
     "models": [
-        "MLFlow-indiejoseph/bert-base-cantonese"
+        "MLFlow-Qwen/Qwen-7B-Chat-Int4",
+        "MLFlow-TheBloke/OpenChat_v3.2-GPTQ",
+        "MLFlow-TheBloke/Llama-2-7b-Chat-AWQ",
+        "MLFlow-TheBloke/Llama-2-70B-chat-GGUF",
+        "MLFlow-TheBloke/Zarafusionex-1.1-L2-7B-GPTQ",
+        "MLFlow-TheBloke/Llama-2-13B-German-Assistant-v4-GPTQ",
+        "MLFlow-TheBloke/airoboros-l2-13b-gpt4-2.0-GPTQ",
+        "MLFlow-TheBloke/WizardLM-33B-V1.0-Uncensored-GPTQ",
+        "MLFlow-davidkim205/komt-llama2-7b-v1",
+        "MLFlow-KnutJaegersberg/deacon-13b",
+        "MLFlow-acrastt/RedPajama-INCITE-Chat-Instruct-3B-V1",
+        "MLFlow-Xenova/llama2.c-stories110M",
+        "MLFlow-ICBU-NPU/FashionGPT-70B-V1"
     ],
     "workspace": "test-southafricanorth",
     "subscription": "80c77c76-74ba-4c8c-8229-4c3b2957990c",

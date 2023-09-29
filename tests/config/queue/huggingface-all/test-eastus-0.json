@@ -1,8 +1,19 @@
 {
     "queue_name": "test-eastus-0",
     "models": [
-        "MLFlow-zoukagh/bert-base-iz-spain-uncased",
-        "MLFlow-TheBloke/Chronolima-Airo-Grad-L2-13B-GPTQ"
+        "MLFlow-mistralai/Mistral-7B-v0.1",
+        "MLFlow-usvsnsp/pythia-6.9b-ppo",
+        "MLFlow-TheBloke/Xwin-LM-7B-V0.1-GPTQ",
+        "MLFlow-TheBloke/Spicyboros-70B-2.2-GPTQ",
+        "MLFlow-TheBloke/Airoboros-L2-70B-2.1-Creative-GPTQ",
+        "MLFlow-TheBloke/CodeLlama-7B-Instruct-GPTQ",
+        "MLFlow-TheBloke/Dolphin-Llama2-7B-GPTQ",
+        "MLFlow-TheBloke/Nous-Hermes-Llama2-GPTQ",
+        "MLFlow-TheBloke/manticore-13b-chat-pyg-GPTQ",
+        "MLFlow-sag-uniroma2/extremITA-Camoscio-7b",
+        "MLFlow-Yukang/Llama-2-7b-longlora-100k-ft",
+        "MLFlow-teknium/OpenHermes-13B",
+        "MLFlow-migtissera/Synthia-70B-v1.2"
     ],
     "workspace": "test-eastus",
     "subscription": "80c77c76-74ba-4c8c-8229-4c3b2957990c",

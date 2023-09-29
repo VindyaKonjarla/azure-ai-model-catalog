@@ -1,8 +1,20 @@
 {
     "queue_name": "test-southcentralus-2",
     "models": [
-        "MLFlow-TheBloke/Airoboros-L2-13B-2.1-GPTQ",
-        "MLFlow-TheBloke/Synthia-70B-GPTQ"
+        "MLFlow-infCapital/llama2-7b-chatvi",
+        "MLFlow-xkianteb/kl_0.1_expert",
+        "MLFlow-TheBloke/openbuddy-llama2-34b-v11.1-bf16-GPTQ",
+        "MLFlow-TheBloke/Marcoroni-70B-GPTQ",
+        "MLFlow-TheBloke/Yarn-Llama-2-7B-128K-GPTQ",
+        "MLFlow-TheBloke/CodeLlama-13B-GPTQ",
+        "MLFlow-TheBloke/Stable-Platypus2-13B-GPTQ",
+        "MLFlow-TheBloke/WizardLM-13B-V1.2-GPTQ",
+        "MLFlow-TheBloke/Karen_theEditor_13B-GPTQ",
+        "MLFlow-Dampish/Dante-2.8B",
+        "MLFlow-amitness/mergedistill-mt-it-ar-128",
+        "MLFlow-Open-Orca/OpenOrca-Platypus2-13B",
+        "MLFlow-amitness/mergedistill-mt-ar-128",
+        "MLFlow-elliotthwang/Elliott-Chinese-LLaMa-GPTQ-V1.0"
     ],
     "workspace": "test-southcentralus",
     "subscription": "80c77c76-74ba-4c8c-8229-4c3b2957990c",

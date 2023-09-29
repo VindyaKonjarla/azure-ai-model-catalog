@@ -1,8 +1,19 @@
 {
     "queue_name": "test-japaneast-0",
     "models": [
-        "MLFlow-TheBloke/Phind-CodeLlama-34B-Python-v1-GPTQ",
-        "MLFlow-serdarcaglar/roberta-base-biomedical-es"
+        "MLFlow-Faradaylab/ARIA-70B-V2",
+        "MLFlow-TheBloke/Falcon-180B-GPTQ",
+        "MLFlow-TheBloke/OpenBuddy-Llama2-13B-v11.1-AWQ",
+        "MLFlow-TheBloke/Upstage-Llama-2-70B-instruct-v2-GGUF",
+        "MLFlow-TheBloke/Airoboros-L2-13B-2.1-GPTQ",
+        "MLFlow-TheBloke/Trurl-2-13B-GPTQ",
+        "MLFlow-TheBloke/vicuna-13B-v1.5-GPTQ",
+        "MLFlow-TheBloke/Redmond-Puffin-13B-GPTQ",
+        "MLFlow-deepset/roberta-large-squad2",
+        "MLFlow-bigscience/bloom-560m",
+        "MLFlow-timoneda/covid_roberta_60_masked",
+        "MLFlow-Phando/fairseq-moe-15b-bf16",
+        "MLFlow-AIDC-ai-business/Marcoroni-7B"
     ],
     "workspace": "test-japaneast",
     "subscription": "80c77c76-74ba-4c8c-8229-4c3b2957990c",

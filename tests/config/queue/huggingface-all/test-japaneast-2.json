@@ -1,7 +1,19 @@
 {
     "queue_name": "test-japaneast-2",
     "models": [
-        "MLFlow-TheBloke/CodeLlama-7B-Python-GGUF"
+        "MLFlow-CyberPeace-Institute/Cybersecurity-Knowledge-Graph",
+        "MLFlow-TheBloke/Falcon-180B-Chat-GPTQ",
+        "MLFlow-TheBloke/MythoMax-L2-13B-AWQ",
+        "MLFlow-TheBloke/Mythalion-13B-GGUF",
+        "MLFlow-TheBloke/Samantha-1.11-13B-GPTQ",
+        "MLFlow-TheBloke/EverythingLM-13b-V2-16K-GPTQ",
+        "MLFlow-TheBloke/vicuna-7B-v1.5-16K-GPTQ",
+        "MLFlow-TheBloke/Llama-2-7b-Chat-GPTQ",
+        "MLFlow-deepset/tinyroberta-squad2",
+        "MLFlow-deepset/bert-large-uncased-whole-word-masking-squad2",
+        "MLFlow-NousResearch/Redmond-Puffin-13B",
+        "MLFlow-mapsoriano/roberta-tagalog-base-philippine-elections-2016-2022-hate-speech",
+        "MLFlow-internlm/internlm-chat-20b"
     ],
     "workspace": "test-japaneast",
     "subscription": "80c77c76-74ba-4c8c-8229-4c3b2957990c",

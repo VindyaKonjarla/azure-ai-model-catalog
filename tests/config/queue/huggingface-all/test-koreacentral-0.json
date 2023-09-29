@@ -1,8 +1,20 @@
 {
     "queue_name": "test-koreacentral-0",
     "models": [
-        "MLFlow-TheBloke/CodeLlama-34B-GPTQ",
-        "MLFlow-nthngdy/headless-pythia-owt2-70m-raw"
+        "MLFlow-TheBloke/Mistral-7B-Instruct-v0.1-GGUF",
+        "MLFlow-pfnet/plamo-13b",
+        "MLFlow-TheBloke/airoboros-l2-13B-2.2.1-GPTQ",
+        "MLFlow-TheBloke/Llama2-Chat-AYT-13B-GPTQ",
+        "MLFlow-TheBloke/Yarn-Llama-2-13B-128K-GPTQ",
+        "MLFlow-TheBloke/CodeLlama-13B-Python-GPTQ",
+        "MLFlow-TheBloke/orca_mini_v3_7B-GPTQ",
+        "MLFlow-TheBloke/airoboros-l2-70B-gpt4-1.4.1-GPTQ",
+        "MLFlow-TheBloke/guanaco-65B-GPTQ",
+        "MLFlow-Undi95/MLewd-L2-Chat-13B",
+        "MLFlow-GRPUI/sgugit-model-v3",
+        "MLFlow-BEE-spoke-data/TinyLlama-1.1bee",
+        "MLFlow-PY007/ByteLlama-230M-preview",
+        "MLFlow-haoranxu/ALMA-7B"
     ],
     "workspace": "test-koreacentral",
     "subscription": "80c77c76-74ba-4c8c-8229-4c3b2957990c",

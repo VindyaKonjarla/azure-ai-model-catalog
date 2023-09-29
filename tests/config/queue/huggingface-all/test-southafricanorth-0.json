@@ -1,7 +1,19 @@
 {
     "queue_name": "test-southafricanorth-0",
     "models": [
-        "MLFlow-ajibawa-2023/Uncensored-Frank-7B"
+        "MLFlow-HuggingFaceM4/idefics-80b",
+        "MLFlow-TheBloke/stablecode-instruct-alpha-3b-GPTQ",
+        "MLFlow-TheBloke/Llama-2-13B-chat-AWQ",
+        "MLFlow-TheBloke/OpenBuddy-Llama2-70b-v10.1-GPTQ",
+        "MLFlow-TheBloke/Llama-2-70B-Orca-200k-GPTQ",
+        "MLFlow-TheBloke/LosslessMegaCoder-Llama2-7B-Mini-GPTQ",
+        "MLFlow-TheBloke/airoboros-l2-7B-gpt4-2.0-GPTQ",
+        "MLFlow-TheBloke/WizardLM-13B-V1.1-GPTQ",
+        "MLFlow-lcw99/polyglot-ko-12.8b-chang-instruct-chat",
+        "MLFlow-deepset/deberta-v3-base-squad2",
+        "MLFlow-JeremiahZ/bert-base-uncased-mnli",
+        "MLFlow-pszemraj/pythia-6.9b-HC3",
+        "MLFlow-malteos/gpt2-xl-wechsel-german"
     ],
     "workspace": "test-southafricanorth",
     "subscription": "80c77c76-74ba-4c8c-8229-4c3b2957990c",

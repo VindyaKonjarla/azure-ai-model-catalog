@@ -1,7 +1,19 @@
 {
     "queue_name": "test-northcentralus-3",
     "models": [
-        "MLFlow-TheBloke/Chronohermes-Grad-L2-13B-GPTQ"
+        "MLFlow-HuggingFaceM4/idefics-9b-instruct",
+        "MLFlow-TheBloke/scarlett-33B-GPTQ",
+        "MLFlow-TheBloke/Llama-2-70B-chat-AWQ",
+        "MLFlow-TheBloke/WizardLM-1.0-Uncensored-CodeLlama-34B-GPTQ",
+        "MLFlow-TheBloke/Airoboros-c34B-2.1-GPTQ",
+        "MLFlow-TheBloke/GodziLLa2-70B-GPTQ",
+        "MLFlow-TheBloke/CodeUp-Llama-2-13B-Chat-HF-GPTQ",
+        "MLFlow-TheBloke/airochronos-33B-GPTQ",
+        "MLFlow-CobraMamba/mamba-gpt-3b-v4",
+        "MLFlow-deepset/roberta-base-squad2-distilled",
+        "MLFlow-JeremiahZ/bert-base-uncased-mrpc",
+        "MLFlow-pszemraj/long-t5-tglobal-base-sci-simplify",
+        "MLFlow-internlm/internlm-20b"
     ],
     "workspace": "test-northcentralus",
     "subscription": "80c77c76-74ba-4c8c-8229-4c3b2957990c",

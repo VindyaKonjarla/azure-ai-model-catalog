@@ -1,8 +1,20 @@
 {
     "queue_name": "test-koreacentral-3",
     "models": [
-        "MLFlow-TheBloke/LlongOrca-7B-16K-GPTQ",
-        "MLFlow-muhtasham/bert-tiny-finetuned-finer"
+        "MLFlow-GreenBitAI/LLaMA-7B-2bit",
+        "MLFlow-42MARU/polyglot-ko-12.8b-instruct",
+        "MLFlow-TheBloke/Xwin-LM-70B-V0.1-GPTQ",
+        "MLFlow-TheBloke/Airoboros-L2-13B-2.2-GPTQ",
+        "MLFlow-TheBloke/llama-2-13B-chat-limarp-v2-merged-GPTQ",
+        "MLFlow-TheBloke/CodeLlama-7B-Python-GPTQ",
+        "MLFlow-TheBloke/MythoMix-L2-13B-GPTQ",
+        "MLFlow-TheBloke/llama2_7b_chat_uncensored-GPTQ",
+        "MLFlow-TheBloke/WizardLM-30B-Uncensored-GPTQ",
+        "MLFlow-almanach/camembert-bio-base",
+        "MLFlow-TigerResearch/tigerbot-70b-chat-v2",
+        "MLFlow-CortexFoundation/netuid11-bittensor-alpha-13b",
+        "MLFlow-migtissera/Synthia-7B-v1.2",
+        "MLFlow-luffycodes/higgs-llama-vicuna-ep25-70b"
     ],
     "workspace": "test-koreacentral",
     "subscription": "80c77c76-74ba-4c8c-8229-4c3b2957990c",
