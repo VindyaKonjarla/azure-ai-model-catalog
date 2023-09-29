@@ -1,6 +1,9 @@
 {
     "queue_name": "test-northeurope-3",
-    "models": [
+    "models":[
+        "MLFlow-t5-small"
+    ],
+    "models1": [
         "MLFlow-HooshvareLab/bert-base-parsbert-ner-uncased",
         "MLFlow-bigcode/starpii",
         "MLFlow-ckiplab/albert-tiny-chinese-ner",
