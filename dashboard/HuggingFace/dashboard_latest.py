@@ -112,7 +112,7 @@ class Dashboard():
 
  
         # self.models_data.sort(key=lambda x: x["Status"])
-        self.models_data.sort(key=lambda x: (x["Status"] != "❌ FAIL", x["Status"]))
+        
         return self.data
 
     def results(self, last_runs_dict):
