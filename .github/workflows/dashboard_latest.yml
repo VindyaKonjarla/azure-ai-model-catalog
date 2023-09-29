@@ -32,6 +32,7 @@ jobs:
         run: |
           python -m pip install --upgrade pip
           pip install pandas requests PyGithub
+          pip install openpyxl
           pip install -r runs_requirements.txt
       # - name: Run Python Script
       #   run: |
