@@ -32,7 +32,8 @@ TASK_NAME = ['fill-mask', 'token-classification', 'question-answering',
              'summarization', 'text-generation', 'text-classification', 'translation','Automatic Speech Recognition']
 STRING_TO_CHECK = 'transformers'
 FILE_NAME = "task_and_library.json"
-ACCESS_TOKEN = "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"
+#ACCESS_TOKEN = "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"
+ACCESS_TOKEN ="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"
 
 test_model_name = os.environ.get('test_model_name')
 logger = get_logger(__name__)
