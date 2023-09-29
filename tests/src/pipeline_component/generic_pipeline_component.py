@@ -10,12 +10,13 @@ import sys
 from box import ConfigBox
 from utils.logging import get_logger
 from fetch_model_detail import ModelDetail
+from dataset_loader import LoadDataset
+from azureml_pipeline import AzurePipeline
 
 # constants
 check_override = True
 
 logger = get_logger(__name__)
-
 
 
 # model to test
@@ -109,6 +110,19 @@ def create_and_get_job_studio_url(command_job, workspace_ml_client):
     workspace_ml_client.jobs.stream(returned_job.name)
     return returned_job.studio_url
 
+
+def get_file_path(task):
+    file_name = task+".json"
+    data_path = f"./datasets/{file_name}"
+    return data_path
+
+
+def get_dataset(task, data_path):
+    load_dataset = LoadDataset(task=task, data_path=data_path)
+    attribute = getattr(LoadDataset, task)
+    return attribute(load_dataset)
+
+
 if __name__ == "__main__":
     # if any of the above are not set, exit with error
     if test_model_name is None or test_queue is None or test_set is None or test_trigger_next_model is None or test_keep_looping is None:
@@ -120,14 +134,14 @@ if __name__ == "__main__":
     if test_trigger_next_model == "true":
         set_next_trigger_model(queue)
     # print values of all above variables
-    logger.info (f"test_subscription_id: {queue['subscription']}")
-    logger.info (f"test_resource_group: {queue['subscription']}")
-    logger.info (f"test_workspace_name: {queue['workspace']}")
-    logger.info (f"test_model_name: {test_model_name}")
-    logger.info (f"test_registry: queue['registry']")
-    logger.info (f"test_trigger_next_model: {test_trigger_next_model}")
-    logger.info (f"test_queue: {test_queue}")
-    logger.info (f"test_set: {test_set}")
+    logger.info(f"test_subscription_id: {queue['subscription']}")
+    logger.info(f"test_resource_group: {queue['subscription']}")
+    logger.info(f"test_workspace_name: {queue['workspace']}")
+    logger.info(f"test_model_name: {test_model_name}")
+    logger.info(f"test_registry: {queue['registry']}")
+    logger.info(f"test_trigger_next_model: {test_trigger_next_model}")
+    logger.info(f"test_queue: {test_queue}")
+    logger.info(f"test_set: {test_set}")
     logger.info(f"Here is my test model name : {test_model_name}")
     try:
         credential = DefaultAzureCredential()
@@ -150,10 +164,13 @@ if __name__ == "__main__":
         resource_group=queue.resource_group,
         workspace_name=queue.workspace
     )
+    registry_ml_client = MLClient(
+        credential=credential, registry_name="azureml-preview-test1")
     mlflow.set_tracking_uri(ws.get_mlflow_tracking_uri())
     compute_target = create_or_get_compute_target(
         workspace_ml_client, queue.compute)
-    environment_variables = {"AZUREML_ARTIFACTS_DEFAULT_TIMEOUT":600.0,"test_model_name": test_model_name}
+    environment_variables = {
+        "AZUREML_ARTIFACTS_DEFAULT_TIMEOUT": 600.0, "test_model_name": test_model_name}
     env_list = workspace_ml_client.environments.list(name=queue.environment)
     latest_version = 0
     for env in env_list:
@@ -167,8 +184,17 @@ if __name__ == "__main__":
                                    environment=latest_env, compute=queue.compute, environment_variables=environment_variables)
     create_and_get_job_studio_url(command_job, workspace_ml_client)
     model_detail = ModelDetail(workspace_ml_client=workspace_ml_client)
-    latest_model, task = model_detail.get_model_detail(test_model_name=test_model_name)
-
+    latest_model, task = model_detail.get_model_detail(
+        test_model_name=test_model_name)
+    data_path = get_file_path(task=task)
+    res = get_dataset(task=task, data_path=data_path)
+    azure_pipeline = AzurePipeline(
+        workspace_ml_client=workspace_ml_client,
+        registry_ml_client=registry_ml_client,
+        task=task
+    )
+    pipeline_jobs = azure_pipeline.run_pipeline(
+        data_path=data_path, foundation_model=latest_model)
     # InferenceAndDeployment = ModelInferenceAndDeployemnt(
     #     test_model_name=test_model_name,
     #     workspace_ml_client=workspace_ml_client,
