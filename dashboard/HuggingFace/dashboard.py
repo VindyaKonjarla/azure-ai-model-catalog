@@ -22,46 +22,65 @@ class Dashboard():
 
     def get_all_workflow_names(self):
         # workflow_name = ["MLFlow-mosaicml/mpt-30b-instruct"]
-        API = "https://api.github.com/repos/Azure/azure-ai-model-catalog/actions/workflows"
-        print (f"Getting github workflows from {API}")
-        total_pages = None
-        current_page = 1
-        per_page = 100
-        workflow_name = []
-        while total_pages is None or current_page <= total_pages:
+         file_path = "tests/config/Models_1K.csv"  # Update this with the actual path
+         try:
+             url = f"https://raw.githubusercontent.com/{self.repo_full_name}/master/{file_path}"
+             response = requests.get(url)
+             response.raise_for_status()
+             
+             # Parse the CSV content and return it as a list
+             csv_data = response.text.splitlines()
+             csv_reader = csv.reader(csv_data)
+             
+             # Assuming the first column contains the data you want to retrieve
+             mlflow_prefixed_data = ["MLFlow-" + row[0] for row in csv_reader]
+             
+             return mlflow_prefixed_data
+             
+             
+         except Exception as e:
+             print(f"Error fetching or parsing content from GitHub: {e}")
+             return []
+        # API = "https://api.github.com/repos/Azure/azure-ai-model-catalog/actions/workflows"
+        # print (f"Getting github workflows from {API}")
+        # total_pages = None
+        # current_page = 1
+        # per_page = 100
+        # workflow_name = []
+        # while total_pages is None or current_page <= total_pages:
 
-            headers = {
-                "Authorization": f"Bearer {self.github_token}",
-                "Accept": "application/vnd.github.v3+json"
-            }
-            params = { "per_page": per_page, "page": current_page }
-            response = requests.get(API, headers=headers, params=params)
-            if response.status_code == 200:
-                workflows = response.json()
-                # append workflow_runs to runs list
-                for workflow in workflows["workflows"]:
-                    if workflow["name"].lower().startswith("mlflow"):
-                        workflow_name.append(workflow["name"])
-                if not workflows["workflows"]:
-                    break
-                # workflow_name.extend(json_response['workflows["name"]'])
-                if current_page == 1:
-                # divide total_count by per_page and round up to get total_pages
-                    total_pages = int(workflows['total_count'] / per_page) + 1
-                current_page += 1
-                # print a single dot to show progress
-                print (f"\rWorkflows fetched: {len(workflow_name)}", end="", flush=True)
-            else:
-                print (f"Error: {response.status_code} {response.text}")
-                exit(1)
-        print (f"\n")
-        # create ../logs/get_github_workflows/ if it does not exist
-        # if not os.path.exists("../logs/get_all_workflow_names"):
-        #     os.makedirs("../logs/get_all_workflow_names")
-        # # dump runs as json file in ../logs/get_github_workflows folder with filename as DDMMMYYYY-HHMMSS.json
-        # with open(f"../logs/get_all_workflow_names/{datetime.now().strftime('%d%b%Y-%H%M%S')}.json", "w") as f:
-        #     json.dump(workflow_name, f, indent=4)
-        return workflow_name
+        #     headers = {
+        #         "Authorization": f"Bearer {self.github_token}",
+        #         "Accept": "application/vnd.github.v3+json"
+        #     }
+        #     params = { "per_page": per_page, "page": current_page }
+        #     response = requests.get(API, headers=headers, params=params)
+        #     if response.status_code == 200:
+        #         workflows = response.json()
+        #         # append workflow_runs to runs list
+        #         for workflow in workflows["workflows"]:
+        #             if workflow["name"].lower().startswith("mlflow"):
+        #                 workflow_name.append(workflow["name"])
+        #         if not workflows["workflows"]:
+        #             break
+        #         # workflow_name.extend(json_response['workflows["name"]'])
+        #         if current_page == 1:
+        #         # divide total_count by per_page and round up to get total_pages
+        #             total_pages = int(workflows['total_count'] / per_page) + 1
+        #         current_page += 1
+        #         # print a single dot to show progress
+        #         print (f"\rWorkflows fetched: {len(workflow_name)}", end="", flush=True)
+        #     else:
+        #         print (f"Error: {response.status_code} {response.text}")
+        #         exit(1)
+        # print (f"\n")
+        # # create ../logs/get_github_workflows/ if it does not exist
+        # # if not os.path.exists("../logs/get_all_workflow_names"):
+        # #     os.makedirs("../logs/get_all_workflow_names")
+        # # # dump runs as json file in ../logs/get_github_workflows folder with filename as DDMMMYYYY-HHMMSS.json
+        # # with open(f"../logs/get_all_workflow_names/{datetime.now().strftime('%d%b%Y-%H%M%S')}.json", "w") as f:
+        # #     json.dump(workflow_name, f, indent=4)
+        # return workflow_name
 
 
     def workflow_last_run(self): 
