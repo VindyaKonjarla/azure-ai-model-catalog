@@ -26,7 +26,7 @@ class Dashboard():
         file_path = "tests/config/WeeklySnapshot_ModelList.xlsx"  # Update with your file path
         try:
             url = f"https://raw.githubusercontent.com/{self.repo_full_name}/master/{file_path}"
-            df = pd.read_excel(url)
+            df = pandas.read_excel(url)
             # Sort the data by downloads in descending order
             df = df.sort_values(by="downloads", ascending=False)
             models_with_prefix = df["models"].apply(lambda x: "MLFlow-" + x)
