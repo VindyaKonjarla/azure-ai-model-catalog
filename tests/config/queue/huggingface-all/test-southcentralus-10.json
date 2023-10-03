@@ -2,7 +2,7 @@
     "queue_name": "test-southcentralus-10",
     "models": [
       
-        "MLFlow-explosion-testing/llama2-fewer-kv-heads"
+        "MLFlow-WizardLM/WizardCoder-Python-34B-V1.0"
       
     ],
     "workspace": "test-southcentralus",
