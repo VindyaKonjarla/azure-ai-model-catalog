@@ -23,12 +23,20 @@ class Dashboard():
      
     def get_workflow_names_from_github(self):
         # Fetch the content of your CSV file from your GitHub repository
-        file_path = "tests/config/modellist.csv"  # Update with your file path
+        file_path = "tests/config/modellist.csv"  # Update this with the actual path
         try:
             url = f"https://raw.githubusercontent.com/{self.repo_full_name}/master/{file_path}"
-            df = pandas.read_csv(url, header=None, names=["models"])  # Read with a single column name "models"
-            models_with_prefix = df["models"].apply(lambda x: "MLFlow-" + str(x))  # Ensure 'x' is converted to a string
-            return models_with_prefix.tolist()
+            response = requests.get(url)
+            response.raise_for_status()
+            
+            # Parse the CSV content and return it as a list
+            csv_data = response.text.splitlines()
+            csv_reader = csv.reader(csv_data)
+            
+            # Assuming the first column contains the data you want to retrieve
+            mlflow_prefixed_data = ["MLFlow-" + row[0] for row in csv_reader]
+            
+            return mlflow_prefixed_data
             
         except Exception as e:
             print(f"Error fetching or parsing content from GitHub: {e}")
