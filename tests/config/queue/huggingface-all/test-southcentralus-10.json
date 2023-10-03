@@ -2,7 +2,7 @@
     "queue_name": "test-southcentralus-10",
     "models": [
       
-        "MLFlow-meta-llama/Llama-2-13b-chat-hf"
+        "MLFlow-explosion-testing/llama2-fewer-kv-heads"
       
     ],
     "workspace": "test-southcentralus",
