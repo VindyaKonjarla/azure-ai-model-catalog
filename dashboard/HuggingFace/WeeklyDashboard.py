@@ -23,13 +23,11 @@ class Dashboard():
      
     def get_workflow_names_from_github(self):
         # Fetch the content of your CSV file from your GitHub repository
-        file_path = "tests/config/WeeklySnapshot_ModelList.xlsx"  # Update with your file path
+        file_path = "tests/config/modellist.csv"  # Update with your file path
         try:
             url = f"https://raw.githubusercontent.com/{self.repo_full_name}/master/{file_path}"
-            df = pandas.read_excel(url)
-            # Sort the data by downloads in descending order
-            df = df.sort_values(by="downloads", ascending=False)
-            models_with_prefix = df["models"].apply(lambda x: "MLFlow-" + x)
+            df = pd.read_csv(url)  # Use read_csv for CSV files
+            models_with_prefix = df["models"].apply(lambda x: "MLFlow-" + str(x))  # Ensure 'x' is converted to a string
             return models_with_prefix.tolist()
             
         except Exception as e:
@@ -114,7 +112,7 @@ class Dashboard():
 
  
         # self.models_data.sort(key=lambda x: x["Status"])
-        
+        self.models_data.sort(key=lambda x: (x["Status"] != "❌ FAIL", x["Status"]))
         return self.data
 
     def results(self, last_runs_dict):
