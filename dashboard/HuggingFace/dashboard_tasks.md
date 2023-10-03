@@ -1,7 +1,7 @@
 |Category|🚀Total|✅Pass|Pass%|❌Failure|Failure%|🚫Cancelled|⏳Running|❗️NotTested
 | ----------- | ----------------- | -------- | -------- | --------  | -------- | --------- | ---------- | -----------|
-Online Endpoint Deployment - Dynamic Installation|35|35|100.0%|0|0.0%|0|0|0|
-Online Endpoint Deployment - Model Packaging|35|35|100.0%|0|0.0%|0|0|0|
+Online Endpoint - Dynamic Installation|35|35|100.0%|0|0.0%|0|0|0|
+Online Endpoint - Model Packaging|35|35|100.0%|0|0.0%|0|0|0|
 
 |    | Model                                                     | Status   | LastRunLink                                                                     | LastRunTimestamp     | Model Package/Dynmaic Installation   |
 |---:|:----------------------------------------------------------|:---------|:--------------------------------------------------------------------------------|:---------------------|:-------------------------------------|
