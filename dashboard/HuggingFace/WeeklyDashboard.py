@@ -26,7 +26,7 @@ class Dashboard():
         file_path = "tests/config/modellist.csv"  # Update with your file path
         try:
             url = f"https://raw.githubusercontent.com/{self.repo_full_name}/master/{file_path}"
-            df = pd.read_csv(url)  # Use read_csv for CSV files
+            df = pandas.read_csv(url)  # Use read_csv for CSV files
             models_with_prefix = df["models"].apply(lambda x: "MLFlow-" + str(x))  # Ensure 'x' is converted to a string
             return models_with_prefix.tolist()
             
