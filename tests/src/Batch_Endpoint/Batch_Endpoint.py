@@ -273,12 +273,6 @@ if __name__ == "__main__":
     print("queue.compute---", queue.compute)
     print("queue.workspace====", queue.workspace)
     foundation_model = get_latest_model_version(workspace_ml_client, test_model_name)
-    # Example usage:
-    # Replace these variables with your actual values
-    # foundation_model = {"name": "your_model_name", "id": "your_model_id"}
-    # compute_name = "your_compute_name"
-    # workspace_ml_client = {}  # Your ML Client object
-
     endpoint = create_and_configure_batch_endpoint(foundation_model, queue.compute, workspace_ml_client)
     task = foundation_model.flavors["transformers"]["task"]
     print("task :", {task})
