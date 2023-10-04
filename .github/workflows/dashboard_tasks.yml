@@ -39,17 +39,17 @@ jobs:
       - name: Run Python Script from other folder to create README in main folder
         run: |
           cd dashboard/HuggingFace
-          python dashboard_tasks.py
+          python FoundationModels_dashboard.py
       - name: Add Generated File
         run: |
           git config user.email "${{ secrets.USER_EMAIL }}"
           git config user.name "${{ secrets.USER_NAME }}"
           git pull origin main
           cd dashboard/HuggingFace
-          git add dashboard_tasks.md          
+          git add FoundationModels_dashboard.md          
           # Attempt to commit changes and handle errors
           set +e
-          git commit -m "Add dashboard_tasks.md"
+          git commit -m "Add FoundationModels_dashboard.md"
           commit_status=$?
           set -e
           if [ $commit_status -eq 0 ]; then
