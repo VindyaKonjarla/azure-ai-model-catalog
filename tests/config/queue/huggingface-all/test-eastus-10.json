@@ -2,7 +2,7 @@
     "queue_name": "test-eastus-10",
     "models": [
       
-        "MLFlow-TheBloke/Chronolima-Airo-Grad-L2-13B-GP"
+        "MLFlow-TheBloke/Firefly-Llama2-13B-v1.2-GPTQ"
       
     ],
     "workspace": "test-eastus",
