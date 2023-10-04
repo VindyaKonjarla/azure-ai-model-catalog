@@ -3,16 +3,17 @@ from azureml.core import Workspace, Environment
 from azure.identity import DefaultAzureCredential, InteractiveBrowserCredential
 from azure.ai.ml.entities import AmlCompute
 from azure.ai.ml import command
-from azure.ai.ml import MLClient
+from azure.ai.ml import Input, MLClient
 import mlflow
 import json
 import os
 import sys
 from box import ConfigBox
-# from utils.logging import get_logger
 from azureml.core.compute import AmlCompute
 from azureml.core.compute_target import ComputeTargetException
+from azure.ai.ml.constants import AssetTypes
 from mlflow.tracking.client import MlflowClient
+import time
 from azure.ai.ml.entities import (
     AmlCompute,
     BatchDeployment,
@@ -61,6 +62,36 @@ def get_sku_override():
         print(f"::warning:: Could not find sku-override file: \n{e}")
         return None
 
+def get_task_specified_input(task):
+    print("pulling inputs")
+    folder_path = f"../../config/sample_inputs/{queue.registry}/{task}/batch_inputs"
+
+    # List all file names in the folder
+    file_names = os.listdir(folder_path)
+    
+    # Create a list to store individual input objects for each file
+    inputs = []
+    
+    # Process each file in the folder
+    for file_name in file_names:
+        print("File Name:", file_name)
+        # Construct the full path to the file
+        file_path = os.path.join(folder_path, file_name)
+        
+        # Check if it's a file (not a directory)
+        if os.path.isfile(file_path):
+            # Create an Input object for the file and add it to the list of inputs
+            file_input = Input(path=file_path, type=AssetTypes.URI_FILE)
+            inputs.append(file_input)
+    
+    # Create an Input object for the folder containing all files
+    folder_input = Input(path=folder_path, type=AssetTypes.URI_FOLDER)
+    
+    # Now you can include both the folder input and individual file inputs in the job
+    job_inputs = [folder_input] + inputs
+    return folder_path
+    
+    
 
 def set_next_trigger_model(queue):
     print("In set_next_trigger_model...")
@@ -128,8 +159,7 @@ def get_latest_model_version(workspace_ml_client, test_model_name):
     #print(f"Model Config : {latest_model.config}")
     return foundation_model
 
-import time
-from azure.ai.ml.entities import BatchEndpoint, BatchDeployment, BatchRetrySettings
+
 
 def create_and_configure_batch_endpoint(
     foundation_model, compute, workspace_ml_client
@@ -137,6 +167,7 @@ def create_and_configure_batch_endpoint(
     # Create a unique endpoint name using a timestamp
     timestamp = int(time.time())
     endpoint_name = f"{test_model_name}-{timestamp}"
+    print("Endpoint name:", {endpoint_name})
 
     # Create the BatchEndpoint
     endpoint = BatchEndpoint(
@@ -173,10 +204,9 @@ def create_and_configure_batch_endpoint(
     # Retrieve and print the default deployment name
     endpoint = workspace_ml_client.batch_endpoints.get(endpoint_name)
     print(f"The default deployment is {endpoint.defaults.deployment_name}")
+    return endpoint
 
-
-
-
+    
 
 
 if __name__ == "__main__":
@@ -195,7 +225,7 @@ if __name__ == "__main__":
     print (f"test_workspace_name: {queue['workspace']}")
     print (f"test_model_name: {test_model_name}")
     print (f"test_sku_type: {test_sku_type}")
-    print (f"test_registry: queue['registry']")
+    print (f"test_registry: {queue['registry']}")
     print (f"test_trigger_next_model: {test_trigger_next_model}")
     print (f"test_queue: {test_queue}")
     print (f"test_set: {test_set}")
@@ -249,21 +279,14 @@ if __name__ == "__main__":
     # compute_name = "your_compute_name"
     # workspace_ml_client = {}  # Your ML Client object
 
-    create_and_configure_batch_endpoint(foundation_model, queue.compute, workspace_ml_client)
+    endpoint = create_and_configure_batch_endpoint(foundation_model, queue.compute, workspace_ml_client)
+    task = foundation_model.flavors["transformers"]["task"]
+    print("task :", {task})
+    folder_path = get_task_specified_input(task=task)
+    print(" input taken running Batch Job")
+    input = Input(path=folder_path, type=AssetTypes.URI_FOLDER)
 
-
-    # BEDeployment = BatchDeployemnt(
-    #     test_model_name=test_model_name,
-    #     workspace_ml_client=workspace_ml_client,
-    #     registry=queue.registry,
-    #     # foundation_model_ID=foundation_model.id,
-    #     # queue=queue.compute,
-    #     # workspace=queue.workspace
-    # )
-    # BEDeployment.batch_inference_and_deployment(
-    #         instance_type=queue.instance_type
-    #     )
-
+   
 
 
 
