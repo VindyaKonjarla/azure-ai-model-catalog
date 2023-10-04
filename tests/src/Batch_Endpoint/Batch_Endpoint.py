@@ -285,6 +285,7 @@ if __name__ == "__main__":
     job = workspace_ml_client.batch_endpoints.invoke(
         endpoint_name=endpoint.name, input=input
     )
+    workspace_ml_client.jobs.stream(job.name)
 
    
 
