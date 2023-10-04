@@ -1,19 +1,15 @@
 {
     "queue_name": "test-japaneast-1",
     "models": [
-        "MLFlow-willyninja30/ARIA-70B-French",
-        "MLFlow-TheBloke/Baichuan2-13B-Chat-GPTQ",
-        "MLFlow-TheBloke/llama-2-70b-Guanaco-QLoRA-AWQ",
-        "MLFlow-TheBloke/Chronos-70B-v2-GPTQ",
-        "MLFlow-TheBloke/Lemur-70B-Chat-v1-GPTQ",
-        "MLFlow-TheBloke/Synthia-13B-GPTQ",
-        "MLFlow-TheBloke/vicuna-7B-v1.5-GPTQ",
-        "MLFlow-TheBloke/Llama-2-70B-chat-GPTQ",
-        "MLFlow-deepset/electra-base-squad2",
-        "MLFlow-bigscience/bloom-1b1",
-        "MLFlow-euclaise/falcon_1b_stage2",
-        "MLFlow-GRPUI/model-667",
-        "MLFlow-lgaalves/gpt-2-xl_camel-ai-physics"
+        "MLFlow-TheBloke/Llama-2-70B-Orca-200k-GPTQ",
+        "MLFlow-TheBloke/Platypus2-70B-Instruct-GPTQ",
+        "MLFlow-TheBloke/Nous-Hermes-Llama-2-7B-GPTQ",
+        "MLFlow-TheBloke/chronos-33b-GPTQ",
+        "MLFlow-anzorq/m2m100_418M_ft_ru-kbd_44K",
+        "MLFlow-amitness/mergedistill-mt-it-ar-128",
+        "MLFlow-jeffrey-fong/invoker-13b",
+        "MLFlow-PY007/ByteLlama-230M-preview",
+        "MLFlow-haoranxu/ALMA-7B"
     ],
     "workspace": "test-japaneast",
     "subscription": "80c77c76-74ba-4c8c-8229-4c3b2957990c",

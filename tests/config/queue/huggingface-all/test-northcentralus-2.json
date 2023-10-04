@@ -1,19 +1,14 @@
 {
     "queue_name": "test-northcentralus-2",
     "models": [
-        "MLFlow-HuggingFaceM4/idefics-80b-instruct",
-        "MLFlow-TheBloke/LlongOrca-13B-16K-GPTQ",
-        "MLFlow-TheBloke/Llama-2-70B-AWQ",
-        "MLFlow-TheBloke/Pygmalion-2-13B-GPTQ",
-        "MLFlow-TheBloke/Airoboros-L2-70B-2.1-GPTQ",
-        "MLFlow-TheBloke/LosslessMegaCoder-Llama2-13B-Mini-GPTQ",
-        "MLFlow-TheBloke/airoboros-l2-7B-gpt4-m2.0-GPTQ",
-        "MLFlow-TheBloke/Chronoboros-33B-GPTQ",
-        "MLFlow-lmdeploy/llama2-chat-7b-w4",
-        "MLFlow-hadifar/eventclassifier",
-        "MLFlow-JeremiahZ/bert-base-uncased-wnli",
-        "MLFlow-stacked-summaries/flan-t5-large-stacked-samsum-1024",
-        "MLFlow-internlm/internlm-chat-7b"
+        "MLFlow-TheBloke/CodeLlama-13B-Instruct-GPTQ",
+        "MLFlow-TheBloke/WizardLM-70B-V1.0-GPTQ",
+        "MLFlow-TheBloke/llama2-7b-chat-codeCherryPop-qLoRA-GPTQ",
+        "MLFlow-TheBloke/guanaco-7B-GPTQ",
+        "MLFlow-amitness/mergedistill-mt-ar-512",
+        "MLFlow-TigerResearch/tigerbot-70b-chat-v2",
+        "MLFlow-teknium/OpenHermes-13B",
+        "MLFlow-migtissera/Synthia-70B-v1.2b"
     ],
     "workspace": "test-northcentralus",
     "subscription": "80c77c76-74ba-4c8c-8229-4c3b2957990c",

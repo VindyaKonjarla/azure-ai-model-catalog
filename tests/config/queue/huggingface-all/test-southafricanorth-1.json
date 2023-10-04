@@ -1,19 +1,14 @@
 {
     "queue_name": "test-southafricanorth-1",
     "models": [
-        "MLFlow-HuggingFaceM4/idefics-9b",
-        "MLFlow-TheBloke/OpenAssistant-Llama2-13B-Orca-v2-8K-3166-GPTQ",
-        "MLFlow-TheBloke/Llama-2-13B-AWQ",
-        "MLFlow-TheBloke/ReMM-SLERP-L2-13B-GPTQ",
-        "MLFlow-TheBloke/Genz-70b-GPTQ",
-        "MLFlow-TheBloke/LlongOrca-7B-16K-GPTQ",
-        "MLFlow-TheBloke/airoboros-l2-13b-gpt4-m2.0-GPTQ",
-        "MLFlow-TheBloke/vicuna-33B-GPTQ",
-        "MLFlow-deepset/deberta-v3-large-squad2",
-        "MLFlow-cenkersisman/gpt2-turkish-900m",
-        "MLFlow-JeremiahZ/bert-base-uncased-rte",
-        "MLFlow-pszemraj/long-t5-tglobal-base-sci-simplify-elife",
-        "MLFlow-XuYipei/kw-cutegpt-13b-ift"
+        "MLFlow-TheBloke/CodeLlama-7B-Python-GPTQ",
+        "MLFlow-TheBloke/Dolphin-Llama2-7B-GPTQ",
+        "MLFlow-TheBloke/Nous-Hermes-Llama2-GPTQ",
+        "MLFlow-TheBloke/manticore-13b-chat-pyg-GPTQ",
+        "MLFlow-eduagarcia-temp/ptcrawl_base_v1_5__checkpoint_last",
+        "MLFlow-victor/CodeLlama-34b-Instruct-hf",
+        "MLFlow-openchat/openchat_v3.2",
+        "MLFlow-amitness/mergedistill-mt-it-128"
     ],
     "workspace": "test-southafricanorth",
     "subscription": "80c77c76-74ba-4c8c-8229-4c3b2957990c",

@@ -1,19 +1,15 @@
 {
     "queue_name": "test-northeurope-2",
     "models": [
-        "MLFlow-maastrichtlawtech/legal-camembert-base",
-        "MLFlow-Trelis/Llama-2-13b-chat-hf-touch-rugby-rules",
-        "MLFlow-TheBloke/Phind-CodeLlama-34B-v2-AWQ",
-        "MLFlow-TheBloke/Spicyboros-7B-2.2-GPTQ",
-        "MLFlow-TheBloke/Airoboros-L2-7B-2.1-GPTQ",
-        "MLFlow-TheBloke/Nous-Hermes-Llama2-70B-GPTQ",
-        "MLFlow-TheBloke/Vigogne-2-7B-Chat-GPTQ",
-        "MLFlow-TheBloke/Luna-AI-Llama2-Uncensored-GPTQ",
-        "MLFlow-TheBloke/medalpaca-13B-GPTQ",
-        "MLFlow-PY007/TinyLlama-1.1B-Chat-v0.1",
-        "MLFlow-InstaDeepAI/nucleotide-transformer-v2-50m-multi-species",
-        "MLFlow-syzymon/long_llama_code_7b",
-        "MLFlow-AIDC-ai-business/Luban-13B"
+        "MLFlow-TheBloke/Phind-CodeLlama-34B-v2-GPTQ",
+        "MLFlow-TheBloke/OpenOrca-Platypus2-13B-GPTQ",
+        "MLFlow-TheBloke/Vigogne-2-7B-Instruct-GPTQ",
+        "MLFlow-TheBloke/chronos-hermes-13B-GPTQ",
+        "MLFlow-42MARU/sitebunny-13b",
+        "MLFlow-Undi95/MLewd-ReMM-L2-Chat-20B",
+        "MLFlow-acrastt/OmegLLaMA-3B",
+        "MLFlow-cmarkea/bloomz-7b1-mt-sft-chat",
+        "MLFlow-cerebras/btlm-3b-8k-base"
     ],
     "workspace": "test-northeurope",
     "subscription": "80c77c76-74ba-4c8c-8229-4c3b2957990c",

@@ -1,19 +1,14 @@
 {
     "queue_name": "test-norwayeast-0",
     "models": [
-        "MLFlow-Qwen/Qwen-7B-Chat",
-        "MLFlow-TheBloke/Kimiko-13B-fp16",
-        "MLFlow-TheBloke/WizardCoder-Python-7B-V1.0-GPTQ",
-        "MLFlow-TheBloke/Llama-2-13B-chat-GGUF",
-        "MLFlow-TheBloke/WizardCoder-Python-34B-V1.0-GPTQ",
-        "MLFlow-TheBloke/OpenOrca-Platypus2-13B-GPTQ",
-        "MLFlow-TheBloke/Vigogne-2-13B-Instruct-GPTQ",
-        "MLFlow-TheBloke/WizardLM-7B-V1.0-Uncensored-GPTQ",
-        "MLFlow-Intel/fid_flan_t5_base_nq",
-        "MLFlow-42dot/42dot_LLM-PLM-1.3B",
-        "MLFlow-acrastt/Puma-3B",
-        "MLFlow-Xenova/llama2.c-stories42M",
-        "MLFlow-vicgalle/gpt2-alpaca-gpt4"
+        "MLFlow-TheBloke/CodeLlama-7B-Python-GGUF",
+        "MLFlow-TheBloke/Llama-2-70B-OASST-1-200-GPTQ",
+        "MLFlow-TheBloke/llama-2-13B-Guanaco-QLoRA-GPTQ",
+        "MLFlow-TheBloke/wizard-mega-13B-GPTQ",
+        "MLFlow-eduagarcia-temp/ptcrawl_plus_legal_base_v3_5__checkpoint_last",
+        "MLFlow-InstaDeepAI/nucleotide-transformer-v2-500m-multi-species",
+        "MLFlow-syzymon/long_llama_code_7b",
+        "MLFlow-AIDC-ai-business/Marcoroni-13B"
     ],
     "workspace": "test-norwayeast",
     "subscription": "80c77c76-74ba-4c8c-8229-4c3b2957990c",

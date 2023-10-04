@@ -1,19 +1,15 @@
 {
     "queue_name": "test-eastus-3",
     "models": [
-        "MLFlow-facebook/mbart-large-50-many-to-many-mmt",
-        "MLFlow-kittn/mistral-7B-v0.1-hf",
-        "MLFlow-TheBloke/FashionGPT-70B-V1.1-GPTQ",
-        "MLFlow-TheBloke/Pygmalion-2-13B-SuperCOT-GPTQ",
-        "MLFlow-TheBloke/Kimiko-v2-13B-GPTQ",
-        "MLFlow-TheBloke/CodeLlama-7B-GGUF",
-        "MLFlow-TheBloke/Llama-2-70B-OASST-1-200-GPTQ",
-        "MLFlow-TheBloke/llama-2-13B-Guanaco-QLoRA-GPTQ",
-        "MLFlow-TheBloke/wizard-mega-13B-GPTQ",
-        "MLFlow-eduagarcia-temp/ptcrawl_base_v1_5__checkpoint1",
-        "MLFlow-Qwen/Qwen-VL-Chat",
-        "MLFlow-openchat/openchat_v3.2",
-        "MLFlow-mosaicml/mpt-7b"
+        "MLFlow-TheBloke/Airoboros-L2-7B-2.1-GPTQ",
+        "MLFlow-TheBloke/LlongOrca-7B-16K-GPTQ",
+        "MLFlow-TheBloke/Upstage-Llama-2-70B-instruct-v2-GPTQ",
+        "MLFlow-TheBloke/WizardLM-13B-V1.0-Uncensored-GPTQ",
+        "MLFlow-davidkim205/komt-llama2-7b-v1",
+        "MLFlow-42dot/42dot_LLM-PLM-1.3B",
+        "MLFlow-acrastt/Marx-3B",
+        "MLFlow-NYTK/PULI-GPTrio",
+        "MLFlow-Evan-Lin/yelp-bart-large-description"
     ],
     "workspace": "test-eastus",
     "subscription": "80c77c76-74ba-4c8c-8229-4c3b2957990c",

@@ -1,19 +1,15 @@
 {
     "queue_name": "test-northeurope-0",
     "models": [
-        "MLFlow-unikei/bert-base-smiles",
-        "MLFlow-leopra96/taylorlyrics",
-        "MLFlow-TheBloke/Wizard-Vicuna-30B-Uncensored-AWQ",
-        "MLFlow-TheBloke/Spicyboros-13B-2.2-GPTQ",
-        "MLFlow-TheBloke/Luban-13B-GPTQ",
-        "MLFlow-TheBloke/CodeLlama-7B-Instruct-GGUF",
-        "MLFlow-TheBloke/HermesLimaRP-L2-7B-GPTQ",
-        "MLFlow-TheBloke/llama-2-7B-Guanaco-QLoRA-GPTQ",
-        "MLFlow-TheBloke/WizardLM-7B-uncensored-GPTQ",
-        "MLFlow-eduagarcia-temp/ptcrawl_plus_legal_base_v3_5__checkpoint_last",
-        "MLFlow-ai-models/gilberto-uncased-from-camembert-fast-tokenizer",
-        "MLFlow-Yukang/Llama-2-13b-chat-longlora-32k-sft",
-        "MLFlow-amitness/mergedistill-mt-it-128"
+        "MLFlow-TheBloke/model_007-70B-GPTQ",
+        "MLFlow-TheBloke/EverythingLM-13B-16K-GPTQ",
+        "MLFlow-TheBloke/airoboros-l2-13b-gpt4-2.0-GPTQ",
+        "MLFlow-TheBloke/WizardLM-33B-V1.0-Uncensored-GPTQ",
+        "MLFlow-Intel/fid_flan_t5_base_nq",
+        "MLFlow-Adun/openthaigpt-1.0.0-beta-7b-ckpt-hf",
+        "MLFlow-acrastt/Griffin-3B",
+        "MLFlow-cmarkea/bloomz-560m-sft-chat",
+        "MLFlow-speechlessai/speechless-codellama-airoboros-orca-platypus-13b"
     ],
     "workspace": "test-northeurope",
     "subscription": "80c77c76-74ba-4c8c-8229-4c3b2957990c",

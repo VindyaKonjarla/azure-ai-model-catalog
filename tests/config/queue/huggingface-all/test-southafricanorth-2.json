@@ -1,19 +1,14 @@
 {
     "queue_name": "test-southafricanorth-2",
     "models": [
-        "MLFlow-pipyp/qwenchatreup",
-        "MLFlow-TheBloke/airoboros-33B-GPT4-m2.0-GPTQ",
-        "MLFlow-TheBloke/Llama-2-7B-AWQ",
-        "MLFlow-TheBloke/Llama-2-13B-GGUF",
-        "MLFlow-TheBloke/Phind-CodeLlama-34B-Python-v1-GPTQ",
-        "MLFlow-TheBloke/EverythingLM-13B-16K-GPTQ",
-        "MLFlow-TheBloke/Upstage-Llama-2-70B-instruct-v2-GPTQ",
-        "MLFlow-TheBloke/WizardLM-13B-V1.0-Uncensored-GPTQ",
-        "MLFlow-Ashishkr/query_wellformedness_score",
-        "MLFlow-timoneda/covid_roberta_15_40_masked",
-        "MLFlow-Trelis/Llama-2-7b-chat-hf-function-calling-v2",
-        "MLFlow-RocioUrquijo/clasificador-languagedetection",
-        "MLFlow-ICBU-NPU/FashionGPT-70B-V1.1"
+        "MLFlow-TheBloke/CodeLlama-7B-Instruct-GPTQ",
+        "MLFlow-TheBloke/WizardLM-1.0-Uncensored-Llama2-13B-GPTQ",
+        "MLFlow-TheBloke/llama-2-70b-Guanaco-QLoRA-GPTQ",
+        "MLFlow-TheBloke/Wizard-Vicuna-7B-Uncensored-GPTQ",
+        "MLFlow-eduagarcia-temp/ptcrawl_base_v1_5__checkpoint2",
+        "MLFlow-Qwen/Qwen-VL-Chat",
+        "MLFlow-Yukang/Llama-2-13b-chat-longlora-32k-sft",
+        "MLFlow-AIDC-ai-business/Marcoroni-13B-v0"
     ],
     "workspace": "test-southafricanorth",
     "subscription": "80c77c76-74ba-4c8c-8229-4c3b2957990c",

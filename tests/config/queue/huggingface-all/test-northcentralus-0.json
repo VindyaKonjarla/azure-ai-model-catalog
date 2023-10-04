@@ -1,19 +1,15 @@
 {
     "queue_name": "test-northcentralus-0",
     "models": [
-        "MLFlow-sjrhuschlee/flan-t5-large-squad2",
-        "MLFlow-TheBloke/Kimiko-v2-13B-fp16",
-        "MLFlow-TheBloke/WizardLM-13B-V1.2-AWQ",
-        "MLFlow-TheBloke/Pygmalion-2-13B-GGUF",
-        "MLFlow-TheBloke/WizardCoder-Python-13B-V1.0-GPTQ",
-        "MLFlow-TheBloke/Zarablend-L2-7B-GPTQ",
-        "MLFlow-TheBloke/vicuna-13B-v1.5-16K-GPTQ",
-        "MLFlow-TheBloke/Llama-2-13B-GPTQ",
-        "MLFlow-kavin23/qa_gpt2",
-        "MLFlow-mmnga/ELYZA-japanese-Llama-2-7b-fast-instruct-GPTQ-calib-ja-2k",
-        "MLFlow-amitness/mergedistill-mt-it-512",
-        "MLFlow-pszemraj/pegasus-x-large-book-summary",
-        "MLFlow-internlm/internlm-chat-7b-v1_1"
+        "MLFlow-TheBloke/CodeLlama-34B-Instruct-GPTQ",
+        "MLFlow-TheBloke/AlpacaCielo2-7B-8K-GPTQ",
+        "MLFlow-TheBloke/airoboros-l2-13B-gpt4-1.4.1-GPTQ",
+        "MLFlow-TheBloke/Wizard-Vicuna-30B-Uncensored-GPTQ",
+        "MLFlow-Undi95/MLewd-L2-Chat-13B",
+        "MLFlow-amazon-sagemaker-community/xlm-roberta-en-ru-emoji-v2",
+        "MLFlow-firqaaa/Madina-7b-chat-QLoRA-8k",
+        "MLFlow-migtissera/Synthia-7B-v1.2",
+        "MLFlow-luffycodes/higgs-llama-vicuna-ep25-70b"
     ],
     "workspace": "test-northcentralus",
     "subscription": "80c77c76-74ba-4c8c-8229-4c3b2957990c",

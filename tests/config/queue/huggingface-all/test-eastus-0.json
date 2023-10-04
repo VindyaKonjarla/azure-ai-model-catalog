@@ -1,19 +1,15 @@
 {
     "queue_name": "test-eastus-0",
     "models": [
-        "MLFlow-mistralai/Mistral-7B-v0.1",
-        "MLFlow-usvsnsp/pythia-6.9b-ppo",
-        "MLFlow-TheBloke/Xwin-LM-7B-V0.1-GPTQ",
-        "MLFlow-TheBloke/Spicyboros-70B-2.2-GPTQ",
-        "MLFlow-TheBloke/Airoboros-L2-70B-2.1-Creative-GPTQ",
-        "MLFlow-TheBloke/CodeLlama-7B-Instruct-GPTQ",
-        "MLFlow-TheBloke/Dolphin-Llama2-7B-GPTQ",
-        "MLFlow-TheBloke/Nous-Hermes-Llama2-GPTQ",
-        "MLFlow-TheBloke/manticore-13b-chat-pyg-GPTQ",
-        "MLFlow-sag-uniroma2/extremITA-Camoscio-7b",
-        "MLFlow-Yukang/Llama-2-7b-longlora-100k-ft",
-        "MLFlow-teknium/OpenHermes-13B",
-        "MLFlow-migtissera/Synthia-70B-v1.2"
+        "MLFlow-TheBloke/fiction.live-Kimiko-V2-70B-GPTQ",
+        "MLFlow-TheBloke/LosslessMegaCoder-Llama2-13B-Mini-GPTQ",
+        "MLFlow-TheBloke/CodeUp-Llama-2-13B-Chat-HF-GPTQ",
+        "MLFlow-TheBloke/airochronos-33B-GPTQ",
+        "MLFlow-lcw99/polyglot-ko-12.8b-chang-instruct-chat",
+        "MLFlow-cenkersisman/gpt2-turkish-900m",
+        "MLFlow-Trelis/Llama-2-7b-chat-hf-function-calling-v2",
+        "MLFlow-Xenova/llama2.c-stories110M",
+        "MLFlow-ICBU-NPU/FashionGPT-70B-V1"
     ],
     "workspace": "test-eastus",
     "subscription": "80c77c76-74ba-4c8c-8229-4c3b2957990c",

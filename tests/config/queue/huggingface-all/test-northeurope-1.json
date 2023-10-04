@@ -1,19 +1,15 @@
 {
     "queue_name": "test-northeurope-1",
     "models": [
-        "MLFlow-SamLowe/roberta-base-go_emotions",
-        "MLFlow-sjrhuschlee/flan-t5-base-squad2",
-        "MLFlow-TheBloke/Upstage-Llama-2-70B-instruct-v2-AWQ",
-        "MLFlow-TheBloke/ORCA_LLaMA_70B_QLoRA-GPTQ",
-        "MLFlow-TheBloke/Athena-v1-GPTQ",
-        "MLFlow-TheBloke/Nous-Puffin-70B-GPTQ",
-        "MLFlow-TheBloke/Airoboros-L2-70B-GPT4-m2.0-GPTQ",
-        "MLFlow-TheBloke/upstage-llama-30b-instruct-2048-GPTQ",
-        "MLFlow-TheBloke/wizard-vicuna-13B-GPTQ",
-        "MLFlow-deepset/roberta-base-squad2",
-        "MLFlow-InstaDeepAI/nucleotide-transformer-v2-500m-multi-species",
-        "MLFlow-Yukang/Llama-2-13b-longlora-16k",
-        "MLFlow-AIDC-ai-business/Marcoroni-13B-v0"
+        "MLFlow-TheBloke/Lemur-70B-Chat-v1-GPTQ",
+        "MLFlow-TheBloke/Llama-2-13B-German-Assistant-v4-GPTQ",
+        "MLFlow-TheBloke/Vigogne-2-13B-Instruct-GPTQ",
+        "MLFlow-TheBloke/WizardLM-7B-V1.0-Uncensored-GPTQ",
+        "MLFlow-benediktpri/finetuned_bert_injection",
+        "MLFlow-Locutusque/gpt2-large-conversational",
+        "MLFlow-acrastt/Bean-3B",
+        "MLFlow-cmarkea/bloomz-3b-sft-chat",
+        "MLFlow-quantumaikr/plankton-500M"
     ],
     "workspace": "test-northeurope",
     "subscription": "80c77c76-74ba-4c8c-8229-4c3b2957990c",

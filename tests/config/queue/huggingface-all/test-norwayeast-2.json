@@ -1,19 +1,14 @@
 {
     "queue_name": "test-norwayeast-2",
     "models": [
-        "MLFlow-Qwen/Qwen-14B-Chat-Int4",
-        "MLFlow-TheBloke/Llama-2-13B-chat-GGML",
-        "MLFlow-TheBloke/Pygmalion-2-13B-SuperCOT-weighed-GPTQ",
-        "MLFlow-TheBloke/Llama-2-7b-Chat-GGUF",
-        "MLFlow-TheBloke/Samantha-1.11-CodeLlama-34B-GPTQ",
-        "MLFlow-TheBloke/WizardMath-7B-V1.0-GPTQ",
-        "MLFlow-TheBloke/StableBeluga-7B-GPTQ",
-        "MLFlow-TheBloke/Vicuna-13B-CoT-GPTQ",
-        "MLFlow-42MARU/sitebunny-13b",
-        "MLFlow-Locutusque/gpt2-large-conversational",
-        "MLFlow-acrastt/Griffin-3B",
-        "MLFlow-NYTK/PULI-GPTrio",
-        "MLFlow-Evan-Lin/yelp-bart-large-description"
+        "MLFlow-TheBloke/CodeLlama-7B-Instruct-GGUF",
+        "MLFlow-TheBloke/Airoboros-L2-70B-GPT4-m2.0-GPTQ",
+        "MLFlow-TheBloke/upstage-llama-30b-instruct-2048-GPTQ",
+        "MLFlow-TheBloke/wizard-vicuna-13B-GPTQ",
+        "MLFlow-PY007/TinyLlama-1.1B-Chat-v0.1",
+        "MLFlow-timoneda/covid_roberta_80_masked",
+        "MLFlow-Phando/fairseq-moe-15b-bf16",
+        "MLFlow-lgaalves/gpt-2-xl_camel-ai-physics"
     ],
     "workspace": "test-norwayeast",
     "subscription": "80c77c76-74ba-4c8c-8229-4c3b2957990c",

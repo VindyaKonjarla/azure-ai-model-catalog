@@ -1,19 +1,14 @@
 {
     "queue_name": "test-northcentralus-3",
     "models": [
-        "MLFlow-HuggingFaceM4/idefics-9b-instruct",
-        "MLFlow-TheBloke/scarlett-33B-GPTQ",
-        "MLFlow-TheBloke/Llama-2-70B-chat-AWQ",
-        "MLFlow-TheBloke/WizardLM-1.0-Uncensored-CodeLlama-34B-GPTQ",
-        "MLFlow-TheBloke/Airoboros-c34B-2.1-GPTQ",
-        "MLFlow-TheBloke/GodziLLa2-70B-GPTQ",
-        "MLFlow-TheBloke/CodeUp-Llama-2-13B-Chat-HF-GPTQ",
-        "MLFlow-TheBloke/airochronos-33B-GPTQ",
-        "MLFlow-CobraMamba/mamba-gpt-3b-v4",
-        "MLFlow-deepset/roberta-base-squad2-distilled",
-        "MLFlow-JeremiahZ/bert-base-uncased-mrpc",
-        "MLFlow-pszemraj/long-t5-tglobal-base-sci-simplify",
-        "MLFlow-internlm/internlm-20b"
+        "MLFlow-TheBloke/CodeLlama-7B-GPTQ",
+        "MLFlow-TheBloke/Firefly-Llama2-13B-v1.2-GPTQ",
+        "MLFlow-TheBloke/StableBeluga2-70B-GPTQ",
+        "MLFlow-TheBloke/guanaco-33B-GPTQ",
+        "MLFlow-almanach/camembert-bio-base",
+        "MLFlow-Yukang/Llama-2-7b-longlora-100k-ft",
+        "MLFlow-teknium/OpenHermes-7B",
+        "MLFlow-thinkingface/test-onnx-2"
     ],
     "workspace": "test-northcentralus",
     "subscription": "80c77c76-74ba-4c8c-8229-4c3b2957990c",

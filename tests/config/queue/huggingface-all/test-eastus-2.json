@@ -1,19 +1,15 @@
 {
     "queue_name": "test-eastus-2",
     "models": [
-        "MLFlow-mistralai/Mistral-7B-Instruct-v0.1",
-        "MLFlow-microsoft/phi-1_5",
-        "MLFlow-TheBloke/Xwin-LM-13B-V0.1-GPTQ",
-        "MLFlow-TheBloke/MLewdBoros-L2-13B-GPTQ",
-        "MLFlow-TheBloke/fiction.live-Kimiko-V2-70B-GPTQ",
-        "MLFlow-TheBloke/CodeLlama-7B-Python-GGUF",
-        "MLFlow-TheBloke/Chronos-Beluga-v2-13B-GPTQ",
-        "MLFlow-TheBloke/llama-2-13B-German-Assistant-v2-GPTQ",
-        "MLFlow-TheBloke/Wizard-Vicuna-13B-Uncensored-GPTQ",
-        "MLFlow-eduagarcia-temp/ptcrawl_base_v1_5__checkpoint2",
-        "MLFlow-victor/CodeLlama-34b-Instruct-hf",
-        "MLFlow-openchat/openchat_v3.1",
-        "MLFlow-thinkingface/test-onnx-2"
+        "MLFlow-TheBloke/Athena-v1-GPTQ",
+        "MLFlow-TheBloke/LosslessMegaCoder-Llama2-7B-Mini-GPTQ",
+        "MLFlow-TheBloke/airoboros-l2-13b-gpt4-m2.0-GPTQ",
+        "MLFlow-TheBloke/vicuna-33B-GPTQ",
+        "MLFlow-Ashishkr/query_wellformedness_score",
+        "MLFlow-KnutJaegersberg/deacon-13b",
+        "MLFlow-acrastt/Puma-3B",
+        "MLFlow-Xenova/llama2.c-stories15M",
+        "MLFlow-timoneda/covid_roberta_25_masked"
     ],
     "workspace": "test-eastus",
     "subscription": "80c77c76-74ba-4c8c-8229-4c3b2957990c",

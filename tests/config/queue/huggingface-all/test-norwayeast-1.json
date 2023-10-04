@@ -1,19 +1,14 @@
 {
     "queue_name": "test-norwayeast-1",
     "models": [
-        "MLFlow-Qwen/Qwen-7B",
-        "MLFlow-TheBloke/Llama-2-70B-Chat-GGML",
-        "MLFlow-TheBloke/MLewd-L2-Chat-13B-GPTQ",
-        "MLFlow-TheBloke/Llama-2-7B-GGUF",
-        "MLFlow-TheBloke/Llama2-70B-OASST-SFT-v10-GPTQ",
-        "MLFlow-TheBloke/WizardMath-13B-V1.0-GPTQ",
-        "MLFlow-TheBloke/Vigogne-2-7B-Instruct-GPTQ",
-        "MLFlow-TheBloke/chronos-hermes-13B-GPTQ",
-        "MLFlow-benediktpri/finetuned_bert_injection",
-        "MLFlow-Adun/openthaigpt-1.0.0-beta-7b-ckpt-hf",
-        "MLFlow-acrastt/Marx-3B",
-        "MLFlow-Xenova/llama2.c-stories15M",
-        "MLFlow-timoneda/covid_roberta_25_masked"
+        "MLFlow-TheBloke/CodeLlama-7B-GGUF",
+        "MLFlow-TheBloke/HermesLimaRP-L2-7B-GPTQ",
+        "MLFlow-TheBloke/llama-2-7B-Guanaco-QLoRA-GPTQ",
+        "MLFlow-TheBloke/WizardLM-7B-uncensored-GPTQ",
+        "MLFlow-deepset/roberta-base-squad2",
+        "MLFlow-InstaDeepAI/nucleotide-transformer-v2-50m-multi-species",
+        "MLFlow-NousResearch/Nous-Hermes-llama-2-7b",
+        "MLFlow-AIDC-ai-business/Marcoroni-7B"
     ],
     "workspace": "test-norwayeast",
     "subscription": "80c77c76-74ba-4c8c-8229-4c3b2957990c",
