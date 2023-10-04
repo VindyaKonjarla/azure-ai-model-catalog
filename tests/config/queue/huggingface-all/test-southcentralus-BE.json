@@ -10,6 +10,6 @@
     "resource_group": "huggingface-registry-test1",
     "registry": "HuggingFace",
     "environment": "automate-venv",
-    "compute": "v-poojr1",
+    "compute": "Standard-D96as-v4",
     "instance_type": "Standard_D96as_v4"
 }
