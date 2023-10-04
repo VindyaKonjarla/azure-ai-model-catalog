@@ -1,15 +1,14 @@
 {
     "queue_name": "test-southcentralus-3",
     "models": [
-        "MLFlow-TheBloke/Llama-2-13B-GGUF",
-        "MLFlow-TheBloke/Synthia-13B-GPTQ",
-        "MLFlow-TheBloke/vicuna-7B-v1.5-16K-GPTQ",
-        "MLFlow-TheBloke/Llama-2-7b-Chat-GPTQ",
-        "MLFlow-deepset/tinyroberta-squad2",
-        "MLFlow-mmnga/ELYZA-japanese-Llama-2-7b-fast-instruct-GPTQ-calib-ja-2k",
-        "MLFlow-JeremiahZ/bert-base-uncased-sst2",
-        "MLFlow-stacked-summaries/flan-t5-large-stacked-samsum-1024",
-        "MLFlow-internlm/internlm-chat-7b"
+        "MLFlow-TheBloke/Zarablend-L2-7B-GPTQ",
+        "MLFlow-TheBloke/Vigogne-2-7B-Instruct-GPTQ",
+        "MLFlow-TheBloke/chronos-hermes-13B-GPTQ",
+        "MLFlow-42MARU/sitebunny-13b",
+        "MLFlow-Undi95/MLewd-ReMM-L2-Chat-20B",
+        "MLFlow-acrastt/OmegLLaMA-3B",
+        "MLFlow-cmarkea/bloomz-7b1-mt-sft-chat",
+        "MLFlow-cerebras/btlm-3b-8k-base"
     ],
     "workspace": "test-southcentralus",
     "subscription": "80c77c76-74ba-4c8c-8229-4c3b2957990c",

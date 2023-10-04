@@ -1,14 +1,13 @@
 {
     "queue_name": "test-southafricanorth-3",
     "models": [
-        "MLFlow-TheBloke/CodeLlama-13B-Instruct-GGUF",
-        "MLFlow-TheBloke/Chronos-Beluga-v2-13B-GPTQ",
-        "MLFlow-TheBloke/llama-2-13B-German-Assistant-v2-GPTQ",
-        "MLFlow-TheBloke/Wizard-Vicuna-13B-Uncensored-GPTQ",
-        "MLFlow-eduagarcia-temp/ptcrawl_base_v1_5__checkpoint1",
-        "MLFlow-ai-models/gilberto-uncased-from-camembert-fast-tokenizer",
-        "MLFlow-Yukang/Llama-2-13b-longlora-16k",
-        "MLFlow-AIDC-ai-business/Luban-13B"
+        "MLFlow-TheBloke/airoboros-l2-70B-GPT4-2.0-GPTQ",
+        "MLFlow-TheBloke/Llama-2-7B-GPTQ",
+        "MLFlow-lmdeploy/llama2-chat-7b-w4",
+        "MLFlow-deepset/roberta-base-squad2-distilled",
+        "MLFlow-JeremiahZ/bert-base-uncased-mnli",
+        "MLFlow-pszemraj/long-t5-tglobal-base-sci-simplify-elife",
+        "MLFlow-XuYipei/kw-cutegpt-13b-ift"
     ],
     "workspace": "test-southafricanorth",
     "subscription": "80c77c76-74ba-4c8c-8229-4c3b2957990c",

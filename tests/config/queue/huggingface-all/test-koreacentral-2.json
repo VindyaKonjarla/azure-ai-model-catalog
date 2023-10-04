@@ -1,15 +1,14 @@
 {
     "queue_name": "test-koreacentral-2",
     "models": [
-        "MLFlow-TheBloke/Airoboros-L2-70B-2.1-Creative-GPTQ",
-        "MLFlow-TheBloke/Zarablend-L2-7B-GPTQ",
-        "MLFlow-TheBloke/airoboros-l2-70B-GPT4-2.0-GPTQ",
-        "MLFlow-TheBloke/Llama-2-7B-GPTQ",
-        "MLFlow-lmdeploy/llama2-chat-7b-w4",
-        "MLFlow-deepset/roberta-base-squad2-distilled",
-        "MLFlow-JeremiahZ/bert-base-uncased-mnli",
-        "MLFlow-pszemraj/long-t5-tglobal-base-sci-simplify-elife",
-        "MLFlow-XuYipei/kw-cutegpt-13b-ift"
+        "MLFlow-TheBloke/LosslessMegaCoder-Llama2-7B-Mini-GPTQ",
+        "MLFlow-TheBloke/Nous-Hermes-Llama-2-7B-GPTQ",
+        "MLFlow-TheBloke/chronos-33b-GPTQ",
+        "MLFlow-anzorq/m2m100_418M_ft_ru-kbd_44K",
+        "MLFlow-amitness/mergedistill-mt-it-ar-128",
+        "MLFlow-jeffrey-fong/invoker-13b",
+        "MLFlow-PY007/ByteLlama-230M-preview",
+        "MLFlow-haoranxu/ALMA-7B"
     ],
     "workspace": "test-koreacentral",
     "subscription": "80c77c76-74ba-4c8c-8229-4c3b2957990c",

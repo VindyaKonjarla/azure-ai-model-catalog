@@ -1,15 +1,13 @@
 {
     "queue_name": "test-northeurope-2",
     "models": [
-        "MLFlow-TheBloke/Phind-CodeLlama-34B-v2-GPTQ",
-        "MLFlow-TheBloke/OpenOrca-Platypus2-13B-GPTQ",
-        "MLFlow-TheBloke/Vigogne-2-7B-Instruct-GPTQ",
-        "MLFlow-TheBloke/chronos-hermes-13B-GPTQ",
-        "MLFlow-42MARU/sitebunny-13b",
-        "MLFlow-Undi95/MLewd-ReMM-L2-Chat-20B",
-        "MLFlow-acrastt/OmegLLaMA-3B",
-        "MLFlow-cmarkea/bloomz-7b1-mt-sft-chat",
-        "MLFlow-cerebras/btlm-3b-8k-base"
+        "MLFlow-TheBloke/orca_mini_v3_13B-GPTQ",
+        "MLFlow-TheBloke/Nous-Hermes-Llama2-GPTQ",
+        "MLFlow-TheBloke/manticore-13b-chat-pyg-GPTQ",
+        "MLFlow-eduagarcia-temp/ptcrawl_base_v1_5__checkpoint_last",
+        "MLFlow-victor/CodeLlama-34b-Instruct-hf",
+        "MLFlow-openchat/openchat_v3.2",
+        "MLFlow-amitness/mergedistill-mt-it-128"
     ],
     "workspace": "test-northeurope",
     "subscription": "80c77c76-74ba-4c8c-8229-4c3b2957990c",

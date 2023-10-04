@@ -1,15 +1,13 @@
 {
     "queue_name": "test-eastus-2",
     "models": [
-        "MLFlow-TheBloke/Athena-v1-GPTQ",
-        "MLFlow-TheBloke/LosslessMegaCoder-Llama2-7B-Mini-GPTQ",
-        "MLFlow-TheBloke/airoboros-l2-13b-gpt4-m2.0-GPTQ",
-        "MLFlow-TheBloke/vicuna-33B-GPTQ",
-        "MLFlow-Ashishkr/query_wellformedness_score",
-        "MLFlow-KnutJaegersberg/deacon-13b",
-        "MLFlow-acrastt/Puma-3B",
-        "MLFlow-Xenova/llama2.c-stories15M",
-        "MLFlow-timoneda/covid_roberta_25_masked"
+        "MLFlow-TheBloke/OpenOrca-Platypus2-13B-GPTQ",
+        "MLFlow-TheBloke/airoboros-l2-70B-gpt4-1.4.1-GPTQ",
+        "MLFlow-TheBloke/guanaco-65B-GPTQ",
+        "MLFlow-reudrax/query-intent-model",
+        "MLFlow-TigerResearch/tigerbot-70b-chat",
+        "MLFlow-CortexFoundation/netuid11-bittensor-alpha-13b",
+        "MLFlow-migtissera/Synthia-70B-v1.2"
     ],
     "workspace": "test-eastus",
     "subscription": "80c77c76-74ba-4c8c-8229-4c3b2957990c",

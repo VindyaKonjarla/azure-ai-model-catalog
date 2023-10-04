@@ -1,15 +1,13 @@
 {
     "queue_name": "test-japaneast-3",
     "models": [
-        "MLFlow-TheBloke/Zarafusionex-1.1-L2-7B-GPTQ",
-        "MLFlow-TheBloke/Stable-Platypus2-13B-GPTQ",
-        "MLFlow-TheBloke/WizardLM-13B-V1.2-GPTQ",
-        "MLFlow-TheBloke/Karen_theEditor_13B-GPTQ",
-        "MLFlow-TabbyML/J-350M",
-        "MLFlow-GRPUI/sgugit-model-v3",
-        "MLFlow-SatoruDano/llama-2-7b-finetuned_v1",
-        "MLFlow-migtissera/Synthia-7B",
-        "MLFlow-haoranxu/ALMA-13B-Pretrain"
+        "MLFlow-TheBloke/Dolphin-Llama2-7B-GPTQ",
+        "MLFlow-TheBloke/upstage-llama-30b-instruct-2048-GPTQ",
+        "MLFlow-TheBloke/wizard-vicuna-13B-GPTQ",
+        "MLFlow-PY007/TinyLlama-1.1B-Chat-v0.1",
+        "MLFlow-timoneda/covid_roberta_80_masked",
+        "MLFlow-Phando/fairseq-moe-15b-bf16",
+        "MLFlow-lgaalves/gpt-2-xl_camel-ai-physics"
     ],
     "workspace": "test-japaneast",
     "subscription": "80c77c76-74ba-4c8c-8229-4c3b2957990c",

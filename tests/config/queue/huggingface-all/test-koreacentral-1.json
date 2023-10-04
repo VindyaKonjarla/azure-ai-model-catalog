@@ -1,15 +1,14 @@
 {
     "queue_name": "test-koreacentral-1",
     "models": [
-        "MLFlow-TheBloke/Yarn-Llama-2-13B-64K-GPTQ",
-        "MLFlow-TheBloke/Llama-2-7B-32K-Instruct-GPTQ",
-        "MLFlow-TheBloke/vicuna-13B-v1.5-16K-GPTQ",
-        "MLFlow-TheBloke/Llama-2-13B-GPTQ",
-        "MLFlow-RuterNorway/Llama-2-13b-chat-norwegian-GPTQ",
-        "MLFlow-hadifar/eventclassifier",
-        "MLFlow-JeremiahZ/bert-base-uncased-mrpc",
-        "MLFlow-pszemraj/pythia-6.9b-HC3",
-        "MLFlow-malteos/gpt2-xl-wechsel-german"
+        "MLFlow-TheBloke/GodziLLa2-70B-GPTQ",
+        "MLFlow-TheBloke/StableBeluga-13B-GPTQ",
+        "MLFlow-TheBloke/chronos-wizardlm-uc-scot-st-13B-GPTQ",
+        "MLFlow-dicta-il/dictalm-7b-instruct",
+        "MLFlow-CreativeLang/metaphor_detection_roberta_seq",
+        "MLFlow-Open-Orca/OpenOrca-Platypus2-13B",
+        "MLFlow-PY007/ByteLlama-320M-preview",
+        "MLFlow-Open-Orca/oo-phi-1_5"
     ],
     "workspace": "test-koreacentral",
     "subscription": "80c77c76-74ba-4c8c-8229-4c3b2957990c",

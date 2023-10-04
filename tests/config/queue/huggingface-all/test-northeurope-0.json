@@ -1,15 +1,13 @@
 {
     "queue_name": "test-northeurope-0",
     "models": [
-        "MLFlow-TheBloke/model_007-70B-GPTQ",
-        "MLFlow-TheBloke/EverythingLM-13B-16K-GPTQ",
-        "MLFlow-TheBloke/airoboros-l2-13b-gpt4-2.0-GPTQ",
-        "MLFlow-TheBloke/WizardLM-33B-V1.0-Uncensored-GPTQ",
-        "MLFlow-Intel/fid_flan_t5_base_nq",
-        "MLFlow-Adun/openthaigpt-1.0.0-beta-7b-ckpt-hf",
-        "MLFlow-acrastt/Griffin-3B",
-        "MLFlow-cmarkea/bloomz-560m-sft-chat",
-        "MLFlow-speechlessai/speechless-codellama-airoboros-orca-platypus-13b"
+        "MLFlow-TheBloke/MythoMax-L2-13B-GPTQ",
+        "MLFlow-TheBloke/StableBeluga2-70B-GPTQ",
+        "MLFlow-TheBloke/guanaco-33B-GPTQ",
+        "MLFlow-almanach/camembert-bio-base",
+        "MLFlow-Yukang/Llama-2-7b-longlora-100k-ft",
+        "MLFlow-teknium/OpenHermes-7B",
+        "MLFlow-thinkingface/test-onnx-2"
     ],
     "workspace": "test-northeurope",
     "subscription": "80c77c76-74ba-4c8c-8229-4c3b2957990c",

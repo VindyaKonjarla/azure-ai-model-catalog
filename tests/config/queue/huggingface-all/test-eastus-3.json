@@ -1,15 +1,13 @@
 {
     "queue_name": "test-eastus-3",
     "models": [
-        "MLFlow-TheBloke/Airoboros-L2-7B-2.1-GPTQ",
-        "MLFlow-TheBloke/LlongOrca-7B-16K-GPTQ",
-        "MLFlow-TheBloke/Upstage-Llama-2-70B-instruct-v2-GPTQ",
-        "MLFlow-TheBloke/WizardLM-13B-V1.0-Uncensored-GPTQ",
-        "MLFlow-davidkim205/komt-llama2-7b-v1",
-        "MLFlow-42dot/42dot_LLM-PLM-1.3B",
-        "MLFlow-acrastt/Marx-3B",
-        "MLFlow-NYTK/PULI-GPTrio",
-        "MLFlow-Evan-Lin/yelp-bart-large-description"
+        "MLFlow-TheBloke/WizardMath-13B-V1.0-GPTQ",
+        "MLFlow-TheBloke/llama2-7b-chat-codeCherryPop-qLoRA-GPTQ",
+        "MLFlow-TheBloke/guanaco-7B-GPTQ",
+        "MLFlow-amitness/mergedistill-mt-ar-512",
+        "MLFlow-TigerResearch/tigerbot-70b-chat-v2",
+        "MLFlow-teknium/OpenHermes-13B",
+        "MLFlow-migtissera/Synthia-70B-v1.2b"
     ],
     "workspace": "test-eastus",
     "subscription": "80c77c76-74ba-4c8c-8229-4c3b2957990c",

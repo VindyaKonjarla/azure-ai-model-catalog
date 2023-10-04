@@ -1,14 +1,13 @@
 {
     "queue_name": "test-norwayeast-1",
     "models": [
-        "MLFlow-TheBloke/CodeLlama-7B-GGUF",
-        "MLFlow-TheBloke/HermesLimaRP-L2-7B-GPTQ",
-        "MLFlow-TheBloke/llama-2-7B-Guanaco-QLoRA-GPTQ",
-        "MLFlow-TheBloke/WizardLM-7B-uncensored-GPTQ",
-        "MLFlow-deepset/roberta-base-squad2",
-        "MLFlow-InstaDeepAI/nucleotide-transformer-v2-50m-multi-species",
-        "MLFlow-NousResearch/Nous-Hermes-llama-2-7b",
-        "MLFlow-AIDC-ai-business/Marcoroni-7B"
+        "MLFlow-TheBloke/CodeUp-Llama-2-13B-Chat-HF-GPTQ",
+        "MLFlow-TheBloke/airochronos-33B-GPTQ",
+        "MLFlow-lcw99/polyglot-ko-12.8b-chang-instruct-chat",
+        "MLFlow-cenkersisman/gpt2-turkish-900m",
+        "MLFlow-Trelis/Llama-2-7b-chat-hf-function-calling-v2",
+        "MLFlow-Xenova/llama2.c-stories110M",
+        "MLFlow-ICBU-NPU/FashionGPT-70B-V1"
     ],
     "workspace": "test-norwayeast",
     "subscription": "80c77c76-74ba-4c8c-8229-4c3b2957990c",

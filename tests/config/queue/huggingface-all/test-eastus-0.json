@@ -1,15 +1,14 @@
 {
     "queue_name": "test-eastus-0",
     "models": [
-        "MLFlow-TheBloke/fiction.live-Kimiko-V2-70B-GPTQ",
-        "MLFlow-TheBloke/LosslessMegaCoder-Llama2-13B-Mini-GPTQ",
-        "MLFlow-TheBloke/CodeUp-Llama-2-13B-Chat-HF-GPTQ",
-        "MLFlow-TheBloke/airochronos-33B-GPTQ",
-        "MLFlow-lcw99/polyglot-ko-12.8b-chang-instruct-chat",
-        "MLFlow-cenkersisman/gpt2-turkish-900m",
-        "MLFlow-Trelis/Llama-2-7b-chat-hf-function-calling-v2",
-        "MLFlow-Xenova/llama2.c-stories110M",
-        "MLFlow-ICBU-NPU/FashionGPT-70B-V1"
+        "MLFlow-TheBloke/EverythingLM-13B-16K-GPTQ",
+        "MLFlow-TheBloke/WizardLM-13B-V1.2-GPTQ",
+        "MLFlow-TheBloke/Karen_theEditor_13B-GPTQ",
+        "MLFlow-TabbyML/J-350M",
+        "MLFlow-GRPUI/sgugit-model-v3",
+        "MLFlow-SatoruDano/llama-2-7b-finetuned_v1",
+        "MLFlow-migtissera/Synthia-7B",
+        "MLFlow-haoranxu/ALMA-13B-Pretrain"
     ],
     "workspace": "test-eastus",
     "subscription": "80c77c76-74ba-4c8c-8229-4c3b2957990c",

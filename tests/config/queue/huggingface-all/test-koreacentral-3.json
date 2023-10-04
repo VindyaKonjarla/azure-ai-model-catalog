@@ -1,15 +1,14 @@
 {
     "queue_name": "test-koreacentral-3",
     "models": [
-        "MLFlow-TheBloke/MythoMax-L2-Kimiko-v2-13B-GPTQ",
-        "MLFlow-TheBloke/orca_mini_v3_70B-GPTQ",
-        "MLFlow-TheBloke/airoboros-l2-7B-gpt4-m2.0-GPTQ",
-        "MLFlow-TheBloke/Chronoboros-33B-GPTQ",
-        "MLFlow-CobraMamba/mamba-gpt-3b-v4",
-        "MLFlow-deepset/deberta-v3-base-squad2",
-        "MLFlow-JeremiahZ/bert-base-uncased-rte",
-        "MLFlow-RocioUrquijo/clasificador-languagedetection",
-        "MLFlow-ICBU-NPU/FashionGPT-70B-V1.1"
+        "MLFlow-TheBloke/LlongOrca-7B-16K-GPTQ",
+        "MLFlow-TheBloke/OpenAssistant-Llama2-13B-Orca-8K-3319-GPTQ",
+        "MLFlow-TheBloke/WizardLM-Uncensored-SuperCOT-StoryTelling-30B-GPTQ",
+        "MLFlow-Dampish/Dante-2.8B",
+        "MLFlow-amitness/mergedistill-mt-en-128",
+        "MLFlow-BEE-spoke-data/TinyLlama-1.1bee",
+        "MLFlow-TigerResearch/tigerbot-13b-chat",
+        "MLFlow-haoranxu/ALMA-7B-Pretrain"
     ],
     "workspace": "test-koreacentral",
     "subscription": "80c77c76-74ba-4c8c-8229-4c3b2957990c",

@@ -1,15 +1,13 @@
 {
     "queue_name": "test-northcentralus-0",
     "models": [
-        "MLFlow-TheBloke/CodeLlama-34B-Instruct-GPTQ",
-        "MLFlow-TheBloke/AlpacaCielo2-7B-8K-GPTQ",
-        "MLFlow-TheBloke/airoboros-l2-13B-gpt4-1.4.1-GPTQ",
-        "MLFlow-TheBloke/Wizard-Vicuna-30B-Uncensored-GPTQ",
-        "MLFlow-Undi95/MLewd-L2-Chat-13B",
-        "MLFlow-amazon-sagemaker-community/xlm-roberta-en-ru-emoji-v2",
-        "MLFlow-firqaaa/Madina-7b-chat-QLoRA-8k",
-        "MLFlow-migtissera/Synthia-7B-v1.2",
-        "MLFlow-luffycodes/higgs-llama-vicuna-ep25-70b"
+        "MLFlow-TheBloke/WizardLM-1.0-Uncensored-Llama2-13B-GPTQ",
+        "MLFlow-TheBloke/Luna-AI-Llama2-Uncensored-GPTQ",
+        "MLFlow-TheBloke/medalpaca-13B-GPTQ",
+        "MLFlow-openchat/openchat_v3.2_super",
+        "MLFlow-timoneda/covid_roberta_60_masked",
+        "MLFlow-GRPUI/model-667",
+        "MLFlow-internlm/internlm-chat-20b"
     ],
     "workspace": "test-northcentralus",
     "subscription": "80c77c76-74ba-4c8c-8229-4c3b2957990c",

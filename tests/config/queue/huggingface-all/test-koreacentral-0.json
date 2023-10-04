@@ -1,15 +1,14 @@
 {
     "queue_name": "test-koreacentral-0",
     "models": [
-        "MLFlow-TheBloke/Llama-2-70B-chat-GGUF",
-        "MLFlow-TheBloke/EverythingLM-13b-V2-16K-GPTQ",
-        "MLFlow-TheBloke/OpenOrcaxOpenChat-Preview2-13B-GPTQ",
-        "MLFlow-TheBloke/Llama-2-13B-chat-GPTQ",
-        "MLFlow-kavin23/qa_gpt2",
-        "MLFlow-Sao10K/Stheno-L2-13B",
-        "MLFlow-JeremiahZ/bert-base-uncased-wnli",
-        "MLFlow-pszemraj/long-t5-tglobal-base-sci-simplify",
-        "MLFlow-internlm/internlm-20b"
+        "MLFlow-TheBloke/orca_mini_v3_70B-GPTQ",
+        "MLFlow-TheBloke/StableBeluga-7B-GPTQ",
+        "MLFlow-TheBloke/Vicuna-13B-CoT-GPTQ",
+        "MLFlow-Sandy0909/finance_sentiment",
+        "MLFlow-JosephusCheung/Qwen-LLaMAfied-7B-Chat",
+        "MLFlow-acrastt/Marx-3B-V2",
+        "MLFlow-amitness/mergedistill-mt-ar-128",
+        "MLFlow-elliotthwang/Elliott-Chinese-LLaMa-GPTQ-V1.0"
     ],
     "workspace": "test-koreacentral",
     "subscription": "80c77c76-74ba-4c8c-8229-4c3b2957990c",

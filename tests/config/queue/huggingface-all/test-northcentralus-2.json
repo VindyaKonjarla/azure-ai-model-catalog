@@ -1,14 +1,13 @@
 {
     "queue_name": "test-northcentralus-2",
     "models": [
-        "MLFlow-TheBloke/CodeLlama-13B-Instruct-GPTQ",
-        "MLFlow-TheBloke/WizardLM-70B-V1.0-GPTQ",
-        "MLFlow-TheBloke/llama2-7b-chat-codeCherryPop-qLoRA-GPTQ",
-        "MLFlow-TheBloke/guanaco-7B-GPTQ",
-        "MLFlow-amitness/mergedistill-mt-ar-512",
-        "MLFlow-TigerResearch/tigerbot-70b-chat-v2",
-        "MLFlow-teknium/OpenHermes-13B",
-        "MLFlow-migtissera/Synthia-70B-v1.2b"
+        "MLFlow-TheBloke/llama2_70b_chat_uncensored-GPTQ",
+        "MLFlow-TheBloke/Redmond-Puffin-13B-GPTQ",
+        "MLFlow-deepset/roberta-large-squad2",
+        "MLFlow-bigscience/bloom-1b1",
+        "MLFlow-NousResearch/Redmond-Puffin-13B",
+        "MLFlow-pszemraj/pegasus-x-large-book-summary",
+        "MLFlow-internlm/internlm-chat-7b-v1_1"
     ],
     "workspace": "test-northcentralus",
     "subscription": "80c77c76-74ba-4c8c-8229-4c3b2957990c",
