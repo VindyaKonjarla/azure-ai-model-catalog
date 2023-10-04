@@ -202,7 +202,7 @@ class Dashboard():
 
         summary_text = "\n".join(summary)
        
-        with open("dashboard_tasks.md", "w", encoding="utf-8") as f:
+        with open("FoundationModels_dashboard.md", "w", encoding="utf-8") as f:
             f.write(summary_text)
             f.write(os.linesep)
             f.write(os.linesep)
