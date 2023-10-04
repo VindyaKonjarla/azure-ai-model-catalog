@@ -1,4 +1,4 @@
-name: MLFlow-NousResearch/Llama-2-70b-hf
+name: MLFlow-NousResearch-Llama-2-70b-hf
 
 on: 
   workflow_dispatch:
