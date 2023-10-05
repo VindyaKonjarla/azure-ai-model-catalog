@@ -25,8 +25,8 @@ jobs:
       run: pip install azure-ai-ml
     - name: pip-install-transformers
       run: pip install transformers
-    # - name: pip-install-transformers[torch]
-    #   run: pip install transformers[torch]
+    - name: pip-install-transformers[torch]
+      run: pip install transformers[torch]
     - name: pip-install-torchvision
       run: pip install torchvision 
     # - name: pip-install-mlflow
