@@ -36,11 +36,11 @@ class Model:
     def __init__(self, model_name) -> None:
         self.model_name = model_name
     def get_test_queue() -> ConfigBox:
-        test_queue = os.environ.get('test_queue')
-        test_set = os.environ.get('test_set')
-        queue_file = f"../config/queue/{test_set}/{test_queue}.json"
-        with open(queue_file) as f:
-            return ConfigBox(json.load(f))
+	    test_queue = os.environ.get('test_queue')
+	    test_set = os.environ.get('test_set')
+	    queue_file = f"../config/queue/{test_set}/{test_queue}.json"
+	    with open(queue_file) as f:
+	        return ConfigBox(json.load(f))
     def set_next_trigger_model(queue):
         print("In set_next_trigger_model...")
     # file the index of test_model_name in models list queue dictionary
@@ -70,7 +70,7 @@ class Model:
             full=True, sort='lastModified', direction=-1)
         # Unpack all values from the generator object
         required_data = [i for i in models]
-    
+
         daata_dict = {}
         # Loop through the list
         for data in required_data:
@@ -95,7 +95,7 @@ class Model:
         df = df[df.tags.apply(lambda x: STRING_TO_CHECK in x)]
         # Retrive the data whose task is in the list
         df = df[df['pipeline_tag'].isin(TASK_NAME)]
-    
+
         # Find the data with that particular name
         required_data = df[df.modelId.apply(lambda x: x == self.model_name)]
         # Get the task
@@ -105,7 +105,7 @@ class Model:
         # Replace number and space
         final_data = re.sub(pattern, '', required_data)
         return final_data
-    
+
     def model_import_pipeline(model_id,update_existing_model, task_name):
     
         import_model_job = import_model(model_id=test_model_name, task_name=task_name,update_existing_model=update_existing_model)
@@ -113,8 +113,8 @@ class Model:
         import_model_job.settings.continue_on_step_failure = False
         return {"model_registration_details": import_model_job.outputs.model_registration_details}
 if __name__ == "__main__":
-    # model = Model(model_name=test_model_name)		
-    TASK_NAME = test_model_name.get_task()
+    model = Model(model_name=test_model_name)		
+    TASK_NAME = model.get_task()
     print("TASK_NAME:==",TASK_NAME)
     queue = get_test_queue()
     if test_trigger_next_model == "true":
