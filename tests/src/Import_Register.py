@@ -114,7 +114,7 @@ def model_import_pipeline(model_id,update_existing_model, task_name):
     return {"model_registration_details": import_model_job.outputs.model_registration_details}
 if __name__ == "__main__":
     model = Model(model_name=test_model_name)		
-    TASK_NAME = model.get_task()
+    TASK_NAME = get_task()
     print("TASK_NAME:==",TASK_NAME)
     print("test_queue:==",test_queue)
     queue = model.get_test_queue()
