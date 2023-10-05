@@ -72,7 +72,7 @@ def get_task() -> str:
     df = df[df['pipeline_tag'].isin(TASK_NAME)]
 
     # Find the data with that particular name
-    required_data = df[df.modelId.apply(lambda x: x == self.model_name)]
+    required_data = df[df.modelId.apply(lambda x: x ==  model_name)]
     # Get the task
     required_data = required_data["pipeline_tag"].to_string()
     # Create pattern fiel number and space
