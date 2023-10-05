@@ -19,41 +19,15 @@ from box import ConfigBox
 # from utils.logging import get_logger
 test_queue = os.environ.get('test_queue')
 test_set = os.environ.get('test_set')
-queue_file = f"../config/queue/{test_set}/{test_queue}.json"
-with open(queue_file) as f:
-	queue=ConfigBox(json.load(f))
-try:
-	credential = DefaultAzureCredential()
-	credential.get_token("https://management.azure.com/.default")
-except Exception as ex:
-	# Fall back to InteractiveBrowserCredential in case DefaultAzureCredential not work
-	credential = InteractiveBrowserCredential()
-    # print("workspace_name : ", queue.workspace)
-try:
-	workspace_ml_client = MLClient.from_config(credential=credential)
-except:
-	workspace_ml_client = MLClient(
-	    credential=credential,
-	    subscription_id=queue.subscription,
-	    resource_group_name=queue.resource_group,
-	    workspace_name=queue.workspace
-	)
-ml_client_registry = MLClient(credential, registry_name=queue.registry)
-import_model = ml_client_registry.components.get(name="import_model_oss_test", label="latest")
-test_model_name = os.environ.get('test_model_name')
-# test_model_name = "bert-base-uncased"
-experiment_name = f"Import Model Pipeline"
-URL = "https://huggingface.co/api/models?sort=downloads&direction=-1&limit=10000"
-COLUMNS_TO_READ = ["modelId", "pipeline_tag", "tags"]
-LIST_OF_COLUMNS = ['modelId', 'downloads',
-                   'lastModified', 'tags', 'pipeline_tag']
-TASK_NAME = ['fill-mask', 'token-classification', 'question-answering',
-             'summarization', 'text-generation', 'text-classification', 'translation']
-STRING_TO_CHECK = 'transformers'
-FILE_NAME = "task_and_library.json"
+test_trigger_next_model = os.environ.get('test_trigger_next_model')
+
 class Model:
     def __init__(self, model_name) -> None:
         self.model_name = model_name
+    def get_test_queue() -> ConfigBox:
+	    queue_file = f"../config/queue/{test_set}/{test_queue}.json"
+	    with open(queue_file) as f:
+	        return ConfigBox(json.load(f))
     def set_next_trigger_model(queue):
         print("In set_next_trigger_model...")
     # file the index of test_model_name in models list queue dictionary
@@ -146,6 +120,36 @@ if __name__ == "__main__":
     model = Model(model_name=test_model_name)		
     TASK_NAME = model.get_task()
     print("TASK_NAME:==",TASK_NAME)
+    queue = get_test_queue()
+	try:
+		credential = DefaultAzureCredential()
+		credential.get_token("https://management.azure.com/.default")
+	except Exception as ex:
+		# Fall back to InteractiveBrowserCredential in case DefaultAzureCredential not work
+		credential = InteractiveBrowserCredential()
+	    # print("workspace_name : ", queue.workspace)
+	try:
+		workspace_ml_client = MLClient.from_config(credential=credential)
+	except:
+		workspace_ml_client = MLClient(
+		    credential=credential,
+		    subscription_id=queue.subscription,
+		    resource_group_name=queue.resource_group,
+		    workspace_name=queue.workspace
+		)
+	ml_client_registry = MLClient(credential, registry_name=queue.registry)
+	import_model = ml_client_registry.components.get(name="import_model_oss_test", label="latest")
+	test_model_name = os.environ.get('test_model_name')
+	# test_model_name = "bert-base-uncased"
+	experiment_name = f"Import Model Pipeline"
+	URL = "https://huggingface.co/api/models?sort=downloads&direction=-1&limit=10000"
+	COLUMNS_TO_READ = ["modelId", "pipeline_tag", "tags"]
+	LIST_OF_COLUMNS = ['modelId', 'downloads',
+	                   'lastModified', 'tags', 'pipeline_tag']
+	TASK_NAME = ['fill-mask', 'token-classification', 'question-answering',
+	             'summarization', 'text-generation', 'text-classification', 'translation']
+	STRING_TO_CHECK = 'transformers'
+	FILE_NAME = "task_and_library.json"
     if test_trigger_next_model == "true":
         set_next_trigger_model(queue)
 update_existing_model=True
