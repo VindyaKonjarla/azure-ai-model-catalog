@@ -21,7 +21,19 @@ test_model_name = os.environ.get('test_model_name')
 test_queue = os.environ.get('test_queue')
 test_set = os.environ.get('test_set')
 test_trigger_next_model = os.environ.get('test_trigger_next_model')
+experiment_name = f"Import Model Pipeline"
+URL = "https://huggingface.co/api/models?sort=downloads&direction=-1&limit=10000"
+COLUMNS_TO_READ = ["modelId", "pipeline_tag", "tags"]
+LIST_OF_COLUMNS = ['modelId', 'downloads',
+       'lastModified', 'tags', 'pipeline_tag']
+TASK_NAME = ['fill-mask', 'token-classification', 'question-answering',
+     'summarization', 'text-generation', 'text-classification', 'translation']
+STRING_TO_CHECK = 'transformers'
+FILE_NAME = "task_and_library.json"
 
+update_existing_model=True
+Reg_Model=test_model_name.replace('/','-')
+huggingface_model_exists_in_registry = False
 class Model:
     def __init__(self, model_name) -> None:
         self.model_name = model_name
@@ -125,21 +137,6 @@ if __name__ == "__main__":
         )
     ml_client_registry = MLClient(credential, registry_name=queue.registry)
     import_model = ml_client_registry.components.get(name="import_model_oss_test", label="latest")
-    test_model_name = os.environ.get('test_model_name')
-    # test_model_name = "bert-base-uncased"
-    experiment_name = f"Import Model Pipeline"
-    URL = "https://huggingface.co/api/models?sort=downloads&direction=-1&limit=10000"
-    COLUMNS_TO_READ = ["modelId", "pipeline_tag", "tags"]
-    LIST_OF_COLUMNS = ['modelId', 'downloads',
-               'lastModified', 'tags', 'pipeline_tag']
-    TASK_NAME = ['fill-mask', 'token-classification', 'question-answering',
-             'summarization', 'text-generation', 'text-classification', 'translation']
-    STRING_TO_CHECK = 'transformers'
-    FILE_NAME = "task_and_library.json"
-
-    update_existing_model=True
-    Reg_Model=test_model_name.replace('/','-')
-    huggingface_model_exists_in_registry = False
     pipeline_object = model_import_pipeline(
         model_id=test_model_name,
         # compute=COMPUTE,
