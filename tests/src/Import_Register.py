@@ -162,7 +162,7 @@ if __name__ == "__main__":
     # if schedule_huggingface_model_import:
         # submit the pipeline job
     huggingface_pipeline_job = workspace_ml_client.jobs.create_or_update(
-        pipeline_object, experiment_name=experiment_name
+        pipeline_object, experiment_name="Import Model Pipeline"
     )
     # wait for the pipeline job to complete
     workspace_ml_client.jobs.stream(huggingface_pipeline_job.name)
