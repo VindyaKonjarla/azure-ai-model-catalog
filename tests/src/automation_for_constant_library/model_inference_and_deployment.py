@@ -148,7 +148,8 @@ class ModelInferenceAndDeployemnt:
                     deployment_name=deployment_name,
                     request_file=json_file_name,
                 )
-                logger.info(f"Getting the reposne from the endpoint is this one : {response}")
+                logger.info(
+                    f"Getting the reposne from the endpoint is this one : {response}")
                 self.delete_file(file_name=json_file_name)
             response_json = json.loads(response)
             output = json.dumps(response_json, indent=2)
@@ -168,6 +169,7 @@ class ModelInferenceAndDeployemnt:
                 self.delete_file(file_name=json_file_name)
             logger.error(f"::error:: Could not invoke endpoint: \n")
             logger.info(f"::error::The exception here is this : \n {e}")
+            raise Exception(e)
 
     def create_model_package(self, latest_model, endpoint):
         logger.info("In create_model_package...")
