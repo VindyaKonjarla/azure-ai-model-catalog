@@ -15,7 +15,7 @@ import shutil
 test_queue = os.environ.get('test_queue')
 queue_file = f"../../config/queue/{test_set}/{test_queue}.json"
 with open(queue_file) as f:
-queue=ConfigBox(json.load(f))
+	queue=ConfigBox(json.load(f))
 try:
 	credential = DefaultAzureCredential()
 	credential.get_token("https://management.azure.com/.default")
