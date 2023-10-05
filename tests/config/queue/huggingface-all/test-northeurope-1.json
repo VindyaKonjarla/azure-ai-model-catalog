@@ -1,13 +1,7 @@
 {
     "queue_name": "test-northeurope-1",
     "models": [
-        "MLFlow-TheBloke/Platypus2-70B-Instruct-GPTQ",
-        "MLFlow-TheBloke/llama2_7b_chat_uncensored-GPTQ",
-        "MLFlow-TheBloke/WizardLM-30B-Uncensored-GPTQ",
-        "MLFlow-sag-uniroma2/extremITA-Camoscio-7b",
-        "MLFlow-Yukang/Llama-2-13b-longlora-32k-ft",
-        "MLFlow-openchat/openchat_v3.1",
-        "MLFlow-mosaicml/mpt-7b"
+        "MLFlow-Batch-distilbert-base-cased"
     ],
     "workspace": "test-northeurope",
     "subscription": "80c77c76-74ba-4c8c-8229-4c3b2957990c",

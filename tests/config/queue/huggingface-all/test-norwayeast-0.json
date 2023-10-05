@@ -1,13 +1,7 @@
 {
     "queue_name": "test-norwayeast-0",
     "models": [
-        "MLFlow-TheBloke/airoboros-l2-7B-gpt4-m2.0-GPTQ",
-        "MLFlow-TheBloke/Chronoboros-33B-GPTQ",
-        "MLFlow-CobraMamba/mamba-gpt-3b-v4",
-        "MLFlow-deepset/deberta-v3-base-squad2",
-        "MLFlow-JeremiahZ/bert-base-uncased-rte",
-        "MLFlow-RocioUrquijo/clasificador-languagedetection",
-        "MLFlow-ICBU-NPU/FashionGPT-70B-V1.1"
+        "MLFlow-Batch-gpt2-medium"
     ],
     "workspace": "test-norwayeast",
     "subscription": "80c77c76-74ba-4c8c-8229-4c3b2957990c",

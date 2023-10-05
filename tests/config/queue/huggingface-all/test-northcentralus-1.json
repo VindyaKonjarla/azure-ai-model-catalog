@@ -1,13 +1,7 @@
 {
     "queue_name": "test-northcentralus-1",
     "models": [
-        "MLFlow-TheBloke/Airoboros-L2-70B-GPT4-m2.0-GPTQ",
-        "MLFlow-TheBloke/Llama-2-70B-GPTQ",
-        "MLFlow-Kriyans/Bert-NER",
-        "MLFlow-bigscience/bloom-560m",
-        "MLFlow-euclaise/falcon_1b_stage2",
-        "MLFlow-mapsoriano/roberta-tagalog-base-philippine-elections-2016-2022-hate-speech",
-        "MLFlow-internlm/internlm-7b"
+        "MLFlow-Batch-roberta-large-mnli"
     ],
     "workspace": "test-northcentralus",
     "subscription": "80c77c76-74ba-4c8c-8229-4c3b2957990c",

@@ -1,14 +1,8 @@
 {
     "queue_name": "test-southcentralus-1",
     "models": [
-        "MLFlow-TheBloke/fiction.live-Kimiko-V2-70B-GPTQ",
-        "MLFlow-TheBloke/airoboros-l2-13b-gpt4-2.0-GPTQ",
-        "MLFlow-TheBloke/WizardLM-33B-V1.0-Uncensored-GPTQ",
-        "MLFlow-Intel/fid_flan_t5_base_nq",
-        "MLFlow-Adun/openthaigpt-1.0.0-beta-7b-ckpt-hf",
-        "MLFlow-acrastt/Griffin-3B",
-        "MLFlow-cmarkea/bloomz-560m-sft-chat",
-        "MLFlow-speechlessai/speechless-codellama-airoboros-orca-platypus-13b"
+        "MLFlow-Batch-t5-large",
+        "MLFlow-Batch-Jean-Baptiste/camembert-ner"
     ],
     "workspace": "test-southcentralus",
     "subscription": "80c77c76-74ba-4c8c-8229-4c3b2957990c",

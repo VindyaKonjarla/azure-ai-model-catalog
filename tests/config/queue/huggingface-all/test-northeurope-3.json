@@ -1,13 +1,7 @@
 {
     "queue_name": "test-northeurope-3",
     "models": [
-        "MLFlow-TheBloke/Stable-Platypus2-13B-GPTQ",
-        "MLFlow-TheBloke/llama-2-70b-Guanaco-QLoRA-GPTQ",
-        "MLFlow-TheBloke/Wizard-Vicuna-7B-Uncensored-GPTQ",
-        "MLFlow-eduagarcia-temp/ptcrawl_base_v1_5__checkpoint2",
-        "MLFlow-Qwen/Qwen-VL-Chat",
-        "MLFlow-Yukang/Llama-2-13b-chat-longlora-32k-sft",
-        "MLFlow-AIDC-ai-business/Marcoroni-13B-v0"
+        "MLFlow-Batch-databricks/dolly-v2-12b"
     ],
     "workspace": "test-northeurope",
     "subscription": "80c77c76-74ba-4c8c-8229-4c3b2957990c",

@@ -1,14 +1,7 @@
 {
     "queue_name": "test-koreacentral-0",
     "models": [
-        "MLFlow-TheBloke/orca_mini_v3_70B-GPTQ",
-        "MLFlow-TheBloke/StableBeluga-7B-GPTQ",
-        "MLFlow-TheBloke/Vicuna-13B-CoT-GPTQ",
-        "MLFlow-Sandy0909/finance_sentiment",
-        "MLFlow-JosephusCheung/Qwen-LLaMAfied-7B-Chat",
-        "MLFlow-acrastt/Marx-3B-V2",
-        "MLFlow-amitness/mergedistill-mt-ar-128",
-        "MLFlow-elliotthwang/Elliott-Chinese-LLaMa-GPTQ-V1.0"
+        "MLFlow-Batch-roberta-base"
     ],
     "workspace": "test-koreacentral",
     "subscription": "80c77c76-74ba-4c8c-8229-4c3b2957990c",

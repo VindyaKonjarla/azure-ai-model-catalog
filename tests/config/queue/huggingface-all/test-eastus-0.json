@@ -1,14 +1,7 @@
 {
     "queue_name": "test-eastus-0",
     "models": [
-        "MLFlow-TheBloke/EverythingLM-13B-16K-GPTQ",
-        "MLFlow-TheBloke/WizardLM-13B-V1.2-GPTQ",
-        "MLFlow-TheBloke/Karen_theEditor_13B-GPTQ",
-        "MLFlow-TabbyML/J-350M",
-        "MLFlow-GRPUI/sgugit-model-v3",
-        "MLFlow-SatoruDano/llama-2-7b-finetuned_v1",
-        "MLFlow-migtissera/Synthia-7B",
-        "MLFlow-haoranxu/ALMA-13B-Pretrain"
+        "MLFlow-Batch-microsoft/deberta-base-mnli"
     ],
     "workspace": "test-eastus",
     "subscription": "80c77c76-74ba-4c8c-8229-4c3b2957990c",

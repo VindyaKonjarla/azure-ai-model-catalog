@@ -1,13 +1,7 @@
 {
     "queue_name": "test-southafricanorth-2",
     "models": [
-        "MLFlow-TheBloke/OpenOrcaxOpenChat-Preview2-13B-GPTQ",
-        "MLFlow-TheBloke/Llama-2-13B-GPTQ",
-        "MLFlow-RuterNorway/Llama-2-13b-chat-norwegian-GPTQ",
-        "MLFlow-hadifar/eventclassifier",
-        "MLFlow-JeremiahZ/bert-base-uncased-mrpc",
-        "MLFlow-pszemraj/pythia-6.9b-HC3",
-        "MLFlow-malteos/gpt2-xl-wechsel-german"
+        "MLFlow-Batch-bert-large-uncased"
     ],
     "workspace": "test-southafricanorth",
     "subscription": "80c77c76-74ba-4c8c-8229-4c3b2957990c",

@@ -1,14 +1,7 @@
 {
     "queue_name": "test-eastus-1",
     "models": [
-        "MLFlow-TheBloke/Llama-2-13B-German-Assistant-v4-GPTQ",
-        "MLFlow-TheBloke/airoboros-l2-13B-gpt4-1.4.1-GPTQ",
-        "MLFlow-TheBloke/Wizard-Vicuna-30B-Uncensored-GPTQ",
-        "MLFlow-Undi95/MLewd-L2-Chat-13B",
-        "MLFlow-amazon-sagemaker-community/xlm-roberta-en-ru-emoji-v2",
-        "MLFlow-firqaaa/Madina-7b-chat-QLoRA-8k",
-        "MLFlow-migtissera/Synthia-7B-v1.2",
-        "MLFlow-luffycodes/higgs-llama-vicuna-ep25-70b"
+        "MLFlow-Batch-microsoft/deberta-base"
     ],
     "workspace": "test-eastus",
     "subscription": "80c77c76-74ba-4c8c-8229-4c3b2957990c",
