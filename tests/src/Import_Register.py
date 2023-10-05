@@ -144,9 +144,9 @@ if __name__ == "__main__":
         update_existing_model=update_existing_model,
         
     )
-    pipeline_object.identity = UserIdentityConfiguration()
+    # pipeline_object.identity = UserIdentityConfiguration()
 
-    pipeline_object.settings.force_rerun = True
+    # pipeline_object.settings.force_rerun = True
 
 
     # pipeline_object.settings.default_compute = COMPUTE
