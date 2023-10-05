@@ -29,8 +29,8 @@ except:
 	workspace_ml_client = MLClient(
 	    credential=credential,
 	    subscription_id=queue.subscription,
-        resource_group_name=queue.resource_group,
-        workspace_name=queue.workspace
+	    resource_group_name=queue.resource_group,
+	    workspace_name=queue.workspace
 	)
 ml_client_registry = MLClient(credential, registry_name=queue.registry)
 import_model = ml_client_registry.components.get(name="import_model_oss_test", label="latest")
