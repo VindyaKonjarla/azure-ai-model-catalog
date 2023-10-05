@@ -40,7 +40,7 @@ class Model:
     def get_test_queue() -> ConfigBox:
         queue_file = f"../config/queue/{test_set}/{test_queue}.json"
         with open(queue_file) as f:
-        return ConfigBox(json.load(f))
+            return ConfigBox(json.load(f))
     def set_next_trigger_model(queue):
         print("In set_next_trigger_model...")
     # file the index of test_model_name in models list queue dictionary
