@@ -17,6 +17,7 @@ import os
 import sys
 from box import ConfigBox
 # from utils.logging import get_logger
+test_model_name = os.environ.get('test_model_name')
 test_queue = os.environ.get('test_queue')
 test_set = os.environ.get('test_set')
 test_trigger_next_model = os.environ.get('test_trigger_next_model')
