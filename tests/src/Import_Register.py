@@ -121,6 +121,8 @@ if __name__ == "__main__":
     TASK_NAME = model.get_task()
     print("TASK_NAME:==",TASK_NAME)
     queue = get_test_queue()
+ 	if test_trigger_next_model == "true":
+	set_next_trigger_model(queue)
 try:
 	credential = DefaultAzureCredential()
 	credential.get_token("https://management.azure.com/.default")
@@ -150,8 +152,7 @@ TASK_NAME = ['fill-mask', 'token-classification', 'question-answering',
 	     'summarization', 'text-generation', 'text-classification', 'translation']
 STRING_TO_CHECK = 'transformers'
 FILE_NAME = "task_and_library.json"
-    if test_trigger_next_model == "true":
-        set_next_trigger_model(queue)
+
 update_existing_model=True
 Reg_Model=test_model_name.replace('/','-')
 huggingface_model_exists_in_registry = False
@@ -206,7 +207,7 @@ if huggingface_pipeline_job  is not None:
         download_path=pipeline_download_path,
         output_name="model_registration_details",
     )
-import json
+
 
 # if pipeline job was not scheduled, skip
 if huggingface_pipeline_job is not None:
