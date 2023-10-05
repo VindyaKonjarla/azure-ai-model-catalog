@@ -16,7 +16,7 @@ import json
 import os
 import sys
 from box import ConfigBox
-from utils.logging import get_logger
+# from utils.logging import get_logger
 test_queue = os.environ.get('test_queue')
 test_set = os.environ.get('test_set')
 queue_file = f"../config/queue/{test_set}/{test_queue}.json"
