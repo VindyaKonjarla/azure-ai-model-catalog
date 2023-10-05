@@ -18,8 +18,6 @@ import sys
 from box import ConfigBox
 # from utils.logging import get_logger
 test_model_name = os.environ.get('test_model_name')
-test_queue = os.environ.get('test_queue')
-test_set = os.environ.get('test_set')
 test_trigger_next_model = os.environ.get('test_trigger_next_model')
 experiment_name = f"Import Model Pipeline"
 URL = "https://huggingface.co/api/models?sort=downloads&direction=-1&limit=10000"
@@ -38,6 +36,8 @@ class Model:
     def __init__(self, model_name) -> None:
         self.model_name = model_name
     def get_test_queue() -> ConfigBox:
+	    test_queue = os.environ.get('test_queue')
+	    test_set = os.environ.get('test_set')
 	    queue_file = f"../config/queue/{test_set}/{test_queue}.json"
 	    with open(queue_file) as f:
 	        return ConfigBox(json.load(f))
