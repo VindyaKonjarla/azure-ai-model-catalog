@@ -25,6 +25,7 @@ from azureml.core.datastore import Datastore
 from azureml.core import Workspace
 from mlflow.tracking.client import MlflowClient
 import re
+from datetime import datetime
 
 # constants
 check_override = True
@@ -165,9 +166,12 @@ def get_latest_model_version(workspace_ml_client, test_model_name ):
 
 
 def create_and_configure_batch_endpoint(
-    foundation_model_name, foundation_model, compute, workspace_ml_client
+    foundation_model_name, foundation_model, compute, workspace_ml_client, task
 ):
 
+    timestamp = int(time.time())
+    endpoint_name = task + str(timestamp)
+    
     reserve_keywords = ["microsoft"]
     regx_for_reserve_keyword = re.compile(
         '|'.join(map(re.escape, reserve_keywords)))
@@ -186,12 +190,13 @@ def create_and_configure_batch_endpoint(
         # Check the model name is more then 32 character
     if len(foundation_model_name) > 32:
         model_name = foundation_model_name[:31]
-        endpoint_name = model_name.rstrip("-")
+        deployment_name = model_name.rstrip("-")
     else:
-        endpoint_name = foundation_model_name
+        deployment_name = foundation_model_name
             
             #endpoint_name = f"{registered_model_name}"
     print("Endpoint name:", {endpoint_name})
+    print("Deployment name:", {deployment_name})
     
     # endpoint_name = f"{registered_model_name}"
     # print("Endpoint name:", {endpoint_name})
@@ -203,7 +208,7 @@ def create_and_configure_batch_endpoint(
     )
     workspace_ml_client.begin_create_or_update(endpoint).result()
 
-    deployment_name = "demo"
+    deployment_name = f"{deployment_name}"
 
     # Create the BatchDeployment
     deployment = BatchDeployment(
@@ -231,7 +236,7 @@ def create_and_configure_batch_endpoint(
     # Retrieve and print the default deployment name
     endpoint = workspace_ml_client.batch_endpoints.get(endpoint_name)
     print(f"The default deployment is {endpoint.defaults.deployment_name}")
-    return endpoint
+    return endpoint_name
 
     
 
@@ -321,17 +326,20 @@ if __name__ == "__main__":
     print("model name replaced with - :", {test_model_name})
     
     foundation_model , foundation_model_name = get_latest_model_version(workspace_ml_client, test_model_name )
-    endpoint = create_and_configure_batch_endpoint(foundation_model_name , foundation_model, queue.compute, workspace_ml_client)
+    #endpoint = create_and_configure_batch_endpoint(foundation_model_name , foundation_model, queue.compute, workspace_ml_client)
     task = foundation_model.flavors["transformers"]["task"]
     print("task :", {task})
+    endpoint_name= create_and_configure_batch_endpoint(foundation_model_name, foundation_model, queue.compute, workspace_ml_client, task)
     folder_path = get_task_specified_input(task=task)
     print(" input taken, running Batch Job")
     input = Input(path=folder_path, type=AssetTypes.URI_FOLDER)
      # Invoke the batch endpoint
     job = workspace_ml_client.batch_endpoints.invoke(
-        endpoint_name=endpoint.name, input=input
+        endpoint_name=endpoint_name, input=input
     )
     workspace_ml_client.jobs.stream(job.name)
+    
+    workspace_ml_client.batch_endpoints.begin_delete(name=endpoint_name).result()
 
    
 
