@@ -22,6 +22,7 @@ test_trigger_next_model = os.environ.get('test_trigger_next_model')
 test_queue = os.environ.get('test_queue')
 test_set = os.environ.get('test_set')
 experiment_name=os.environ.get('experiment_name')
+COMPUTE=os.environ.get('COMPUTE')
 # experiment_name = f"Import Model Pipeline"
 URL = "https://huggingface.co/api/models?sort=downloads&direction=-1&limit=10000"
 COLUMNS_TO_READ = ["modelId", "pipeline_tag", "tags"]
@@ -145,12 +146,12 @@ if __name__ == "__main__":
         update_existing_model=update_existing_model,
         
     )
-    # pipeline_object.identity = UserIdentityConfiguration()
+    pipeline_object.identity = UserIdentityConfiguration()
 
-    # pipeline_object.settings.force_rerun = True
+    pipeline_object.settings.force_rerun = True
 
 
-    # pipeline_object.settings.default_compute = COMPUTE
+    pipeline_object.settings.default_compute = COMPUTE
     schedule_huggingface_model_import = (
         not huggingface_model_exists_in_registry
         and test_model_name not in [None, "None"]
