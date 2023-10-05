@@ -21,7 +21,8 @@ test_model_name = os.environ.get('test_model_name')
 test_trigger_next_model = os.environ.get('test_trigger_next_model')
 test_queue = os.environ.get('test_queue')
 test_set = os.environ.get('test_set')
-experiment_name = f"Import Model Pipeline"
+experiment_name=os.environ.get('experiment_name')
+# experiment_name = f"Import Model Pipeline"
 URL = "https://huggingface.co/api/models?sort=downloads&direction=-1&limit=10000"
 COLUMNS_TO_READ = ["modelId", "pipeline_tag", "tags"]
 LIST_OF_COLUMNS = ['modelId', 'downloads',
@@ -162,7 +163,7 @@ if __name__ == "__main__":
     # if schedule_huggingface_model_import:
         # submit the pipeline job
     huggingface_pipeline_job = workspace_ml_client.jobs.create_or_update(
-        pipeline_object, experiment_name="Import Model Pipeline"
+        pipeline_object, experiment_name=experiment_name
     )
     # wait for the pipeline job to complete
     workspace_ml_client.jobs.stream(huggingface_pipeline_job.name)
