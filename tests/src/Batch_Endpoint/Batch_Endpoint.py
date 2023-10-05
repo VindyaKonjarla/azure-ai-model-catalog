@@ -168,6 +168,17 @@ def create_and_configure_batch_endpoint(
     foundation_model_name, foundation_model, compute, workspace_ml_client
 ):
 
+    reserve_keywords = ["microsoft"]
+    regx_for_reserve_keyword = re.compile(
+        '|'.join(map(re.escape, reserve_keywords)))
+    reserve_keywords_check = re.findall(
+        regx_for_reserve_keyword, foundation_model_name)
+    if reserve_keywords_check:
+        foundation_model_name = regx_for_reserve_keyword.sub(
+            '', foundation_model_name)
+        foundation_model_name = foundation_model_name.lstrip("-")
+
+    
     if foundation_model_name[0].isdigit():
             num_pattern = "[0-9]"
             foundation_model_name = re.sub(num_pattern, '', foundation_model_name)
@@ -293,18 +304,18 @@ if __name__ == "__main__":
         # Replace the expression with hyphen
         test_model_name  = regx_for_expression.sub("-", test_model_name)
 
-    reserve_keywords = ["microsoft"]
-    # Create the regular expression to ignore
-    regx_for_reserve_keyword = re.compile(
-        '|'.join(map(re.escape, reserve_keywords)))
-    # Check the model_name contains any of the string
-    reserve_keywords_check = re.findall(
-        regx_for_reserve_keyword, test_model_name)
-    if reserve_keywords_check:
-        # Replace the resenve keyword with nothing with hyphen
-        test_model_name = regx_for_reserve_keyword.sub(
-            '', test_model_name)
-        test_model_name = test_model_name.lstrip("-")
+    # reserve_keywords = ["microsoft"]
+    # # Create the regular expression to ignore
+    # regx_for_reserve_keyword = re.compile(
+    #     '|'.join(map(re.escape, reserve_keywords)))
+    # # Check the model_name contains any of the string
+    # reserve_keywords_check = re.findall(
+    #     regx_for_reserve_keyword, test_model_name)
+    # if reserve_keywords_check:
+    #     # Replace the resenve keyword with nothing with hyphen
+    #     test_model_name = regx_for_reserve_keyword.sub(
+    #         '', test_model_name)
+    #     test_model_name = test_model_name.lstrip("-")
 
 
     print("model name replaced with - :", {test_model_name})
