@@ -14,7 +14,7 @@ import os
 import shutil
 test_queue = os.environ.get('test_queue')
 test_set = os.environ.get('test_set')
-queue_file = f"../../config/queue/{test_set}/{test_queue}.json"
+queue_file = f"../config/queue/{test_set}/{test_queue}.json"
 with open(queue_file) as f:
 	queue=ConfigBox(json.load(f))
 try:
