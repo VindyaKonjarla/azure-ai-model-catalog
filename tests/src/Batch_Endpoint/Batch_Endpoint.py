@@ -131,9 +131,9 @@ def create_or_get_compute_target(ml_client,  compute):
         ml_client.compute.begin_create_or_update(compute).result()
     return compute
 
-def get_latest_model_version(workspace_ml_client, registered_model_name):
+def get_latest_model_version(workspace_ml_client, test_model_name ):
     print("In get_latest_model_version...")
-    version_list = list(workspace_ml_client.models.list(registered_model_name))
+    version_list = list(workspace_ml_client.models.list(test_model_name ))
     
     if len(version_list) == 0:
         print("Model not found in registry")
@@ -142,7 +142,7 @@ def get_latest_model_version(workspace_ml_client, registered_model_name):
     else:
         model_version = version_list[0].version
         foundation_model = workspace_ml_client.models.get(
-            registered_model_name, model_version)
+            test_model_name , model_version)
         print(
             "\n\nUsing model name: {0}, version: {1}, id: {2} for inferencing".format(
                 foundation_model.name, foundation_model.version, foundation_model.id
@@ -160,17 +160,30 @@ def get_latest_model_version(workspace_ml_client, registered_model_name):
         print("No model found in the registry.")
     
     #print(f"Model Config : {latest_model.config}")
-    return foundation_model
+    return foundation_model, foundation_model_name
 
 
 
 def create_and_configure_batch_endpoint(
-    foundation_model, compute, workspace_ml_client
+    foundation_model_name, foundation_model, compute, workspace_ml_client
 ):
-    # Create a unique endpoint name using a timestamp
-    #timestamp = int(time.time())
-    endpoint_name = f"{registered_model_name}"
+
+    if foundation_model_name[0].isdigit():
+            num_pattern = "[0-9]"
+            foundation_model_name = re.sub(num_pattern, '', foundation_model_name)
+            foundation_model_name = foundation_model_name.strip("-")
+        # Check the model name is more then 32 character
+    if len(foundation_model_name) > 32:
+        model_name = foundation_model_name[:31]
+        endpoint_name = model_name.rstrip("-")
+    else:
+        endpoint_name = foundation_model_name
+            
+            #endpoint_name = f"{registered_model_name}"
     print("Endpoint name:", {endpoint_name})
+    
+    # endpoint_name = f"{registered_model_name}"
+    # print("Endpoint name:", {endpoint_name})
 
     # Create the BatchEndpoint
     endpoint = BatchEndpoint(
@@ -269,7 +282,6 @@ if __name__ == "__main__":
     #version_list = list(workspace_ml_client.models.list(test_model_name))
     client = MlflowClient()
 
-
     expression_to_ignore = ["/", "\\", "|", "@", "#", ".",
                             "$", "%", "^", "&", "*", "<", ">", "?", "!", "~"]
     # Create the regular expression to ignore
@@ -279,22 +291,26 @@ if __name__ == "__main__":
     expression_check = re.findall(regx_for_expression, test_model_name)
     if expression_check:
         # Replace the expression with hyphen
-        registered_model_name  = regx_for_expression.sub("-", test_model_name)
-    else:
-        # If threr will be model namr with / then replace it
-        registered_model_name  = test_model_name
+        test_model_name  = regx_for_expression.sub("-", test_model_name)
+
+    reserve_keywords = ["microsoft"]
+    # Create the regular expression to ignore
+    regx_for_reserve_keyword = re.compile(
+        '|'.join(map(re.escape, reserve_keywords)))
+    # Check the model_name contains any of the string
+    reserve_keywords_check = re.findall(
+        regx_for_reserve_keyword, test_model_name)
+    if reserve_keywords_check:
+        # Replace the resenve keyword with nothing with hyphen
+        test_model_name = regx_for_reserve_keyword.sub(
+            '', test_model_name)
+        test_model_name = test_model_name.lstrip("-")
 
 
-    print("model name replaced with - :", {registered_model_name})
-    # registered_model_detail = client.get_latest_versions(
-    #     name=registered_model_name, stages=["None"])
-    # model_detail = registered_model_detail[0]
-    # print("Latest registered model: " , model_detail)
-    # print("Latest registered model version is : ", model_detail.version)
-    # print("queue.compute---", queue.compute)
-    # print("queue.workspace====", queue.workspace)
-    foundation_model = get_latest_model_version(workspace_ml_client, registered_model_name)
-    endpoint = create_and_configure_batch_endpoint(foundation_model, queue.compute, workspace_ml_client)
+    print("model name replaced with - :", {test_model_name})
+    
+    foundation_model , foundation_model_name = get_latest_model_version(workspace_ml_client, test_model_name )
+    endpoint = create_and_configure_batch_endpoint(foundation_model_name , foundation_model, queue.compute, workspace_ml_client)
     task = foundation_model.flavors["transformers"]["task"]
     print("task :", {task})
     folder_path = get_task_specified_input(task=task)
