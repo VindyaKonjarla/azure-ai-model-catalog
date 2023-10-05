@@ -121,7 +121,7 @@ if __name__ == "__main__":
     TASK_NAME = model.get_task()
     print("TASK_NAME:==",TASK_NAME)
     queue = get_test_queue()
- 	if test_trigger_next_model == "true":
+ if test_trigger_next_model == "true":
 	set_next_trigger_model(queue)
 try:
 	credential = DefaultAzureCredential()
