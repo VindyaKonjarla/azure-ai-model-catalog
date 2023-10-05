@@ -19,6 +19,8 @@ from box import ConfigBox
 # from utils.logging import get_logger
 test_model_name = os.environ.get('test_model_name')
 test_trigger_next_model = os.environ.get('test_trigger_next_model')
+test_queue = os.environ.get('test_queue')
+test_set = os.environ.get('test_set')
 experiment_name = f"Import Model Pipeline"
 URL = "https://huggingface.co/api/models?sort=downloads&direction=-1&limit=10000"
 COLUMNS_TO_READ = ["modelId", "pipeline_tag", "tags"]
@@ -36,11 +38,9 @@ class Model:
     def __init__(self, model_name) -> None:
         self.model_name = model_name
     def get_test_queue() -> ConfigBox:
-	    test_queue = os.environ.get('test_queue')
-	    test_set = os.environ.get('test_set')
-	    queue_file = f"../config/queue/{test_set}/{test_queue}.json"
-	    with open(queue_file) as f:
-	        return ConfigBox(json.load(f))
+	queue_file = f"../config/queue/{test_set}/{test_queue}.json"
+	with open(queue_file) as f:
+	return ConfigBox(json.load(f))
     def set_next_trigger_model(queue):
         print("In set_next_trigger_model...")
     # file the index of test_model_name in models list queue dictionary
@@ -116,6 +116,7 @@ if __name__ == "__main__":
     model = Model(model_name=test_model_name)		
     TASK_NAME = model.get_task()
     print("TASK_NAME:==",TASK_NAME)
+    print("test_queue:==",test_queue)
     queue = get_test_queue()
     if test_trigger_next_model == "true":
         set_next_trigger_model(queue)
