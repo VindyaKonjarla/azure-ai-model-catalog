@@ -32,86 +32,86 @@ FILE_NAME = "task_and_library.json"
 update_existing_model=True
 Reg_Model=test_model_name.replace('/','-')
 huggingface_model_exists_in_registry = False
-# class Model:
-def __init__(self, model_name) -> None:
-    self.model_name = model_name
-def get_test_queue() -> ConfigBox:
-    test_queue = os.environ.get('test_queue')
-    test_set = os.environ.get('test_set')
-    queue_file = f"../config/queue/{test_set}/{test_queue}.json"
-    with open(queue_file) as f:
-        return ConfigBox(json.load(f))
-def set_next_trigger_model(queue):
-    print("In set_next_trigger_model...")
-# file the index of test_model_name in models list queue dictionary
-    model_list = list(queue.models)
-    #model_name_without_slash = test_model_name.replace('/', '-')
-    check_mlflow_model = "MLFlow-"+test_model_name
-    index = model_list.index(check_mlflow_model)
-    #index = model_list.index(test_model_name)
-    print(f"index of {test_model_name} in queue: {index}")
-# if index is not the last element in the list, get the next element in the list
-    if index < len(model_list) - 1:
-        next_model = model_list[index + 1]
-    else:
-        if (test_keep_looping == "true"):
-            next_model = queue[0]
+class Model:
+    def __init__(self, model_name) -> None:
+        self.model_name = model_name
+    def get_test_queue() -> ConfigBox:
+        test_queue = os.environ.get('test_queue')
+        test_set = os.environ.get('test_set')
+        queue_file = f"../config/queue/{test_set}/{test_queue}.json"
+        with open(queue_file) as f:
+            return ConfigBox(json.load(f))
+    def set_next_trigger_model(queue):
+        print("In set_next_trigger_model...")
+    # file the index of test_model_name in models list queue dictionary
+        model_list = list(queue.models)
+        #model_name_without_slash = test_model_name.replace('/', '-')
+        check_mlflow_model = "MLFlow-"+test_model_name
+        index = model_list.index(check_mlflow_model)
+        #index = model_list.index(test_model_name)
+        print(f"index of {test_model_name} in queue: {index}")
+    # if index is not the last element in the list, get the next element in the list
+        if index < len(model_list) - 1:
+            next_model = model_list[index + 1]
         else:
-            print("::warning:: finishing the queue")
-            next_model = ""
-# write the next model to github step output
-    with open(os.environ['GITHUB_OUTPUT'], 'a') as fh:
-        print(f'NEXT_MODEL={next_model}')
-        print(f'NEXT_MODEL={next_model}', file=fh)
-def get_task(self) -> str:
-    hf_api = HfApi()
-    # Get all the1 models in the list
-    models = hf_api.list_models(
-        full=True, sort='lastModified', direction=-1)
-    # Unpack all values from the generator object
-    required_data = [i for i in models]
-
-    daata_dict = {}
-    # Loop through the list
-    for data in required_data:
-        # Loop through all the column present in the list
-        for key in data.__dict__.keys():
-            if key in LIST_OF_COLUMNS:
-                # Check the dictionary already contains a value for that particular column
-                if daata_dict.get(key) is None:
-                    # If the column and its value is not present then insert column and an empty list pair to the dictionary
-                    daata_dict[key] = []
-                # Get the value for that particular column
-                values = daata_dict.get(key)
-                if key == 'tags':
-                    # If its tag column extract value if it is nonne then bydefault return a list with string Empty
-                    values.append(data.__dict__.get(key, ["Empty"]))
-                else:
-                    values.append(data.__dict__.get(key, "Empty"))
-                daata_dict[key] = values
-    # Convert dictionary to the dataframe
-    df = pd.DataFrame(daata_dict)
-    # Find the data with the model which will be having trasnfomer tag
-    df = df[df.tags.apply(lambda x: STRING_TO_CHECK in x)]
-    # Retrive the data whose task is in the list
-    df = df[df['pipeline_tag'].isin(TASK_NAME)]
-
-    # Find the data with that particular name
-    required_data = df[df.modelId.apply(lambda x: x == self.model_name)]
-    # Get the task
-    required_data = required_data["pipeline_tag"].to_string()
-    # Create pattern fiel number and space
-    pattern = r'[0-9\s+]'
-    # Replace number and space
-    final_data = re.sub(pattern, '', required_data)
-    return final_data
-
-def model_import_pipeline(model_id,update_existing_model, task_name):
-
-    import_model_job = import_model(model_id=test_model_name, task_name=task_name,update_existing_model=update_existing_model)
-    # Set job to not continue on failure
-    import_model_job.settings.continue_on_step_failure = False
-    return {"model_registration_details": import_model_job.outputs.model_registration_details}
+            if (test_keep_looping == "true"):
+                next_model = queue[0]
+            else:
+                print("::warning:: finishing the queue")
+                next_model = ""
+    # write the next model to github step output
+        with open(os.environ['GITHUB_OUTPUT'], 'a') as fh:
+            print(f'NEXT_MODEL={next_model}')
+            print(f'NEXT_MODEL={next_model}', file=fh)
+    def get_task(self) -> str:
+        hf_api = HfApi()
+        # Get all the1 models in the list
+        models = hf_api.list_models(
+            full=True, sort='lastModified', direction=-1)
+        # Unpack all values from the generator object
+        required_data = [i for i in models]
+    
+        daata_dict = {}
+        # Loop through the list
+        for data in required_data:
+            # Loop through all the column present in the list
+            for key in data.__dict__.keys():
+                if key in LIST_OF_COLUMNS:
+                    # Check the dictionary already contains a value for that particular column
+                    if daata_dict.get(key) is None:
+                        # If the column and its value is not present then insert column and an empty list pair to the dictionary
+                        daata_dict[key] = []
+                    # Get the value for that particular column
+                    values = daata_dict.get(key)
+                    if key == 'tags':
+                        # If its tag column extract value if it is nonne then bydefault return a list with string Empty
+                        values.append(data.__dict__.get(key, ["Empty"]))
+                    else:
+                        values.append(data.__dict__.get(key, "Empty"))
+                    daata_dict[key] = values
+        # Convert dictionary to the dataframe
+        df = pd.DataFrame(daata_dict)
+        # Find the data with the model which will be having trasnfomer tag
+        df = df[df.tags.apply(lambda x: STRING_TO_CHECK in x)]
+        # Retrive the data whose task is in the list
+        df = df[df['pipeline_tag'].isin(TASK_NAME)]
+    
+        # Find the data with that particular name
+        required_data = df[df.modelId.apply(lambda x: x == self.model_name)]
+        # Get the task
+        required_data = required_data["pipeline_tag"].to_string()
+        # Create pattern fiel number and space
+        pattern = r'[0-9\s+]'
+        # Replace number and space
+        final_data = re.sub(pattern, '', required_data)
+        return final_data
+    
+    def model_import_pipeline(model_id,update_existing_model, task_name):
+    
+        import_model_job = import_model(model_id=test_model_name, task_name=task_name,update_existing_model=update_existing_model)
+        # Set job to not continue on failure
+        import_model_job.settings.continue_on_step_failure = False
+        return {"model_registration_details": import_model_job.outputs.model_registration_details}
 if __name__ == "__main__":
     # model = Model(model_name=test_model_name)		
     TASK_NAME = test_model_name.get_task()
