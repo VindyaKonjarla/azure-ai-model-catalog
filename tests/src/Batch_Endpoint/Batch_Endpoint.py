@@ -24,6 +24,7 @@ from azure.ai.ml.entities import (
 from azureml.core.datastore import Datastore
 from azureml.core import Workspace
 from mlflow.tracking.client import MlflowClient
+import re
 
 # constants
 check_override = True
@@ -130,9 +131,9 @@ def create_or_get_compute_target(ml_client,  compute):
         ml_client.compute.begin_create_or_update(compute).result()
     return compute
 
-def get_latest_model_version(workspace_ml_client, test_model_name):
+def get_latest_model_version(workspace_ml_client, registered_model_name):
     print("In get_latest_model_version...")
-    version_list = list(workspace_ml_client.models.list(test_model_name))
+    version_list = list(workspace_ml_client.models.list(registered_model_name))
     
     if len(version_list) == 0:
         print("Model not found in registry")
@@ -141,7 +142,7 @@ def get_latest_model_version(workspace_ml_client, test_model_name):
     else:
         model_version = version_list[0].version
         foundation_model = workspace_ml_client.models.get(
-            test_model_name, model_version)
+            registered_model_name, model_version)
         print(
             "\n\nUsing model name: {0}, version: {1}, id: {2} for inferencing".format(
                 foundation_model.name, foundation_model.version, foundation_model.id
@@ -167,8 +168,8 @@ def create_and_configure_batch_endpoint(
     foundation_model, compute, workspace_ml_client
 ):
     # Create a unique endpoint name using a timestamp
-    timestamp = int(time.time())
-    endpoint_name = f"{test_model_name}-{timestamp}"
+    #timestamp = int(time.time())
+    endpoint_name = f"{registered_model_name}"
     print("Endpoint name:", {endpoint_name})
 
     # Create the BatchEndpoint
@@ -267,19 +268,37 @@ if __name__ == "__main__":
     
     #version_list = list(workspace_ml_client.models.list(test_model_name))
     client = MlflowClient()
-    registered_model_detail = client.get_latest_versions(
-        name=test_model_name, stages=["None"])
-    model_detail = registered_model_detail[0]
-    print("Latest registered model: " , model_detail)
-    print("Latest registered model version is : ", model_detail.version)
-    print("queue.compute---", queue.compute)
-    print("queue.workspace====", queue.workspace)
-    foundation_model = get_latest_model_version(workspace_ml_client, test_model_name)
+
+
+    expression_to_ignore = ["/", "\\", "|", "@", "#", ".",
+                            "$", "%", "^", "&", "*", "<", ">", "?", "!", "~"]
+    # Create the regular expression to ignore
+    regx_for_expression = re.compile(
+        '|'.join(map(re.escape, expression_to_ignore)))
+    # Check the model_name contains any of there character
+    expression_check = re.findall(regx_for_expression, test_model_name)
+    if expression_check:
+        # Replace the expression with hyphen
+        registered_model_name  = regx_for_expression.sub("-", test_model_name)
+    else:
+        # If threr will be model namr with / then replace it
+        registered_model_name  = test_model_name
+
+
+    print("model name replaced with - :", {registered_model_name})
+    # registered_model_detail = client.get_latest_versions(
+    #     name=registered_model_name, stages=["None"])
+    # model_detail = registered_model_detail[0]
+    # print("Latest registered model: " , model_detail)
+    # print("Latest registered model version is : ", model_detail.version)
+    # print("queue.compute---", queue.compute)
+    # print("queue.workspace====", queue.workspace)
+    foundation_model = get_latest_model_version(workspace_ml_client, registered_model_name)
     endpoint = create_and_configure_batch_endpoint(foundation_model, queue.compute, workspace_ml_client)
     task = foundation_model.flavors["transformers"]["task"]
     print("task :", {task})
     folder_path = get_task_specified_input(task=task)
-    print(" input taken running Batch Job")
+    print(" input taken, running Batch Job")
     input = Input(path=folder_path, type=AssetTypes.URI_FOLDER)
      # Invoke the batch endpoint
     job = workspace_ml_client.batch_endpoints.invoke(
