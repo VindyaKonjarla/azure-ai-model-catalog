@@ -46,7 +46,7 @@ jobs:
     - name: deploy-model-step
       id: deploy-model-step
       run: python generic_initial_automation.py
-      working-directory: tests/src/automation_for_constant_library
+      working-directory: tests/src/Batch_Endpoint
     - name: trigger-next-model-step
       env:
         GITHUB_TOKEN: ${{ secrets.WORKFLOW_TOKEN }}
