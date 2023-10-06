@@ -172,7 +172,7 @@ def create_or_get_compute_target(ml_client,  compute):
         ml_client.compute.begin_create_or_update(compute).result()
     return compute
 
-def get_latest_model_version(workspace_ml_client, test_model_name ):
+def get_latest_model_version(workspace_ml_client, test_model_name):
     print("In get_latest_model_version...")
     version_list = list(workspace_ml_client.models.list(test_model_name ))
     
@@ -352,12 +352,12 @@ if __name__ == "__main__":
 
     print("model name replaced with - :", {test_model_name})
     
-    foundation_model , foundation_model_name = get_latest_model_version(workspace_ml_client, test_model_name )
+    foundation_model, foundation_model_name = get_latest_model_version(workspace_ml_client, test_model_name.lower())
     #endpoint = create_and_configure_batch_endpoint(foundation_model_name , foundation_model, queue.compute, workspace_ml_client)
     
     task = foundation_model.flavors["transformers"]["task"]
     print("task :", {task})
-    endpoint_name= create_and_configure_batch_endpoint(foundation_model_name, foundation_model, queue.compute, workspace_ml_client, task)
+    endpoint_name = create_and_configure_batch_endpoint(foundation_model_name, foundation_model, queue.compute, workspace_ml_client, task)
     folder_path = get_task_specified_input(task=task, test_model_name=test_model_name)
     print(" input taken, running Batch Job")
     input = Input(path=folder_path, type=AssetTypes.URI_FOLDER)
