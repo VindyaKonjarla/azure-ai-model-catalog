@@ -4,7 +4,7 @@
         "MLFlow-Batch-t5-large",
         "MLFlow-Batch-Jean-Baptiste/camembert-ner"
     ],
-    "workspace": "test-southcentralus",
+    "workspace": "test-northeurope",
     "subscription": "80c77c76-74ba-4c8c-8229-4c3b2957990c",
     "resource_group": "huggingface-registry-test1",
     "registry": "HuggingFace",
