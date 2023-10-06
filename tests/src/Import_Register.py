@@ -16,6 +16,8 @@ import json
 import os
 import sys
 from box import ConfigBox
+from azure.ai.ml.entities import AmlCompute
+from azure.core.exceptions import ResourceNotFoundError
 # from utils.logging import get_logger
 test_model_name = os.environ.get('test_model_name')
 test_trigger_next_model = os.environ.get('test_trigger_next_model')
@@ -106,9 +108,9 @@ def set_next_trigger_model(queue):
         print(f'NEXT_MODEL={next_model}', file=fh)
 
 @pipeline
-def model_import_pipeline(model_id,update_existing_model, task_name):
+def model_import_pipeline(model_id,COMPUTE,update_existing_model, task_name):
 
-    import_model_job = import_model(model_id=test_model_name, task_name=task_name,update_existing_model=update_existing_model)
+    import_model_job = import_model(model_id=test_model_name,compute=COMPUTE, task_name=task_name,update_existing_model=update_existing_model)
     # Set job to not continue on failure
     import_model_job.settings.continue_on_step_failure = False
     return {"model_registration_details": import_model_job.outputs.model_registration_details}
@@ -137,12 +139,39 @@ if __name__ == "__main__":
             workspace_name=queue.workspace
         )
     ml_client_registry = MLClient(credential, registry_name=queue.registry)
+    registry_mlclient = MLClient(credential, registry_name="azureml")
+    version_list = list(registry_mlclient.models.list(test_model_name))
+    if len(version_list) == 0:
+        print("Model not found in registry")
+    else:
+        model_version = version_list[0].version
+        foundation_model = registry_mlclient.models.get(
+        test_model_name, model_version)
+        print(
+        "\n\nUsing model name: {0}, version: {1}, id: {2} for inferencing".format(
+            foundation_model.name, foundation_model.version, foundation_model.id))
+    computelist=foundation_model.properties.get("inference-recommended-sku", "Standard_E16s_v3")
+    a = computelist.index(',')
+    COMPUTE = computelist[:a]
+    try:
+        _ = ml_client_ws.compute.get(COMPUTE)
+        print("Found existing compute target.")
+    except ResourceNotFoundError:
+        print("Creating a new compute target...")
+        compute_config = AmlCompute(
+            name=COMPUTE,
+            type="amlcompute",
+            size=compute,
+            idle_time_before_scale_down=120,
+            min_instances=0,
+            max_instances=6,
+        )
+    ml_client_ws.begin_create_or_update(compute_config).result()
     import_model = ml_client_registry.components.get(name="import_model_oss_test", label="latest")
     pipeline_object = model_import_pipeline(
         model_id=test_model_name,
-        # compute=COMPUTE,
+        compute=COMPUTE,
         task_name=TASK_NAME,
-        # registry_name=REGISTRY_NAME,
         update_existing_model=update_existing_model,
         
     )
