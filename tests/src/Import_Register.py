@@ -155,7 +155,7 @@ if __name__ == "__main__":
     a = computelist.index(',')
     COMPUTE = computelist[:a]
     try:
-        _ = ml_client_ws.compute.get(COMPUTE)
+        _ = workspace_ml_client.compute.get(COMPUTE)
         print("Found existing compute target.")
     except ResourceNotFoundError:
         print("Creating a new compute target...")
@@ -167,7 +167,7 @@ if __name__ == "__main__":
             min_instances=0,
             max_instances=6,
         )
-    ml_client_ws.begin_create_or_update(compute_config).result()
+    workspace_ml_client.begin_create_or_update(compute_config).result()
     import_model = ml_client_registry.components.get(name="import_model_oss_test", label="latest")
     pipeline_object = model_import_pipeline(
         model_id=test_model_name,
