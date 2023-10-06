@@ -21,6 +21,7 @@ from azure.core.exceptions import ResourceNotFoundError
 # from utils.logging import get_logger
 test_model_name = os.environ.get('test_model_name')
 test_trigger_next_model = os.environ.get('test_trigger_next_model')
+test_keep_looping = os.environ.get('test_keep_looping')
 test_queue = os.environ.get('test_queue')
 test_set = os.environ.get('test_set')
 experiment_name=os.environ.get('experiment_name')
