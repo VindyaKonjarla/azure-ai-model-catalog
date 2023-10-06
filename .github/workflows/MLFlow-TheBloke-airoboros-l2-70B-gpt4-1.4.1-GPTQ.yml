@@ -10,6 +10,7 @@ env:
   test_queue: test-southcentralus
   test_set: huggingface-all
   test_keep_looping: false
+  ACTIONS_STEP_DEBUG: true
 
 jobs:
   deploy-model-job:
