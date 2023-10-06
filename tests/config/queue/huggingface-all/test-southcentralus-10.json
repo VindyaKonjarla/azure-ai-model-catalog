@@ -2,12 +2,7 @@
     "queue_name": "test-southcentralus-10",
     "models": [
       
-        "MLFlow-TheBloke/airoboros-l2-70B-gpt4-1.4.1-GPTQ",
-        "MLFlow-bigcode/starpii",
-        "MLFlow-ckiplab/bert-base-chinese-ner",
-        "MLFlow-d4data/biomedical-ner-all"
-        
-      
+        "MLFlow-MP-Jean-Baptiste-camembert-ner"
     ],
     "workspace": "test-southcentralus",
     "subscription": "80c77c76-74ba-4c8c-8229-4c3b2957990c",
