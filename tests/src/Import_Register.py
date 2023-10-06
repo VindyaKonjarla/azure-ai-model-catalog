@@ -172,7 +172,7 @@ if __name__ == "__main__":
     import_model = ml_client_registry.components.get(name="import_model_oss_test", label="latest")
     pipeline_object = model_import_pipeline(
         model_id=test_model_name,
-        compute=compute_name,
+        compute_name=compute_name,
         task_name=TASK_NAME,
         update_existing_model=update_existing_model,
         
