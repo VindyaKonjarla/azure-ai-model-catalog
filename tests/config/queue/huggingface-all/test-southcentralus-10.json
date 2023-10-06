@@ -2,7 +2,11 @@
     "queue_name": "test-southcentralus-10",
     "models": [
       
-        "MLFlow-WizardLM/WizardCoder-Python-34B-V1.0"
+        "MLFlow-TheBloke/airoboros-l2-70B-gpt4-1.4.1-GPTQ",
+        "MLFlow-bigcode/starpii",
+        "MLFlow-ckiplab/bert-base-chinese-ner",
+        "MLFlow-d4data/biomedical-ner-all"
+        
       
     ],
     "workspace": "test-southcentralus",
