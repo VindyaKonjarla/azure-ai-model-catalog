@@ -1,10 +1,10 @@
 |Category|🚀Total|✅Pass|Pass%|❌Failure|Failure%|🚫Cancelled|⏳Running|❗️NotTested
 | ----------- | ----------------- | -------- | -------- | --------  | -------- | --------- | ---------- | -----------|
-Online Endpoint Deployment - Dynamic Installation|35|35|100.0%|0|0.0%|0|0|0|
-Online Endpoint Deployment - Model Packaging|35|35|100.0%|0|0.0%|0|0|0|
-Batch Endpoint Deployment|35|35|100.0%|0|0.0%|0|0|0|
+Online Endpoint - Dynamic Installation|35|35|100.0%|0|0.0%|0|0|0|
+Online Endpoint - Model Packaging|35|35|100.0%|0|0.0%|0|0|0|
+Batch Endpoint |35|35|100.0%|0|0.0%|0|0|0|
 
-|     | Model                                                        | Status   | LastRunLink                                                                     | LastRunTimestamp     | Model Package/Dynmaic Installation/Batch   |
+|     | Model                                                        | Status   | LastRunLink                                                                     | LastRunTimestamp     | Category   |
 |----:|:-------------------------------------------------------------|:---------|:--------------------------------------------------------------------------------|:---------------------|:-------------------------------------------|
 |   0 | MLFlow-MP-Jean-Baptiste-camembert-ner                        | ✅ PASS   | [Link](https://github.com/Azure/azure-ai-model-catalog/actions/runs/6434327696) | 2023-10-06T16:48:55Z | Model Package                              |
 |   1 | MLFlow-MP-bert-base-cased                                    | ✅ PASS   | [Link](https://github.com/Azure/azure-ai-model-catalog/actions/runs/6432260824) | 2023-10-06T13:26:25Z | Model Package                              |
