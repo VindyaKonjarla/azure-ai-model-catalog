@@ -1,7 +1,7 @@
 {
     "queue_name": "test-northeurope-3",
     "models":[
-        "MLFlow-t5-small"
+        "MLFlow-Jean-Baptiste/camembert-ner"
     ],
     "models1": [
         "MLFlow-HooshvareLab/bert-base-parsbert-ner-uncased",

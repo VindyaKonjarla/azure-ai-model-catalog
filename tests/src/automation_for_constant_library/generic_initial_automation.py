@@ -175,7 +175,7 @@ if __name__ == "__main__":
     mlflow.set_tracking_uri(ws.get_mlflow_tracking_uri())
     compute_target = create_or_get_compute_target(
         workspace_ml_client, queue.compute)
-    environment_variables = {"AZUREML_ARTIFACTS_DEFAULT_TIMEOUT":600.0,"test_model_name": test_model_name}
+    environment_variables = {"AZUREML_ARTIFACTS_DEFAULT_TIMEOUT":600.0,"test_model_name": test_model_name.lower()}
     env_list = workspace_ml_client.environments.list(name=queue.environment)
     latest_version = 0
     for env in env_list:
@@ -190,7 +190,7 @@ if __name__ == "__main__":
     create_and_get_job_studio_url(command_job, workspace_ml_client)
 
     InferenceAndDeployment = ModelInferenceAndDeployemnt(
-        test_model_name=test_model_name,
+        test_model_name=test_model_name.lower(),
         workspace_ml_client=workspace_ml_client,
         registry=queue.registry
     )
