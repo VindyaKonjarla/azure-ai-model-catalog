@@ -141,13 +141,13 @@ if __name__ == "__main__":
         )
     ml_client_registry = MLClient(credential, registry_name=queue.registry)
     registry_mlclient = MLClient(credential, registry_name="azureml")
-    version_list = list(registry_mlclient.models.list(test_model_name))
+    version_list = list(registry_mlclient.models.list(Reg_Model))
     if len(version_list) == 0:
         print("Model not found in registry")
     else:
         model_version = version_list[0].version
         foundation_model = registry_mlclient.models.get(
-        test_model_name, model_version)
+        Reg_Model, model_version)
         print(
         "\n\nUsing model name: {0}, version: {1}, id: {2} for inferencing".format(
             foundation_model.name, foundation_model.version, foundation_model.id))
