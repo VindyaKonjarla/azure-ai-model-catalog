@@ -1,5 +1,5 @@
 {
-    "queue_name": "test-northeurope-3",
+    "queue_name": "test-northeurope-4",
     "models":[
         "MLFlow-Jean-Baptiste/camembert-ner"
     ],
