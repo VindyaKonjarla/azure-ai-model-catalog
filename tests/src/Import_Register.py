@@ -168,7 +168,7 @@ if __name__ == "__main__":
             min_instances=0,
             max_instances=6,
         )
-    workspace_ml_client.begin_create_or_update(compute_config).result()
+        workspace_ml_client.begin_create_or_update(compute_config).result()
     import_model = ml_client_registry.components.get(name="import_model_oss_test", label="latest")
     pipeline_object = model_import_pipeline(
         model_id=test_model_name,
