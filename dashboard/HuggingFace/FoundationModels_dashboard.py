@@ -40,7 +40,7 @@ class Dashboard():
                 workflows = response.json()
                 # append workflow_runs to runs list
                 for workflow in workflows["workflows"]:
-                    if (workflow["name"].startswith("MLFlow-MP") | workflow["name"].startswith("MLFlow-DI")):
+                    if (workflow["name"].startswith("MLFlow-MP") | workflow["name"].startswith("MLFlow-DI") | workflow["name"].startswith("MLFlow-Batch")):
                         workflow_name.append(workflow["name"])
                 if not workflows["workflows"]:
                     break
