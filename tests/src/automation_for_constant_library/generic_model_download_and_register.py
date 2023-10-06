@@ -325,10 +325,10 @@ if __name__ == "__main__":
     expression_check = re.findall(regx_for_expression, test_model_name)
     if expression_check:
         # Replace the expression with hyphen
-        registered_model_name = regx_for_expression.sub("-", test_model_name)
+        registered_model_name = regx_for_expression.sub("-", test_model_name.lower())
     else:
         # If threr will be model namr with / then replace it
-        registered_model_name = test_model_name
+        registered_model_name = test_model_name.lower()
     client = MlflowClient()
     model.download_and_register_model(
         task=task, scoring_input=scoring_input, registered_model_name=registered_model_name, client=client)
