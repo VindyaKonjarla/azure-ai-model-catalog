@@ -29,7 +29,7 @@ COLUMNS_TO_READ = ["modelId", "pipeline_tag", "tags"]
 LIST_OF_COLUMNS = ['modelId', 'downloads',
                    'lastModified', 'tags', 'pipeline_tag']
 TASK_NAME = ['fill-mask', 'token-classification', 'question-answering',
-             'summarization', 'text-generation', 'text-classification', 'translation']
+             'summarization', 'text-generation', 'text-classification', 'translation','Automatic Speech Recognition']
 STRING_TO_CHECK = 'transformers'
 FILE_NAME = "task_and_library.json"
 ACCESS_TOKEN = "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"
@@ -117,6 +117,7 @@ class Model:
         """
         scoring_file = f"sample_inputs/{task}.json"
         # check of scoring_file exists
+        print("task:---------:",task)
         try:
             with open(scoring_file) as f:
                 scoring_input = ConfigBox(json.load(f))
@@ -209,22 +210,49 @@ class Model:
                 scoring_input.input_data[index] = scoring_input.input_data[index].replace(
                     "<mask>", pipeline_tokenizer.mask_token).replace("[MASK]", pipeline_tokenizer.mask_token)
 
-        # Generate the transformer model output for that particular model
-        output = generate_signature_output(
-            model_pipeline, scoring_input.input_data)
-        # It will infer the signature directly from input and output
-        signature = infer_signature(scoring_input.input_data, output)
-
         artifact_path = registered_model_name + "-artifact"
-        # With the help of mlflow log and register the model in the workspace
-        mlflow.transformers.log_model(
-            transformers_model=model_pipeline,
-            task=task,
-            artifact_path=artifact_path,
-            registered_model_name=registered_model_name,
-            signature=signature,
-            input_example=scoring_input.input_data
-        )
+        try:
+            # Generate the transformer model output for that particular model
+            output = generate_signature_output(
+                model_pipeline, scoring_input.input_data)
+            # It will infer the signature directly from input and output
+            signature = infer_signature(scoring_input.input_data, output)
+
+            # With the help of mlflow log and register the model in the workspace
+            mlflow.transformers.log_model(
+                transformers_model=model_pipeline,
+                task=task,
+                artifact_path=artifact_path,
+                registered_model_name=registered_model_name,
+                signature=signature,
+                input_example=scoring_input.input_data
+            )
+            logger.info("MLFlow logging and registerring is completed")
+        except IndexError as ex:
+            logger.warning(
+                f"::warning::Reaching in the index error block as model is not compaitable with our input and the exception is : \n {ex}")
+            # Get the output from the pipeline to check which input is nor working
+            output_from_pipeline = model_pipeline(scoring_input.input_data)
+            for index in range(len(output_from_pipeline)):
+                if len(output_from_pipeline[index]) != 0:
+                    logger.info(f"This model is giving output in this index: {index}")
+                    # Generate the transformer model output for that particular model
+                    output = generate_signature_output(
+                        model_pipeline, scoring_input.input_data[index])
+                    # It will infer the signature directly from input and output
+                    signature = infer_signature(
+                        scoring_input.input_data[index], output)
+                    # With the help of mlflow log and register the model in the workspace
+                    mlflow.transformers.log_model(
+                            transformers_model=model_pipeline,
+                            task=task,
+                            artifact_path=artifact_path,
+                            registered_model_name=registered_model_name,
+                            signature=signature,
+                            input_example=scoring_input.input_data[index]
+                        )
+                    logger.info("MLFlow logging and registerring is completed")
+            
         registered_model_list = client.get_latest_versions(
             name=registered_model_name, stages=["None"])
         model_detail = registered_model_list[0]
@@ -297,10 +325,10 @@ if __name__ == "__main__":
     expression_check = re.findall(regx_for_expression, test_model_name)
     if expression_check:
         # Replace the expression with hyphen
-        registered_model_name = regx_for_expression.sub("-", test_model_name)
+        registered_model_name = regx_for_expression.sub("-", test_model_name.lower())
     else:
         # If threr will be model namr with / then replace it
-        registered_model_name = test_model_name
+        registered_model_name = test_model_name.lower()
     client = MlflowClient()
     model.download_and_register_model(
         task=task, scoring_input=scoring_input, registered_model_name=registered_model_name, client=client)
