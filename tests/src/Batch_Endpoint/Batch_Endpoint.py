@@ -1,3 +1,4 @@
+from transformers import AutoTokenizer
 from azureml.core import Workspace, Environment
 #from batch_inference_and_deployment import BatchDeployemnt
 from azure.identity import DefaultAzureCredential, InteractiveBrowserCredential
@@ -10,6 +11,7 @@ import os
 import sys
 from box import ConfigBox
 from azureml.core.compute import AmlCompute
+from huggingface_hub import login
 from azureml.core.compute_target import ComputeTargetException
 from azure.ai.ml.constants import AssetTypes
 from mlflow.tracking.client import MlflowClient
@@ -64,7 +66,25 @@ def get_sku_override():
         print(f"::warning:: Could not find sku-override file: \n{e}")
         return None
 
-def get_task_specified_input(task):
+# Function to dynamically replace masking tokens
+def process_input_for_fill_mask_task(file_path, mask_token):
+    try:
+        with open(file_path, 'r') as file:
+            file_content = file.read()
+
+        # Detect and replace the masking token based on the model's mask token
+        file_content = re.sub(r'\[MASK\]', mask_token, file_content)
+        #file_content = re.sub(r'<mask>', mask_token, file_content)
+
+        # Write the modified content back to the file
+        with open(file_path, 'w') as file:
+            file.write(file_content)
+
+    except Exception as e:
+        print(f"Error processing {file_path} for 'fill-mask' task: {str(e)}")
+
+
+def get_task_specified_input(task, test_model_name):
     print("pulling inputs")
     folder_path = f"../../config/sample_inputs/{queue.registry}/{task}/batch_inputs"
 
@@ -84,13 +104,33 @@ def get_task_specified_input(task):
         if os.path.isfile(file_path):
             # Create an Input object for the file and add it to the list of inputs
             file_input = Input(path=file_path, type=AssetTypes.URI_FILE)
+            # Handle the "fill-mask" task by replacing [MASK] with <mask> in the input data
+            if task.lower() == "fill-mask":
+                tokenizer = AutoTokenizer.from_pretrained(test_model_name)
+                #tokenizer = AutoTokenizer.from_pretrained(test_model_name, trust_remote_code=True, use_auth_token=True)
+                mask_token = tokenizer.mask_token  
+                process_input_for_fill_mask_task(file_path, mask_token)
+            # if task.lower() == "fill-mask":
+            #     try:
+            #         with open(file_path, 'r') as file:
+            #             file_content = file.read()
+                    
+            #         # Replace [MASK] with <mask> in the input data
+            #         file_content = file_content.replace('[MASK]', '<mask>')
+                    
+            #         # Write the modified content back to the file
+            #         with open(file_path, 'w') as file:
+            #             file.write(file_content)
+
+            #     except Exception as e:
+            #         print(f"Error processing {file_name} for 'fill-mask' task: {str(e)}")
+            
             inputs.append(file_input)
     
     # Create an Input object for the folder containing all files
     folder_input = Input(path=folder_path, type=AssetTypes.URI_FOLDER)
-    
-    # Now you can include both the folder input and individual file inputs in the job
     job_inputs = [folder_input] + inputs
+    # print("job_inputs:", {job_inputs})
     return folder_path
     
     
@@ -309,28 +349,16 @@ if __name__ == "__main__":
         # Replace the expression with hyphen
         test_model_name  = regx_for_expression.sub("-", test_model_name)
 
-    # reserve_keywords = ["microsoft"]
-    # # Create the regular expression to ignore
-    # regx_for_reserve_keyword = re.compile(
-    #     '|'.join(map(re.escape, reserve_keywords)))
-    # # Check the model_name contains any of the string
-    # reserve_keywords_check = re.findall(
-    #     regx_for_reserve_keyword, test_model_name)
-    # if reserve_keywords_check:
-    #     # Replace the resenve keyword with nothing with hyphen
-    #     test_model_name = regx_for_reserve_keyword.sub(
-    #         '', test_model_name)
-    #     test_model_name = test_model_name.lstrip("-")
-
 
     print("model name replaced with - :", {test_model_name})
     
     foundation_model , foundation_model_name = get_latest_model_version(workspace_ml_client, test_model_name )
     #endpoint = create_and_configure_batch_endpoint(foundation_model_name , foundation_model, queue.compute, workspace_ml_client)
+    
     task = foundation_model.flavors["transformers"]["task"]
     print("task :", {task})
     endpoint_name= create_and_configure_batch_endpoint(foundation_model_name, foundation_model, queue.compute, workspace_ml_client, task)
-    folder_path = get_task_specified_input(task=task)
+    folder_path = get_task_specified_input(task=task, test_model_name=test_model_name)
     print(" input taken, running Batch Job")
     input = Input(path=folder_path, type=AssetTypes.URI_FOLDER)
      # Invoke the batch endpoint
