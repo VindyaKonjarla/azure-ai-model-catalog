@@ -45,8 +45,8 @@ jobs:
       run: pip install fugashi[unidic-lite]  
     - name: deploy-model-step
       id: deploy-model-step
-      run: python Batch_Endpoint.py
-      working-directory: tests/src/Batch_Endpoint
+      run: python generic_initial_automation.py
+      working-directory: tests/src/automation_for_constant_library
     - name: trigger-next-model-step
       env:
         GITHUB_TOKEN: ${{ secrets.WORKFLOW_TOKEN }}
