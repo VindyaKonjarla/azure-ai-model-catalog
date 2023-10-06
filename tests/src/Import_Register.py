@@ -25,7 +25,8 @@ test_keep_looping = os.environ.get('test_keep_looping')
 test_queue = os.environ.get('test_queue')
 test_set = os.environ.get('test_set')
 experiment_name=os.environ.get('experiment_name')
-COMPUTE=os.environ.get('COMPUTE')
+compute_name = "model-import-cluster"
+# COMPUTE=os.environ.get('COMPUTE')
 # experiment_name = f"Import Model Pipeline"
 URL = "https://huggingface.co/api/models?sort=downloads&direction=-1&limit=10000"
 COLUMNS_TO_READ = ["modelId", "pipeline_tag", "tags"]
@@ -109,9 +110,9 @@ def set_next_trigger_model(queue):
         print(f'NEXT_MODEL={next_model}', file=fh)
 
 @pipeline
-def model_import_pipeline(model_id,COMPUTE,update_existing_model, task_name):
+def model_import_pipeline(model_id,compute_name,update_existing_model, task_name):
 
-    import_model_job = import_model(model_id=test_model_name,compute=COMPUTE, task_name=task_name,update_existing_model=update_existing_model)
+    import_model_job = import_model(model_id=test_model_name,compute=compute_name, task_name=task_name,update_existing_model=update_existing_model)
     # Set job to not continue on failure
     import_model_job.settings.continue_on_step_failure = False
     return {"model_registration_details": import_model_job.outputs.model_registration_details}
@@ -155,14 +156,14 @@ if __name__ == "__main__":
     a = computelist.index(',')
     COMPUTE = computelist[:a]
     try:
-        _ = workspace_ml_client.compute.get(COMPUTE)
+        _ = workspace_ml_client.compute.get(compute_name)
         print("Found existing compute target.")
     except ResourceNotFoundError:
         print("Creating a new compute target...")
         compute_config = AmlCompute(
-            name=COMPUTE,
+            name=compute_name,
             type="amlcompute",
-            size=compute,
+            size=COMPUTE,
             idle_time_before_scale_down=120,
             min_instances=0,
             max_instances=6,
@@ -171,7 +172,7 @@ if __name__ == "__main__":
     import_model = ml_client_registry.components.get(name="import_model_oss_test", label="latest")
     pipeline_object = model_import_pipeline(
         model_id=test_model_name,
-        compute=COMPUTE,
+        compute=compute_name,
         task_name=TASK_NAME,
         update_existing_model=update_existing_model,
         
@@ -181,7 +182,7 @@ if __name__ == "__main__":
     pipeline_object.settings.force_rerun = True
 
 
-    pipeline_object.settings.default_compute = COMPUTE
+    pipeline_object.settings.default_compute = compute_name
     schedule_huggingface_model_import = (
         not huggingface_model_exists_in_registry
         and test_model_name not in [None, "None"]
