@@ -1,4 +1,4 @@
-name: Update README with Timestamp
+name: FoundationModels_dashboard
 
 on:
   workflow_dispatch
