@@ -105,7 +105,7 @@ def set_next_trigger_model(queue):
         print(f'NEXT_MODEL={next_model}')
         print(f'NEXT_MODEL={next_model}', file=fh)
 
-
+@pipeline
 def model_import_pipeline(model_id,update_existing_model, task_name):
 
     import_model_job = import_model(model_id=test_model_name, task_name=task_name,update_existing_model=update_existing_model)
