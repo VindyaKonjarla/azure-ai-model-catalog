@@ -2,7 +2,7 @@
     "queue_name": "test-northeurope-4",
     "models": [
         "IM-bert-base-uncased",
-	"IM-facebook-bart-large-cnn"
+	"IM-facebook/bart-large-cnn"
 	
     ],
     "workspace": "test-northeurope",
