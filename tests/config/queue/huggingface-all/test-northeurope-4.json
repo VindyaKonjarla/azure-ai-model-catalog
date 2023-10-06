@@ -1,15 +1,7 @@
 {
     "queue_name": "test-northeurope-4",
     "models":[
-        "MLFlow-Jean-Baptiste/camembert-ner"
-    ],
-    "models1": [
-        "MLFlow-HooshvareLab/bert-base-parsbert-ner-uncased",
-        "MLFlow-bigcode/starpii",
-        "MLFlow-ckiplab/albert-tiny-chinese-ner",
-        "MLFlow-d4data/biomedical-ner-all",
-        "MLFlow-hatmimoha/arabic-ner",
-        "MLFlow-ml6team/keyphrase-extraction-distilbert-inspec"
+        "MLFlow-MP-databricks/dolly-v2-12b"
     ],
     "workspace": "test-northeurope",
     "subscription": "80c77c76-74ba-4c8c-8229-4c3b2957990c",
