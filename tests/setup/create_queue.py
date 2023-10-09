@@ -23,7 +23,7 @@ parser = argparse.ArgumentParser()
 # mode - options are file or registry
 parser.add_argument("--mode", type=str, default="file")
 # registry name if model is in registry
-parser.add_argument("--registry_name", type=str, default="HuggingFace")
+parser.add_argument("--registry_name", type=str, default="azureml-preview-test1")
 # argument to specify Github workflow directory. can write to local dir for testing
 # !!! main workflow files will be overwritten if set to "../../.github/workflows" !!!
 parser.add_argument("--workflow_dir", type=str, default="../../.github/workflows")
