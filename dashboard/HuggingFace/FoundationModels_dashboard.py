@@ -40,7 +40,7 @@ class Dashboard():
                 workflows = response.json()
                 # append workflow_runs to runs list
                 for workflow in workflows["workflows"]:
-                    if (workflow["name"].startswith("MLFlow-MP") | workflow["name"].startswith("MLFlow-DI") | workflow["name"].startswith("MLFlow-Batch")):
+                    if (workflow["name"].startswith("MLFlow-MP") | workflow["name"].startswith("MLFlow-DI") | workflow["name"].startswith("MLFlow-Batch") | workflow["name"].startswith("MLFlow-Import") | workflow["name"].startswith("MLFlow-Eval")):
                         workflow_name.append(workflow["name"])
                 if not workflows["workflows"]:
                     break
@@ -81,9 +81,9 @@ class Dashboard():
 
  
 
-                if "workflow_runs" not in runs_data:
-                    print(f"No runs found for workflow '{workflow_name}'. Skipping...")
-                    continue
+                # if "workflow_runs" not in runs_data:
+                #     print(f"No runs found for workflow '{workflow_name}'. Skipping...")
+                #     continue
 
  
 
@@ -132,7 +132,7 @@ class Dashboard():
                     "Status": f"{'✅ PASS' if last_run['conclusion'] == 'success' else '❌ FAIL' if last_run['conclusion'] == 'failure' else '🚫 CANCELLED' if last_run['conclusion'] == 'cancelled' else '⏳ RUNNING'}",
                     "LastRunLink": f"[Link]({run_link})",
                     "LastRunTimestamp": last_run["created_at"],
-                    "Model Package/Dynmaic Installation/Batch": f"""{'Model Package' if workflow_name.startswith("MLFlow-MP") == True else 'Dynmaic Installation' if workflow_name.startswith("MLFlow-DI") == True else 'Batch' if workflow_name.startswith("MLFlow-Batch") == True else 'None' }"""
+                    "Category": f"""{'Model Package' if workflow_name.startswith("MLFlow-MP") == True else 'Dynmaic Installation' if workflow_name.startswith("MLFlow-DI") == True else 'Batch' if workflow_name.startswith("MLFlow-Batch") == True else 'Import' if workflow_name.startswith("MLFlow-Import") == True else 'Evaluate' if workflow_name.startswith("MLFlow-Eval") == True else 'None' }"""
                 }
 
                 self.models_data.append(models_entry)
@@ -150,7 +150,9 @@ class Dashboard():
     def results(self, last_runs_dict):
         results_dict = {"total_mp": 0, "success_mp": 0, "failure_mp": 0, "cancelled_mp": 0,"running_mp":0, "not_tested_mp": 0, "total_duration_mp": 0,
                         "total_di": 0, "success_di": 0, "failure_di": 0, "cancelled_di": 0,"running_di":0, "not_tested_di": 0, "total_duration_di": 0,
-                       "total_batch": 0, "success_batch": 0, "failure_batch": 0, "cancelled_batch": 0,"running_batch":0, "not_tested_batch": 0, "total_duration_batch": 0}
+                       "total_batch": 0, "success_batch": 0, "failure_batch": 0, "cancelled_batch": 0,"running_batch":0, "not_tested_batch": 0, "total_duration_batch": 0,
+                       "total_import": 0, "success_import": 0, "failure_import": 0, "cancelled_import": 0,"running_import":0, "not_tested_import": 0, "total_duration_import": 0,
+                       "total_eval": 0, "success_eval": 0, "failure_eval": 0, "cancelled_eval": 0,"running_eval":0, "not_tested_eval": 0, "total_duration_eval": 0}
         summary = []
 
  
@@ -163,49 +165,59 @@ class Dashboard():
         results_dict["failure_mp"] = df.loc[(df['status'] == 'completed') & (df['conclusion'] == 'failure') & (df["workflow_name"].str.startswith("MLFlow-MP") == True)]['workflow_id'].count()
         results_dict["cancelled_mp"] = df.loc[(df['status'] == 'completed') & (df['conclusion'] == 'cancelled') & (df["workflow_name"].str.startswith("MLFlow-MP") == True)]['workflow_id'].count()
         results_dict["running_mp"] = df.loc[(df['status'] == 'in_progress') & (df["workflow_name"].str.startswith("MLFlow-MP") == True)]['workflow_id'].count()  # Add running count
-        results_dict["not_tested_mp"] = df.loc[(df['status'] != 'completed') & (df["workflow_name"].str.startswith("MLFlow-MP") == True)]['workflow_id'].count()
+        # results_dict["not_tested_mp"] = df.loc[(df['status'] != 'completed') & (df["workflow_name"].str.startswith("MLFlow-MP") == True)]['workflow_id'].count()
+        results_dict["not_tested_mp"] = results_dict["total_mp"] - (results_dict["success_mp"] + results_dict["failure_mp"] + results_dict["cancelled_mp"] + results_dict["running_mp"])
 
          
         results_dict["total_di"] = df.loc[df["workflow_name"].str.startswith("MLFlow-DI") == True]["workflow_id"].count()
         results_dict["success_di"] = df.loc[(df['status'] == 'completed') & (df['conclusion'] == 'success') & (df["workflow_name"].str.startswith("MLFlow-DI") == True)]['workflow_id'].count()
         results_dict["failure_di"] = df.loc[(df['status'] == 'completed') & (df['conclusion'] == 'failure') & (df["workflow_name"].str.startswith("MLFlow-DI") == True)]['workflow_id'].count()
         results_dict["cancelled_di"] = df.loc[(df['status'] == 'completed') & (df['conclusion'] == 'cancelled') & (df["workflow_name"].str.startswith("MLFlow-DI") == True)]['workflow_id'].count()
-        results_dict["running-di"] = df.loc[(df['status'] == 'in_progress')& (df["workflow_name"].str.startswith("MLFlow-DI") == True)]['workflow_id'].count()  # Add running count
-        results_dict["not_tested_di"] = df.loc[(df['status'] != 'completed') & (df["workflow_name"].str.startswith("MLFlow-DI") == True)]['workflow_id'].count()
+        results_dict["running_di"] = df.loc[(df['status'] == 'in_progress')& (df["workflow_name"].str.startswith("MLFlow-DI") == True)]['workflow_id'].count()  # Add running count
+        # results_dict["not_tested_di"] = df.loc[(df['status'] != 'completed') & (df["workflow_name"].str.startswith("MLFlow-DI") == True)]['workflow_id'].count()
+        results_dict["not_tested_di"] = results_dict["total_di"] - (results_dict["success_di"] + results_dict["failure_di"] + results_dict["cancelled_di"] + results_dict["running_di"])
 
+     
+        results_dict["total_import"] = df.loc[df["workflow_name"].str.startswith("MLFlow-Import") == True]["workflow_id"].count()
+        results_dict["success_import"] = df.loc[(df['status'] == 'completed') & (df['conclusion'] == 'success') & (df["workflow_name"].str.startswith("MLFlow-Import") == True)]['workflow_id'].count()
+        results_dict["failure_import"] = df.loc[(df['status'] == 'completed') & (df['conclusion'] == 'failure') & (df["workflow_name"].str.startswith("MLFlow-Import") == True)]['workflow_id'].count()
+        results_dict["cancelled_import"] = df.loc[(df['status'] == 'completed') & (df['conclusion'] == 'cancelled') & (df["workflow_name"].str.startswith("MLFlow-Import") == True)]['workflow_id'].count()
+        results_dict["running_import"] = df.loc[(df['status'] == 'in_progress')& (df["workflow_name"].str.startswith("MLFlow-Import") == True)]['workflow_id'].count()  # Add running count
+        # results_dict["not_tested_import"] = df.loc[(df['status'] != 'completed') & (df["workflow_name"].str.startswith("MLFlow-Import") == True)]['workflow_id'].count()
+        results_dict["not_tested_import"] = results_dict["total_import"] - (results_dict["success_import"] + results_dict["failure_import"] + results_dict["cancelled_import"] + results_dict["running_import"])
+
+        
         results_dict["total_batch"] = df.loc[df["workflow_name"].str.startswith("MLFlow-Batch") == True]["workflow_id"].count()
         results_dict["success_batch"] = df.loc[(df['status'] == 'completed') & (df['conclusion'] == 'success') & (df["workflow_name"].str.startswith("MLFlow-Batch") == True)]['workflow_id'].count()
         results_dict["failure_batch"] = df.loc[(df['status'] == 'completed') & (df['conclusion'] == 'failure') & (df["workflow_name"].str.startswith("MLFlow-Batch") == True)]['workflow_id'].count()
         results_dict["cancelled_batch"] = df.loc[(df['status'] == 'completed') & (df['conclusion'] == 'cancelled') & (df["workflow_name"].str.startswith("MLFlow-Batch") == True)]['workflow_id'].count()
-        results_dict["running-batch"] = df.loc[(df['status'] == 'in_progress')& (df["workflow_name"].str.startswith("MLFlow-Batch") == True)]['workflow_id'].count()  # Add running count
-        results_dict["not_tested_batch"] = df.loc[(df['status'] != 'completed') & (df["workflow_name"].str.startswith("MLFlow-Batch") == True)]['workflow_id'].count()
+        results_dict["running_batch"] = df.loc[(df['status'] == 'in_progress')& (df["workflow_name"].str.startswith("MLFlow-Batch") == True)]['workflow_id'].count()  # Add running count
+        # results_dict["not_tested_batch"] = df.loc[(df['status'] != 'completed') & (df["workflow_name"].str.startswith("MLFlow-Batch") == True)]['workflow_id'].count()
+        results_dict["not_tested_batch"] = results_dict["total_batch"] - (results_dict["success_batch"] + results_dict["failure_batch"] + results_dict["cancelled_batch"] + results_dict["running_batch"])
 
+     
+        results_dict["total_eval"] = df.loc[df["workflow_name"].str.startswith("MLFlow-Eval") == True]["workflow_id"].count()
+        results_dict["success_eval"] = df.loc[(df['status'] == 'completed') & (df['conclusion'] == 'success') & (df["workflow_name"].str.startswith("MLFlow-Eval") == True)]['workflow_id'].count()
+        results_dict["failure_eval"] = df.loc[(df['status'] == 'completed') & (df['conclusion'] == 'failure') & (df["workflow_name"].str.startswith("MLFlow-Eval") == True)]['workflow_id'].count()
+        results_dict["cancelled_eval"] = df.loc[(df['status'] == 'completed') & (df['conclusion'] == 'cancelled') & (df["workflow_name"].str.startswith("MLFlow-Eval") == True)]['workflow_id'].count()
+        results_dict["running_eval"] = df.loc[(df['status'] == 'in_progress')& (df["workflow_name"].str.startswith("MLFlow-Eval") == True)]['workflow_id'].count()  # Add running count
+        # results_dict["not_tested_eval"] = df.loc[(df['status'] != 'completed') & (df["workflow_name"].str.startswith("MLFlow-Eval") == True)]['workflow_id'].count()
+        results_dict["not_tested_eval"] = results_dict["total_eval"] - (results_dict["success_eval"] + results_dict["failure_eval"] + results_dict["cancelled_eval"] + results_dict["running_eval"])
 
-
-
-        success_rate_di = results_dict["success_di"]/results_dict["total_di"]*100.00
-        failure_rate_di = results_dict["failure_di"]/results_dict["total_di"]*100.00
-        cancel_rate_di = results_dict["cancelled_di"]/results_dict["total_di"]*100.00
-        running_rate_di = results_dict["running_di"] / results_dict["total_di"] * 100.00  # Calculate running rate
-
-        success_rate_mp = results_dict["success_mp"]/results_dict["total_mp"]*100.00
-        failure_rate_mp = results_dict["failure_mp"]/results_dict["total_mp"]*100.00
-        cancel_rate_mp = results_dict["cancelled_mp"]/results_dict["total_mp"]*100.00
-        running_rate_mp = results_dict["running_mp"] / results_dict["total_mp"] * 100.00  # Calculate running rate
-
- 
-        
-        summary.append("|Category|🚀Total|✅Pass|Pass%|❌Failure|Failure%|🚫Cancelled|⏳Running|❗️NotTested") 
+     
+        summary.append("|Category|🚀Total|✅Pass|Pass%|❌Failure|Failure%|🚫Cancelled|⏳Running|❗️New") 
         summary.append("| ----------- | ----------------- | -------- | -------- | --------  | -------- | --------- | ---------- | -----------|")
         #summary.append("| Online Endpoint Deployment - Dynamic Installation| ")      
         #summary.append("| Online Endpoint Deployment - Packaging| )
         #summary.append("🚀Total|✅Success|❌Failure|🚫Cancelled|⏳Running|")
         #summary.append("-----|-------|-------|-------|-------|")
-        summary.append(f"Online Endpoint - Dynamic Installation|{results_dict['total_di']}|{results_dict['success_di']}|{(results_dict['success_di']/results_dict['total_di'])*100}%|{results_dict['failure_di']}|{(results_dict['failure_di']/results_dict['total_di'])*100}%|{results_dict['cancelled_di']}|{results_dict['running_di']}|{results_dict['not_tested_di']}|")
-        summary.append(f"Online Endpoint - Model Packaging|{results_dict['total_mp']}|{results_dict['success_mp']}|{(results_dict['success_mp']/results_dict['total_mp'])*100}%|{results_dict['failure_mp']}|{(results_dict['failure_mp']/results_dict['total_mp'])*100}%|{results_dict['cancelled_mp']}|{results_dict['running_mp']}|{results_dict['not_tested_mp']}|")
-        summary.append(f"Batch Endpoint|{results_dict['total_batch']}|{results_dict['success_batch']}|{(results_dict['success_batch']/results_dict['total_batch'])*100}%|{results_dict['failure_batch']}|{(results_dict['failure_batch']/results_dict['total_batch'])*100}%|{results_dict['cancelled_batch']}|{results_dict['running_batch']}|{results_dict['not_tested_batch']}|")
-
-
+        
+        summary.append(f"Online Endpoint - Dynamic Installation|{results_dict['total_di']}|{results_dict['success_di']}|{results_dict['success_di']/results_dict['total_di']:.2%}|{results_dict['failure_di']}|{results_dict['failure_di']/results_dict['total_di']:.2%}|{results_dict['cancelled_di']}|{results_dict['running_di']}|{results_dict['not_tested_di']}|")
+        summary.append(f"Online Endpoint - Model Packaging|{results_dict['total_mp']}|{results_dict['success_mp']}|{results_dict['success_mp']/results_dict['total_mp']:.2%}|{results_dict['failure_mp']}|{results_dict['failure_mp']/results_dict['total_mp']:.2%}|{results_dict['cancelled_mp']}|{results_dict['running_mp']}|{results_dict['not_tested_mp']}|")
+        summary.append(f"Batch Endpoint|{results_dict['total_batch']}|{results_dict['success_batch']}|{results_dict['success_batch']/results_dict['total_batch']:.2%}|{results_dict['failure_batch']}|{results_dict['failure_batch']/results_dict['total_batch']:.2%}|{results_dict['cancelled_batch']}|{results_dict['running_batch']}|{results_dict['not_tested_batch']}|")
+        summary.append(f"Import|{results_dict['total_import']}|{results_dict['success_import']}|{results_dict['success_import']/results_dict['total_import']:.2%}|{results_dict['failure_import']}|{results_dict['failure_import']/results_dict['total_import']:.2%}|{results_dict['cancelled_import']}|{results_dict['running_import']}|{results_dict['not_tested_import']}|")
+        summary.append(f"Evaluate|{results_dict['total_eval']}|{results_dict['success_eval']}|{results_dict['success_eval']/results_dict['total_eval']:.2%}|{results_dict['failure_eval']}|{results_dict['failure_eval']/results_dict['total_eval']:.2%}|{results_dict['cancelled_eval']}|{results_dict['running_eval']}|{results_dict['not_tested_eval']}|")
+     
         models_df = pandas.DataFrame.from_dict(self.models_data)
         models_md = models_df.to_markdown()
 
