@@ -90,7 +90,7 @@ def create_queue_files(queue, workspace_list):
             q_dict["resource_group"] = workspace_list[workspace]["resource_group"]
             q_dict["registry"] = args.registry_name
             q_dict["environment"] = workspace_list[workspace]["environment"]
-            q_dict["compute"] = workspace_list[workspace]["compute"]
+            # q_dict["compute"] = workspace_list[workspace]["compute"]
             # q_dict["instance_type"] = workspace_list[workspace]["instance_type"]
             print("q_dict",q_dict)
             print("workspace",q_dict["workspace"])
