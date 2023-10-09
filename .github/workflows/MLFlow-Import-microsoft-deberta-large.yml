@@ -1,13 +1,13 @@
-name: MLFlow-Import-microsoft-deberta-large
+name: MLFlow-Import-microsoft/deberta-large
 
 on: 
   workflow_dispatch:
 
 env:
-  test_model_name: microsoft-deberta-large
+  test_model_name: microsoft/deberta-large
   test_sku_type: cpu
   test_trigger_next_model: true
-  test_queue: test-northcentralus-3
+  test_queue: test-eastus-0
   test_set: huggingface-all
   test_keep_looping: false
 

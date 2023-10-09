@@ -1,7 +1,7 @@
 {
     "queue_name": "test-koreacentral-2",
     "models": [
-        "MLFlow-Import-distilbert-base-cased"
+        "MLFlow-Import-microsoft/deberta-xlarge"
     ],
     "workspace": "test-koreacentral",
     "subscription": "80c77c76-74ba-4c8c-8229-4c3b2957990c",
