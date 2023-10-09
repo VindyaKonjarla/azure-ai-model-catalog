@@ -1,4 +1,4 @@
-name: MLFlow-Import-facebook-bart-large-cnn
+name: MLFlow-Import-facebook/bart-large-cnn
 
 on: 
   workflow_dispatch:
