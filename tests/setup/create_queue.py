@@ -58,7 +58,7 @@ except Exception as ex:
     print ("::error Auth failed, DefaultAzureCredential not working: \n{e}")
     exit (1)
 # Connect to the HuggingFaceHub registry
-registry_ml_client = MLClient(credential, registry_name="HuggingFace")
+registry_ml_client = MLClient(credential, registry_name="azureml-preview-test1")
 queue = []
 # move this to config file later
 templates=['transformers-cpu-small', 'transformers-cpu-medium', 'transformers-cpu-large','transformers-cpu-extra-large', 'transformers-gpu-medium']
