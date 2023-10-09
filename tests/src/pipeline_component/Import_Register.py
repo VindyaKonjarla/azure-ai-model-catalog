@@ -164,7 +164,7 @@ if __name__ == "__main__":
         compute_config = AmlCompute(
             name=compute_name,
             type="amlcompute",
-            size="Standard-E64s-v3",
+            size="STANDARD_E64_V3",
             idle_time_before_scale_down=120,
             min_instances=0,
             max_instances=6,
