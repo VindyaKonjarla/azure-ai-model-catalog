@@ -205,7 +205,7 @@ class Dashboard():
         results_dict["not_tested_eval"] = results_dict["total_eval"] - (results_dict["success_eval"] + results_dict["failure_eval"] + results_dict["cancelled_eval"] + results_dict["running_eval"])
 
      
-        summary.append("|Category|🚀Total|✅Pass|Pass%|❌Failure|Failure%|🚫Cancelled|⏳Running|❗️New") 
+        summary.append("|Category|🚀Total|✅Pass|Pass%|❌Failure|Failure%|🚫Cancelled|⏳Running|Others") 
         summary.append("| ----------- | ----------------- | -------- | -------- | --------  | -------- | --------- | ---------- | -----------|")
         #summary.append("| Online Endpoint Deployment - Dynamic Installation| ")      
         #summary.append("| Online Endpoint Deployment - Packaging| )
