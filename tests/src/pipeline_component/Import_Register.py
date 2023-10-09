@@ -41,7 +41,7 @@ update_existing_model=True
 Reg_Model=test_model_name.replace('/','-')
 huggingface_model_exists_in_registry = False
 def get_test_queue() -> ConfigBox:
-    queue_file = f"../config/queue/{test_set}/{test_queue}.json"
+    queue_file = f"../../config/queue/{test_set}/{test_queue}.json"
     with open(queue_file) as f:
         return ConfigBox(json.load(f))
 def get_task() -> str:
