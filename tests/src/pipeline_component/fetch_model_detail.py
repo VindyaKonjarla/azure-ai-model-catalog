@@ -1,5 +1,5 @@
 from utils.logging import get_logger
-from src.automation_for_constant_library.fetch_task import HfTask
+from fetch_task import HfTask
 import re
 
 logger = get_logger(__name__)
@@ -52,4 +52,4 @@ class ModelDetail:
             task = hfApi.get_task()
         logger.info(f"latest_model: {latest_model}")
         logger.info(f"Task is : {task}")
-        return latest_model, task
+        return latest_model
