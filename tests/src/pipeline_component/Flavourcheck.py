@@ -26,10 +26,10 @@ except:
 	    credential=credential,
 	    subscription_id = "80c77c76-74ba-4c8c-8229-4c3b2957990c",
         resource_group_name = "huggingface-registry-test1",
-        workspace_name = "test-northeurope"
+        workspace_name = "test-koreacentral"
 	)
 ml_client_registry = MLClient(credential, registry_name="azureml-preview-test1")
-model_name = "t5-base"
+model_name = "databricks-dolly-v2-12b"
 foundation_model = workspace_ml_client.models.get(model_name, label="latest")
 print(
     "\n\nUsing model name: {0}, version: {1}, id: {2} for fine tuning".format(
