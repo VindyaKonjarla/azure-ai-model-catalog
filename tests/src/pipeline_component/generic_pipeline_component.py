@@ -101,7 +101,7 @@ def create_or_get_compute_target(ml_client,  compute, instance):
 
 def get_file_path(task):
     file_name = task+".json"
-    data_path = f"./datasets/{task}{file_name}"
+    data_path = f"./datasets/{task}/{file_name}"
     return data_path
 
 
@@ -336,7 +336,7 @@ if __name__ == "__main__":
         )
         # don't reuse cached results from previous jobs
         pipeline_object.settings.force_rerun = True
-        pipeline_object.settings.default_compute = COMPUTE_CLUSTER
+        pipeline_object.settings.default_compute = queue.compute
 
         # set continue on step failure to False
         pipeline_object.settings.continue_on_step_failure = False
