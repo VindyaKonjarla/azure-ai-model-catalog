@@ -1,11 +1,11 @@
 {
     "queue_name": "test-eastus-1",
     "models": [
-        "MLFlow-haoranxu/ALMA-7B",
-        "MLFlow-elliotthwang/Elliott-Chinese-LLaMa-GPTQ-V1.0",
-        "MLFlow-haoranxu/ALMA-7B-Pretrain",
-        "MLFlow-haoranxu/ALMA-13B-Pretrain",
-        "MLFlow-luffycodes/higgs-llama-vicuna-ep25-70b"
+        "haoranxu/ALMA-7B",
+        "elliotthwang/Elliott-Chinese-LLaMa-GPTQ-V1.0",
+        "haoranxu/ALMA-7B-Pretrain",
+        "haoranxu/ALMA-13B-Pretrain",
+        "luffycodes/higgs-llama-vicuna-ep25-70b"
     ],
     "workspace": "test-eastus",
     "subscription": "80c77c76-74ba-4c8c-8229-4c3b2957990c",
