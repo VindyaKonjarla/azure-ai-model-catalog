@@ -1,8 +1,8 @@
 {
     "queue_name": "test-southcentralus-1",
     "models": [
-        "MLFlow-Import-t5-large",
-        "MLFlow-Import-distilbert-base-cased-distilled-squad"
+        "MLFlow-Evaluate-B",
+        "MLFlow-Evaluate-distilbert-base-cased-distilled-squad"
     ],
     "workspace": "test-southcentralus",
     "subscription": "80c77c76-74ba-4c8c-8229-4c3b2957990c",
