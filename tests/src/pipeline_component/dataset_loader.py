@@ -99,6 +99,7 @@ class LoadDataset:
 
     def summarization(self):
         try:
+            logger.info(f"Data path is this one : {self.data_path} and result is this : {os.path.exists(self.data_path)}")
             if not os.path.exists(self.data_path):
                 hf_test_data = load_dataset(
                     "cnn_dailymail", "3.0.0", split="test", streaming=True)
