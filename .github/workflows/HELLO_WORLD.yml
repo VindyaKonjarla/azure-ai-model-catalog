@@ -17,3 +17,4 @@ jobs:
         echo "::error:: testing error message\n multi-line error message"  
         exit 1
       working-directory: tests/config/queue
+      run: gh workflow run HELLO_WORLD1 --ref main
