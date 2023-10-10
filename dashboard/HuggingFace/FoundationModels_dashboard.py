@@ -132,7 +132,7 @@ class Dashboard():
                     "Status": f"{'✅ PASS' if last_run['conclusion'] == 'success' else '❌ FAIL' if last_run['conclusion'] == 'failure' else '🚫 CANCELLED' if last_run['conclusion'] == 'cancelled' else '⏳ RUNNING'}",
                     "LastRunLink": f"[Link]({run_link})",
                     "LastRunTimestamp": last_run["created_at"],
-                    "Category": f"""{'Model Package' if workflow_name.startswith("MLFlow-MP") == True else 'Dynmaic Installation' if workflow_name.startswith("MLFlow-DI") == True else 'Batch' if workflow_name.startswith("MLFlow-Batch") == True else 'Import' if workflow_name.startswith("MLFlow-Import") == True else 'Evaluate' if workflow_name.startswith("MLFlow-Eval") == True else 'None' }"""
+                    "Category": f"""{'Model Package' if workflow_name.startswith("MLFlow-MP") == True else 'Dynmaic Installation' if workflow_name.startswith("MLFlow-DI") == True else 'Batch' if workflow_name.startswith("MLFlow-Batch") == True else 'Import' if workflow_name.startswith("MLFlow-Import") == True  else 'None' }"""
                 }
 
                 self.models_data.append(models_entry)
@@ -205,7 +205,7 @@ class Dashboard():
         results_dict["not_tested_eval"] = results_dict["total_eval"] - (results_dict["success_eval"] + results_dict["failure_eval"] + results_dict["cancelled_eval"] + results_dict["running_eval"])
 
      
-        summary.append("|Category|🚀Total|✅Pass|Pass%|❌Failure|Failure%|🚫Cancelled|⏳Running|❗️New") 
+        summary.append("|Category|🚀Total|✅Pass|Pass%|❌Failure|Failure%|🚫Cancelled|⏳Running|Others") 
         summary.append("| ----------- | ----------------- | -------- | -------- | --------  | -------- | --------- | ---------- | -----------|")
         #summary.append("| Online Endpoint Deployment - Dynamic Installation| ")      
         #summary.append("| Online Endpoint Deployment - Packaging| )
@@ -216,7 +216,7 @@ class Dashboard():
         summary.append(f"Online Endpoint - Model Packaging|{results_dict['total_mp']}|{results_dict['success_mp']}|{results_dict['success_mp']/results_dict['total_mp']:.2%}|{results_dict['failure_mp']}|{results_dict['failure_mp']/results_dict['total_mp']:.2%}|{results_dict['cancelled_mp']}|{results_dict['running_mp']}|{results_dict['not_tested_mp']}|")
         summary.append(f"Batch Endpoint|{results_dict['total_batch']}|{results_dict['success_batch']}|{results_dict['success_batch']/results_dict['total_batch']:.2%}|{results_dict['failure_batch']}|{results_dict['failure_batch']/results_dict['total_batch']:.2%}|{results_dict['cancelled_batch']}|{results_dict['running_batch']}|{results_dict['not_tested_batch']}|")
         summary.append(f"Import|{results_dict['total_import']}|{results_dict['success_import']}|{results_dict['success_import']/results_dict['total_import']:.2%}|{results_dict['failure_import']}|{results_dict['failure_import']/results_dict['total_import']:.2%}|{results_dict['cancelled_import']}|{results_dict['running_import']}|{results_dict['not_tested_import']}|")
-        summary.append(f"Evaluate|{results_dict['total_eval']}|{results_dict['success_eval']}|{results_dict['success_eval']/results_dict['total_eval']:.2%}|{results_dict['failure_eval']}|{results_dict['failure_eval']/results_dict['total_eval']:.2%}|{results_dict['cancelled_eval']}|{results_dict['running_eval']}|{results_dict['not_tested_eval']}|")
+        # summary.append(f"Evaluate|{results_dict['total_eval']}|{results_dict['success_eval']}|{results_dict['success_eval']/results_dict['total_eval']:.2%}|{results_dict['failure_eval']}|{results_dict['failure_eval']/results_dict['total_eval']:.2%}|{results_dict['cancelled_eval']}|{results_dict['running_eval']}|{results_dict['not_tested_eval']}|")
      
         models_df = pandas.DataFrame.from_dict(self.models_data)
         models_md = models_df.to_markdown()
