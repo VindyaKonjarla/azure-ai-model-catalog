@@ -43,9 +43,11 @@ jobs:
       run: pip install sentencepiece
     - name: pip-install-fugashi[unidic-lite]
       run: pip install fugashi[unidic-lite]  
+    - name: pip-install-datasets
+      run: pip install datasets
     - name: deploy-model-step
       id: deploy-model-step
-      run: python Import_Register.py
+      run: python generic_pipeline_component.py
       working-directory: tests/src/pipeline_component
     - name: trigger-next-model-step
       env:

@@ -1,7 +1,7 @@
-t5-small
-t5-large
-sshleifer/distilbart-cnn-12-6
-roberta-base-openai-detector
+A
+B
+CD
+EF
 roberta-base
 microsoft/deberta-xlarge
 microsoft/deberta-large-mnli
@@ -9,7 +9,7 @@ microsoft/deberta-large
 microsoft/deberta-base-mnli
 microsoft/deberta-base
 gpt2
-facebook/bart-large-cnn
+GH
 distilgpt2
 distilbert-base-cased
 deepset/roberta-base-squad2
