@@ -1,11 +1,13 @@
 {
     "queue_name": "test-northeurope-3",
     "models": [
-        "MLFlow-Import-Jean-Baptiste/camembert-ner"
+        "MLFlow-Evaluate-sshleifer/distilbart-cnn-12-6"
     ],
     "workspace": "test-northeurope",
     "subscription": "80c77c76-74ba-4c8c-8229-4c3b2957990c",
     "resource_group": "huggingface-registry-test1",
     "registry": "azureml-preview-test1",
-    "environment": "automate-venv"
+    "environment": "automate-venv",
+    "compute": "Standard-E64s-v3",
+    "instance_type": "Standard_E64s_v3"
 }
