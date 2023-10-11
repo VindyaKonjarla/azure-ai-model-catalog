@@ -242,13 +242,14 @@ if __name__ == "__main__":
         # print(f"\n{model_name}")
         print(model.__dict__)
         flavour = model.flavors
-        print("flavour:----",flavour.get("python_function").get("loader_module", None))
-        # if flavour== None:
-        #     print(f"This model {model.name} is not registered in the mlflow flavour")
-        #     raise Exception('Some message')
-        # else:
-        #     if flavour.get("python_function").get("loader_module", None) == "mlflow.transformers":
-        #         print(f"This model {model.name} is registered in the mlflow flavour")
+        flavour_check=flavour.get("python_function").get("loader_module", None)
+        print("flavour:----",flavour_check)
+        if flavour_check== "azureml.evaluate.mlflow.hftransformers":
+            print(f"This model {model.name} is registered in the hftransformers flavour")
+            raise Exception('Some message')
+        else:
+            if flavour_check == "mlflow.transformers":
+                print(f"This model {model.name} is registered in the mlflow flavour")
 
         
         # HF=model.flavors is None
