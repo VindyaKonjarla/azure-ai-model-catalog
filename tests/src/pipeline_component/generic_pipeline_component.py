@@ -159,9 +159,9 @@ def get_pipeline_task(task):
 #     registry_name="azureml-preview-test1"
 # )
 # mlflow.set_tracking_uri(ws.get_mlflow_tracking_uri())
-COMPUTE_CLUSTER = "cpu-cluster"
-
 registry_ml_client = ''
+
+
 @pipeline()
 def evaluation_pipeline(task, mlflow_model, test_data, input_column_names, label_column_name, evaluation_file_path, compute):
     try:
@@ -284,7 +284,7 @@ if __name__ == "__main__":
     logger.info(f"registry_ml_client : {registry_ml_client}")
     mlflow.set_tracking_uri(ws.get_mlflow_tracking_uri())
     compute_target = create_or_get_compute_target(
-        ml_client = workspace_ml_client, compute=queue.compute, instance=queue.instance_type)
+        ml_client=workspace_ml_client, compute=queue.compute, instance=queue.instance_type)
     # environment_variables = {
     #     "AZUREML_ARTIFACTS_DEFAULT_TIMEOUT": 600.0, "test_model_name": test_model_name}
     # env_list = workspace_ml_client.environments.list(name=queue.environment)
@@ -302,6 +302,15 @@ if __name__ == "__main__":
     model_detail = ModelDetail(workspace_ml_client=workspace_ml_client)
     latest_model = model_detail.get_model_detail(
         test_model_name=test_model_name)
+    flavour = latest_model.flavors
+    if flavour.get("python_function", None) == None:
+        logger.info(
+            f"This model {latest_model.name} is not registered in the mlflow flavour")
+    else:
+        if flavour.get("python_function").get("loader_module") == "mlflow.transformers":
+            logger.info(
+                f"This model {latest_model.name} is registered in the mlflow flavour")
+
     task = HfTask(model_name=test_model_name).get_task()
     data_path = get_file_path(task=task)
     input_column_names, label_column_name = get_dataset(task=task, data_path=data_path,
