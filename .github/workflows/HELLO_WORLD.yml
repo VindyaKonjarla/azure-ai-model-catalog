@@ -10,7 +10,7 @@ jobs:
     - name: check-out-repo-step
       uses: actions/checkout@v2
     - name: start-tests-step
-      run: |
+      run:
         echo "Hello World"
         echo "Print Hello World"  
     - name: trigger-next-workflow
