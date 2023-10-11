@@ -155,7 +155,7 @@ if __name__ == "__main__":
     computelist=foundation_model.properties.get("inference-recommended-sku", "Standard_E16s_v3")
     a = computelist.index(',')
     # COMPUTE = computelist[:a]
-    COMPUTE="Standard-E64s-v3"
+    # COMPUTE="Standard-E64s-v3"
     try:
         _ = workspace_ml_client.compute.get(compute_name)
         print("Found existing compute target.")
@@ -164,7 +164,7 @@ if __name__ == "__main__":
         compute_config = AmlCompute(
             name=compute_name,
             type="amlcompute",
-            size="STANDARD_E64_V3",
+            size="STANDARD_E64S_V3",
             idle_time_before_scale_down=120,
             min_instances=0,
             max_instances=6,
@@ -239,3 +239,7 @@ if __name__ == "__main__":
         model = workspace_ml_client.models.get(name=model_name, version=model_version)
         print(f"\n{model_name}")
         print(model.__dict__)
+        if model.flavors['python_function']['loader_module']=='mlflow.transformers':
+            print("Model is in mlflow")
+        else: 
+            raise Exception('Some message')
