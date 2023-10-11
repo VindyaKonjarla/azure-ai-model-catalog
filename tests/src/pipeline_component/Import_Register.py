@@ -242,7 +242,7 @@ if __name__ == "__main__":
         # print(f"\n{model_name}")
         print(model.__dict__)
         flavour = model.flavors
-        print("flavour:----",model.flavors.python_function.loader_module)
+        print("flavour:----",flavour.get("python_function").get("loader_module", None))
         if flavour== None:
             print(f"This model {model.name} is not registered in the mlflow flavour")
             raise Exception('Some message')
