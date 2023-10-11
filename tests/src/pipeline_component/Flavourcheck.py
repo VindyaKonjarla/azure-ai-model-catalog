@@ -45,8 +45,8 @@ if HF==False:
         print("ML Model")
     except:
         raise Exception('Some message')
-else:
-    raise Exception('Some message')
+    else:
+            raise Exception('Some message')
 
 
 # if ML=='mlflow.transformers' and HF==False: 
