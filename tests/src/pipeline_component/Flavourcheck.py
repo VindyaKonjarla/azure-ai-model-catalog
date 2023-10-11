@@ -30,13 +30,26 @@ except:
 	)
 ml_client_registry = MLClient(credential, registry_name="azureml-preview-test1")
 model_name = "databricks-dolly-v2-12b"
+model_name="roberta-base"
 foundation_model = workspace_ml_client.models.get(model_name, label="latest")
 print(
     "\n\nUsing model name: {0}, version: {1}, id: {2} for fine tuning".format(
         foundation_model.name, foundation_model.version, foundation_model.id
     )
 )
-try: foundation_model.flavors['python_function']['loader_module']=='mlflow.transformers'
-    print("Model is in mlflow")
-except ResourceNotFoundError: 
+HF=foundation_model.flavors is None
+if HF==False:
+    ML=foundation_model.flavors['python_function']['loader_module']
+    try:
+        ML='mlflow.transformers'
+        print("ML Model")
+    except:
+        raise Exception('Some message')
+else:
     raise Exception('Some message')
+
+
+# if ML=='mlflow.transformers' and HF==False: 
+#     print("ML Model")
+# else: 
+#     raise Exception('Some message')
