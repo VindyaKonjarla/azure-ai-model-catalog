@@ -92,7 +92,7 @@ def set_next_trigger_model(queue):
     model_list = list(queue.models)
     #model_name_without_slash = test_model_name.replace('/', '-')
     # check_mlflow_model = "MLFlow-Import-"+test_model_name
-    check_mlflow_model = "IM-Flavourcheck--"+test_model_name
+    check_mlflow_model = "IM-Flavourcheck-"+test_model_name
     index = model_list.index(check_mlflow_model)
     #index = model_list.index(test_model_name)
     print(f"index of {test_model_name} in queue: {index}")
