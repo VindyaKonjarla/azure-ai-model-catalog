@@ -36,7 +36,7 @@ print(
         foundation_model.name, foundation_model.version, foundation_model.id
     )
 )
-if foundation_model.flavors['python_function']['loader_module']=='mlflow.transformers':
+try: foundation_model.flavors['python_function']['loader_module']=='mlflow.transformers':
     print("Model is in mlflow")
-else: 
+except ResourceNotFoundError: 
     raise Exception('Some message')
