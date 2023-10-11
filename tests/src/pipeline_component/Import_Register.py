@@ -91,7 +91,8 @@ def set_next_trigger_model(queue):
 # file the index of test_model_name in models list queue dictionary
     model_list = list(queue.models)
     #model_name_without_slash = test_model_name.replace('/', '-')
-    check_mlflow_model = "MLFlow-Import-"+test_model_name
+    # check_mlflow_model = "MLFlow-Import-"+test_model_name
+    check_mlflow_model = "IM-Flavourcheck--"+test_model_name
     index = model_list.index(check_mlflow_model)
     #index = model_list.index(test_model_name)
     print(f"index of {test_model_name} in queue: {index}")
@@ -152,100 +153,110 @@ if __name__ == "__main__":
         print(
         "\n\nUsing model name: {0}, version: {1}, id: {2} for inferencing".format(
             foundation_model.name, foundation_model.version, foundation_model.id))
-    computelist=foundation_model.properties.get("inference-recommended-sku", "Standard_E16s_v3")
-    a = computelist.index(',')
-    # COMPUTE = computelist[:a]
-    # COMPUTE="Standard-E64s-v3"
-    try:
-        _ = workspace_ml_client.compute.get(compute_name)
-        print("Found existing compute target.")
-    except ResourceNotFoundError:
-        print("Creating a new compute target...")
-        compute_config = AmlCompute(
-            name=compute_name,
-            type="amlcompute",
-            size="STANDARD_E64S_V3",
-            idle_time_before_scale_down=120,
-            min_instances=0,
-            max_instances=6,
-        )
-        workspace_ml_client.begin_create_or_update(compute_config).result()
-    import_model = ml_client_registry.components.get(name="import_model_oss_test", label="latest")
-    pipeline_object = model_import_pipeline(
-        model_id=test_model_name,
-        compute_name=compute_name,
-        task_name=TASK_NAME,
-        update_existing_model=update_existing_model,
+    # computelist=foundation_model.properties.get("inference-recommended-sku", "Standard_E16s_v3")
+    # a = computelist.index(',')
+    # # COMPUTE = computelist[:a]
+    # # COMPUTE="Standard-E64s-v3"
+    # try:
+    #     _ = workspace_ml_client.compute.get(compute_name)
+    #     print("Found existing compute target.")
+    # except ResourceNotFoundError:
+    #     print("Creating a new compute target...")
+    #     compute_config = AmlCompute(
+    #         name=compute_name,
+    #         type="amlcompute",
+    #         size="STANDARD_E64S_V3",
+    #         idle_time_before_scale_down=120,
+    #         min_instances=0,
+    #         max_instances=6,
+    #     )
+    #     workspace_ml_client.begin_create_or_update(compute_config).result()
+    # import_model = ml_client_registry.components.get(name="import_model_oss_test", label="latest")
+    # pipeline_object = model_import_pipeline(
+    #     model_id=test_model_name,
+    #     compute_name=compute_name,
+    #     task_name=TASK_NAME,
+    #     update_existing_model=update_existing_model,
         
-    )
-    pipeline_object.identity = UserIdentityConfiguration()
+    # )
+    # pipeline_object.identity = UserIdentityConfiguration()
 
-    pipeline_object.settings.force_rerun = True
-
-
-    pipeline_object.settings.default_compute = compute_name
-    schedule_huggingface_model_import = (
-        not huggingface_model_exists_in_registry
-        and test_model_name not in [None, "None"]
-        and len(test_model_name) > 1
-    )
-    print(
-        f"Need to schedule run for importing {test_model_name}: {schedule_huggingface_model_import}")
-
-    huggingface_pipeline_job = None
-    # if schedule_huggingface_model_import:
-        # submit the pipeline job
-    huggingface_pipeline_job = workspace_ml_client.jobs.create_or_update(
-        pipeline_object, experiment_name=experiment_name
-    )
-    # wait for the pipeline job to complete
-    workspace_ml_client.jobs.stream(huggingface_pipeline_job.name)
-
-    download_path = "./pipeline_outputs/"
-
-    # delete the folder if already exists
-    if os.path.exists(download_path):
-        shutil.rmtree(download_path)
-
-    # if pipeline job was not scheduled, skip
-    if huggingface_pipeline_job  is not None:
-
-        print("Pipeline job: " + huggingface_pipeline_job.name)
-        print("Downloading pipeline job output: model_registration_details")
-
-        pipeline_download_path = os.path.join(download_path, huggingface_pipeline_job.name)
-        os.makedirs(pipeline_download_path, exist_ok=True)
-
-        workspace_ml_client.jobs.download(
-            name=huggingface_pipeline_job.name,
-            download_path=pipeline_download_path,
-            output_name="model_registration_details",
-        )
+    # pipeline_object.settings.force_rerun = True
 
 
-    # if pipeline job was not scheduled, skip
-    if huggingface_pipeline_job is not None:
+    # pipeline_object.settings.default_compute = compute_name
+    # schedule_huggingface_model_import = (
+    #     not huggingface_model_exists_in_registry
+    #     and test_model_name not in [None, "None"]
+    #     and len(test_model_name) > 1
+    # )
+    # print(
+    #     f"Need to schedule run for importing {test_model_name}: {schedule_huggingface_model_import}")
 
-        with open(
-            f"./pipeline_outputs/{huggingface_pipeline_job.name}/named-outputs/model_registration_details/model_registration_details.json",
-            "r",
-        ) as f:
-            registration_details = json.load(f)
+    # huggingface_pipeline_job = None
+    # # if schedule_huggingface_model_import:
+    #     # submit the pipeline job
+    # huggingface_pipeline_job = workspace_ml_client.jobs.create_or_update(
+    #     pipeline_object, experiment_name=experiment_name
+    # )
+    # # wait for the pipeline job to complete
+    # workspace_ml_client.jobs.stream(huggingface_pipeline_job.name)
 
-        model_name = registration_details["name"]
-        model_version = registration_details["version"]
+    # download_path = "./pipeline_outputs/"
+
+    # # delete the folder if already exists
+    # if os.path.exists(download_path):
+    #     shutil.rmtree(download_path)
+
+    # # if pipeline job was not scheduled, skip
+    # if huggingface_pipeline_job  is not None:
+
+    #     print("Pipeline job: " + huggingface_pipeline_job.name)
+    #     print("Downloading pipeline job output: model_registration_details")
+
+    #     pipeline_download_path = os.path.join(download_path, huggingface_pipeline_job.name)
+    #     os.makedirs(pipeline_download_path, exist_ok=True)
+
+    #     workspace_ml_client.jobs.download(
+    #         name=huggingface_pipeline_job.name,
+    #         download_path=pipeline_download_path,
+    #         output_name="model_registration_details",
+    #     )
+
+
+    # # if pipeline job was not scheduled, skip
+    # if huggingface_pipeline_job is not None:
+
+    #     with open(
+    #         f"./pipeline_outputs/{huggingface_pipeline_job.name}/named-outputs/model_registration_details/model_registration_details.json",
+    #         "r",
+    #     ) as f:
+    #         registration_details = json.load(f)
+
+    #     model_name = registration_details["name"]
+    #     model_version = registration_details["version"]
 
         # Get the model object from workspace
-        model = workspace_ml_client.models.get(name=model_name, version=model_version)
+        # model = workspace_ml_client.models.get(name=model_name, version=model_version)
+        model = workspace_ml_client.models.get(name=test_model_name, version="latest")
         print(f"\n{model_name}")
         print(model.__dict__)
-        HF=model.flavors is None
-        if HF==False:
-            ML=model.flavors['python_function']['loader_module']
-            try:
-                ML='mlflow.transformers'
-                print("ML Model")
-            except:
-                raise Exception('Some message')
-            else:
-                raise Exception('Some message')
+        flavour = model.flavors
+        if flavour== None:
+            print(f"This model {model.name} is not registered in the mlflow flavour")
+            raise Exception('Some message')
+        else:
+            if flavour.get("python_function").get("loader_module", None) == "mlflow.transformers":
+                print(f"This model {model.name} is registered in the mlflow flavour")
+
+        
+        # HF=model.flavors is None
+        # if HF==False:
+        #     ML=model.flavors['python_function']['loader_module']
+        #     try:
+        #         ML='mlflow.transformers'
+        #         print("ML Model")
+        #     except:
+        #         raise Exception('Some message')
+        #     else:
+        #         raise Exception('Some message')
