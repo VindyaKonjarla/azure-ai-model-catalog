@@ -1,4 +1,4 @@
-name: facebook/bart-large-cnn
+name: MLFlow-Evaluate-facebook/bart-large-cnn
 
 on: 
   workflow_dispatch:
