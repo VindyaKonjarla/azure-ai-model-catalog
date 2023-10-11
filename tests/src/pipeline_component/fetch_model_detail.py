@@ -42,14 +42,14 @@ class ModelDetail:
         else:
             model_name = test_model_name
         latest_model = self.get_latest_model_version(model_name)
-        try:
-            task = latest_model.flavors["transformers"]["task"]
-        except Exception as e:
-            logger.warning(
-                f"::warning::From the transformer flavour we are not able to extract the task for this model : {latest_model}")
-            logger.info(f"Following Alternate approach to getch task....")
-            hfApi = HfTask(model_name=self.test_model_name)
-            task = hfApi.get_task()
+        # try:
+        #     task = latest_model.flavors["transformers"]["task"]
+        # except Exception as e:
+        #     logger.warning(
+        #         f"::warning::From the transformer flavour we are not able to extract the task for this model : {latest_model}")
+        #     logger.info(f"Following Alternate approach to getch task....")
+        #     hfApi = HfTask(model_name=test_model_name)
+        #     task = hfApi.get_task()
         logger.info(f"latest_model: {latest_model}")
-        logger.info(f"Task is : {task}")
+        # logger.info(f"Task is : {task}")
         return latest_model
