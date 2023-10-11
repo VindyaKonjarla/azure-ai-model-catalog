@@ -189,9 +189,10 @@ if __name__ == "__main__":
     compute_target = create_or_get_compute_target(
         ml_client=workspace_ml_client, compute=queue.compute, instance_type=queue.instance_type)
     task = HfTask(model_name=test_model_name).get_task()
+    logger.info(f"Task is this : {task} for the model : {test_model_name}")
     try:
         pipeline_object = model_import_pipeline(
-            model_id=test_model_name,
+            #model_id=test_model_name,
             compute_name=queue.compute,
             task_name=task,
             update_existing_model=True,
