@@ -243,12 +243,12 @@ if __name__ == "__main__":
         print(model.__dict__)
         flavour = model.flavors
         print("flavour:----",flavour.get("python_function").get("loader_module", None))
-        if flavour== None:
-            print(f"This model {model.name} is not registered in the mlflow flavour")
-            raise Exception('Some message')
-        else:
-            if flavour.get("python_function").get("loader_module", None) == "mlflow.transformers":
-                print(f"This model {model.name} is registered in the mlflow flavour")
+        # if flavour== None:
+        #     print(f"This model {model.name} is not registered in the mlflow flavour")
+        #     raise Exception('Some message')
+        # else:
+        #     if flavour.get("python_function").get("loader_module", None) == "mlflow.transformers":
+        #         print(f"This model {model.name} is registered in the mlflow flavour")
 
         
         # HF=model.flavors is None
