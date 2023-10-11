@@ -239,7 +239,7 @@ if __name__ == "__main__":
         # Get the model object from workspace
         # model = workspace_ml_client.models.get(name=model_name, version=model_version)
         model = workspace_ml_client.models.get(name=test_model_name, label="latest")
-        print(f"\n{model_name}")
+        # print(f"\n{model_name}")
         print(model.__dict__)
         flavour = model.flavors
         if flavour== None:
