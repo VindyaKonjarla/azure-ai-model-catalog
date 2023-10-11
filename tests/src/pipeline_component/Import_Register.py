@@ -25,7 +25,7 @@ test_keep_looping = os.environ.get('test_keep_looping')
 test_queue = os.environ.get('test_queue')
 test_set = os.environ.get('test_set')
 experiment_name=os.environ.get('experiment_name')
-compute_name = "model-import-cluster"
+compute_name = "import-cluster"
 # COMPUTE=os.environ.get('COMPUTE')
 # experiment_name = f"Import Model Pipeline"
 URL = "https://huggingface.co/api/models?sort=downloads&direction=-1&limit=10000"
@@ -154,7 +154,7 @@ if __name__ == "__main__":
             foundation_model.name, foundation_model.version, foundation_model.id))
     computelist=foundation_model.properties.get("inference-recommended-sku", "Standard_E16s_v3")
     a = computelist.index(',')
-    # COMPUTE = computelist[:a]
+    COMPUTE = computelist[:a]
     # COMPUTE="Standard-E64s-v3"
     try:
         _ = workspace_ml_client.compute.get(compute_name)
@@ -164,7 +164,7 @@ if __name__ == "__main__":
         compute_config = AmlCompute(
             name=compute_name,
             type="amlcompute",
-            size="STANDARD_E64S_V3",
+            size=COMPUTE,
             idle_time_before_scale_down=120,
             min_instances=0,
             max_instances=6,
