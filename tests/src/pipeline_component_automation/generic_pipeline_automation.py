@@ -4,6 +4,8 @@ from azure.identity import DefaultAzureCredential, InteractiveBrowserCredential
 from azure.ai.ml.entities import AmlCompute
 from azure.ai.ml import MLClient, UserIdentityConfiguration
 from azure.core.exceptions import ResourceNotFoundError
+from azure.ai.ml import Input
+from azure.ai.ml.constants import AssetTypes
 import mlflow
 import json
 import os
@@ -13,6 +15,10 @@ from utils.logging import get_logger
 from fetch_model_detail import ModelDetail
 from azure.ai.ml.dsl import pipeline
 from fetch_task import HfTask
+from dataset_loader import LoadDataset
+from metrics_result import MetricsCalaulator
+import time
+import pandas as pd
 
 # constants
 check_override = True
@@ -53,6 +59,8 @@ test_keep_looping = os.environ.get('test_keep_looping')
 # the queue file also contains the details of the workspace, registry, subscription, resource group
 
 huggingface_model_exists_in_registry = False
+
+FILE_NAME = "pipeline_task.json"
 
 
 def get_test_queue() -> ConfigBox:
@@ -115,6 +123,32 @@ def create_or_get_compute_target(ml_client, compute, instance_type):
     return compute
 
 
+def get_file_path(task):
+    file_name = task+".json"
+    data_path = f"./datasets/{task}/{file_name}"
+    return data_path
+
+
+def get_dataset(task, data_path, latest_model):
+    load_dataset = LoadDataset(
+        task=task, data_path=data_path, latest_model=latest_model)
+    task = task.replace("-", "_")
+    attribute = getattr(LoadDataset, task)
+    return attribute(load_dataset)
+
+
+def get_pipeline_task(task):
+    try:
+        with open(FILE_NAME) as f:
+            pipeline_task = ConfigBox(json.load(f))
+            logger.info(
+                f"Library name based on its task :\n\n {pipeline_task}\n\n")
+    except Exception as e:
+        logger.error(
+            f"::Error:: Could not find library from here :{pipeline_task}.Here is the exception\n{e}")
+    return pipeline_task.get(task)
+
+
 @pipeline
 def model_import_pipeline(compute_name, update_existing_model, task_name):
     import_model = registry_ml_client.components.get(
@@ -124,6 +158,46 @@ def model_import_pipeline(compute_name, update_existing_model, task_name):
     # Set job to not continue on failure
     import_model_job.settings.continue_on_step_failure = False
     return {"model_registration_details": import_model_job.outputs.model_registration_details}
+
+
+@pipeline()
+def evaluation_pipeline(task, mlflow_model, test_data, input_column_names, label_column_name, evaluation_file_path, compute):
+    try:
+        logger.info("Started configuring the job")
+        #data_path = "./datasets/translation.json"
+        pipeline_component_func = registry_ml_client.components.get(
+            name="mlflow_oss_model_evaluation_pipeline", label="latest"
+        )
+        evaluation_job = pipeline_component_func(
+            # specify the foundation model available in the azureml system registry or a model from the workspace
+            # mlflow_model = Input(type=AssetTypes.MLFLOW_MODEL, path=f"{mlflow_model_path}"),
+            mlflow_model=mlflow_model,
+            # test data
+            test_data=Input(type=AssetTypes.URI_FILE, path=test_data),
+            # The following parameters map to the dataset fields
+            input_column_names=input_column_names,
+            label_column_name=label_column_name,
+            # compute settings
+            compute_name=compute,
+            # specify the instance type for serverless job
+            # instance_type= "STANDARD_NC24",
+            # Evaluation settings
+            task=task,
+            # config file containing the details of evaluation metrics to calculate
+            # evaluation_config=Input(
+            #     type=AssetTypes.URI_FILE, path="./evaluation/eval_config.json"),
+            evaluation_config=Input(
+                type=AssetTypes.URI_FILE, path=evaluation_file_path),
+            # config cluster/device job is running on
+            # set device to GPU/CPU on basis if GPU count was found
+            device="auto",
+        )
+        return {"evaluation_result": evaluation_job.outputs.evaluation_result}
+    except Exception as ex:
+        _, _, exc_tb = sys.exc_info()
+        logger.error(f"The exception occured at this line no : {exc_tb.tb_lineno}" +
+                     f" the exception is this one : \n {ex}")
+        raise Exception(ex)
 
 
 if __name__ == "__main__":
@@ -192,7 +266,6 @@ if __name__ == "__main__":
     logger.info(f"Task is this : {task} for the model : {test_model_name}")
     try:
         pipeline_object = model_import_pipeline(
-            #model_id=test_model_name,
             compute_name=queue.compute,
             task_name=task,
             update_existing_model=True,
@@ -212,7 +285,7 @@ if __name__ == "__main__":
         # if schedule_huggingface_model_import:
         # submit the pipeline job
         huggingface_pipeline_job = workspace_ml_client.jobs.create_or_update(
-            pipeline_object, experiment_name=f"{test_model_name}"
+            pipeline_object, experiment_name=f"import_pipeline_{test_model_name}"
         )
         # wait for the pipeline job to complete
         workspace_ml_client.jobs.stream(huggingface_pipeline_job.name)
@@ -249,6 +322,55 @@ if __name__ == "__main__":
                      f" skipping the further process and the exception is this one : {ex}")
         sys.exit(1)
 
+    data_path = get_file_path(task=task)
+    input_column_names, label_column_name = get_dataset(task=task, data_path=data_path,
+                                                        latest_model=registered_model)
+    pieline_task = get_pipeline_task(task)
+
+    try:
+        pipeline_jobs = []
+        eval_experiment_name = f"{pieline_task}-evaluation"
+        pipeline_object = evaluation_pipeline(
+            task=pieline_task,
+            mlflow_model=Input(type=AssetTypes.MLFLOW_MODEL,
+                               path=f"{registered_model.id}"),
+            test_data=Input(type=AssetTypes.URI_FILE, path=data_path),
+            input_column_names=input_column_names,
+            label_column_name=label_column_name,
+            evaluation_file_path=Input(
+                type=AssetTypes.URI_FILE, path=f"./evaluation/{task}/eval_config.json"),
+            compute=queue.compute,
+            #mlflow_model = f"{latest_model.id}",
+            #data_path = data_path
+        )
+        # don't reuse cached results from previous jobs
+        pipeline_object.settings.force_rerun = True
+        pipeline_object.settings.default_compute = queue.compute
+
+        # set continue on step failure to False
+        pipeline_object.settings.continue_on_step_failure = False
+
+        timestamp = str(int(time.time()))
+        pipeline_object.display_name = f"eval-{registered_model.name}-{timestamp}"
+        pipeline_job = workspace_ml_client.jobs.create_or_update(
+            pipeline_object, experiment_name=eval_experiment_name
+        )
+        # add model['name'] and pipeline_job.name as key value pairs to a dictionary
+        pipeline_jobs.append(
+            {"model_name": registered_model.name, "job_name": pipeline_job.name})
+        # wait for the pipeline job to complete
+        workspace_ml_client.jobs.stream(pipeline_job.name)
+        # return pipeline_jobs
+    except Exception as ex:
+        _, _, exc_tb = sys.exc_info()
+        logger.error(f"The exception occured at this line no : {exc_tb.tb_lineno}" +
+                     f" the exception is this one : \n {ex}")
+        raise Exception(ex)
+
+    metrics_df = MetricsCalaulator(
+        pipeline_jobs=pipeline_jobs, mlflow=mlflow, experiment_name=evaluation_pipeline)
+    logger.info(f"Evaluation result is this : {metrics_df}")
+    logger.info("Proceeding with inference and deployment")
     InferenceAndDeployment = ModelInferenceAndDeployemnt(
         test_model_name=test_model_name.lower(),
         workspace_ml_client=workspace_ml_client,
