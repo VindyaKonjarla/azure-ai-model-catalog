@@ -302,7 +302,7 @@ if __name__ == "__main__":
                      f" skipping the further process and the exception is this one : {ex}")
         raise Exception(ex)
     registered_model_detail = ModelDetail(
-        workspace_ml_client=registry_ml_client)
+        workspace_ml_client=workspace_ml_client)
     registered_model = registered_model_detail.get_model_detail(
         test_model_name=test_model_name)
     try:
