@@ -241,6 +241,15 @@ if __name__ == "__main__":
         # model = workspace_ml_client.models.get(name=test_model_name, label="latest")
         print(f"\n{model_name}")
         print(model.__dict__)
+        flavour = model.flavors
+        flavour_check=flavour.get("python_function").get("loader_module", None)
+        print("flavour:----",flavour_check)
+        if flavour_check== "azureml.evaluate.mlflow.hftransformers":
+            print(f"This model {model.name} is registered in the hftransformers flavour")
+            raise Exception('Some message')
+        else:
+            if flavour_check == "mlflow.transformers":
+                print(f"This model {model.name} is registered in the mlflow flavour")
         # flavour = model.flavors
         # print("flavour:----",flavour.get("python_function").get("loader_module", None))
         # if flavour== None:
