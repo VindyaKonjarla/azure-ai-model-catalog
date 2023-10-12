@@ -88,11 +88,15 @@ def set_next_trigger_model(queue):
     model_list = list(queue.models)
     #model_name_without_slash = test_model_name.replace('/', '-')
     check_mlflow_model = "MLFlow-"+test_model_name
+    import_alias_model_name = f"MLFlow-Import-{test_model_name}"
+    
     if check_mlflow_model in model_list:
         index = model_list.index(check_mlflow_model)
+    elif import_alias_model_name in model_list:
+        index = model_list.index(import_alias_model_name)
     else:
-        index = model_list.index("MLFlow-Import-"+test_model_name)
-    #index = model_list.index(test_model_name)
+        index = model_list.index("MLFlow-Evaluate-"+test_model_name)
+
     logger.info(f"index of {test_model_name} in queue: {index}")
 # if index is not the last element in the list, get the next element in the list
     if index < len(model_list) - 1:
@@ -362,7 +366,7 @@ if __name__ == "__main__":
         workspace_ml_client.jobs.stream(pipeline_job.name)
         # return pipeline_jobs
         metrics_df = MetricsCalaulator(
-        pipeline_jobs=pipeline_jobs, mlflow=mlflow, experiment_name=eval_experiment_name).display_metric()
+            pipeline_jobs=pipeline_jobs, mlflow=mlflow, experiment_name=eval_experiment_name).display_metric()
         logger.info(f"Evaluation result is this : {metrics_df}")
     except Exception as ex:
         _, _, exc_tb = sys.exc_info()
