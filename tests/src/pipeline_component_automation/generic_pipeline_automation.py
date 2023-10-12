@@ -368,7 +368,7 @@ if __name__ == "__main__":
         raise Exception(ex)
 
     metrics_df = MetricsCalaulator(
-        pipeline_jobs=pipeline_jobs, mlflow=mlflow, experiment_name=evaluation_pipeline).display_metric()
+        pipeline_jobs=pipeline_jobs, mlflow=mlflow, experiment_name=eval_experiment_name).display_metric()
     logger.info(f"Evaluation result is this : {metrics_df}")
     logger.info("Proceeding with inference and deployment")
     # InferenceAndDeployment = ModelInferenceAndDeployemnt(
