@@ -328,7 +328,7 @@ class ModelInferenceAndDeployemnt:
         output = loaded_model_pipeline(scoring_input.input_data)
         print("My outupt is this : ", output)
 
-    def model_infernce_and_deployment(self, instance_type):
+    def model_infernce_and_deployment(self, instance_type, task):
         # expression_to_ignore = ["/", "\\", "|", "@", "#", ".",
         #                         "$", "%", "^", "&", "*", "<", ">", "?", "!", "~"]
         # # Create the regular expression to ignore
@@ -346,17 +346,6 @@ class ModelInferenceAndDeployemnt:
         #     self.workspace_ml_client, model_name)
         latest_model = ModelDetail(workspace_ml_client=self.workspace_ml_client).get_model_detail(
             test_model_name=self.test_model_name)
-        try:
-            #task = latest_model.flavors["transformers"]["task"]
-            hfApi = HfTask(model_name=self.test_model_name)
-            task = hfApi.get_task()
-        except Exception as e:
-            logger.warning(
-                f"::warning::From the transformer flavour we are not able to extract the task for this model : {latest_model}")
-            logger.info(f"Following Alternate approach to getch task....")
-            sys.exit(1)
-            # hfApi = HfTask(model_name=self.test_model_name)
-            # task = hfApi.get_task()
         logger.info(f"latest_model: {latest_model}")
         logger.info(f"Task is : {task}")
         scoring_file, scoring_input = self.get_task_specified_input(task=task)

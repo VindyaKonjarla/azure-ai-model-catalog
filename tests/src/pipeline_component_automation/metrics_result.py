@@ -22,10 +22,14 @@ class MetricsCalaulator:
                     self.experiment_name], filter_string=filter, output_format="list"
             )
             # get the compute_metrics runs.
-            # using a hacky way till 'Bug 2320997: not able to show eval metrics in FT notebooks - mlflow client now showing display names' is fixed
             for run in runs:
                 if len(run.data.metrics) > 0:
-                    logger.info(run.data.metrics)
+                    logger.info(f"==========={run.data.metrics}==================")
+                    temp_df = pd.DataFrame(run_metric, index=[0])
+                    # concat the temp_df to the metrics_df
+                    metrics_df = pd.concat(
+                        [metrics_df, temp_df], ignore_index=True)
+                    
                 logger.info(run.data.metrics)
                 # else, check if run.data.metrics.accuracy exists
                 if "exact_match" in run.data.metrics:

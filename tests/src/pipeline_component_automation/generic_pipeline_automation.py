@@ -264,37 +264,37 @@ if __name__ == "__main__":
         ml_client=workspace_ml_client, compute=queue.compute, instance_type=queue.instance_type)
     task = HfTask(model_name=test_model_name).get_task()
     logger.info(f"Task is this : {task} for the model : {test_model_name}")
-    # try:
-    #     pipeline_object = model_import_pipeline(
-    #         compute_name=queue.compute,
-    #         task_name=task,
-    #         update_existing_model=True,
-    #     )
-    #     pipeline_object.identity = UserIdentityConfiguration()
-    #     pipeline_object.settings.force_rerun = True
-    #     pipeline_object.settings.default_compute = queue.compute
-    #     schedule_huggingface_model_import = (
-    #         not huggingface_model_exists_in_registry
-    #         and test_model_name not in [None, "None"]
-    #         and len(test_model_name) > 1
-    #     )
-    #     logger.info(
-    #         f"Need to schedule run for importing {test_model_name}: {schedule_huggingface_model_import}")
+    try:
+        pipeline_object = model_import_pipeline(
+            compute_name=queue.compute,
+            task_name=task,
+            update_existing_model=True,
+        )
+        pipeline_object.identity = UserIdentityConfiguration()
+        pipeline_object.settings.force_rerun = True
+        pipeline_object.settings.default_compute = queue.compute
+        schedule_huggingface_model_import = (
+            not huggingface_model_exists_in_registry
+            and test_model_name not in [None, "None"]
+            and len(test_model_name) > 1
+        )
+        logger.info(
+            f"Need to schedule run for importing {test_model_name}: {schedule_huggingface_model_import}")
 
-    #     huggingface_pipeline_job = None
-    #     # if schedule_huggingface_model_import:
-    #     # submit the pipeline job
-    #     huggingface_pipeline_job = workspace_ml_client.jobs.create_or_update(
-    #         pipeline_object, experiment_name=f"import_pipeline_{test_model_name}"
-    #     )
-    #     # wait for the pipeline job to complete
-    #     workspace_ml_client.jobs.stream(huggingface_pipeline_job.name)
-    # except Exception as ex:
-    #     _, _, exc_tb = sys.exc_info()
-    #     logger.error(f"::error:: Not able to initiate job \n")
-    #     logger.error(f"The exception occured at this line no : {exc_tb.tb_lineno}" +
-    #                  f" skipping the further process and the exception is this one : {ex}")
-    #     raise Exception(ex)
+        huggingface_pipeline_job = None
+        # if schedule_huggingface_model_import:
+        # submit the pipeline job
+        huggingface_pipeline_job = workspace_ml_client.jobs.create_or_update(
+            pipeline_object, experiment_name=f"import_pipeline_{test_model_name}"
+        )
+        # wait for the pipeline job to complete
+        workspace_ml_client.jobs.stream(huggingface_pipeline_job.name)
+    except Exception as ex:
+        _, _, exc_tb = sys.exc_info()
+        logger.error(f"::error:: Not able to initiate job \n")
+        logger.error(f"The exception occured at this line no : {exc_tb.tb_lineno}" +
+                     f" skipping the further process and the exception is this one : {ex}")
+        raise Exception(ex)
     registered_model_detail = ModelDetail(
         workspace_ml_client=registry_ml_client)
     registered_model = registered_model_detail.get_model_detail(
@@ -361,21 +361,21 @@ if __name__ == "__main__":
         # wait for the pipeline job to complete
         workspace_ml_client.jobs.stream(pipeline_job.name)
         # return pipeline_jobs
+        metrics_df = MetricsCalaulator(
+        pipeline_jobs=pipeline_jobs, mlflow=mlflow, experiment_name=eval_experiment_name).display_metric()
+        logger.info(f"Evaluation result is this : {metrics_df}")
     except Exception as ex:
         _, _, exc_tb = sys.exc_info()
         logger.error(f"The exception occured at this line no : {exc_tb.tb_lineno}" +
                      f" the exception is this one : \n {ex}")
         raise Exception(ex)
-
-    metrics_df = MetricsCalaulator(
-        pipeline_jobs=pipeline_jobs, mlflow=mlflow, experiment_name=eval_experiment_name).display_metric()
-    logger.info(f"Evaluation result is this : {metrics_df}")
     logger.info("Proceeding with inference and deployment")
-    # InferenceAndDeployment = ModelInferenceAndDeployemnt(
-    #     test_model_name=test_model_name.lower(),
-    #     workspace_ml_client=workspace_ml_client,
-    #     registry=queue.registry
-    # )
-    # InferenceAndDeployment.model_infernce_and_deployment(
-    #     instance_type=queue.instance_type
-    # )
+    InferenceAndDeployment = ModelInferenceAndDeployemnt(
+        test_model_name=test_model_name.lower(),
+        workspace_ml_client=workspace_ml_client,
+        registry=queue.registry
+    )
+    InferenceAndDeployment.model_infernce_and_deployment(
+        instance_type=queue.instance_type,
+        task=task
+    )
