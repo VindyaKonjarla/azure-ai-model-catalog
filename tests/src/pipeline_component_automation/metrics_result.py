@@ -10,7 +10,7 @@ class MetricsCalaulator:
         self.mlflow = mlflow
         self.experiment_name = experiment_name
 
-    def display_metrice(self) -> pd.DataFrame:
+    def display_metric(self) -> pd.DataFrame:
         metrics_df = pd.DataFrame()
         for job in self.pipeline_jobs:
             logger.info(job)
