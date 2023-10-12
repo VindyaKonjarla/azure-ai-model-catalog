@@ -256,11 +256,13 @@ if __name__ == "__main__":
     )
     azureml_registry = MLClient(credential, registry_name="azureml")
     mlflow.set_tracking_uri(ws.get_mlflow_tracking_uri())
-    model_detail = ModelDetail(workspace_ml_client=azureml_registry)
-    foundation_model = model_detail.get_model_detail(
-        test_model_name=test_model_name)
-    computelist = foundation_model.properties.get(
-        "inference-recommended-sku", "Standard_E16s_v3")
+
+    # model_detail = ModelDetail(workspace_ml_client=azureml_registry)
+    # foundation_model = model_detail.get_model_detail(
+    #     test_model_name=test_model_name)
+    # computelist = foundation_model.properties.get(
+    #     "inference-recommended-sku", "Standard_E16s_v3")
+    
     # compute_target = create_or_get_compute_target(
     #     workspace_ml_client, queue.compute)
 
