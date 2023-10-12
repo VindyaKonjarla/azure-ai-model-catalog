@@ -1,5 +1,5 @@
 {
-    "queue_name": "test-northeurope-5",
+    "queue_name": "test-northeurope-6",
     "models": [
         "MLFlow-DI-tiiuae/falcon-40b"
     ],
@@ -8,6 +8,6 @@
     "resource_group": "huggingface-registry-test1",
     "registry": "HuggingFace",
     "environment": "automate-venv",
-    "compute": "Standard-E64s-v3",
-    "instance_type": "Standard_E64s_v3"
+    "compute": "Standard-D96a-v4",
+    "instance_type": "Standard_D96a_v4"
 }
