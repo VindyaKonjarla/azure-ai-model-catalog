@@ -344,7 +344,8 @@ class ModelInferenceAndDeployemnt:
         #     model_name = self.test_model_name
         # latest_model = self.get_latest_model_version(
         #     self.workspace_ml_client, model_name)
-        latest_model = ModelDetail(workspace_ml_client=self.workspace_ml_client).get_model_detail(test_model_name=self.test_model_name)
+        latest_model = ModelDetail(workspace_ml_client=self.workspace_ml_client).get_model_detail(
+            test_model_name=self.test_model_name)
         try:
             #task = latest_model.flavors["transformers"]["task"]
             hfApi = HfTask(model_name=self.test_model_name)
