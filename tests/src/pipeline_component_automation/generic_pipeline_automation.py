@@ -89,7 +89,7 @@ def set_next_trigger_model(queue):
     #model_name_without_slash = test_model_name.replace('/', '-')
     check_mlflow_model = "MLFlow-"+test_model_name
     import_alias_model_name = f"MLFlow-Import-{test_model_name}"
-    
+
     if check_mlflow_model in model_list:
         index = model_list.index(check_mlflow_model)
     elif import_alias_model_name in model_list:
@@ -268,6 +268,8 @@ if __name__ == "__main__":
         ml_client=workspace_ml_client, compute=queue.compute, instance_type=queue.instance_type)
     task = HfTask(model_name=test_model_name).get_task()
     logger.info(f"Task is this : {task} for the model : {test_model_name}")
+    timestamp = str(int(time.time()))
+    exp_model_name = test_model_name.replace('/', '-')
     try:
         pipeline_object = model_import_pipeline(
             compute_name=queue.compute,
@@ -289,7 +291,7 @@ if __name__ == "__main__":
         # if schedule_huggingface_model_import:
         # submit the pipeline job
         huggingface_pipeline_job = workspace_ml_client.jobs.create_or_update(
-            pipeline_object, experiment_name=f"import_pipeline_{test_model_name}"
+            pipeline_object, experiment_name=f"import-pipeline-{exp_model_name}-{timestamp}"
         )
         # wait for the pipeline job to complete
         workspace_ml_client.jobs.stream(huggingface_pipeline_job.name)
@@ -333,7 +335,7 @@ if __name__ == "__main__":
 
     try:
         pipeline_jobs = []
-        eval_experiment_name = f"{pieline_task}-evaluation"
+        eval_experiment_name = f"{pieline_task}-{exp_model_name}-evaluation-{timestamp}"
         pipeline_object = evaluation_pipeline(
             task=pieline_task,
             mlflow_model=Input(type=AssetTypes.MLFLOW_MODEL,
@@ -354,7 +356,6 @@ if __name__ == "__main__":
         # set continue on step failure to False
         pipeline_object.settings.continue_on_step_failure = False
 
-        timestamp = str(int(time.time()))
         pipeline_object.display_name = f"eval-{registered_model.name}-{timestamp}"
         pipeline_job = workspace_ml_client.jobs.create_or_update(
             pipeline_object, experiment_name=eval_experiment_name
