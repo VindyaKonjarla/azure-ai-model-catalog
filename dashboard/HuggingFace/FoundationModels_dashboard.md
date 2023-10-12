@@ -1,18 +1,18 @@
 |Category|🚀Total|✅Pass|Pass%|❌Failure|Failure%|🚫Cancelled|⏳Running|Others
 | ----------- | ----------------- | -------- | -------- | --------  | -------- | --------- | ---------- | -----------|
-Online Endpoint - Dynamic Installation|35|35|100.00%|0|0.00%|0|0|0|
+Online Endpoint - Dynamic Installation|36|35|97.22%|1|2.78%|0|0|0|
 Online Endpoint - Model Packaging|36|35|97.22%|1|2.78%|0|0|0|
-Batch Endpoint|35|35|100.00%|0|0.00%|0|0|0|
-Import|36|33|91.67%|2|5.56%|0|1|0|
-Evaluate|14|11|78.57%|1|7.14%|2|0|0|
+Batch Endpoint|36|35|97.22%|1|2.78%|0|0|0|
+Import|36|35|97.22%|1|2.78%|0|0|0|
+Evaluate|15|11|73.33%|0|0.00%|3|1|0|
 
 |     | Model                                                         | Status      | LastRunLink                                                                     | LastRunTimestamp     | Category             |
 |----:|:--------------------------------------------------------------|:------------|:--------------------------------------------------------------------------------|:---------------------|:---------------------|
 |   0 | MLFlow-Import-databricks-dolly-v2-12b                         | ❌ FAIL      | [Link](https://github.com/Azure/azure-ai-model-catalog/actions/runs/6478346057) | 2023-10-11T05:24:13Z | Import               |
-|   1 | MLFlow-Import-t5-small                                        | ❌ FAIL      | [Link](https://github.com/Azure/azure-ai-model-catalog/actions/runs/6482531397) | 2023-10-11T12:31:58Z | Import               |
-|   2 | MLFlow-MP-tiiuae-falcon-40b                                   | ❌ FAIL      | [Link](https://github.com/Azure/azure-ai-model-catalog/actions/runs/6468907786) | 2023-10-10T11:56:19Z | Model Package        |
-|   3 | MLFlow-Evaluate-databricks-dolly-v2-12b                       | ❌ FAIL      | [Link](https://github.com/Azure/azure-ai-model-catalog/actions/runs/6480529520) | 2023-10-11T09:19:53Z | None                 |
-|   4 | MLFlow-Import-tiiuae-falcon-40b                               | ⏳ RUNNING   | [Link](https://github.com/Azure/azure-ai-model-catalog/actions/runs/6491445494) | 2023-10-12T05:01:03Z | Import               |
+|   1 | MLFlow-MP-tiiuae-falcon-40b                                   | ❌ FAIL      | [Link](https://github.com/Azure/azure-ai-model-catalog/actions/runs/6468907786) | 2023-10-10T11:56:19Z | Model Package        |
+|   2 | MLFlow-DI-tiiuae-falcon-40b                                   | ❌ FAIL      | [Link](https://github.com/Azure/azure-ai-model-catalog/actions/runs/6493492370) | 2023-10-12T08:57:03Z | Dynmaic Installation |
+|   3 | MLFlow-Batch-tiiuae-falcon-40b                                | ❌ FAIL      | [Link](https://github.com/Azure/azure-ai-model-catalog/actions/runs/6493430689) | 2023-10-12T08:50:30Z | Batch                |
+|   4 | MLFlow-Evaluate-databricks-dolly-v2-12b                       | ⏳ RUNNING   | [Link](https://github.com/Azure/azure-ai-model-catalog/actions/runs/6496041198) | 2023-10-12T13:04:11Z | None                 |
 |   5 | MLFlow-MP-Jean-Baptiste-camembert-ner                         | ✅ PASS      | [Link](https://github.com/Azure/azure-ai-model-catalog/actions/runs/6434327696) | 2023-10-06T16:48:55Z | Model Package        |
 |   6 | MLFlow-MP-bert-base-cased                                     | ✅ PASS      | [Link](https://github.com/Azure/azure-ai-model-catalog/actions/runs/6432260824) | 2023-10-06T13:26:25Z | Model Package        |
 |   7 | MLFlow-MP-bert-base-uncased                                   | ✅ PASS      | [Link](https://github.com/Azure/azure-ai-model-catalog/actions/runs/6432283906) | 2023-10-06T13:28:29Z | Model Package        |
@@ -151,16 +151,19 @@ Evaluate|14|11|78.57%|1|7.14%|2|0|0|
 | 140 | MLFlow-Import-roberta-large                                   | ✅ PASS      | [Link](https://github.com/Azure/azure-ai-model-catalog/actions/runs/6454589937) | 2023-10-09T09:10:13Z | Import               |
 | 141 | MLFlow-Import-sshleifer-distilbart-cnn-12-6                   | ✅ PASS      | [Link](https://github.com/Azure/azure-ai-model-catalog/actions/runs/6458689271) | 2023-10-09T15:26:47Z | Import               |
 | 142 | MLFlow-Import-t5-large                                        | ✅ PASS      | [Link](https://github.com/Azure/azure-ai-model-catalog/actions/runs/6472273740) | 2023-10-10T16:40:52Z | Import               |
-| 143 | MLFlow-Evaluate-deepset-roberta-base-squad2                   | ✅ PASS      | [Link](https://github.com/Azure/azure-ai-model-catalog/actions/runs/6478320228) | 2023-10-11T05:20:49Z | None                 |
-| 144 | MLFlow-Evaluate-distilbert-base-cased-distilled-squad         | ✅ PASS      | [Link](https://github.com/Azure/azure-ai-model-catalog/actions/runs/6478468353) | 2023-10-11T05:42:29Z | None                 |
-| 145 | MLFlow-Evaluate-distilbert-base-uncased-distilled-squad       | ✅ PASS      | [Link](https://github.com/Azure/azure-ai-model-catalog/actions/runs/6478474096) | 2023-10-11T05:43:30Z | None                 |
-| 146 | MLFlow-Evaluate-gpt2-large                                    | ✅ PASS      | [Link](https://github.com/Azure/azure-ai-model-catalog/actions/runs/6478503277) | 2023-10-11T05:48:29Z | None                 |
-| 147 | MLFlow-Evaluate-gpt2-medium                                   | ✅ PASS      | [Link](https://github.com/Azure/azure-ai-model-catalog/actions/runs/6478506470) | 2023-10-11T05:49:00Z | None                 |
-| 148 | MLFlow-Evaluate-gpt2                                          | ✅ PASS      | [Link](https://github.com/Azure/azure-ai-model-catalog/actions/runs/6478494827) | 2023-10-11T05:47:05Z | None                 |
-| 149 | MLFlow-Evaluate-deepset-minilm-uncased-squad2                 | ✅ PASS      | [Link](https://github.com/Azure/azure-ai-model-catalog/actions/runs/6479388226) | 2023-10-11T07:33:26Z | None                 |
-| 150 | MLFlow-Evaluate-sshleifer-distilbart-cnn-12-6                 | ✅ PASS      | [Link](https://github.com/Azure/azure-ai-model-catalog/actions/runs/6479420700) | 2023-10-11T07:36:33Z | None                 |
-| 151 | MLFlow-Evaluate-facebook-bart-large-cnn                       | ✅ PASS      | [Link](https://github.com/Azure/azure-ai-model-catalog/actions/runs/6479897020) | 2023-10-11T08:23:21Z | None                 |
-| 152 | MLFlow-Evaluate-t5-large                                      | ✅ PASS      | [Link](https://github.com/Azure/azure-ai-model-catalog/actions/runs/6480355843) | 2023-10-11T09:05:07Z | None                 |
-| 153 | MLFlow-Evaluate-t5-small                                      | ✅ PASS      | [Link](https://github.com/Azure/azure-ai-model-catalog/actions/runs/6480361454) | 2023-10-11T09:05:32Z | None                 |
-| 154 | MLFlow-Evaluate-distilgpt2                                    | 🚫 CANCELLED | [Link](https://github.com/Azure/azure-ai-model-catalog/actions/runs/6478480898) | 2023-10-11T05:44:45Z | None                 |
-| 155 | MLFlow-Evaluate-t5-base                                       | 🚫 CANCELLED | [Link](https://github.com/Azure/azure-ai-model-catalog/actions/runs/6479399745) | 2023-10-11T07:34:29Z | None                 |
+| 143 | MLFlow-Import-t5-small                                        | ✅ PASS      | [Link](https://github.com/Azure/azure-ai-model-catalog/actions/runs/6494356589) | 2023-10-12T10:19:09Z | Import               |
+| 144 | MLFlow-Evaluate-deepset-roberta-base-squad2                   | ✅ PASS      | [Link](https://github.com/Azure/azure-ai-model-catalog/actions/runs/6478320228) | 2023-10-11T05:20:49Z | None                 |
+| 145 | MLFlow-Evaluate-distilbert-base-cased-distilled-squad         | ✅ PASS      | [Link](https://github.com/Azure/azure-ai-model-catalog/actions/runs/6478468353) | 2023-10-11T05:42:29Z | None                 |
+| 146 | MLFlow-Evaluate-distilbert-base-uncased-distilled-squad       | ✅ PASS      | [Link](https://github.com/Azure/azure-ai-model-catalog/actions/runs/6478474096) | 2023-10-11T05:43:30Z | None                 |
+| 147 | MLFlow-Evaluate-gpt2-large                                    | ✅ PASS      | [Link](https://github.com/Azure/azure-ai-model-catalog/actions/runs/6478503277) | 2023-10-11T05:48:29Z | None                 |
+| 148 | MLFlow-Evaluate-gpt2-medium                                   | ✅ PASS      | [Link](https://github.com/Azure/azure-ai-model-catalog/actions/runs/6478506470) | 2023-10-11T05:49:00Z | None                 |
+| 149 | MLFlow-Evaluate-gpt2                                          | ✅ PASS      | [Link](https://github.com/Azure/azure-ai-model-catalog/actions/runs/6478494827) | 2023-10-11T05:47:05Z | None                 |
+| 150 | MLFlow-Import-tiiuae-falcon-40b                               | ✅ PASS      | [Link](https://github.com/Azure/azure-ai-model-catalog/actions/runs/6491445494) | 2023-10-12T05:01:03Z | Import               |
+| 151 | MLFlow-Evaluate-deepset-minilm-uncased-squad2                 | ✅ PASS      | [Link](https://github.com/Azure/azure-ai-model-catalog/actions/runs/6479388226) | 2023-10-11T07:33:26Z | None                 |
+| 152 | MLFlow-Evaluate-sshleifer-distilbart-cnn-12-6                 | ✅ PASS      | [Link](https://github.com/Azure/azure-ai-model-catalog/actions/runs/6479420700) | 2023-10-11T07:36:33Z | None                 |
+| 153 | MLFlow-Evaluate-facebook-bart-large-cnn                       | ✅ PASS      | [Link](https://github.com/Azure/azure-ai-model-catalog/actions/runs/6479897020) | 2023-10-11T08:23:21Z | None                 |
+| 154 | MLFlow-Evaluate-t5-large                                      | ✅ PASS      | [Link](https://github.com/Azure/azure-ai-model-catalog/actions/runs/6480355843) | 2023-10-11T09:05:07Z | None                 |
+| 155 | MLFlow-Evaluate-t5-small                                      | ✅ PASS      | [Link](https://github.com/Azure/azure-ai-model-catalog/actions/runs/6480361454) | 2023-10-11T09:05:32Z | None                 |
+| 156 | MLFlow-Evaluate-distilgpt2                                    | 🚫 CANCELLED | [Link](https://github.com/Azure/azure-ai-model-catalog/actions/runs/6478480898) | 2023-10-11T05:44:45Z | None                 |
+| 157 | MLFlow-Evaluate-t5-base                                       | 🚫 CANCELLED | [Link](https://github.com/Azure/azure-ai-model-catalog/actions/runs/6479399745) | 2023-10-11T07:34:29Z | None                 |
+| 158 | MLFlow-Evaluate-tiiuae-falcon-40b                             | 🚫 CANCELLED | [Link](https://github.com/Azure/azure-ai-model-catalog/actions/runs/6495260889) | 2023-10-12T11:54:58Z | None                 |
