@@ -16,6 +16,7 @@ from utils.logging import get_logger
 from fetch_task import HfTask
 import mlflow
 from box import ConfigBox
+from fetch_model_detail import ModelDetail
 import re
 import sys
 
@@ -328,29 +329,33 @@ class ModelInferenceAndDeployemnt:
         print("My outupt is this : ", output)
 
     def model_infernce_and_deployment(self, instance_type):
-        expression_to_ignore = ["/", "\\", "|", "@", "#", ".",
-                                "$", "%", "^", "&", "*", "<", ">", "?", "!", "~"]
-        # Create the regular expression to ignore
-        regx_for_expression = re.compile(
-            '|'.join(map(re.escape, expression_to_ignore)))
-        # Check the model_name contains any of there character
-        expression_check = re.findall(
-            regx_for_expression, self.test_model_name)
-        if expression_check:
-            # Replace the expression with hyphen
-            model_name = regx_for_expression.sub("-", self.test_model_name)
-        else:
-            model_name = self.test_model_name
-        latest_model = self.get_latest_model_version(
-            self.workspace_ml_client, model_name)
+        # expression_to_ignore = ["/", "\\", "|", "@", "#", ".",
+        #                         "$", "%", "^", "&", "*", "<", ">", "?", "!", "~"]
+        # # Create the regular expression to ignore
+        # regx_for_expression = re.compile(
+        #     '|'.join(map(re.escape, expression_to_ignore)))
+        # # Check the model_name contains any of there character
+        # expression_check = re.findall(
+        #     regx_for_expression, self.test_model_name)
+        # if expression_check:
+        #     # Replace the expression with hyphen
+        #     model_name = regx_for_expression.sub("-", self.test_model_name)
+        # else:
+        #     model_name = self.test_model_name
+        # latest_model = self.get_latest_model_version(
+        #     self.workspace_ml_client, model_name)
+        latest_model = ModelDetail(workspace_ml_client=self.workspace_ml_client).get_model_detail()
         try:
-            task = latest_model.flavors["transformers"]["task"]
+            #task = latest_model.flavors["transformers"]["task"]
+            hfApi = HfTask(model_name=self.test_model_name)
+            task = hfApi.get_task()
         except Exception as e:
             logger.warning(
                 f"::warning::From the transformer flavour we are not able to extract the task for this model : {latest_model}")
             logger.info(f"Following Alternate approach to getch task....")
-            hfApi = HfTask(model_name=self.test_model_name)
-            task = hfApi.get_task()
+            sys.exit(1)
+            # hfApi = HfTask(model_name=self.test_model_name)
+            # task = hfApi.get_task()
         logger.info(f"latest_model: {latest_model}")
         logger.info(f"Task is : {task}")
         scoring_file, scoring_input = self.get_task_specified_input(task=task)
