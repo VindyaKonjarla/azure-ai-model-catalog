@@ -25,8 +25,8 @@ test_keep_looping = os.environ.get('test_keep_looping')
 test_queue = os.environ.get('test_queue')
 test_set = os.environ.get('test_set')
 experiment_name=os.environ.get('experiment_name')
-compute_name = "model-import-cluster"
-# COMPUTE=os.environ.get('COMPUTE')
+# compute_name = "model-import-cluster"
+COMPUTE=os.environ.get('COMPUTE')
 # experiment_name = f"Import Model Pipeline"
 URL = "https://huggingface.co/api/models?sort=downloads&direction=-1&limit=10000"
 COLUMNS_TO_READ = ["modelId", "pipeline_tag", "tags"]
@@ -111,9 +111,9 @@ def set_next_trigger_model(queue):
         print(f'NEXT_MODEL={next_model}', file=fh)
 
 @pipeline
-def model_import_pipeline(model_id,compute_name,update_existing_model, task_name):
+def model_import_pipeline(model_id,COMPUTE,update_existing_model, task_name):
 
-    import_model_job = import_model(model_id=test_model_name,compute=compute_name, task_name=task_name,update_existing_model=update_existing_model)
+    import_model_job = import_model(model_id=test_model_name,compute=COMPUTE, task_name=task_name,update_existing_model=update_existing_model)
     # Set job to not continue on failure
     import_model_job.settings.continue_on_step_failure = False
     return {"model_registration_details": import_model_job.outputs.model_registration_details}
