@@ -184,7 +184,7 @@ def write_single_workflow_file(model, q, secret_name):
     # # print(workflow_file['env']['test_queue'])
     print (f"Generating workflow file: {workflow_file}")
     os.system(f"cp {args.workflow_template} {workflow_file}")
-    test_Model=model.replace("MLFlow-Evaluate-"," ")
+    test_Model=model.replace("MLFlow-Import-"," ")
     test_model_name=test_Model.strip()
     print(test_model_name)
     os.system(f"sed -i s/name: .*/name: {model}/g' {workflow_file}")
