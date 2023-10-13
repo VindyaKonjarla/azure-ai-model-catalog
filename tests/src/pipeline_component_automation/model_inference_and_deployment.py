@@ -54,25 +54,6 @@ class ModelInferenceAndDeployemnt:
         print(logs)
         self.prase_logs(logs)
 
-    def get_latest_model_version(self, workspace_ml_client, model_name):
-        logger.info("In get_latest_model_version...")
-        version_list = list(workspace_ml_client.models.list(model_name))
-        if len(version_list) == 0:
-            logger.info("Model not found in registry")
-        else:
-            model_version = version_list[0].version
-            foundation_model = workspace_ml_client.models.get(
-                model_name, model_version)
-            logger.info(
-                "\n\nUsing model name: {0}, version: {1}, id: {2} for inferencing".format(
-                    foundation_model.name, foundation_model.version, foundation_model.id
-                )
-            )
-        logger.info(
-            f"Latest model {foundation_model.name} version {foundation_model.version} created at {foundation_model.creation_context.created_at}")
-        #print(f"Model Config : {latest_model.config}")
-        return foundation_model
-
     def get_model_output(self, task, latest_model, scoring_input):
         model_sourceuri = latest_model.properties["mlflow.modelSourceUri"]
         loaded_model_pipeline = mlflow.transformers.load_model(
@@ -237,18 +218,6 @@ class ModelInferenceAndDeployemnt:
     def create_online_deployment(self, latest_model, online_endpoint_name, model_package, instance_type):
         logger.info("In create_online_deployment...")
         logger.info(f"latest_model.name is this : {latest_model.name}")
-        # # Expression need to be replaced with hyphen
-        # expression_to_ignore = ["/", "\\", "|", "@", "#", ".",
-        #                         "$", "%", "^", "&", "*", "<", ">", "?", "!", "~", "_"]
-        # # Create the regular expression to ignore
-        # regx = re.compile('|'.join(map(re.escape, expression_to_ignore)))
-        # # Check the model_name contains any of there character
-        # expression_check = re.findall(regx, latest_model.name)
-        # if expression_check:
-        #     # Replace the expression with hyphen
-        #     latest_model_name = regx.sub("-", latest_model.name)
-        # else:
-        #     latest_model_name = latest_model.name
         latest_model_name = self.get_model_name(
             latest_model_name=latest_model.name)
         # Check if the model name starts with a digit
@@ -313,43 +282,10 @@ class ModelInferenceAndDeployemnt:
                 f"::Error:: Could not find scoring_file: {scoring_file}. Finishing without sample scoring: \n{e}")
         return scoring_file, scoring_input
 
-    def local_inference(self, task, latest_model, scoring_input):
-        model_sourceuri = latest_model.properties["mlflow.modelSourceUri"]
-        loaded_model_pipeline = mlflow.transformers.load_model(
-            model_uri=model_sourceuri)
-        print(
-            f"Latest model name : {latest_model.name} and latest model version : {latest_model.version}", )
-        if task == "fill-mask":
-            pipeline_tokenizer = loaded_model_pipeline.tokenizer
-            for index in range(len(scoring_input.input_data)):
-                scoring_input.input_data[index] = scoring_input.input_data[index].replace(
-                    "<mask>", pipeline_tokenizer.mask_token).replace("[MASK]", pipeline_tokenizer.mask_token)
-
-        output = loaded_model_pipeline(scoring_input.input_data)
-        print("My outupt is this : ", output)
-
     def model_infernce_and_deployment(self, instance_type, task, latest_model):
-        # expression_to_ignore = ["/", "\\", "|", "@", "#", ".",
-        #                         "$", "%", "^", "&", "*", "<", ">", "?", "!", "~"]
-        # # Create the regular expression to ignore
-        # regx_for_expression = re.compile(
-        #     '|'.join(map(re.escape, expression_to_ignore)))
-        # # Check the model_name contains any of there character
-        # expression_check = re.findall(
-        #     regx_for_expression, self.test_model_name)
-        # if expression_check:
-        #     # Replace the expression with hyphen
-        #     model_name = regx_for_expression.sub("-", self.test_model_name)
-        # else:
-        #     model_name = self.test_model_name
-        # latest_model = self.get_latest_model_version(
-        #     self.workspace_ml_client, model_name)
-        # latest_model = ModelDetail(workspace_ml_client=self.workspace_ml_client).get_model_detail(
-        #     test_model_name=self.test_model_name)
         logger.info(f"latest_model is this : {latest_model}")
         logger.info(f"Task is : {task}")
         scoring_file, scoring_input = self.get_task_specified_input(task=task)
-        # self.local_inference(task=task, latest_model=latest_model, scoring_input=scoring_input)
         # endpoint names need to be unique in a region, hence using timestamp to create unique endpoint name
         timestamp = int(time.time())
         online_endpoint_name = task + str(timestamp)
