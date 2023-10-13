@@ -328,7 +328,7 @@ class ModelInferenceAndDeployemnt:
         output = loaded_model_pipeline(scoring_input.input_data)
         print("My outupt is this : ", output)
 
-    def model_infernce_and_deployment(self, instance_type, task):
+    def model_infernce_and_deployment(self, instance_type, task, latest_model):
         # expression_to_ignore = ["/", "\\", "|", "@", "#", ".",
         #                         "$", "%", "^", "&", "*", "<", ">", "?", "!", "~"]
         # # Create the regular expression to ignore
@@ -344,9 +344,9 @@ class ModelInferenceAndDeployemnt:
         #     model_name = self.test_model_name
         # latest_model = self.get_latest_model_version(
         #     self.workspace_ml_client, model_name)
-        latest_model = ModelDetail(workspace_ml_client=self.workspace_ml_client).get_model_detail(
-            test_model_name=self.test_model_name)
-        logger.info(f"latest_model: {latest_model}")
+        # latest_model = ModelDetail(workspace_ml_client=self.workspace_ml_client).get_model_detail(
+        #     test_model_name=self.test_model_name)
+        logger.info(f"latest_model is this : {latest_model}")
         logger.info(f"Task is : {task}")
         scoring_file, scoring_input = self.get_task_specified_input(task=task)
         # self.local_inference(task=task, latest_model=latest_model, scoring_input=scoring_input)
