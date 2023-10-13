@@ -255,7 +255,7 @@ class ModelInferenceAndDeployemnt:
                 deployment_name, online_endpoint_name)
             self.workspace_ml_client.online_endpoints.begin_delete(
                 name=online_endpoint_name).wait()
-            exit(1)
+            sys.exit(1)
         endpoint.traffic = {deployment_name: 100}
         try:
             self.workspace_ml_client.begin_create_or_update(endpoint).result()
@@ -268,7 +268,7 @@ class ModelInferenceAndDeployemnt:
                 deployment_name, online_endpoint_name)
             self.workspace_ml_client.online_endpoints.begin_delete(
                 name=endpoint.name).wait()
-            exit(1)
+            sys.exit(1)
         deployment_obj = self.workspace_ml_client.online_deployments.get(
             name=deployment_name, endpoint_name=endpoint.name)
         logger.info(f"Deployment object is this one: {deployment_obj}")
@@ -316,13 +316,14 @@ class ModelInferenceAndDeployemnt:
         latest_model = self.get_latest_model_version(
             self.workspace_ml_client, model_name)
         try:
-            task = latest_model.flavors["transformers"]["task"]
+            #task = latest_model.flavors["transformers"]["task"]
+            hfApi = HfTask(model_name=self.test_model_name)
+            task = hfApi.get_task()
         except Exception as e:
             logger.warning(
                 f"::warning::From the transformer flavour we are not able to extract the task for this model : {latest_model}")
-            logger.info(f"Following Alternate approach to getch task....")
-            hfApi = HfTask(model_name=self.test_model_name)
-            task = hfApi.get_task()
+            sys.exit(1)
+           
         logger.info(f"latest_model: {latest_model}")
         logger.info(f"Task is : {task}")
         scoring_file, scoring_input = self.get_task_specified_input(task=task)
