@@ -7,6 +7,5 @@
       "environment": "automate-venv",
       "compute": "Standard-E64s-v3",
       "instance_type": "Standard_E64s_v3"
-    }
-  
+    }  
 }
