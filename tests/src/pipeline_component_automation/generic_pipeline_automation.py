@@ -384,5 +384,6 @@ if __name__ == "__main__":
     )
     InferenceAndDeployment.model_infernce_and_deployment(
         instance_type=queue.instance_type,
-        task=task
+        task=task,
+        latest_model=registered_model
     )
