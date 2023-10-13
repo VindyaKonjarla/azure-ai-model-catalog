@@ -47,8 +47,9 @@ jobs:
       run: pip install datasets
     - name: deploy-model-step
       id: deploy-model-step
-      run: python Import_Register.py
-      working-directory: tests/src/pipeline_component
+      run: python generic_initial_automation.py
+      working-directory: tests/src/test_with_dynamic_installation
+
     - name: trigger-next-model-step
       env:
         GITHUB_TOKEN: ${{ secrets.WORKFLOW_TOKEN }}
