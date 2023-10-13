@@ -2,7 +2,6 @@ import re
 from huggingface_hub import HfApi
 import pandas as pd
 from utils.logging import get_logger
-URL = "https://huggingface.co/api/models?sort=downloads&direction=-1&limit=10000"
 LIST_OF_COLUMNS = ['modelId', 'downloads',
                    'lastModified', 'tags', 'pipeline_tag']
 TASK_NAME = ['fill-mask', 'token-classification', 'question-answering',
