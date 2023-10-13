@@ -184,7 +184,7 @@ if __name__ == "__main__":
     pipeline_object.settings.force_rerun = True
 
 
-    pipeline_object.settings.default_compute = compute_name
+    pipeline_object.settings.default_compute = COMPUTE
     schedule_huggingface_model_import = (
         not huggingface_model_exists_in_registry
         and test_model_name not in [None, "None"]
