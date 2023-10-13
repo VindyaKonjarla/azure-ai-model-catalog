@@ -25,6 +25,7 @@ class MetricsCalaulator:
             for run in runs:
                 if len(run.data.metrics) > 0:
                     logger.info(f"==========={run.data.metrics}==================")
+                    run_metric = run.data.metrics
                     temp_df = pd.DataFrame(run_metric, index=[0])
                     # concat the temp_df to the metrics_df
                     metrics_df = pd.concat(
