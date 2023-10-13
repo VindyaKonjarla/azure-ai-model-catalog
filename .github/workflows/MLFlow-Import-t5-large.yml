@@ -4,7 +4,7 @@ on:
   workflow_dispatch:
 
 env:
-  test_model_name: MLFlow-Import-t5-large
+  test_model_name: t5-large
   test_sku_type: cpu
   test_trigger_next_model: true
   test_queue: test-southcentralus-1
