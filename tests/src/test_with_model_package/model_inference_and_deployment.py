@@ -194,6 +194,7 @@ class ModelInferenceAndDeployemnt:
             logger.error(f"::error:: Could not create Model package: \n")
             logger.error(f"The exception occured at this line no : {exc_tb.tb_lineno}" +
                          f" the exception is this one :{e}")
+            sys.exit(1)
         try:
             self.workspace_ml_client.begin_create_or_update(endpoint).result()
         except Exception as e:
@@ -202,7 +203,7 @@ class ModelInferenceAndDeployemnt:
             logger.error(f"The exception occured at this line no : {exc_tb.tb_lineno}" +
                          f" the exception is this one : {e}")
             self.prase_logs(str(e))
-            exit(1)
+            sys.exit(1)
         return model_package
 
     def get_model_name(self, latest_model_name):
@@ -283,7 +284,7 @@ class ModelInferenceAndDeployemnt:
                 deployment_name, online_endpoint_name)
             self.workspace_ml_client.online_endpoints.begin_delete(
                 name=online_endpoint_name).wait()
-            exit(1)
+            sys.exit(1)
 
         return deployment_name
 
