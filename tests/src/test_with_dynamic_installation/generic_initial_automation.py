@@ -10,6 +10,7 @@ import os
 import sys
 from box import ConfigBox
 from utils.logging import get_logger
+from fetch_model_detail import ModelDetail
 
 # constants
 check_override = True
@@ -189,11 +190,13 @@ if __name__ == "__main__":
     #                                environment=latest_env, compute=queue.compute, environment_variables=environment_variables)
     # create_and_get_job_studio_url(command_job, workspace_ml_client)
 
+    foundation_model = ModelDetail(workspace_ml_client=workspace_ml_client).get_model_detail(test_model_name=test_model_name)
     InferenceAndDeployment = ModelInferenceAndDeployemnt(
         test_model_name=test_model_name.lower(),
         workspace_ml_client=workspace_ml_client,
         registry=queue.registry
     )
     InferenceAndDeployment.model_infernce_and_deployment(
-        instance_type=queue.instance_type
+        instance_type=queue.instance_type,
+        latest_model=foundation_model
     )
