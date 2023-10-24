@@ -7,7 +7,7 @@
         "MLFlow-Batch-distilbert-base-uncased-finetuned-sst-2-english",
         "MLFlow-Batch-sagorsarker/codeswitch-hineng-ner-lince",
         "MLFlow-Batch-facebook-bart-large-cnn",
-        "MLFlow-Batch-deepset/roberta-large-squad2",
+        "MLFlow-Batch-deepset/roberta-large-squad2"
         
     ],
     "workspace": "test-eastus",
