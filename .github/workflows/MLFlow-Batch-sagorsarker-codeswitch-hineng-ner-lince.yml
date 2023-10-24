@@ -1,10 +1,10 @@
-name: MLFlow-Batch-facebook-bart-large-cnn
+name: MLFlow-Batch-sagorsarker/codeswitch-hineng-ner-lince
 
 on: 
   workflow_dispatch:
 
 env:
-  test_model_name: facebook-bart-large-cnn
+  test_model_name: sagorsarker/codeswitch-hineng-ner-lince
   test_sku_type: cpu
   test_trigger_next_model: true
   test_queue: test-southcentralus-BE
