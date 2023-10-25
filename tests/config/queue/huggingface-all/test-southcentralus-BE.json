@@ -18,7 +18,7 @@
         "MLFlow-Batch-distilbert-base-uncased",
         "MLFlow-Batch-distilbert-base-cased-distilled-squad",
         "MLFlow-Batch-distilbert-base-cased",
-        "MLFlow-Batch-deepset-roberta-base-squad2",
+        "MLFlow-Batch-deepset/roberta-base-squad2",
         "MLFlow-Batch-deepset-minilm-uncased-squad2",
         "MLFlow-Batch-camembert-base",
         "MLFlow-Batch-bert-base-uncased",
