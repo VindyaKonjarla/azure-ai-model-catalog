@@ -2,9 +2,9 @@
     "queue_name": "test-BE-01",
     "models": [
         "MLFlow-Batch-t5-large",
-        "MLFlow-Batch-MLFlow-Batch-microsoft/deberta-xlarge",
+        "MLFlow-Batch-microsoft/deberta-xlarge",
         "MLFlow-Batch-gpt2-large",
-        "MLFlow-Batch-MLFlow-Batch-Jean-Baptiste/camembert-ner",
+        "MLFlow-Batch-Jean-Baptiste/camembert-ner",
         "MLFlow-Batch-facebook-bart-large-cnn"
         
         
