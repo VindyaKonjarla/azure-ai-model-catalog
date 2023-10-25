@@ -1,13 +1,28 @@
 {
     "queue_name": "test-southcentralus-BE",
     "models": [
-        "MLFlow-Batch-bert-base-uncased",
-        "MLFlow-Batch-gpt2",
         "MLFlow-Batch-t5-small",
+        "MLFlow-Batch-sshleifer-distilbart-cnn-12-6",
+        "MLFlow-Batch-roberta-large-openai-detector",
+        "MLFlow-Batch-roberta-large-mnli",
+        "MLFlow-Batch-roberta-base-openai-detector",
+        "MLFlow-Batch-roberta-base",
+        "MLFlow-Batch-microsoft-deberta-large-mnli",
+        "MLFlow-Batch-microsoft-deberta-base-mnli",
+        "MLFlow-Batch-gpt2",
+        "MLFlow-Batch-finiteautomata-bertweet-base-sentiment-analysis",
+        "MLFlow-Batch-distilroberta-base",
+        "MLFlow-Batch-distilgpt2",
         "MLFlow-Batch-distilbert-base-uncased-finetuned-sst-2-english",
-        "MLFlow-Batch-sagorsarker/codeswitch-hineng-ner-lince",
-        "MLFlow-Batch-facebook-bart-large-cnn",
-        "MLFlow-Batch-deepset/roberta-large-squad2"
+        "MLFlow-Batch-distilbert-base-uncased-distilled-squad",
+        "MLFlow-Batch-distilbert-base-uncased",
+        "MLFlow-Batch-distilbert-base-cased-distilled-squad",
+        "MLFlow-Batch-distilbert-base-cased",
+        "MLFlow-Batch-deepset-roberta-base-squad2",
+        "MLFlow-Batch-deepset-minilm-uncased-squad2",
+        "MLFlow-Batch-camembert-base",
+        "MLFlow-Batch-bert-base-uncased",
+        "MLFlow-Batch-bert-base-cased"
         
     ],
     "workspace": "test-eastus",
