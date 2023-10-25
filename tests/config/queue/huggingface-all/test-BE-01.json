@@ -1,0 +1,19 @@
+{
+    "queue_name": "test-BE-01",
+    "models": [
+        "MLFlow-Batch-t5-large",
+        "MLFlow-Batch-microsoft-deberta-xlarge",
+        "MLFlow-Batch-gpt2-large",
+        "MLFlow-Batch-Jean-Baptiste-camembert-ner",
+        "MLFlow-Batch-facebook-bart-large-cnn"
+        
+        
+    ],
+    "workspace": "test-eastus",
+    "subscription": "80c77c76-74ba-4c8c-8229-4c3b2957990c",
+    "resource_group": "huggingface-registry-test1",
+    "registry": "HuggingFace",
+    "environment": "automate-venv",
+    "compute": "Standard-DS4-v2",
+    "instance_type": "Standard_DS4_v2"
+}
