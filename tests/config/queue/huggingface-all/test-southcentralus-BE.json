@@ -2,7 +2,7 @@
     "queue_name": "test-southcentralus-BE",
     "models": [
         "MLFlow-Batch-t5-small",
-        "MLFlow-Batch-MLFlow-Batch-sshleifer/distilbart-cnn-12-6",
+        "MLFlow-Batch-sshleifer/distilbart-cnn-12-6",
         "MLFlow-Batch-roberta-large-openai-detector",
         "MLFlow-Batch-roberta-large-mnli",
         "MLFlow-Batch-roberta-base-openai-detector",
@@ -19,7 +19,7 @@
         "MLFlow-Batch-distilbert-base-cased-distilled-squad",
         "MLFlow-Batch-distilbert-base-cased",
         "MLFlow-Batch-deepset/roberta-base-squad2",
-        "MMLFlow-Batch-deepset/minilm-uncased-squad2",
+        "MLFlow-Batch-deepset/minilm-uncased-squad2",
         "MLFlow-Batch-camembert-base",
         "MLFlow-Batch-bert-base-uncased",
         "MLFlow-Batch-bert-base-cased"
