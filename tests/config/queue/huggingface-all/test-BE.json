@@ -3,8 +3,8 @@
     "models": [
         "MLFlow-Batch-t5-base",
         "MLFlow-Batch-roberta-large",
-        "MLFlow-Batch-MLFlow-Batch-microsoft/deberta-large",
-        "MLFlow-Batch-MLFlow-Batch-microsoft/deberta-base",
+        "MLFlow-Batch-microsoft/deberta-large",
+        "MLFlow-Batch-microsoft/deberta-base",
         "MLFlow-Batch-gpt2-medium",
         "MLFlow-Batch-bert-large-uncased",
         "MLFlow-Batch-bert-large-cased"
