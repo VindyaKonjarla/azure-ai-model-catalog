@@ -371,7 +371,7 @@ if __name__ == "__main__":
     task = HfTask(model_name=test_model_name).get_task()
     print("Task is this : ", {task})
     
-    test_model_name = get_model_name(test_model_name)
+    #test_model_name = get_model_name(test_model_name)
     #version_list = list(workspace_ml_client.models.list(test_model_name))
     client = MlflowClient()
 
