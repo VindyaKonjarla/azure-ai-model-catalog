@@ -207,33 +207,33 @@ def get_latest_model_version(workspace_ml_client, test_model_name):
     return foundation_model, foundation_model_name
 
 
-def get_model_name(test_model_name):
-        # Expression need to be replaced with hyphen
-        expression_to_ignore = ["/", "\\", "|", "@", "#", ".",
-                                "$", "%", "^", "&", "*", "<", ">", "?", "!", "~", "_"]
-        # Create the regular expression to ignore
-        regx_for_expression = re.compile(
-            '|'.join(map(re.escape, expression_to_ignore)))
-        # Check the model_name contains any of there character
-        expression_check = re.findall(regx_for_expression, test_model_name)
-        if expression_check:
-            # Replace the expression with hyphen
-            test_model_name = regx_for_expression.sub("-", test_model_name)
-        # Reserve Keyword need to be removed
-        reserve_keywords = ["microsoft"]
-        # Create the regular expression to ignore
-        regx_for_reserve_keyword = re.compile(
-            '|'.join(map(re.escape, reserve_keywords)))
-        # Check the model_name contains any of the string
-        reserve_keywords_check = re.findall(
-            regx_for_reserve_keyword, test_model_name)
-        if reserve_keywords_check:
-            # Replace the resenve keyword with nothing with hyphen
-            test_model_name = regx_for_reserve_keyword.sub(
-                '', test_model_name)
-            test_model_name = test_model_name.lstrip("-")
+# def get_model_name(test_model_name):
+#         # Expression need to be replaced with hyphen
+#         expression_to_ignore = ["/", "\\", "|", "@", "#", ".",
+#                                 "$", "%", "^", "&", "*", "<", ">", "?", "!", "~", "_"]
+#         # Create the regular expression to ignore
+#         regx_for_expression = re.compile(
+#             '|'.join(map(re.escape, expression_to_ignore)))
+#         # Check the model_name contains any of there character
+#         expression_check = re.findall(regx_for_expression, test_model_name)
+#         if expression_check:
+#             # Replace the expression with hyphen
+#             test_model_name = regx_for_expression.sub("-", test_model_name)
+#         # Reserve Keyword need to be removed
+#         reserve_keywords = ["microsoft"]
+#         # Create the regular expression to ignore
+#         regx_for_reserve_keyword = re.compile(
+#             '|'.join(map(re.escape, reserve_keywords)))
+#         # Check the model_name contains any of the string
+#         reserve_keywords_check = re.findall(
+#             regx_for_reserve_keyword, test_model_name)
+#         if reserve_keywords_check:
+#             # Replace the resenve keyword with nothing with hyphen
+#             test_model_name = regx_for_reserve_keyword.sub(
+#                 '', test_model_name)
+#             test_model_name = test_model_name.lstrip("-")
 
-        return test_model_name
+#         return test_model_name
 
 def create_and_configure_batch_endpoint(
     foundation_model_name, foundation_model, compute, workspace_ml_client, task
@@ -244,15 +244,15 @@ def create_and_configure_batch_endpoint(
 
     #foundation_model_name = get_model_name(foundation_model_name=foundation_model.name)
     
-    # reserve_keywords = ["microsoft"]
-    # regx_for_reserve_keyword = re.compile(
-    #     '|'.join(map(re.escape, reserve_keywords)))
-    # reserve_keywords_check = re.findall(
-    #     regx_for_reserve_keyword, foundation_model_name)
-    # if reserve_keywords_check:
-    #     foundation_model_name = regx_for_reserve_keyword.sub(
-    #         '', foundation_model_name)
-    #     foundation_model_name = foundation_model_name.lstrip("-")
+    reserve_keywords = ["microsoft"]
+    regx_for_reserve_keyword = re.compile(
+        '|'.join(map(re.escape, reserve_keywords)))
+    reserve_keywords_check = re.findall(
+        regx_for_reserve_keyword, foundation_model_name)
+    if reserve_keywords_check:
+        foundation_model_name = regx_for_reserve_keyword.sub(
+            '', foundation_model_name)
+        foundation_model_name = foundation_model_name.lstrip("-")
 
     
     if foundation_model_name[0].isdigit():
@@ -375,16 +375,16 @@ if __name__ == "__main__":
     #version_list = list(workspace_ml_client.models.list(test_model_name))
     client = MlflowClient()
 
-    # expression_to_ignore = ["/", "\\", "|", "@", "#", ".",
-    #                         "$", "%", "^", "&", "*", "<", ">", "?", "!", "~"]
-    # # Create the regular expression to ignore
-    # regx_for_expression = re.compile(
-    #     '|'.join(map(re.escape, expression_to_ignore)))
-    # # Check the model_name contains any of there character
-    # expression_check = re.findall(regx_for_expression, test_model_name)
-    # if expression_check:
-    #     # Replace the expression with hyphen
-    #     test_model_name  = regx_for_expression.sub("-", test_model_name)
+    expression_to_ignore = ["/", "\\", "|", "@", "#", ".",
+                            "$", "%", "^", "&", "*", "<", ">", "?", "!", "~"]
+    # Create the regular expression to ignore
+    regx_for_expression = re.compile(
+        '|'.join(map(re.escape, expression_to_ignore)))
+    # Check the model_name contains any of there character
+    expression_check = re.findall(regx_for_expression, test_model_name)
+    if expression_check:
+        # Replace the expression with hyphen
+        test_model_name  = regx_for_expression.sub("-", test_model_name)
 
 
     print("model name replaced with - :", {test_model_name})
