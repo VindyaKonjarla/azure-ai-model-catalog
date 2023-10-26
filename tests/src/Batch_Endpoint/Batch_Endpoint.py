@@ -16,7 +16,7 @@ from azureml.core.compute_target import ComputeTargetException
 from azure.ai.ml.constants import AssetTypes
 from mlflow.tracking.client import MlflowClient
 import time
-from fetch_task import HfTask
+from fetch_tasks import HfTask
 from azure.ai.ml.entities import (
     AmlCompute,
     BatchDeployment,
