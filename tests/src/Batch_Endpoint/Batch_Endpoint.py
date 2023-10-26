@@ -16,6 +16,7 @@ from azureml.core.compute_target import ComputeTargetException
 from azure.ai.ml.constants import AssetTypes
 from mlflow.tracking.client import MlflowClient
 import time
+from fetch_task import HfTask
 from azure.ai.ml.entities import (
     AmlCompute,
     BatchDeployment,
@@ -355,8 +356,10 @@ if __name__ == "__main__":
     foundation_model, foundation_model_name = get_latest_model_version(workspace_ml_client, test_model_name.lower())
     #endpoint = create_and_configure_batch_endpoint(foundation_model_name , foundation_model, queue.compute, workspace_ml_client)
     
-    task = foundation_model.flavors["transformers"]["task"]
-    print("task :", {task})
+    # task = foundation_model.flavors["transformers"]["task"]
+    # print("task :", {task})
+    task = HfTask(model_name=test_model_name).get_task()
+    print("Task is this : {task} for the model : {test_model_name}")
     endpoint_name = create_and_configure_batch_endpoint(foundation_model_name, foundation_model, queue.compute, workspace_ml_client, task)
     folder_path = get_task_specified_input(task=task, test_model_name=test_model_name)
     print(" input taken, running Batch Job")
