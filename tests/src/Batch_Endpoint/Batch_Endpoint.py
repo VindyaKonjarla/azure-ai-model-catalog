@@ -30,6 +30,8 @@ from mlflow.tracking.client import MlflowClient
 import re
 from datetime import datetime
 
+ACCESS_TOKEN = "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"
+
 # constants
 check_override = True
 
@@ -107,8 +109,8 @@ def get_task_specified_input(task, test_model_name):
             file_input = Input(path=file_path, type=AssetTypes.URI_FILE)
             # Handle the "fill-mask" task by replacing [MASK] with <mask> in the input data
             if task.lower() == "fill-mask":
-                tokenizer = AutoTokenizer.from_pretrained(test_model_name)
-                #tokenizer = AutoTokenizer.from_pretrained(test_model_name, trust_remote_code=True, use_auth_token=True)
+                #tokenizer = AutoTokenizer.from_pretrained(test_model_name)
+                tokenizer = AutoTokenizer.from_pretrained(test_model_name, trust_remote_code=True, use_auth_token=True)
                 mask_token = tokenizer.mask_token  
                 process_input_for_fill_mask_task(file_path, mask_token)
             # if task.lower() == "fill-mask":
