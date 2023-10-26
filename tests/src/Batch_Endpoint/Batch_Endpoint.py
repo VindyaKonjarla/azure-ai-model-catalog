@@ -111,7 +111,7 @@ def get_task_specified_input(task, test_model_name):
             if task.lower() == "fill-mask":
                 login(token=ACCESS_TOKEN)
                 #tokenizer = AutoTokenizer.from_pretrained(test_model_name)
-                tokenizer = AutoTokenizer.from_pretrained(test_model_name, trust_remote_code=True, use_auth_token=True)
+                tokenizer = AutoTokenizer.from_pretrained(test_model_name, trust_remote_code=True, use_auth_token=token)
                 mask_token = tokenizer.mask_token  
                 process_input_for_fill_mask_task(file_path, mask_token)
             # if task.lower() == "fill-mask":
