@@ -366,6 +366,9 @@ if __name__ == "__main__":
         name=queue.environment, version=str(latest_version))
     print("Latest Environment :", latest_env)
 
+    task = HfTask(model_name=test_model_name).get_task()
+    print("Task is this : ", {task})
+    
     test_model_name = get_model_name(test_model_name)
     #version_list = list(workspace_ml_client.models.list(test_model_name))
     client = MlflowClient()
@@ -384,14 +387,13 @@ if __name__ == "__main__":
 
     print("model name replaced with - :", {test_model_name})
     
-    # foundation_model, foundation_model_name = get_latest_model_version(workspace_ml_client, test_model_name.lower())
+    #foundation_model, foundation_model_name = get_latest_model_version(workspace_ml_client, test_model_name.lower())
     foundation_model, foundation_model_name = get_latest_model_version(workspace_ml_client, test_model_name)
     #endpoint = create_and_configure_batch_endpoint(foundation_model_name , foundation_model, queue.compute, workspace_ml_client)
     
     # task = foundation_model.flavors["transformers"]["task"]
     # print("task :", {task})
-    task = HfTask(model_name=test_model_name).get_task()
-    print("Task is this : ", {task})
+
     endpoint_name = create_and_configure_batch_endpoint(foundation_model_name, foundation_model, queue.compute, workspace_ml_client, task)
     folder_path = get_task_specified_input(task=task, test_model_name=test_model_name)
     print(" input taken, running Batch Job")
