@@ -231,7 +231,7 @@ def get_model_name(test_model_name):
                 '', test_model_name)
             test_model_name = test_model_name.lstrip("-")
 
-        return test_model_name()
+        return test_model_name
 
 def create_and_configure_batch_endpoint(
     foundation_model_name, foundation_model, compute, workspace_ml_client, task
