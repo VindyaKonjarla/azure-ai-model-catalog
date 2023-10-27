@@ -338,6 +338,7 @@ if __name__ == "__main__":
     print (f"test_trigger_next_model: {test_trigger_next_model}")
     print (f"test_queue: {test_queue}")
     print (f"test_set: {test_set}")
+    print (f"test_model_from_registry: {queue['model_registry']}")
     print("Here is my test model name : ", test_model_name)
 
     try:
