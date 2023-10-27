@@ -3,7 +3,6 @@
     "models": [
         "MLFlow-Batch-t5-small",
         "MLFlow-Batch-sshleifer/distilbart-cnn-12-6",
-        "MLFlow-Batch-roberta-base-openai-detector",
         "MLFlow-Batch-roberta-base",
         "MLFlow-Batch-gpt2",
         "MLFlow-Batch-distilroberta-base",
