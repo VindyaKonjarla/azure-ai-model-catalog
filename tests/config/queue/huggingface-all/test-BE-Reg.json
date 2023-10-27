@@ -1,0 +1,19 @@
+{
+    "queue_name": "test-BE-Reg",
+    "models": [
+        "MLFlow-Batch-t5-base",
+        "MLFlow-Batch-roberta-large",
+        "MLFlow-Batch-microsoft/deberta-large",
+        "MLFlow-Batch-microsoft/deberta-base",
+        "MLFlow-Batch-gpt2-medium",
+        "MLFlow-Batch-bert-large-uncased",
+        "MLFlow-Batch-bert-large-cased"
+    ],
+    "workspace": "test-eastus",
+    "subscription": "80c77c76-74ba-4c8c-8229-4c3b2957990c",
+    "resource_group": "huggingface-registry-test1",
+    "registry": "HuggingFace",
+    "environment": "automate-venv",
+    "compute": "Standard-DS3-v2",
+    "instance_type": "Standard_DS3_v2"
+}
