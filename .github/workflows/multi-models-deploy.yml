@@ -104,7 +104,7 @@ jobs:
         working-directory: tests/src/automation_for_constant_library
 
       - name: trigger-next-model-step
+        if: ${{ env.test_trigger_next_model == 'true' && success() }}
+        run: gh workflow run ${{ steps.deploy-models.outputs.NEXT_MODEL }} --ref ${{ github.ref_name }}
         env:
           GITHUB_TOKEN: ${{ secrets.WORKFLOW_TOKEN }}
-        if: ${{ env.test_trigger_next_model == 'true' && steps.deploy-models.outcome == 'success' }}
-        run: gh workflow run ${{ steps.deploy-model-step.outputs.NEXT_MODEL }} --ref ${{ github.ref_name }}
