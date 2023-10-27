@@ -5,7 +5,7 @@
         "MLFlow-Batch-microsoft/deberta-xlarge",
         "MLFlow-Batch-gpt2-large",
         "MLFlow-Batch-Jean-Baptiste/camembert-ner",
-        "MLFlow-Batch-facebook-bart-large-cnn"
+        "MLFlow-Batch-facebook/bart-large-cnn"
         
         
     ],
