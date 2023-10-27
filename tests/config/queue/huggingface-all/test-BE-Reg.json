@@ -9,5 +9,6 @@
     "registry": "HuggingFace",
     "environment": "automate-venv",
     "compute": "Standard-DS3-v2",
-    "instance_type": "Standard_DS3_v2"
+    "instance_type": "Standard_DS3_v2",
+    "model_registry": "azureml-preview-test1"
 }
