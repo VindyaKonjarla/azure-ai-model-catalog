@@ -359,7 +359,8 @@ if __name__ == "__main__":
         workspace_name=queue.workspace
     )
     mlflow.set_tracking_uri(ws.get_mlflow_tracking_uri())
-    registry_ml_client = MLClient(credential, registry_name="azureml-preview-test1")
+    #registry_ml_client = MLClient(credential, registry_name="azureml-preview-test1")
+    registry_ml_client = MLClient(credential, registry_name=queue.model_registry)
     
     compute_target = create_or_get_compute_target(workspace_ml_client, queue.compute)
     # environment_variables = {"test_model_name": test_model_name}
