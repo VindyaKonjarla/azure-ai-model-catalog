@@ -179,9 +179,9 @@ def create_or_get_compute_target(ml_client,  compute):
         ml_client.compute.begin_create_or_update(compute).result()
     return compute
 
-def get_latest_model_version(workspace_ml_client, test_model_name):
+def get_latest_model_version(registry_ml_client, test_model_name):
     print("In get_latest_model_version...")
-    version_list = list(workspace_ml_client.models.list(test_model_name ))
+    version_list = list(registry_ml_client.models.list(test_model_name ))
     
     if len(version_list) == 0:
         print("Model not found in registry")
@@ -189,7 +189,7 @@ def get_latest_model_version(workspace_ml_client, test_model_name):
         foundation_model_id = None  # Set id to None as well
     else:
         model_version = version_list[0].version
-        foundation_model = workspace_ml_client.models.get(
+        foundation_model = registry_ml_client.models.get(
             test_model_name , model_version)
         print(
             "\n\nUsing model name: {0}, version: {1}, id: {2} for inferencing".format(
@@ -359,6 +359,7 @@ if __name__ == "__main__":
         workspace_name=queue.workspace
     )
     mlflow.set_tracking_uri(ws.get_mlflow_tracking_uri())
+    registry_ml_client = MLClient(credential, registry_name="azureml-preview-test1")
     
     compute_target = create_or_get_compute_target(workspace_ml_client, queue.compute)
     # environment_variables = {"test_model_name": test_model_name}
@@ -396,7 +397,7 @@ if __name__ == "__main__":
     print("model name replaced with - :", {test_model_name})
     
     #foundation_model, foundation_model_name = get_latest_model_version(workspace_ml_client, test_model_name.lower())
-    foundation_model, foundation_model_name = get_latest_model_version(workspace_ml_client, test_model_name)
+    foundation_model, foundation_model_name = get_latest_model_version(registry_ml_client, test_model_name)
     #endpoint = create_and_configure_batch_endpoint(foundation_model_name , foundation_model, queue.compute, workspace_ml_client)
     
     # task = foundation_model.flavors["transformers"]["task"]
