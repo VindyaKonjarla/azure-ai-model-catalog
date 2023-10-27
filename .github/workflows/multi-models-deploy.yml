@@ -82,6 +82,11 @@ jobs:
         run: python generic_model_download_and_register.py ${{ matrix.model }}
         working-directory: tests/src/automation_for_constant_library
 
+      - name: handle-deploy-model-failure
+        if: failure()
+        continue-on-error: true
+        run: echo "Deployment failed for ${{ matrix.model }}"
+
       - name: trigger-next-model-step
         env:
           GITHUB_TOKEN: ${{ secrets.WORKFLOW_TOKEN }}
