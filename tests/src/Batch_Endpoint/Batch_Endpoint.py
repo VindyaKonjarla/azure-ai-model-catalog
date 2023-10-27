@@ -110,6 +110,8 @@ def get_task_specified_input(task, test_model_name):
             # Handle the "fill-mask" task by replacing [MASK] with <mask> in the input data
             if task.lower() == "fill-mask":
                 #login(token=ACCESS_TOKEN)
+                print("Testing test model name is :", {test_model_name})
+                print("Testing - Task is  : ", {task})
                 tokenizer = AutoTokenizer.from_pretrained(test_model_name)
                 #tokenizer = AutoTokenizer.from_pretrained(test_model_name, use_auth_token=ACCESS_TOKEN)
                 #tokenizer = AutoTokenizer.from_pretrained(test_model_name, trust_remote_code=True, use_auth_token=True)
