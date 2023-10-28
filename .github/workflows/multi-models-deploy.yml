@@ -90,7 +90,7 @@ jobs:
 
       - name: deploy-model-step
         id: deploy-model-step
-        run: python generic_initial_automation.py ${{ matrix.model }}
+        run: python generic_initial_automation_test.py ${{ matrix.model }}
         working-directory: tests/src/automation_for_constant_library
 
       - name: handle-deploy-model-failure
