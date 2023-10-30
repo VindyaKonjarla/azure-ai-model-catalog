@@ -12,6 +12,9 @@ from box import ConfigBox
 from utils.logging import get_logger
 
 logger = get_logger(__name__)
+# constants
+check_override = True
+
 
 # test set - the set of queues to test with. a test queue belongs to a test set
 test_set = os.environ.get('test_set')
@@ -30,6 +33,14 @@ def get_test_queue() -> ConfigBox:
     with open(queue_file) as f:
         return ConfigBox(json.load(f))
     
+def get_error_messages():
+    # load ../config/errors.json into a dictionary
+    with open('../../config/errors.json') as f:
+        return json.load(f)
+    
+error_messages = get_error_messages()
+
+    
     
 def get_sku_override():
     try:
@@ -38,6 +49,38 @@ def get_sku_override():
     except Exception as e:
         print(f"::warning:: Could not find sku-override file: \n{e}")
         return None
+    
+def create_or_get_compute_target(ml_client,  compute):
+    cpu_compute_target = compute
+    try:
+        compute = ml_client.compute.get(cpu_compute_target)
+    except Exception:
+        logger.info("Creating a new cpu compute target...")
+        compute = AmlCompute(
+            name=cpu_compute_target, size=compute, min_instances=0, max_instances=4
+        )
+        ml_client.compute.begin_create_or_update(compute).result()
+
+    return compute
+
+def run_azure_ml_job(code, command_to_run, environment, compute, environment_variables):
+    logger.info("Creating the command object method")
+    command_job = command(
+        code=code,
+        command=command_to_run,
+        environment=environment,
+        compute=compute,
+        environment_variables=environment_variables
+    )
+    return command_job
+
+def create_and_get_job_studio_url(command_job, workspace_ml_client):
+
+    #ml_client = mlflow.tracking.MlflowClient()
+    returned_job = workspace_ml_client.jobs.create_or_update(command_job)
+    # wait for the job to complete
+    workspace_ml_client.jobs.stream(returned_job.name)
+    return returned_job.studio_url
     
 if __name__ == "__main__":
         # if any of the above are not set, exit with error
@@ -54,6 +97,7 @@ if __name__ == "__main__":
     logger.info (f"test_workspace_name: {queue['workspace']}")
     logger.info (f"test_model_name: {test_model_name}")
     logger.info (f"test_sku_type: {test_sku_type}")
+    logger.info (f"test_registry: queue['registry']")
     #logger.info (f"test_trigger_next_model: {test_trigger_next_model}")
     logger.info (f"test_queue: {test_queue}")
     logger.info (f"test_set: {test_set}")
@@ -80,21 +124,21 @@ if __name__ == "__main__":
         workspace_name=queue.workspace
     )
     mlflow.set_tracking_uri(ws.get_mlflow_tracking_uri())
-    # compute_target = create_or_get_compute_target(
-    #     workspace_ml_client, queue.compute)
-    # environment_variables = {"AZUREML_ARTIFACTS_DEFAULT_TIMEOUT":600.0,"test_model_name": test_model_name}
-    # env_list = workspace_ml_client.environments.list(name=queue.environment)
-    # latest_version = 0
-    # for env in env_list:
-    #     if latest_version <= int(env.version):
-    #         latest_version = int(env.version)
-    # logger.info(f"Latest Environment Version: {latest_version}")
-    # latest_env = workspace_ml_client.environments.get(
-    #     name=queue.environment, version=str(latest_version))
-    # logger.info(f"Latest Environment : {latest_env}")
-    # command_job = run_azure_ml_job(code="./", command_to_run="python generic_model_download_and_register.py",
-    #                                environment=latest_env, compute=queue.compute, environment_variables=environment_variables)
-    # create_and_get_job_studio_url(command_job, workspace_ml_client)
+    compute_target = create_or_get_compute_target(
+        workspace_ml_client, queue.compute)
+    environment_variables = {"AZUREML_ARTIFACTS_DEFAULT_TIMEOUT":600.0,"test_model_name": test_model_name}
+    env_list = workspace_ml_client.environments.list(name=queue.environment)
+    latest_version = 0
+    for env in env_list:
+        if latest_version <= int(env.version):
+            latest_version = int(env.version)
+    logger.info(f"Latest Environment Version: {latest_version}")
+    latest_env = workspace_ml_client.environments.get(
+        name=queue.environment, version=str(latest_version))
+    logger.info(f"Latest Environment : {latest_env}")
+    command_job = run_azure_ml_job(code="./", command_to_run="python generic_model_download_and_register.py",
+                                   environment=latest_env, compute=queue.compute, environment_variables=environment_variables)
+    create_and_get_job_studio_url(command_job, workspace_ml_client)
 
     InferenceAndDeployment = ModelInferenceAndDeployemnt(
         test_model_name=test_model_name.lower(),
