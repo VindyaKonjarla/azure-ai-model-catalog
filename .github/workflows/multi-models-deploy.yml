@@ -74,8 +74,8 @@ jobs:
           echo "test_sku_type=cpu" >> $GITHUB_ENV
           echo "test_queue=your_queue_value" >> $GITHUB_ENV
           echo "test_set=your_set_value" >> $GITHUB_ENV
-          echo "test_trigger_next_model=true" >> $GITHUB_ENV
-          echo "test_keep_looping=false" >> $GITHUB_ENV
+          # echo "test_trigger_next_model=true" >> $GITHUB_ENV
+          # echo "test_keep_looping=false" >> $GITHUB_ENV
   
 
 
