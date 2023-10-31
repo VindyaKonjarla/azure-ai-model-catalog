@@ -1,7 +1,7 @@
 {
     "queue_name": "test-BE-01",
     "models": [
-        "MLFlow-Batch-bert-base-cased"  
+        "MLFlow-Batch-t5-small"  
     ],
     "workspace": "sonata-ws-ae",
     "subscription": "ed2cab61-14cc-4fb3-ac23-d72609214cfd",
