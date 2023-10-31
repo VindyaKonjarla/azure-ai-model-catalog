@@ -307,7 +307,7 @@ class ModelInferenceAndDeployemnt:
                 f"::Error:: Could not find scoring_file: {scoring_file}. Finishing without sample scoring: \n{e}")
         return scoring_file, scoring_input
 
-    def model_infernce_and_deployment(self, instance_type, compute, task):
+    def model_infernce_and_deployment(self, instance_type, task):
         expression_to_ignore = ["/", "\\", "|", "@", "#", ".",
                                 "$", "%", "^", "&", "*", "<", ">", "?", "!", "~"]
         # Create the regular expression to ignore
