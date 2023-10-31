@@ -7,7 +7,7 @@
     "subscription": "ed2cab61-14cc-4fb3-ac23-d72609214cfd",
     "resource_group": "sonata-oss-testing-rg",
     "registry": "HuggingFace",
-    "environment": "automate-venv",
+    "environment": "automate-env",
     "compute": "Standard-DS2-v2",
     "instance_type": "Standard_DS2_v2"
 }
