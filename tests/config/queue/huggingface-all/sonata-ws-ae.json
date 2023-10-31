@@ -1,5 +1,5 @@
 {
-    "queue_name": "test-sonata-ws-ae",
+    "queue_name": "sonata-ws-ae",
     "models": [
         "MLFlow-MP-t5-small"
     ],
