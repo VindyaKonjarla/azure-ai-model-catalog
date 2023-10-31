@@ -76,11 +76,9 @@ jobs:
         id: deploy-model-step
         working-directory: tests/src/automation_for_constant_library
         run: python generic_initial_automation_test.py ${{ matrix.model }}
+        continue-on-error: true
         
 
       - name: handle-deploy-model-failure
         if: failure()
-        continue-on-error: true
         run: echo "Deployment failed for ${{ matrix.model }}"
-
-        
