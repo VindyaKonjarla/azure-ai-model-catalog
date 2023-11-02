@@ -314,6 +314,7 @@ def create_and_configure_batch_endpoint(
     return endpoint_name
 
 def deploy_fine_tuned_model(task, fine_tuned_task, fine_tuned_model_name):
+    print("fine_tuned_model_name":, fine_tuned_model_name)
     # Fetch the latest foundation model for the fine-tuned task
     foundation_model, foundation_model_name = get_latest_model_version(workspace_ml_client, fine_tuned_model_name)
     
