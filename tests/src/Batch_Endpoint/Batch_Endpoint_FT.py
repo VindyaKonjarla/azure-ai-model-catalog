@@ -389,11 +389,11 @@ if __name__ == "__main__":
 
     task_mapping = {
         "text-classification": {
-            "token-classification": "FT-NER-"+{test_model_name}+"-oss",
+            "token-classification": "FT-NER-"+str{test_model_name}+"-oss",
             "question-answering": "FT-QA-{test_model_name}"
         },
         "fill-mask": {
-            "question-answering": "FT-QA-"+{test_model_name}+"-oss"
+            "question-answering": "FT-QA-"+str{test_model_name}+"-oss"
         },
         "text-generation": {
             "text-classification": "FT-TC-{test_model_name}-oss",
