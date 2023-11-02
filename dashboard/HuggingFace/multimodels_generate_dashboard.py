@@ -45,5 +45,5 @@ dashboard_content = """
 """
 
 # Save the generated HTML content to a file
-with open('multimodels_dashboard.html', 'w') as file:
+with open('multimodels_dashboard.md', 'w') as file:
     file.write(dashboard_content)
