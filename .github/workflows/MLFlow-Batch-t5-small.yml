@@ -45,7 +45,7 @@ jobs:
       run: pip install fugashi[unidic-lite]  
     - name: deploy-model-step
       id: deploy-model-step
-      run: python Batch_Endpoint_FT.py
+      run: python Batch_Endpoint.py
       working-directory: tests/src/Batch_Endpoint
     - name: trigger-next-model-step
       env:
