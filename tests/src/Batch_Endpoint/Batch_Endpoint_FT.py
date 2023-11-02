@@ -254,20 +254,24 @@ def create_and_configure_batch_endpoint(
     if reserve_keywords_check:
         foundation_model_name = regx_for_reserve_keyword.sub(
             '', foundation_model_name)
-        foundation_model_name = foundation_model_name
-        #foundation_model_name = foundation_model_name.lstrip("-")
+        #foundation_model_name = foundation_model_name
+        foundation_model_name = foundation_model_name.lstrip("-")
+        print("Foundation model name after M:", foundation_model_name)
 
     
     if foundation_model_name[0].isdigit():
             num_pattern = "[0-9]"
             foundation_model_name = re.sub(num_pattern, '', foundation_model_name)
             foundation_model_name = foundation_model_name.strip("-")
+        print("Foundation model name after N:", foundation_model_name)
         # Check the model name is more then 32 character
     if len(foundation_model_name) > 32:
         model_name = foundation_model_name[:31]
         deployment_name = model_name.rstrip("-")
+        print("Foundation model name after 32:", foundation_model_name)
     else:
         deployment_name = foundation_model_name
+        print("Foundation model name after all:", foundation_model_name)
             
             #endpoint_name = f"{registered_model_name}"
     print("Final model name:", {foundation_model_name})
