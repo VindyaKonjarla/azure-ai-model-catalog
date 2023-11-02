@@ -322,7 +322,7 @@ class ModelInferenceAndDeployemnt:
             self.workspace_ml_client, model_name)
         try:
             #task = latest_model.flavors["transformers"]["task"]
-            hfApi = HfTask(model_name=self.model_name)
+            hfApi = HfTask(model_name=self.test_model_name)
             task = hfApi.get_task()
         except Exception as e:
             logger.warning(
