@@ -1,0 +1,53 @@
+name: multi-models-deploy
+
+on: 
+  workflow_dispatch:
+    inputs:
+      model_list:
+        description: 'List of models to deploy'
+        required: true
+      test_queues:
+        description: 'List of test queues'
+        required: true
+
+env:
+   test_sku_type: cpu
+   test_set: huggingface-all
+
+jobs:
+  deploy-model-job:
+    strategy:
+      matrix:
+        model: ${{fromJson(inputs.model_list)}}
+        test_queue: ${{fromJson(inputs.test_queues)}}
+
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: check-out-repo-step
+        uses: actions/checkout@v3
+
+      - name: azure-login-step
+        uses: azure/login@v1
+        with:
+          creds: ${{secrets.AZURE_CREDENTIALS}}
+
+      - name: pip-install-azure-ai-ml
+        run: pip install azure-ai-ml
+
+      # ... (other installation steps)
+
+      - name: set-model-env-variable
+        run: echo "test_model_name=${{ matrix.model }}" >> $GITHUB_ENV
+        env:
+          test_queue: ${{ matrix.test_queue }}
+
+      - name: deploy-model-step
+        id: deploy-model-step
+        working-directory: tests/src/automation_for_constant_library
+        run: python generic_initial_automation_test.py ${{ matrix.model }}
+        continue-on-error: true
+
+      - name: handle-deploy-model-failure
+        if: failure()
+        run: echo "Deployment failed for ${{ matrix.model }} with test queue ${{ matrix.test_queue }}"
