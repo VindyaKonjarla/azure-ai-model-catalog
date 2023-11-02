@@ -7,7 +7,7 @@ env:
   test_model_name: microsoft/deberta-large
   test_sku_type: cpu
   test_trigger_next_model: true
-  test_queue: test-BE
+  test_queue: test-BE-01
   test_set: huggingface-all
   test_keep_looping: false
 
@@ -45,7 +45,7 @@ jobs:
       run: pip install fugashi[unidic-lite]  
     - name: deploy-model-step
       id: deploy-model-step
-      run: python Batch_Endpoint.py
+      run: python Batch_Endpoint_FT.py
       working-directory: tests/src/Batch_Endpoint
     - name: trigger-next-model-step
       env:
