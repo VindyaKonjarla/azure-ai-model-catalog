@@ -163,10 +163,10 @@ if __name__ == "__main__":
         resource_group=queue.resource_group,
         workspace_name=queue.workspace
     )
-    registry_ml_client = MLClient(
-        credential=credential,
-        registry_name=queue.registry
-    )
+    # registry_ml_client = MLClient(
+    #     credential=credential,
+    #     registry_name=queue.registry
+    # )
     # task = HfTask(model_name=test_model_name).get_task()
     # logger.info(f"Task is this : {task} for the model : {test_model_name}")
 
