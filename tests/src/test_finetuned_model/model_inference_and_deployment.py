@@ -321,9 +321,9 @@ class ModelInferenceAndDeployemnt:
         latest_model = self.get_latest_model_version(
             self.workspace_ml_client, model_name)
         try:
-            task = latest_model.flavors["transformers"]["task"]
-            # hfApi = HfTask(model_name=self.model_name)
-            # task = hfApi.get_task()
+            #task = latest_model.flavors["transformers"]["task"]
+            hfApi = HfTask(model_name=self.model_name)
+            task = hfApi.get_task()
         except Exception as e:
             logger.warning(
                 f"::warning::From the transformer flavour we are not able to extract the task for this model : {latest_model}")
