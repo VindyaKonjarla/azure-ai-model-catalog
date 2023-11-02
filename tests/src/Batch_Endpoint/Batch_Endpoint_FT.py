@@ -246,7 +246,7 @@ def create_and_configure_batch_endpoint(
 
     #foundation_model_name = get_model_name(foundation_model_name=foundation_model.name)
     
-    reserve_keywords = ["microsoft"]
+    reserve_keywords = ["microsoft-"]
     regx_for_reserve_keyword = re.compile(
         '|'.join(map(re.escape, reserve_keywords)))
     reserve_keywords_check = re.findall(
