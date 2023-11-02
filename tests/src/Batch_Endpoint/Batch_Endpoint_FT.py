@@ -263,7 +263,7 @@ def create_and_configure_batch_endpoint(
             num_pattern = "[0-9]"
             foundation_model_name = re.sub(num_pattern, '', foundation_model_name)
             foundation_model_name = foundation_model_name.strip("-")
-        print("Foundation model name after N:", foundation_model_name)
+            print("Foundation model name after N:", foundation_model_name)
         # Check the model name is more then 32 character
     if len(foundation_model_name) > 32:
         model_name = foundation_model_name[:31]
