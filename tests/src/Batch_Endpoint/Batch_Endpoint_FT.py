@@ -315,14 +315,18 @@ def create_and_configure_batch_endpoint(
 
 def deploy_fine_tuned_model(task, fine_tuned_task, fine_tuned_model_name):
     print("fine_tuned_model_name:" , fine_tuned_model_name)
+    print("fine_tuned_task:" , fine_tuned_task)
     # Fetch the latest foundation model for the fine-tuned task
     foundation_model, foundation_model_name = get_latest_model_version(workspace_ml_client, fine_tuned_model_name)
+
+    # Specify the input folder path for batch inference
+    folder_path = get_task_specified_input(fine_tuned_task, fine_tuned_model_name)
     
     # Create and configure the batch endpoint for the fine-tuned task
     fine_tuned_endpoint_name = create_and_configure_batch_endpoint(foundation_model_name.lower(), foundation_model, queue.compute, workspace_ml_client, fine_tuned_task)
     
-    # Specify the input folder path for batch inference
-    folder_path = get_task_specified_input(fine_tuned_task, fine_tuned_model_name)
+    # # Specify the input folder path for batch inference
+    # folder_path = get_task_specified_input(fine_tuned_task, fine_tuned_model_name)
     
     # Run batch inference job for the fine-tuned model
     print(" input taken, running Batch Job")
