@@ -421,7 +421,19 @@ if __name__ == "__main__":
 
     task = HfTask(model_name=test_model_name).get_task()
     print("Task is this: ", task)
-    
+
+    expression_to_ignore = ["/", "\\", "|", "@", "#", ".",
+                            "$", "%", "^", "&", "*", "<", ">", "?", "!", "~"]
+    # Create the regular expression to ignore
+    regx_for_expression = re.compile(
+        '|'.join(map(re.escape, expression_to_ignore)))
+    # Check the model_name contains any of there character
+    expression_check = re.findall(regx_for_expression, test_model_name)
+    if expression_check:
+        # Replace the expression with hyphen
+        test_model_name  = regx_for_expression.sub("-", test_model_name)
+
+    print("model name replaced with - :", {test_model_name})
 
     if task in task_mapping:
         fine_tuned_models = task_mapping[task]
