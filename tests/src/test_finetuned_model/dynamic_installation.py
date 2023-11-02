@@ -150,15 +150,19 @@ class ModelDynamicInstallation:
 
     def create_online_endpoint(self, endpoint):
         logger.info("In create_online_endpoint...")
+        workspace_ml_client = self.workspace_ml_client
         try:
-            self.workspace_ml_client.online_endpoints.begin_create_or_update(
-                endpoint).wait()
+            # self.workspace_ml_client.online_endpoints.begin_create_or_update(
+            #     endpoint).wait()
+            workspace_ml_client.online_endpoints.begin_create_or_update(endpoint).wait()
         except Exception as e:
             logger.error(f"::error:: Could not create endpoint: \n")
             logger.error(f"{e}\n\n check logs:\n\n")
             self.prase_logs(str(e))
             exit(1)
-        online_endpoint_obj = self.workspace_ml_client.online_endpoints.get(
+        # online_endpoint_obj = self.workspace_ml_client.online_endpoints.get(
+        #     name=endpoint.name)
+        online_endpoint_obj = workspace_ml_client.online_endpoints.get(
             name=endpoint.name)
         logger.info(f"online_endpoint_obj : {online_endpoint_obj}")
 
