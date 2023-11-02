@@ -25,6 +25,7 @@ jobs:
           python-version: 3.8
 
       - name: Generate Dashboard
+        working-directory: dashboard/HuggingFace
         run: |
           # Run the Python script to generate the dashboard HTML
           python multimodels_generate_dashboard.py
