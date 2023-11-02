@@ -36,7 +36,7 @@ jobs:
         run: |
           git config user.name "${{ secrets.USER_NAME }}"
           git config user.email "${{ secrets.USER_EMAIL }}"
-          git add multimodels_dashboard.html
+          git add multimodels_dashboard.md
           git commit -m "Multimodels dashboard"
           git push
         env:
