@@ -254,7 +254,8 @@ def create_and_configure_batch_endpoint(
     if reserve_keywords_check:
         foundation_model_name = regx_for_reserve_keyword.sub(
             '', foundation_model_name)
-        foundation_model_name = foundation_model_name.lstrip("-")
+        foundation_model_name = foundation_model_name
+        #foundation_model_name = foundation_model_name.lstrip("-")
 
     
     if foundation_model_name[0].isdigit():
