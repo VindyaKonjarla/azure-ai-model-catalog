@@ -286,9 +286,11 @@ def create_and_configure_batch_endpoint(
         name=endpoint_name,
         description=f"Batch endpoint for {foundation_model.name} ",
     )
+    print("Updating Edpoint")
     workspace_ml_client.begin_create_or_update(endpoint).result()
 
     deployment_name = f"{deployment_name}"
+    print("Deployment name:", {deployment_name})
 
     # Create the BatchDeployment
     deployment = BatchDeployment(
@@ -304,6 +306,7 @@ def create_and_configure_batch_endpoint(
         output_file_name="predictions.csv",
         retry_settings=BatchRetrySettings(max_retries=3, timeout=300),
     )
+    print("Updating Deployment")
     workspace_ml_client.begin_create_or_update(deployment).result()
 
     # Retrieve the created endpoint
