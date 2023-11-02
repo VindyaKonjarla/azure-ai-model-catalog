@@ -8,6 +8,6 @@
     "resource_group": "sonata-oss-testing-rg",
     "registry": "HuggingFace",
     "environment": "automate-env",
-    "compute": "Standard-DS2-v2",
-    "instance_type": "Standard_DS2_v2"
+    "compute": "Standard-NC24rs-v3",
+    "instance_type": "Standard_NC24rs_v3"
 }
