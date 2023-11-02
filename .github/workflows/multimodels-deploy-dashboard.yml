@@ -1,0 +1,31 @@
+name: Multimodels Dashboard
+
+on:
+  workflow_run:
+    workflows: ["multi-models-deploy"]
+    types:
+      - completed
+
+jobs:
+  update-dashboard:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout Repository
+        uses: actions/checkout@v2
+
+      - name: Generate Dashboard
+        run: |
+          # Run the Python script to generate the dashboard HTML
+          python multimodels_generate_dashboard.py
+        env:
+          GITHUB_TOKEN: ${{ secrets.WORKFLOW_TOKEN }}
+
+      - name: Commit and Push Changes
+        run: |
+          git config user.name "${{ secrets.USER_NAME }}"
+          git config user.email "${{ secrets.USER_EMAIL }"
+          git add multimodels_dashboard.html
+          git commit -m "Multimodels dashboard"
+          git push
+        env:
+          GITHUB_TOKEN: ${{ secrets.WORKFLOW_TOKEN }}
