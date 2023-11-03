@@ -141,7 +141,7 @@ if __name__ == "__main__":
             resource_group_name=queue.resource_group,
             workspace_name=queue.workspace
         )
-    ml_client_registry = MLClient(credential, registry_name=queue.registry)
+    ml_client_registry = MLClient(credential, registry_name="azureml-preview-test1")
     registry_mlclient = MLClient(credential, registry_name="azureml")
     version_list = list(registry_mlclient.models.list(Reg_Model))
     if len(version_list) == 0:
