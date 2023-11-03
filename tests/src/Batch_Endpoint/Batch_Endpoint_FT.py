@@ -286,7 +286,7 @@ def create_and_configure_batch_endpoint(
         name=endpoint_name,
         description=f"Batch endpoint for {foundation_model.name} ",
     )
-    print("Updating Edpoint")
+    #print("Updating Endpoint")
     workspace_ml_client.begin_create_or_update(endpoint).result()
 
     deployment_name = f"{deployment_name}"
@@ -306,7 +306,7 @@ def create_and_configure_batch_endpoint(
         output_file_name="predictions.csv",
         retry_settings=BatchRetrySettings(max_retries=3, timeout=300),
     )
-    print("Updating Deployment")
+    #print("Updating Deployment")
     workspace_ml_client.begin_create_or_update(deployment).result()
 
     # Retrieve the created endpoint
@@ -318,7 +318,7 @@ def create_and_configure_batch_endpoint(
 
     # Retrieve and print the default deployment name
     endpoint = workspace_ml_client.batch_endpoints.get(endpoint_name)
-    print(f"The default deployment is {endpoint.defaults.deployment_name}")
+    #print(f"The default deployment is {endpoint.defaults.deployment_name}")
     return endpoint_name
 
 def deploy_fine_tuned_model(task, fine_tuned_task, fine_tuned_model_name):
