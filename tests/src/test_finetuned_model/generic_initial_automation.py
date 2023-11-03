@@ -164,6 +164,7 @@ if __name__ == "__main__":
             resource_group_name=queue.resource_group,
             workspace_name=queue.workspace
         )
+    logger.info(f"work_space_ml_client : {workspace_ml_client}")
     ws = Workspace(
         subscription_id=queue.subscription,
         resource_group=queue.resource_group,
