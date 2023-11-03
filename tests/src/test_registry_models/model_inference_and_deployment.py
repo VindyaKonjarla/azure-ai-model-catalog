@@ -307,7 +307,7 @@ class ModelInferenceAndDeployemnt:
                 f"::Error:: Could not find scoring_file: {scoring_file}. Finishing without sample scoring: \n{e}")
         return scoring_file, scoring_input
 
-    def model_infernce_and_deployment(self, instance_type, task):
+    def model_infernce_and_deployment(self, instance_type, task, compute):
         expression_to_ignore = ["/", "\\", "|", "@", "#", ".",
                                 "$", "%", "^", "&", "*", "<", ">", "?", "!", "~"]
         # Create the regular expression to ignore
@@ -374,10 +374,10 @@ class ModelInferenceAndDeployemnt:
             scoring_file=scoring_file,
             scoring_input = scoring_input
         )
-        # batch_deployment = ModelBatchDeployment(
-        #     model=latest_model,
-        #     workspace_ml_client=self.workspace_ml_client,
-        #     task=task,
-        #     model_name=self.test_model_name
-        # )
-        # batch_deployment.batch_deployment(compute=compute)
+        batch_deployment = ModelBatchDeployment(
+            model=latest_model,
+            workspace_ml_client=self.workspace_ml_client,
+            task=task,
+            model_name=self.test_model_name
+        )
+        batch_deployment.batch_deployment(compute=compute)
