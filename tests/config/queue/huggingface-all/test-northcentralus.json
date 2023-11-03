@@ -4,6 +4,6 @@
     "resource_group": "huggingface-registry-test1",
     "registry": "HuggingFace",
     "environment": "automate-venv",
-    "compute": "Standard-E96ads-v5",
-    "instance_type": "Standard_E96ads_v5"
+    "compute": "Standard-E64s-v3",
+    "instance_type": "Standard_E64s_v3"
 }
