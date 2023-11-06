@@ -256,7 +256,9 @@ if __name__ == "__main__":
     )
     azureml_registry = MLClient(credential, registry_name="azureml")
     mlflow.set_tracking_uri(ws.get_mlflow_tracking_uri())
-
+    computelist=foundation_model.properties.get("inference-recommended-sku", "Standard_E16s_v3")
+    a = computelist.index(',')
+    COMPUTE = computelist[:a]
     # model_detail = ModelDetail(workspace_ml_client=azureml_registry)
     # foundation_model = model_detail.get_model_detail(
     #     test_model_name=test_model_name)
@@ -264,23 +266,23 @@ if __name__ == "__main__":
     #     "inference-recommended-sku", "Standard_E16s_v3")
     
     # compute_target = create_or_get_compute_target(
-    #     workspace_ml_client, queue.compute)
+    #     workspace_ml_client, COMPUTE)
 
     compute_target = create_or_get_compute_target(
-        ml_client=workspace_ml_client, compute=queue.compute, instance_type=queue.instance_type)
+        ml_client=workspace_ml_client, compute=COMPUTE, instance_type=queue.instance_type)
     task = HfTask(model_name=test_model_name).get_task()
     logger.info(f"Task is this : {task} for the model : {test_model_name}")
     timestamp = str(int(time.time()))
     exp_model_name = test_model_name.replace('/', '-')
     try:
         pipeline_object = model_import_pipeline(
-            compute_name=queue.compute,
+            compute_name=COMPUTE,
             task_name=task,
             update_existing_model=True,
         )
         pipeline_object.identity = UserIdentityConfiguration()
         pipeline_object.settings.force_rerun = True
-        pipeline_object.settings.default_compute = queue.compute
+        pipeline_object.settings.default_compute = COMPUTE
         schedule_huggingface_model_import = (
             not huggingface_model_exists_in_registry
             and test_model_name not in [None, "None"]
@@ -347,13 +349,13 @@ if __name__ == "__main__":
             label_column_name=label_column_name,
             evaluation_file_path=Input(
                 type=AssetTypes.URI_FILE, path=f"./evaluation/{task}/eval_config.json"),
-            compute=queue.compute,
+            compute=COMPUTE,
             #mlflow_model = f"{latest_model.id}",
             #data_path = data_path
         )
         # don't reuse cached results from previous jobs
         pipeline_object.settings.force_rerun = True
-        pipeline_object.settings.default_compute = queue.compute
+        pipeline_object.settings.default_compute = COMPUTE
 
         # set continue on step failure to False
         pipeline_object.settings.continue_on_step_failure = False
