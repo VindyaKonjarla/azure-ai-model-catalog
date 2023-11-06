@@ -33,7 +33,7 @@ def get_error_messages():
 
 
 error_messages = get_error_messages()
-
+compute_name = "model-import-cluster"
 # model to test
 test_model_name = os.environ.get('test_model_name')
 
@@ -265,8 +265,17 @@ if __name__ == "__main__":
     a = computelist.index(',')
     COMPUTE = computelist[:a]
     print("COMPUTE:",COMPUTE)
-    compute_target = create_or_get_compute_target(
-        workspace_ml_client, COMPUTE, instance_type=queue.instance_type)
+    compute_config = AmlCompute(
+            name=compute_name,
+            type="amlcompute",
+            size=COMPUTE,
+            idle_time_before_scale_down=120,
+            min_instances=0,
+            max_instances=6,
+        )
+    workspace_ml_client.begin_create_or_update(compute_config).result()
+    # compute_target = create_or_get_compute_target(
+    #     workspace_ml_client, COMPUTE, instance_type=queue.instance_type)
 
     # compute_target = create_or_get_compute_target(
     #     ml_client=workspace_ml_client, compute=COMPUTE, instance_type=queue.instance_type)
