@@ -198,8 +198,7 @@ class ModelInferenceAndDeployemnt:
                          f" the exception is this one :{e}")
             sys.exit(1)
         try:
-            workspace_ml_client = self.workspace_ml_client
-            workspace_ml_client.begin_create_or_update(endpoint).wait()
+            self.workspace_ml_client.begin_create_or_update(endpoint).result()
         except Exception as e:
             _, _, exc_tb = sys.exc_info()
             logger.error(f"::error:: Could not create endpoint: \n")
