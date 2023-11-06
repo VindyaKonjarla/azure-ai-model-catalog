@@ -264,6 +264,7 @@ if __name__ == "__main__":
         "inference-recommended-sku", "Standard_E16s_v3")
     a = computelist.index(',')
     COMPUTE = computelist[:a]
+    print("COMPUTE:",COMPUTE)
     compute_target = create_or_get_compute_target(
         workspace_ml_client, COMPUTE, instance_type=queue.instance_type)
 
