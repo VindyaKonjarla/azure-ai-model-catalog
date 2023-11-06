@@ -264,7 +264,7 @@ if __name__ == "__main__":
         "inference-recommended-sku", "Standard_E16s_v3")
     a = computelist.index(',')
     COMPUTE = computelist[:a]
-    compute_name=COMPUTE
+    compute_name=COMPUTE.replace("_", "-")
     print("COMPUTE:",COMPUTE)
     compute_config = AmlCompute(
             name=compute_name,
