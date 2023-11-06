@@ -252,7 +252,7 @@ if __name__ == "__main__":
     )
     registry_ml_client = MLClient(
         credential=credential,
-        registry_name=queue.registry
+        registry_name="azureml-preview-test1"
     )
     azureml_registry = MLClient(credential, registry_name="azureml")
     mlflow.set_tracking_uri(ws.get_mlflow_tracking_uri())
