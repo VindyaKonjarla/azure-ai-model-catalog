@@ -1,5 +1,5 @@
 {
-    "queue_name": "test-southcentralus-0",
+    "queue_name": "test-sonata-ws-eus-0",
     "models": [
         "MLFlow-Batch-distilbert-base-cased-distilled-squad",
         "MLFlow-Import-t5-small"
