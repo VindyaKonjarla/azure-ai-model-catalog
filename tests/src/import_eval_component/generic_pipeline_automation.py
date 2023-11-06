@@ -252,7 +252,7 @@ if __name__ == "__main__":
     )
     registry_ml_client = MLClient(
         credential=credential,
-        registry_name="azureml-preview-test1"
+        registry_name=queue.registry
     )
     azureml_registry = MLClient(credential, registry_name="azureml")
     mlflow.set_tracking_uri(ws.get_mlflow_tracking_uri())
@@ -260,10 +260,9 @@ if __name__ == "__main__":
     model_detail = ModelDetail(workspace_ml_client=azureml_registry)
     foundation_model = model_detail.get_model_detail(
         test_model_name=test_model_name)
-    computelist = foundation_model.properties.get(
-        "inference-recommended-sku", "Standard_E16s_v3")
-    a = computelist.index(',')
-    instance_type = computelist[:a]
+    instance_type = foundation_model.properties.get("evaluation-recommended-sku")
+    # a = computelist.index(',')
+    # instance_type = computelist[:a]
     compute = instance_type.replace("_", "-")
     logger.info(f"instance : {instance_type} and compute is : {compute}")
     # compute_config = AmlCompute(
@@ -276,7 +275,10 @@ if __name__ == "__main__":
     #     )
     #workspace_ml_client.begin_create_or_update(compute_config).result()
     compute_target = create_or_get_compute_target(
-        workspace_ml_client, compute, instance_type=instance_type)
+                     ml_client=workspace_ml_client,
+                     compute=compute,
+                     instance_type=instance_type
+                     )
 
     # compute_target = create_or_get_compute_target(
     #     ml_client=workspace_ml_client, compute=COMPUTE, instance_type=queue.instance_type)
