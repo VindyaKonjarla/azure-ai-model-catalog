@@ -224,7 +224,7 @@ if __name__ == "__main__":
     logger.info(f"test_workspace_name: {queue['workspace']}")
     logger.info(f"test_model_name: {test_model_name}")
     logger.info(f"test_sku_type: {test_sku_type}")
-    logger.info(f"test_registry: queue['registry']")
+    logger.info(f"test_registry: {queue['registry']}")
     logger.info(f"test_trigger_next_model: {test_trigger_next_model}")
     logger.info(f"test_queue: {test_queue}")
     logger.info(f"test_set: {test_set}")
