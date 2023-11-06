@@ -182,7 +182,6 @@ def evaluation_pipeline(task, mlflow_model, test_data, input_column_names, label
             input_column_names=input_column_names,
             label_column_name=label_column_name,
             # compute settings
-            compute_name=compute,
             # specify the instance type for serverless job
             # instance_type= "STANDARD_NC24",
             # Evaluation settings
@@ -286,7 +285,7 @@ if __name__ == "__main__":
     exp_model_name = test_model_name.replace('/', '-')
     try:
         pipeline_object = model_import_pipeline(
-            compute_name=COMPUTE,
+            compute_name=compute_name,
             task_name=task,
             update_existing_model=True,
         )
