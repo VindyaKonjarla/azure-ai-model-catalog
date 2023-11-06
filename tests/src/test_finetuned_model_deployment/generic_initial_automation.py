@@ -149,21 +149,21 @@ if __name__ == "__main__":
         # Fall back to InteractiveBrowserCredential in case DefaultAzureCredential not work
         credential = InteractiveBrowserCredential()
     logger.info(f"workspace_name : {queue.workspace}")
-    # try:
-    #     workspace_ml_client = MLClient.from_config(credential=credential)
-    # except:
-    #     workspace_ml_client = MLClient(
-    #         credential=credential,
-    #         subscription_id=queue.subscription,
-    #         resource_group_name=queue.resource_group,
-    #         workspace_name=queue.workspace
-    #     )
-    workspace_ml_client = MLClient(
+    try:
+        workspace_ml_client = MLClient.from_config(credential=credential)
+    except:
+        workspace_ml_client = MLClient(
             credential=credential,
             subscription_id=queue.subscription,
             resource_group_name=queue.resource_group,
             workspace_name=queue.workspace
         )
+    # workspace_ml_client = MLClient(
+    #         credential=credential,
+    #         subscription_id=queue.subscription,
+    #         resource_group_name=queue.resource_group,
+    #         workspace_name=queue.workspace
+    #     )
     logger.info(f"work_space_ml_client : {workspace_ml_client}")
     ws = Workspace(
         subscription_id=queue.subscription,
