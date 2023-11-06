@@ -265,7 +265,7 @@ if __name__ == "__main__":
     a = computelist.index(',')
     COMPUTE = computelist[:a]
     compute_target = create_or_get_compute_target(
-        workspace_ml_client, COMPUTE)
+        workspace_ml_client, COMPUTE, instance_type=queue.instance_type)
 
     # compute_target = create_or_get_compute_target(
     #     ml_client=workspace_ml_client, compute=COMPUTE, instance_type=queue.instance_type)
