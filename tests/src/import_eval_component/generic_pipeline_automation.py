@@ -388,7 +388,7 @@ if __name__ == "__main__":
         workspace_ml_client=workspace_ml_client
     )
     InferenceAndDeployment.model_infernce_and_deployment(
-        instance_type=queue.instance_type,
+        instance_type=instance_type,
         task=task,
         latest_model=registered_model
     )
