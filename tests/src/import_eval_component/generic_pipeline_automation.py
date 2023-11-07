@@ -277,110 +277,111 @@ if __name__ == "__main__":
     logger.info(f"Task is this : {task} for the model : {test_model_name}")
     timestamp = str(int(time.time()))
     exp_model_name = test_model_name.replace('/', '-')
-    try:
-        pipeline_object = model_import_pipeline(
-            compute_name=compute,
-            task_name=task,
-            update_existing_model=True,
-        )
-        pipeline_object.identity = UserIdentityConfiguration()
-        pipeline_object.settings.force_rerun = True
-        pipeline_object.settings.default_compute = compute
-        schedule_huggingface_model_import = (
-            not huggingface_model_exists_in_registry
-            and test_model_name not in [None, "None"]
-            and len(test_model_name) > 1
-        )
-        logger.info(
-            f"Need to schedule run for importing {test_model_name}: {schedule_huggingface_model_import}")
+    # try:
+    #     pipeline_object = model_import_pipeline(
+    #         compute_name=compute,
+    #         task_name=task,
+    #         update_existing_model=True,
+    #     )
+    #     pipeline_object.identity = UserIdentityConfiguration()
+    #     pipeline_object.settings.force_rerun = True
+    #     pipeline_object.settings.default_compute = compute
+    #     schedule_huggingface_model_import = (
+    #         not huggingface_model_exists_in_registry
+    #         and test_model_name not in [None, "None"]
+    #         and len(test_model_name) > 1
+    #     )
+    #     logger.info(
+    #         f"Need to schedule run for importing {test_model_name}: {schedule_huggingface_model_import}")
 
-        huggingface_pipeline_job = None
-        # if schedule_huggingface_model_import:
-        # submit the pipeline job
-        huggingface_pipeline_job = workspace_ml_client.jobs.create_or_update(
-            pipeline_object, experiment_name=f"import-pipeline-{exp_model_name}-{timestamp}"
-        )
-        # wait for the pipeline job to complete
-        workspace_ml_client.jobs.stream(huggingface_pipeline_job.name)
-    except Exception as ex:
-        _, _, exc_tb = sys.exc_info()
-        logger.error(f"::error:: Not able to initiate job \n")
-        logger.error(f"The exception occured at this line no : {exc_tb.tb_lineno}" +
-                     f" skipping the further process and the exception is this one : {ex}")
-        sys.exit(1)
+    #     huggingface_pipeline_job = None
+    #     # if schedule_huggingface_model_import:
+    #     # submit the pipeline job
+    #     huggingface_pipeline_job = workspace_ml_client.jobs.create_or_update(
+    #         pipeline_object, experiment_name=f"import-pipeline-{exp_model_name}-{timestamp}"
+    #     )
+    #     # wait for the pipeline job to complete
+    #     workspace_ml_client.jobs.stream(huggingface_pipeline_job.name)
+    # except Exception as ex:
+    #     _, _, exc_tb = sys.exc_info()
+    #     logger.error(f"::error:: Not able to initiate job \n")
+    #     logger.error(f"The exception occured at this line no : {exc_tb.tb_lineno}" +
+    #                  f" skipping the further process and the exception is this one : {ex}")
+    #     sys.exit(1)
+
     registered_model_detail = ModelDetail(
         workspace_ml_client=workspace_ml_client)
     registered_model = registered_model_detail.get_model_detail(
         test_model_name=test_model_name)
-    try:
-        flavour = registered_model.flavors
-        if flavour.get("python_function", None) == None:
-            logger.info(
-                f"This model {registered_model.name} is not registered in the mlflow flavour so skipping the further process")
-            raise Exception(
-                f"This model {registered_model.name} is not registered in the mlflow flavour so skipping the further process")
-        else:
-            if flavour.get("python_function").get("loader_module", None) == "mlflow.transformers":
-                logger.info(
-                    f"This model {registered_model.name} is registered in the mlflow flavour")
-            else:
-                logger.info(
-                    f"This model {registered_model.name} is not registered in the mlflow flavour so skipping the further process")
-                raise Exception(
-                    f"This model {registered_model.name} is not registered in the mlflow flavour so skipping the further process")
-    except Exception as ex:
-        _, _, exc_tb = sys.exc_info()
-        logger.error(f"::error:: Not able to initiate job \n")
-        logger.error(f"The exception occured at this line no : {exc_tb.tb_lineno}" +
-                     f" skipping the further process and the exception is this one : {ex}")
-        sys.exit(1)
+    # try:
+    #     flavour = registered_model.flavors
+    #     if flavour.get("python_function", None) == None:
+    #         logger.info(
+    #             f"This model {registered_model.name} is not registered in the mlflow flavour so skipping the further process")
+    #         raise Exception(
+    #             f"This model {registered_model.name} is not registered in the mlflow flavour so skipping the further process")
+    #     else:
+    #         if flavour.get("python_function").get("loader_module", None) == "mlflow.transformers":
+    #             logger.info(
+    #                 f"This model {registered_model.name} is registered in the mlflow flavour")
+    #         else:
+    #             logger.info(
+    #                 f"This model {registered_model.name} is not registered in the mlflow flavour so skipping the further process")
+    #             raise Exception(
+    #                 f"This model {registered_model.name} is not registered in the mlflow flavour so skipping the further process")
+    # except Exception as ex:
+    #     _, _, exc_tb = sys.exc_info()
+    #     logger.error(f"::error:: Not able to initiate job \n")
+    #     logger.error(f"The exception occured at this line no : {exc_tb.tb_lineno}" +
+    #                  f" skipping the further process and the exception is this one : {ex}")
+    #     sys.exit(1)
 
-    data_path = get_file_path(task=task)
-    input_column_names, label_column_name = get_dataset(task=task, data_path=data_path,
-                                                        latest_model=registered_model)
-    pieline_task = get_pipeline_task(task)
+    # data_path = get_file_path(task=task)
+    # input_column_names, label_column_name = get_dataset(task=task, data_path=data_path,
+    #                                                     latest_model=registered_model)
+    # pieline_task = get_pipeline_task(task)
 
-    try:
-        pipeline_jobs = []
-        eval_experiment_name = f"{pieline_task}-{exp_model_name}-evaluation-{timestamp}"
-        pipeline_object = evaluation_pipeline(
-            task=pieline_task,
-            mlflow_model=Input(type=AssetTypes.MLFLOW_MODEL,
-                               path=f"{registered_model.id}"),
-            test_data=Input(type=AssetTypes.URI_FILE, path=data_path),
-            input_column_names=input_column_names,
-            label_column_name=label_column_name,
-            evaluation_file_path=Input(
-                type=AssetTypes.URI_FILE, path=f"./evaluation/{task}/eval_config.json"),
-            compute=compute,
-            #mlflow_model = f"{latest_model.id}",
-            #data_path = data_path
-        )
-        # don't reuse cached results from previous jobs
-        pipeline_object.settings.force_rerun = True
-        pipeline_object.settings.default_compute = compute
+    # try:
+    #     pipeline_jobs = []
+    #     eval_experiment_name = f"{pieline_task}-{exp_model_name}-evaluation-{timestamp}"
+    #     pipeline_object = evaluation_pipeline(
+    #         task=pieline_task,
+    #         mlflow_model=Input(type=AssetTypes.MLFLOW_MODEL,
+    #                            path=f"{registered_model.id}"),
+    #         test_data=Input(type=AssetTypes.URI_FILE, path=data_path),
+    #         input_column_names=input_column_names,
+    #         label_column_name=label_column_name,
+    #         evaluation_file_path=Input(
+    #             type=AssetTypes.URI_FILE, path=f"./evaluation/{task}/eval_config.json"),
+    #         compute=compute,
+    #         #mlflow_model = f"{latest_model.id}",
+    #         #data_path = data_path
+    #     )
+    #     # don't reuse cached results from previous jobs
+    #     pipeline_object.settings.force_rerun = True
+    #     pipeline_object.settings.default_compute = compute
 
-        # set continue on step failure to False
-        pipeline_object.settings.continue_on_step_failure = False
+    #     # set continue on step failure to False
+    #     pipeline_object.settings.continue_on_step_failure = False
 
-        pipeline_object.display_name = f"eval-{registered_model.name}-{timestamp}"
-        pipeline_job = workspace_ml_client.jobs.create_or_update(
-            pipeline_object, experiment_name=eval_experiment_name
-        )
-        # add model['name'] and pipeline_job.name as key value pairs to a dictionary
-        pipeline_jobs.append(
-            {"model_name": registered_model.name, "job_name": pipeline_job.name})
-        # wait for the pipeline job to complete
-        workspace_ml_client.jobs.stream(pipeline_job.name)
-        # return pipeline_jobs
-        metrics_df = MetricsCalaulator(
-            pipeline_jobs=pipeline_jobs, mlflow=mlflow, experiment_name=eval_experiment_name).display_metric()
-        logger.info(f"Evaluation result is this : {metrics_df}")
-    except Exception as ex:
-        _, _, exc_tb = sys.exc_info()
-        logger.error(f"The exception occured at this line no : {exc_tb.tb_lineno}" +
-                     f" the exception is this one : \n {ex}")
-        raise Exception(ex)
+    #     pipeline_object.display_name = f"eval-{registered_model.name}-{timestamp}"
+    #     pipeline_job = workspace_ml_client.jobs.create_or_update(
+    #         pipeline_object, experiment_name=eval_experiment_name
+    #     )
+    #     # add model['name'] and pipeline_job.name as key value pairs to a dictionary
+    #     pipeline_jobs.append(
+    #         {"model_name": registered_model.name, "job_name": pipeline_job.name})
+    #     # wait for the pipeline job to complete
+    #     workspace_ml_client.jobs.stream(pipeline_job.name)
+    #     # return pipeline_jobs
+    #     metrics_df = MetricsCalaulator(
+    #         pipeline_jobs=pipeline_jobs, mlflow=mlflow, experiment_name=eval_experiment_name).display_metric()
+    #     logger.info(f"Evaluation result is this : {metrics_df}")
+    # except Exception as ex:
+    #     _, _, exc_tb = sys.exc_info()
+    #     logger.error(f"The exception occured at this line no : {exc_tb.tb_lineno}" +
+    #                  f" the exception is this one : \n {ex}")
+    #     raise Exception(ex)
     logger.info("Proceeding with inference and deployment")
     InferenceAndDeployment = ModelInferenceAndDeployemnt(
         test_model_name=test_model_name,
