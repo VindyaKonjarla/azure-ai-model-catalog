@@ -390,5 +390,6 @@ if __name__ == "__main__":
     InferenceAndDeployment.model_infernce_and_deployment(
         instance_type=instance_type,
         task=task,
-        latest_model=registered_model
+        latest_model=registered_model,
+        compute=compute
     )

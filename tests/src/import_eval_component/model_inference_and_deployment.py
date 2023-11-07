@@ -15,6 +15,7 @@ from azure.ai.ml.entities import (
 from utils.logging import get_logger
 from fetch_task import HfTask
 from dynamic_installation import ModelDynamicInstallation
+from batch_deployment import ModelBatchDeployment
 import mlflow
 from box import ConfigBox
 from fetch_model_detail import ModelDetail
@@ -282,7 +283,7 @@ class ModelInferenceAndDeployemnt:
                 f"::Error:: Could not find scoring_file: {scoring_file}. Finishing without sample scoring: \n{e}")
         return scoring_file, scoring_input
 
-    def model_infernce_and_deployment(self, instance_type, task, latest_model):
+    def model_infernce_and_deployment(self, instance_type, task, latest_model, compute):
         logger.info(f"latest_model is this : {latest_model}")
         logger.info(f"Task is : {task}")
         scoring_file, scoring_input = self.get_task_specified_input(task=task)
@@ -324,3 +325,10 @@ class ModelInferenceAndDeployemnt:
             scoring_file=scoring_file,
             scoring_input = scoring_input
         )
+        batch_deployment = ModelBatchDeployment(
+            model=latest_model,
+            workspace_ml_client=self.workspace_ml_client,
+            task=task,
+            model_name=self.test_model_name
+        )
+        batch_deployment.batch_deployment(compute=compute)
