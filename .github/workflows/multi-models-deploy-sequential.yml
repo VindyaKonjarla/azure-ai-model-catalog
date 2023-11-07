@@ -1,4 +1,4 @@
-name: multi-models-deploy
+name: multi-models-deploy-sequential
 
 on:
   workflow_dispatch:
@@ -71,12 +71,12 @@ jobs:
       - name: Deploy Set 1
         if: inputs.model_list_set1
         run: |
-          for model in ${{fromJson(inputs.model_list_set1)}}; do
+           for model in ${{fromJson(inputs.model_list_set1)}}; do
              echo "Deploying $model..."
              cd tests/src/automation_for_constant_library
-             python generic_initial_automation_test.py $model
+             python generic_initial_automation_test.py $model || true
              cd $GITHUB_WORKSPACE  # Reset the working directory
-          done
+           done
         continue-on-error: true
 
       - name: Deploy Set 2
@@ -85,7 +85,40 @@ jobs:
            for model in ${{fromJson(inputs.model_list_set2)}}; do
              echo "Deploying $model..."
              cd tests/src/automation_for_constant_library
-             python generic_initial_automation_test.py $model
+             python generic_initial_automation_test.py $model || true
+             cd $GITHUB_WORKSPACE  # Reset the working directory
+           done
+        continue-on-error: true
+
+      - name: Deploy Set 3
+        if: inputs.model_list_set3
+        run: |
+           for model in ${{fromJson(inputs.model_list_set3)}}; do
+             echo "Deploying $model..."
+             cd tests/src/automation_for_constant_library
+             python generic_initial_automation_test.py $model || true
+             cd $GITHUB_WORKSPACE  # Reset the working directory
+           done
+        continue-on-error: true
+
+      - name: Deploy Set 4
+        if: inputs.model_list_set4
+        run: |
+           for model in ${{fromJson(inputs.model_list_set4)}}; do
+             echo "Deploying $model..."
+             cd tests/src/automation_for_constant_library
+             python generic_initial_automation_test.py $model || true
+             cd $GITHUB_WORKSPACE  # Reset the working directory
+           done
+        continue-on-error: true
+
+      - name: Deploy Set 5
+        if: inputs.model_list_set5
+        run: |
+           for model in ${{fromJson(inputs.model_list_set5)}}; do
+             echo "Deploying $model..."
+             cd tests/src/automation_for_constant_library
+             python generic_initial_automation_test.py $model || true
              cd $GITHUB_WORKSPACE  # Reset the working directory
            done
         continue-on-error: true
