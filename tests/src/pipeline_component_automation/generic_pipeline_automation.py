@@ -155,10 +155,10 @@ def get_pipeline_task(task):
 
 
 @pipeline
-def model_import_pipeline(compute_name, update_existing_model, task_name):
+def model_import_pipeline(COMPUTE, update_existing_model, task_name):
     import_model = registry_ml_client.components.get(
         name="import_model_oss_test", label="latest")
-    import_model_job = import_model(model_id=test_model_name, compute=compute_name,
+    import_model_job = import_model(model_id=test_model_name, compute=COMPUTE,
                                     task_name=task_name, update_existing_model=update_existing_model)
     # Set job to not continue on failure
     import_model_job.settings.continue_on_step_failure = False
@@ -290,7 +290,7 @@ if __name__ == "__main__":
     exp_model_name = test_model_name.replace('/', '-')
     try:
         pipeline_object = model_import_pipeline(
-            compute_name=compute_name,
+            compute_name=COMPUTE,
             task_name=task,
             update_existing_model=True,
         )
