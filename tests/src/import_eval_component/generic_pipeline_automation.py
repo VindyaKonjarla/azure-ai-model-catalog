@@ -265,15 +265,6 @@ if __name__ == "__main__":
     # instance_type = computelist[:a]
     compute = instance_type.replace("_", "-")
     logger.info(f"instance : {instance_type} and compute is : {compute}")
-    # compute_config = AmlCompute(
-    #         name=compute_name,
-    #         type="amlcompute",
-    #         size=COMPUTE,
-    #         idle_time_before_scale_down=120,
-    #         min_instances=0,
-    #         max_instances=6,
-    #     )
-    #workspace_ml_client.begin_create_or_update(compute_config).result()
     compute_target = create_or_get_compute_target(
                      ml_client=workspace_ml_client,
                      compute=compute,
@@ -392,9 +383,8 @@ if __name__ == "__main__":
         raise Exception(ex)
     logger.info("Proceeding with inference and deployment")
     InferenceAndDeployment = ModelInferenceAndDeployemnt(
-        test_model_name=test_model_name.lower(),
-        workspace_ml_client=workspace_ml_client,
-        registry=queue.registry
+        test_model_name=test_model_name,
+        workspace_ml_client=workspace_ml_client
     )
     InferenceAndDeployment.model_infernce_and_deployment(
         instance_type=queue.instance_type,
