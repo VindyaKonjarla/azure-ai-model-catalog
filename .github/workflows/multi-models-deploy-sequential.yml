@@ -72,18 +72,20 @@ jobs:
         if: inputs.model_list_set1
         run: |
           for model in ${{fromJson(inputs.model_list_set1)}}; do
-            echo "Deploying $model..."
-        working-directory: tests/src/automation_for_constant_library
-        run: python generic_initial_automation_test.py ${{fromJson(inputs.model_list_set1)}}
+             echo "Deploying $model..."
+             cd tests/src/automation_for_constant_library
+             python generic_initial_automation_test.py $model
+             cd $GITHUB_WORKSPACE  # Reset the working directory
+          done
         continue-on-error: true
-        done
+
       - name: Deploy Set 2
         if: inputs.model_list_set2
         run: |
-          for model in ${{fromJson(inputs.model_list_set2)}}; do
-            echo "Deploying $model..."
-        working-directory: tests/src/automation_for_constant_library
-        run: python generic_initial_automation_test.py ${{fromJson(inputs.model_list_set2)}}
+           for model in ${{fromJson(inputs.model_list_set2)}}; do
+             echo "Deploying $model..."
+             cd tests/src/automation_for_constant_library
+             python generic_initial_automation_test.py $model
+             cd $GITHUB_WORKSPACE  # Reset the working directory
+           done
         continue-on-error: true
-        done
-
