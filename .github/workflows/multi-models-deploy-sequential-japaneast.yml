@@ -19,7 +19,7 @@ on:
 env:
    test_sku_type: cpu
    test_set: huggingface-all
-   test_queue: test-eastus
+   test_queue: test-japaneast
 
 jobs:
   deploy-model-job:
