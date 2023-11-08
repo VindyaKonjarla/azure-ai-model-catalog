@@ -71,14 +71,14 @@ jobs:
       - name: Deploy Models in Parallel
         run: |
           case ${{ matrix.model_set }} in
-            set1)
+            set1
               models="${{fromJson(inputs.model_list_set1)}}"
               ;;
-            set2)
+            set2
               models="${{fromJson(inputs.model_list_set2)}}"
               ;;
             # Add more sets as needed
-          esac
+          #esac
 
           deploy_model() {
             local model="$1"
