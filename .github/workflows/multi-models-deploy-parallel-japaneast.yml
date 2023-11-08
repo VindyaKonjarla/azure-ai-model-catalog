@@ -8,6 +8,7 @@ on:
         required: true
       model_list_set2:
         description: 'List of models to deploy (Set 2)'
+        required: true
       model_list_set3:
         description: 'List of models to deploy (Set 3)'
         required: true
@@ -81,19 +82,12 @@ jobs:
 
       - name: Deploy Models in Parallel
         run: |
-          case ${{ matrix.model_set }} in
-            set1)
-              models="${{fromJson(inputs.model_list_set1)}}"
-            ;;
-            set2)
-              models="${{fromJson(inputs.model_list_set2)}}"
-            ;;
-            set3)
-              models="${{fromJson(inputs.model_list_set3)}}"
-            ;;
-            # Add more sets as needed
-          esac
+          # Get the first model from each set
+          set1_model="${{fromJson(inputs.model_list_set1)}}[0]"
+          set2_model="${{fromJson(inputs.model_list_set2)}}[0]"
+          set3_model="${{fromJson(inputs.model_list_set3)}}[0]"
 
+          # Deploy the first models in parallel
           deploy_model() {
             local model="$1"
             echo "Deploying $model..."
@@ -103,8 +97,18 @@ jobs:
           }
 
           IFS=$'\n'
-          for model in $models; do
+          for model in $set1_model $set2_model $set3_model; do
             deploy_model "$model" &
           done
           wait
+
+          # Continue deploying the remaining models
+          for model_set in set1 set2 set3; do
+            # Get the remaining models from the current set
+            remaining_models="${{fromJson(inputs.model_list_$model_set)}}[1:]"
+
+            for model in $remaining_models; do
+              deploy_model "$model"
+            done
+          done
           continue-on-error: true
