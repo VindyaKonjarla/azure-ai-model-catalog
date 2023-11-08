@@ -8,60 +8,71 @@ on:
         required: true
       model_list_set2:
         description: 'List of models to deploy (Set 2)'
+      model_list_set3:
+        description: 'List of models to deploy (Set 3)'
+        required: true
       # Add more sets as needed
 
 env:
-   test_sku_type: cpu
-   test_set: huggingface-all
-   test_queue: test-japaneast
+  test_sku_type: cpu
+  test_set: huggingface-all
+  test_queue: test-japaneast
 
 jobs:
   deploy-model-job:
     runs-on: ubuntu-latest
 
+    strategy:
+      matrix:
+        model_set:
+          - set1
+          - set2
+          - set3
+          # Add more sets as needed
+
     steps:
-      - name: check-out-repo-step
+      - name: Check out repo step
         uses: actions/checkout@v3
 
-      - name: azure-login-step
+      - name: Azure login step
         uses: azure/login@v1
         with:
           creds: ${{secrets.AZURE_CREDENTIALS}}
 
-      - name: pip-install-azure-ai-ml
+      - name: Pip install azure-ai-ml step
         run: pip install azure-ai-ml
 
-      - name: pip-install-azureml-core
+      - name: Pip install azureml-core step
         run: pip install azureml-core
 
-      - name: pip-install-datasets
+      - name: Pip install datasets step
         run: pip install datasets
 
-      - name: pip-install-azureml-mlflow
+      - name: Pip install azureml-mlflow step
         run: pip install azureml-mlflow==1.53.0
 
-      - name: pip-install-transformers
+      - name: Pip install transformers step
         run: pip install transformers
 
-      - name: pip-install-transformers[torch]
+      - name: Pip install transformers[torch] step
         run: pip install transformers[torch]
 
-      - name: pip-install-torchvision
+      - name: Pip install torchvision step
         run: pip install torchvision
 
-      - name: pip-install-mlflow
+      - name: Pip install mlflow step
         run: pip install mlflow
 
-      - name: pip-install-python-box
-        run: pip install python-box 
+      - name: Pip install python-box step
+        run: pip install python-box
 
-      - name: pip-install-sacremoses
+      - name: Pip install sacremoses step
         run: pip install sacremoses
 
-      - name: pip-install-sentencepiece
+      - name: Pip install sentencepiece step
         run: pip install sentencepiece
 
-      - name: pip-install-fugashi[unidic-lite]
+      - name: Pip install fugashi[unidic-lite] step
         run: pip install fugashi[unidic-lite]
 
       - name: Set Environment Variables
@@ -71,26 +82,29 @@ jobs:
       - name: Deploy Models in Parallel
         run: |
           case ${{ matrix.model_set }} in
-            set1
+            set1)
               models="${{fromJson(inputs.model_list_set1)}}"
-              ;;
-            set2
+            ;;
+            set2)
               models="${{fromJson(inputs.model_list_set2)}}"
-              ;;
+            ;;
+            set3)
+              models="${{fromJson(inputs.model_list_set3)}}"
+            ;;
             # Add more sets as needed
-          #esac
+          esac
 
           deploy_model() {
             local model="$1"
             echo "Deploying $model..."
             cd tests/src/automation_for_constant_library
             python generic_initial_automation_test.py $model || true
-            cd $GITHUB_WORKSPACE  # Reset the working directory
+            cd $GITHUB_WORKSPACE
           }
 
-          IFS=$'\n'  # Set the Internal Field Separator to newline
+          IFS=$'\n'
           for model in $models; do
             deploy_model "$model" &
           done
-          wait  # Wait for all background jobs to finish
-        continue-on-error: true
+          wait
+          continue-on-error: true
