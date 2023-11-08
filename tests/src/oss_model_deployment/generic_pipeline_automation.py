@@ -255,7 +255,7 @@ if __name__ == "__main__":
         registry_name=queue.registry
     )
     azureml_registry = MLClient(credential, registry_name="azureml")
-    mlflow.set_tracking_uri(ws.get_mlflow_tracking_uri())
+    #mlflow.set_tracking_uri(ws.get_mlflow_tracking_uri())
        
     model_detail = ModelDetail(workspace_ml_client=azureml_registry)
     foundation_model = model_detail.get_model_detail(
@@ -309,10 +309,14 @@ if __name__ == "__main__":
     #                  f" skipping the further process and the exception is this one : {ex}")
     #     sys.exit(1)
 
+    
+
     registered_model_detail = ModelDetail(
         workspace_ml_client=workspace_ml_client)
     registered_model = registered_model_detail.get_model_detail(
         test_model_name=test_model_name)
+    
+
     # try:
     #     flavour = registered_model.flavors
     #     if flavour.get("python_function", None) == None:
