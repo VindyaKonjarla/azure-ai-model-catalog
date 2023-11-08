@@ -112,16 +112,6 @@ def set_next_trigger_model(queue):
         logger.info(f'NEXT_MODEL={next_model}')
         print(f'NEXT_MODEL={next_model}', file=fh)
 
-# @pipeline
-# def model_import_pipeline(compute_name, update_existing_model, task_name):
-#     import_model = registry_ml_client.components.get(
-#         name="import_model_oss_test", label="latest")
-#     import_model_job = import_model(model_id=test_model_name, compute=compute_name,
-#                                     task_name=task_name, update_existing_model=update_existing_model)
-#     # Set job to not continue on failure
-#     import_model_job.settings.continue_on_step_failure = False
-#     return {"model_registration_details": import_model_job.outputs.model_registration_details}
-
 if __name__ == "__main__":
     # if any of the above are not set, exit with error
     if test_model_name is None or test_sku_type is None or test_queue is None or test_set is None or test_trigger_next_model is None or test_keep_looping is None:
