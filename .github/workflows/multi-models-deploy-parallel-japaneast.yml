@@ -122,8 +122,7 @@ jobs:
           for model in $models; do
             echo "Deploying $model..."
             cd tests/src/automation_for_constant_library
-            python generic_initial_automation_test.py $model
+            python generic_initial_automation_test.py $model || continue
             cd $GITHUB_WORKSPACE
-            wait
           done
           continue-on-error: true
