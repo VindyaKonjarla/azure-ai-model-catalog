@@ -19,10 +19,6 @@ jobs:
   deploy-model-job:
     runs-on: ubuntu-latest
 
-    strategy:
-      matrix:
-        model_set: [set1, set2]  # Add more sets as needed
-
     steps:
       - name: check-out-repo-step
         uses: actions/checkout@v3
@@ -72,30 +68,29 @@ jobs:
         run: |
           echo "test_model_name=${{ matrix.model_set }}" >> $GITHUB_ENV
 
-      - name: Deploy Models
+      - name: Deploy Models in Parallel
         run: |
           case ${{ matrix.model_set }} in
-            set1
+            set1)
               models="${{fromJson(inputs.model_list_set1)}}"
               ;;
-            set2
+            set2)
               models="${{fromJson(inputs.model_list_set2)}}"
               ;;
-            # set3)
-            #   models="${{fromJson(inputs.model_list_set3)}}"
-            #   ;;
-            # set4)
-            #   models="${{fromJson(inputs.model_list_set4)}}"
-            #   ;;
-            # set5)
-            #   models="${{fromJson(inputs.model_list_set5)}}"
-            #   ;;
+            # Add more sets as needed
           esac
 
-          for model in $models; do
+          deploy_model() {
+            local model="$1"
             echo "Deploying $model..."
             cd tests/src/automation_for_constant_library
             python generic_initial_automation_test.py $model || true
             cd $GITHUB_WORKSPACE  # Reset the working directory
+          }
+
+          IFS=$'\n'  # Set the Internal Field Separator to newline
+          for model in $models; do
+            deploy_model "$model" &
           done
+          wait  # Wait for all background jobs to finish
         continue-on-error: true
