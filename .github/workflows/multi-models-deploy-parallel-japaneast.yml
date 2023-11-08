@@ -77,8 +77,18 @@ jobs:
 
       - name: Set Environment Variables
         run: |
-          echo "test_model_name=${{ matrix.model_set }}" >> $GITHUB_ENV
-
+          case ${{ matrix.model_set }} in
+            set1)
+             echo "test_model_name=${{fromJson(inputs.model_list_set1)}}" >> $GITHUB_ENV
+            ;;
+            set2)
+             echo "test_model_name=${{fromJson(inputs.model_list_set2)}}" >> $GITHUB_ENV
+            ;;
+            set3)
+             echo "test_model_name=${{fromJson(inputs.model_list_set3)}}" >> $GITHUB_ENV
+            ;;
+            # Add more sets as needed
+          esac
       - name: Deploy Models in Parallel
         run: |
           case ${{ matrix.model_set }} in
