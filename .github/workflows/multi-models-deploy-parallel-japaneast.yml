@@ -76,6 +76,30 @@ jobs:
       - name: Pip install fugashi[unidic-lite] step
         run: pip install fugashi[unidic-lite]
 
+      - name: Print Model List Set 1
+        run: |
+          models="${{fromJson(inputs.model_list_set1)}}"
+          echo "Models in Set 1:"
+          for model in $models; do
+            echo "  $model"
+          done
+
+      - name: Print Model List Set 2
+        run: |
+          models="${{fromJson(inputs.model_list_set2)}}"
+          echo "Models in Set 2:"
+          for model in $models; do
+            echo "  $model"
+          done
+
+      - name: Print Model List Set 3
+        run: |
+          models="${{fromJson(inputs.model_list_set3)}}"
+          echo "Models in Set 3:"
+          for model in $models; do
+            echo "  $model"
+          done
+
       - name: Set Environment Variables
         run: |
           echo "test_model_name=${{ matrix.model_set }}" >> $GITHUB_ENV
@@ -108,4 +132,3 @@ jobs:
             deploy_model "$model" &
           done
           wait
-          continue-on-error: true
