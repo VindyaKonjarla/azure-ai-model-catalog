@@ -8,7 +8,6 @@ on:
         required: true
       model_list_set2:
         description: 'List of models to deploy (Set 2)'
-        required: true
       model_list_set3:
         description: 'List of models to deploy (Set 3)'
         required: true
@@ -76,35 +75,11 @@ jobs:
       - name: Pip install fugashi[unidic-lite] step
         run: pip install fugashi[unidic-lite]
 
-      - name: Print Model List Set 1
-        run: |
-          models="${{fromJson(inputs.model_list_set1)}}"
-          echo "Models in Set 1:"
-          for model in $models; do
-            echo "  $model"
-          done
-
-      - name: Print Model List Set 2
-        run: |
-          models="${{fromJson(inputs.model_list_set2)}}"
-          echo "Models in Set 2:"
-          for model in $models; do
-            echo "  $model"
-          done
-
-      - name: Print Model List Set 3
-        run: |
-          models="${{fromJson(inputs.model_list_set3)}}"
-          echo "Models in Set 3:"
-          for model in $models; do
-            echo "  $model"
-          done
-
       - name: Set Environment Variables
         run: |
           echo "test_model_name=${{ matrix.model_set }}" >> $GITHUB_ENV
 
-      - name: Deploy Models Sequentially
+      - name: Deploy Models in Parallel
         run: |
           case ${{ matrix.model_set }} in
             set1)
@@ -119,10 +94,16 @@ jobs:
             # Add more sets as needed
           esac
 
-          for model in $models; do
+          deploy_model() {
+            local model="$1"
             echo "Deploying $model..."
             cd tests/src/automation_for_constant_library
-            python generic_initial_automation_test.py $model || continue
+            python generic_initial_automation_test.py $model || true
             cd $GITHUB_WORKSPACE
+          }
+
+          IFS=$'\n'
+          for model in $models; do
+            deploy_model "$model" &
           done
-          continue-on-error: true
+          wait
