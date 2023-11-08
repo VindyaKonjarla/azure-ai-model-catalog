@@ -104,7 +104,7 @@ jobs:
         run: |
           echo "test_model_name=${{ matrix.model_set }}" >> $GITHUB_ENV
 
-      - name: Deploy Models in Parallel
+      - name: Deploy Models Sequentially
         run: |
           case ${{ matrix.model_set }} in
             set1)
@@ -119,16 +119,11 @@ jobs:
             # Add more sets as needed
           esac
 
-          deploy_model() {
-            local model="$1"
+          for model in $models; do
             echo "Deploying $model..."
             cd tests/src/automation_for_constant_library
-            python generic_initial_automation_test.py $model || true
+            python generic_initial_automation_test.py $model
             cd $GITHUB_WORKSPACE
-          }
-
-          IFS=$'\n'
-          for model in $models; do
-            deploy_model "$model" &
+            wait
           done
-          wait
+          continue-on-error: true
