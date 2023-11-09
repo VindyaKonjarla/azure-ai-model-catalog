@@ -166,7 +166,7 @@ def model_import_pipeline(compute_name, update_existing_model, task_name):
 
 
 @pipeline()
-def evaluation_pipeline(task, mlflow_model, test_data, input_column_names, label_column_name, evaluation_file_path, compute=compute_name):
+def evaluation_pipeline(task, mlflow_model, test_data, input_column_names, label_column_name, evaluation_file_path, compute):
     try:
         logger.info("Started configuring the job")
         #data_path = "./datasets/translation.json"
@@ -365,7 +365,7 @@ if __name__ == "__main__":
             label_column_name=label_column_name,
             evaluation_file_path=Input(
                 type=AssetTypes.URI_FILE, path=f"./evaluation/{task}/eval_config.json"),
-            compute=COMPUTE,
+            compute=compute_name,
             #mlflow_model = f"{latest_model.id}",
             #data_path = data_path
         )
