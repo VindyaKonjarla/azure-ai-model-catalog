@@ -262,8 +262,9 @@ if __name__ == "__main__":
         test_model_name=test_model_name)
     computelist = foundation_model.properties.get(
         "evaluation-recommended-sku", "STANDARD_NC6S_V3")
-    a = computelist.index(',')
-    COMPUTE = computelist[:a]
+    # a = computelist.index(',')
+    # COMPUTE = computelist[:a]
+    COMPUTE = computelist
     compute_name=COMPUTE.replace("_", "-")
     try:
         _ = workspace_ml_client.compute.get(compute_name)
