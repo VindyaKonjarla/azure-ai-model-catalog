@@ -301,6 +301,7 @@ class ModelInferenceAndDeployemnt:
             name=online_endpoint_name,
             auth_mode="key",
         )
+        logger.info(f"ManageOnlieEndpoint : {endpoint}")
         self.create_online_endpoint(endpoint=endpoint)
         deployment_name = self.create_online_deployment(
             latest_model=latest_model,

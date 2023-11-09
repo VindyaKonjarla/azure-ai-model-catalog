@@ -180,19 +180,19 @@ if __name__ == "__main__":
     instance_type = foundation_model.properties.get("evaluation-recommended-sku")
     compute = instance_type.replace("_", "-")
     logger.info(f"instance : {instance_type} and compute is : {compute}")
-    compute_target = create_or_get_compute_target(
-                     ml_client=workspace_ml_client,
-                     compute=compute,
-                     instance_type=instance_type
-                     )
+    # compute_target = create_or_get_compute_target(
+    #                  ml_client=workspace_ml_client,
+    #                  compute=compute,
+    #                  instance_type=instance_type
+    #                  )
 
     task = HfTask(model_name=test_model_name).get_task()
     logger.info(f"Task is this : {task} for the model : {test_model_name}")
 
-    registered_model_detail = ModelDetail(
-        workspace_ml_client=workspace_ml_client)
-    registered_model = registered_model_detail.get_model_detail(
-        test_model_name=test_model_name)
+    # registered_model_detail = ModelDetail(
+    #     workspace_ml_client=workspace_ml_client)
+    # registered_model = registered_model_detail.get_model_detail(
+    #     test_model_name=test_model_name)
     
     logger.info("Proceeding with inference and deployment")
     InferenceAndDeployment = ModelInferenceAndDeployemnt(
@@ -202,5 +202,5 @@ if __name__ == "__main__":
     InferenceAndDeployment.model_infernce_and_deployment(
         instance_type=instance_type,
         task=task,
-        latest_model=registered_model
+        latest_model=foundation_model
     )
