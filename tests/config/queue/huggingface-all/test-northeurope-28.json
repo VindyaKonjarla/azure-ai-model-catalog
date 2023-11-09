@@ -1,7 +1,7 @@
 {
     "queue_name": "test-northeurope-28",
     "models": [
-        "meta-llama/Llama-2-7b"
+        "sshleifer/distilbart-cnn-12-6"
     ],
     "workspace": "test-northeurope",
     "subscription": "ed2cab61-14cc-4fb3-ac23-d72609214cfd",
