@@ -265,6 +265,7 @@ if __name__ == "__main__":
     # a = computelist.index(',')
     # COMPUTE = computelist[:a]
     COMPUTE = computelist
+    print("COMPUTE----------",COMPUTE)
     compute_name=COMPUTE.replace("_", "-")
     try:
         _ = workspace_ml_client.compute.get(compute_name)
