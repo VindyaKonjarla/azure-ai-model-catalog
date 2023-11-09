@@ -45,8 +45,8 @@ jobs:
       run: pip install fugashi[unidic-lite]  
     - name: deploy-model-step
       id: deploy-model-step
-      run: python generic_hf_model_deployment.py
-      working-directory: tests/src/hf_model_deployment
+      run: python generic_pipeline_automation.py
+      working-directory: tests/src/oss_model_deployment
     - name: trigger-next-model-step
       env:
         GITHUB_TOKEN: ${{ secrets.WORKFLOW_TOKEN }}
