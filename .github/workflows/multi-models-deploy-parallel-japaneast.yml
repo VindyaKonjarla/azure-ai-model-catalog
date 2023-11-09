@@ -4,12 +4,12 @@ on:
   workflow_dispatch:
     inputs:
       model_list_set1:
-        description: 'List of models to deploy (Set 1)'
+        description: 'model_list_set1'
         required: true
       model_list_set2:
-        description: 'List of models to deploy (Set 2)'
+        description: 'model_list_set2'
       model_list_set3:
-        description: 'List of models to deploy (Set 3)'
+        description: 'model_list_set3'
         required: true
       # Add more sets as needed
 
