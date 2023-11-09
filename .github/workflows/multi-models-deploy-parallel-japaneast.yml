@@ -79,13 +79,13 @@ jobs:
         run: |
           case ${{ matrix.model_set }} in
             set1)
-             echo "test_model_name=${{matrix.model_list_set1}}" >> $GITHUB_ENV
+             echo "test_model_name=${{fromJson(inputs.model_list_set1)}}" >> $GITHUB_ENV
             ;;
             set2)
-             echo "test_model_name=${{matrix.model_list_set2}}" >> $GITHUB_ENV
+             echo "test_model_name=${{fromJson(inputs.model_list_set2)}}" >> $GITHUB_ENV
             ;;
             set3)
-             echo "test_model_name=${{matrix.model_list_set3}}" >> $GITHUB_ENV
+             echo "test_model_name=${{fromJson(inputs.model_list_set3)}}" >> $GITHUB_ENV
             ;;
             # Add more sets as needed
           esac
@@ -93,13 +93,13 @@ jobs:
         run: |
           case ${{ matrix.model_set }} in
             set1)
-              test_model_name="${{matrix.model_list_set1}}"
+              test_model_name="${{fromJson(inputs.model_list_set1)}}"
             ;;
             set2)
-              test_model_name="${{matrix.model_list_set2}}"
+              test_model_name="${{fromJson(inputs.model_list_set2)}}"
             ;;
             set3)
-              test_model_name="${{matrix.model_list_set3}}"
+              test_model_name="${{fromJson(inputs.model_list_set3)}}"
             ;;
             # Add more sets as needed
           esac
