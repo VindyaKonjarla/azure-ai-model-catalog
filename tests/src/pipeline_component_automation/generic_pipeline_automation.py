@@ -166,7 +166,7 @@ def model_import_pipeline(compute_name, update_existing_model, task_name):
 
 
 @pipeline()
-def evaluation_pipeline(task, mlflow_model, test_data, input_column_names, label_column_name, evaluation_file_path, compute):
+def evaluation_pipeline(task, mlflow_model, test_data, input_column_names, label_column_name, evaluation_file_path, compute=compute_name):
     try:
         logger.info("Started configuring the job")
         #data_path = "./datasets/translation.json"
