@@ -80,24 +80,25 @@ jobs:
         run: |
           case ${{ matrix.model_set }} in
             set1)
-              models=($(jq -r '.[]' <<< ${{ inputs.model_list_set1 }}))
+              models=($(jq -r '.[]' <<< ["gpt2-large", "bert-base-uncased"]))
             ;;
             set2)
-              models=($(jq -r '.[]' <<< ${{ inputs.model_list_set2 }}))
+              models=($(jq -r '.[]' <<< ["ProsusAI/finbert","Helsinki-NLP/opus-mt-sn-en"]))
             ;;
             set3)
-              models=($(jq -r '.[]' <<< ${{ inputs.model_list_set3 }}))
+              models=($(jq -r '.[]' <<< ["llyaGusev/rubert_ext_sum_gazeta","microsoft/deberta-v3-xsmall"]))
             ;;
             # Add more sets as needed
           esac
 
-          for model in "${models[@]}"; do
+          for model in "$models[@]}"; do
             echo "Setting test_model_name to $model..."
             echo "test_model_name=$model" >> $GITHUB_ENV
           done
-          echo "test_models=${models[@]}" >> $GITHUB_ENV
+          echo "test_models=$models[@]}" >> $GITHUB_ENV
 
       - name: Deploy Models in Parallel
+        shell: /usr/bin/bash -e
         run: |
           deploy_model() {
             local model="$1"
@@ -107,9 +108,8 @@ jobs:
             cd $GITHUB_WORKSPACE
           }
 
-          test_models=($(jq -r '.[]' <<< ${{ env.test_models }}))
-
-          for model in "${test_models[@]}"; do
+          IFS=$'\n'
+          for model in "${models[@]}"; do
             deploy_model "$model" &
           done
           wait
