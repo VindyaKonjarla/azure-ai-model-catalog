@@ -1,116 +1,115 @@
 name: multi-models-deploy-parallel
 
 on:
- workflow_dispatch:
-  inputs:
-   model_list_set1:
-    description: 'List of models to deploy (Set 1)'
-    required: true
-   model_list_set2:
-    description: 'List of models to deploy (Set 2)'
-    required: true
-   model_list_set3:
-    description: 'List of models to deploy (Set 3)'
-    required: true
-   # Add more sets as needed
+  workflow_dispatch:
+    inputs:
+      model_list_set1:
+        description: 'List of models to deploy (Set 1)'
+        required: true
+      model_list_set2:
+        description: 'List of models to deploy (Set 2)'
+        required: true
+      model_list_set3:
+        description: 'List of models to deploy (Set 3)'
+        required: true
+      # Add more sets as needed
 
 env:
- test_sku_type: cpu
- test_set: huggingface-all
- test_queue: test-japaneast
+  test_sku_type: cpu
+  test_set: huggingface-all
+  test_queue: test-japaneast
 
 jobs:
- deploy-model-job:
-  runs-on: ubuntu-latest
+  deploy-model-job:
+    runs-on: ubuntu-latest
 
-  strategy:
-   matrix:
-    model_set:
-     - set1
-     - set2
-     - set3
-     # Add more sets as needed
+    strategy:
+      matrix:
+        model_set:
+          - set1
+          - set2
+          - set3
+          # Add more sets as needed
 
-  steps:
-   - name: Check out repo step
-    uses: actions/checkout@v3
+    steps:
+      - name: Check out repo step
+        uses: actions/checkout@v3
 
-   - name: Azure login step
-    uses: azure/login@v1
-    with:
-     creds: ${{secrets.AZURE_CREDENTIALS}}
+      - name: Azure login step
+        uses: azure/login@v1
+        with:
+          creds: ${{secrets.AZURE_CREDENTIALS}}
 
-   - name: Pip install azure-ai-ml step
-    run: pip install azure-ai-ml
+      - name: Pip install azure-ai-ml step
+        run: pip install azure-ai-ml
 
-   - name: Pip install azureml-core step
-    run: pip install azureml-core
+      - name: Pip install azureml-core step
+        run: pip install azureml-core
 
-   - name: Pip install datasets step
-    run: pip install datasets
+      - name: Pip install datasets step
+        run: pip install datasets
 
-   - name: Pip install azureml-mlflow step
-    run: pip install azureml-mlflow==1.53.0
+      - name: Pip install azureml-mlflow step
+        run: pip install azureml-mlflow==1.53.0
 
-   - name: Pip install transformers step
-    run: pip install transformers
+      - name: Pip install transformers step
+        run: pip install transformers
 
-   - name: Pip install transformers[torch] step
-    run: pip install transformers[torch]
+      - name: Pip install transformers[torch] step
+        run: pip install transformers[torch]
 
-   - name: Pip install torchvision step
-    run: pip install torchvision
+      - name: Pip install torchvision step
+        run: pip install torchvision
 
-   - name: Pip install mlflow step
-    run: pip install mlflow
+      - name: Pip install mlflow step
+        run: pip install mlflow
 
-   - name: Pip install python-box step
-    run: pip install python-box
+      - name: Pip install python-box step
+        run: pip install python-box
 
-   - name: Pip install sacremoses step
-    run: pip install sacremoses
+      - name: Pip install sacremoses step
+        run: pip install sacremoses
 
-   - name: Pip install sentencepiece step
-    run: pip install sentencepiece
+      - name: Pip install sentencepiece step
+        run: pip install sentencepiece
 
-   - name: Pip install fugashi[unidic-lite] step
-    run: pip install fugashi[unidic-lite]
+      - name: Pip install fugashi[unidic-lite] step
+        run: pip install fugashi[unidic-lite]
 
-   - name: Set Environment Variables
-    run: |
-     case <span class="math-inline">\{\{ matrix\.model\_set \}\} in
-set1\)
-models\=\(</span>(jq -r '.[]' <<< <span class="math-inline">\{\{ inputs\.model\_list\_set1 \}\}\)\)
-;;
-set2\)
-models\=\(</span>(jq -r '.[]' <<< <span class="math-inline">\{\{ inputs\.model\_list\_set2 \}\}\)\)
-;;
-set3\)
-models\=\(</span>(jq -r '.[]' <<< <span class="math-inline">\{\{ inputs\.model\_list\_set3 \}\}\)\)
-;;
-\# Add more sets as needed
-esac
-deploy\_model\_failure\=false
-for model in "</span>{models[@]}"; do
-      echo "Setting test_model_name to $model..."
-      echo "test_model_name=$model" >> $GITHUB_ENV
+      - name: Set Environment Variables
+        run: |
+          case ${{ matrix.model_set }} in
+            set1)
+              models=($(jq -r '.[]' <<< ${{ inputs.model_list_set1 }}))
+            ;;
+            set2)
+              models=($(jq -r '.[]' <<< ${{ inputs.model_list_set2 }}))
+            ;;
+            set3)
+              models=($(jq -r '.[]' <<< ${{ inputs.model_list_set3 }}))
+            ;;
+            # Add more sets as needed
+          esac
 
-      deploy_model "$model"
+          for model in "${models[@]}"; do
+            echo "Setting test_model_name to $model..."
+            echo "test_model_name=$model" >> $GITHUB_ENV
+          done
+          echo "test_models=${models[@]}" >> $GITHUB_ENV
 
-      if [ <span class="math-inline">? \-ne 0 \]; then
-deploy\_model\_failure\=true
-fi
-done
-echo "test\_models\=</span>{models[@]}" >> $GITHUB_ENV
+      - name: Deploy Models in Parallel
+        run: |
+          deploy_model() {
+            local model="$1"
+            echo "Deploying $model..."
+            cd tests/src/automation_for_constant_library
+            python generic_initial_automation_test.py $model "$test_model_name" || true
+            cd $GITHUB_WORKSPACE
+          }
 
-   - name: Deploy Models in Parallel
-    run: |
-     deploy_model() {
-      local model="$1"
-      echo "Deploying $model..."
-      cd tests/src/automation_for_constant_library
-      python generic_initial_automation_test.py $model "$test_model_name" || true
-      cd <span class="math-inline">GITHUB\_WORKSPACE
-\}
-test\_models\=\(</span>(jq -r '.[]' <<< <span class="math-inline">\{\{ env\.test\_models \}\}\)\)
-for model in "</span>{test_models[@]}"; do
+          test_models=($(jq -r '.[]' <<< ${{ env.test_models }}))
+
+          for model in "${test_models[@]}"; do
+            deploy_model "$model" &
+          done
+          wait
