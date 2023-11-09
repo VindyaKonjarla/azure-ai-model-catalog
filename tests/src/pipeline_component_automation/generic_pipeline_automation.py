@@ -261,12 +261,12 @@ if __name__ == "__main__":
     foundation_model = model_detail.get_model_detail(
         test_model_name=test_model_name)
     computelist = foundation_model.properties.get(
-        "evaluation-recommended-sku", "STANDARD_NC6S_V3")
+        "evaluation-recommended-sku", "donotdelete-DS4v2")
     # a = computelist.index(',')
     # COMPUTE = computelist[:a]
     COMPUTE = computelist
     print("COMPUTE----------",COMPUTE)
-    compute_name=COMPUTE.replace("_", "-")
+    compute_name="donotdelete-"+COMPUTE.replace("_", "-")
     try:
         _ = workspace_ml_client.compute.get(compute_name)
         print("Found existing compute target.")
