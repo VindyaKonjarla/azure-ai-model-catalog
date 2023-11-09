@@ -261,7 +261,7 @@ if __name__ == "__main__":
     foundation_model = model_detail.get_model_detail(
         test_model_name=test_model_name)
     computelist = foundation_model.properties.get(
-        "inference-recommended-sku", "Standard_E16s_v3")
+        "inference-recommended-sku", "STANDARD_NC6S_V3")
     a = computelist.index(',')
     COMPUTE = computelist[:a]
     compute_name=COMPUTE.replace("_", "-")
