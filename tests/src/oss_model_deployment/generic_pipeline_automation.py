@@ -95,7 +95,7 @@ def set_next_trigger_model(queue):
     elif import_alias_model_name in model_list:
         index = model_list.index(import_alias_model_name)
     else:
-        index = model_list.index(test_model_name.replace("/", "-").lower()+"oss")
+        index = model_list.index(test_model_name.replace("/", "-").lower()+"-oss")
 
     logger.info(f"index of {test_model_name} in queue: {index}")
 # if index is not the last element in the list, get the next element in the list
