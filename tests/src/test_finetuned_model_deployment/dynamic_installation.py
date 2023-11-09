@@ -252,6 +252,7 @@ class ModelDynamicInstallation:
             name=online_endpoint_name,
             auth_mode="key",
         )
+        logger.info(f"ManagedOnlineEndpoint : {endpoint}")
         self.create_online_endpoint(endpoint=endpoint)
         self.create_online_deployment(
             latest_model=latest_model,
