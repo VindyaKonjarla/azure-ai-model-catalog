@@ -93,13 +93,13 @@ jobs:
         run: |
           case ${{ matrix.model_set }} in
             set1)
-              models="${{fromJson(inputs.model_list_set1)}}"
+              test_model_name="${{fromJson(inputs.model_list_set1)}}"
             ;;
             set2)
-              models="${{fromJson(inputs.model_list_set2)}}"
+              test_model_name="${{fromJson(inputs.model_list_set2)}}"
             ;;
             set3)
-              models="${{fromJson(inputs.model_list_set3)}}"
+              test_model_name="${{fromJson(inputs.model_list_set3)}}"
             ;;
             # Add more sets as needed
           esac
@@ -113,7 +113,7 @@ jobs:
           }
 
           IFS=$'\n'
-          for model in $models; do
+          for model in $test_model_name; do
             deploy_model "$model" &
           done
           wait
