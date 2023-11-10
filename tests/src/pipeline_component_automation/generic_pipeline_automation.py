@@ -350,17 +350,17 @@ if __name__ == "__main__":
     #     logger.error(f"The exception occured at this line no : {exc_tb.tb_lineno}" +
     #                  f" skipping the further process and the exception is this one : {ex}")
     #     sys.exit(1)
-
-    # data_path = get_file_path(task=task)
-    # input_column_names, label_column_name = get_dataset(task=task, data_path=data_path,
-    #                                                     latest_model=registered_model)
-    # pieline_task = get_pipeline_task(task)
- # -----------------------------------------
+# -----------------------------------------
+    data_path = get_file_path(task=task)
+    input_column_names, label_column_name = get_dataset(task=task, data_path=data_path,
+                                                        latest_model=registered_model)
+    pipeline_task = get_pipeline_task(task)
+ 
     try:
         pipeline_jobs = []
-        eval_experiment_name = f"{pieline_task}-{exp_model_name}-evaluation-{timestamp}"
+        eval_experiment_name = f"{pipeline_task}-{exp_model_name}-evaluation-{timestamp}"
         pipeline_object = evaluation_pipeline(
-            task=pieline_task,
+            task=pipeline_task,
             mlflow_model=Input(type=AssetTypes.MLFLOW_MODEL,
                                path=f"{registered_model.id}"),
             test_data=Input(type=AssetTypes.URI_FILE, path=data_path),
