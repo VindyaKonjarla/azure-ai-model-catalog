@@ -355,7 +355,7 @@ if __name__ == "__main__":
     # input_column_names, label_column_name = get_dataset(task=task, data_path=data_path,
     #                                                     latest_model=registered_model)
     # pieline_task = get_pipeline_task(task)
- -----------------------------------------
+ # -----------------------------------------
     try:
         pipeline_jobs = []
         eval_experiment_name = f"{pieline_task}-{exp_model_name}-evaluation-{timestamp}"
