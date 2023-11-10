@@ -325,10 +325,10 @@ class ModelInferenceAndDeployemnt:
             scoring_file=scoring_file,
             scoring_input = scoring_input
         )
-        batch_deployment = ModelBatchDeployment(
-            model=latest_model,
-            workspace_ml_client=self.workspace_ml_client,
-            task=task,
-            model_name=self.test_model_name
-        )
-        batch_deployment.batch_deployment(compute=compute)
+        # batch_deployment = ModelBatchDeployment(
+        #     model=latest_model,
+        #     workspace_ml_client=self.workspace_ml_client,
+        #     task=task,
+        #     model_name=self.test_model_name
+        # )
+        # batch_deployment.batch_deployment(compute=compute)

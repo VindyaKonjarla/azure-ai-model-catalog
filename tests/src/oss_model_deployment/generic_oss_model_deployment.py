@@ -253,10 +253,10 @@ if __name__ == "__main__":
     #     credential=credential,
     #     registry_name=queue.registry
     # )
-    azureml_registry = MLClient(credential, registry_name="azureml")
+    #
     #mlflow.set_tracking_uri(ws.get_mlflow_tracking_uri())
     registered_model_name = test_model_name.replace("/", "-").lower()
-    model_detail = ModelDetail(workspace_ml_client=azureml_registry)
+    model_detail = ModelDetail(workspace_ml_client=workspace_ml_client)
     foundation_model = model_detail.get_model_detail(
         test_model_name=registered_model_name)
     instance_type = foundation_model.properties.get("evaluation-recommended-sku")
@@ -264,18 +264,18 @@ if __name__ == "__main__":
     # instance_type = computelist[:a]
     compute = instance_type.replace("_", "-")
     logger.info(f"instance : {instance_type} and compute is : {compute}")
-    compute_target = create_or_get_compute_target(
-                     ml_client=workspace_ml_client,
-                     compute=compute,
-                     instance_type=instance_type
-                     )
+    # compute_target = create_or_get_compute_target(
+    #                  ml_client=workspace_ml_client,
+    #                  compute=compute,
+    #                  instance_type=instance_type
+    #                  )
 
     # compute_target = create_or_get_compute_target(
     #     ml_client=workspace_ml_client, compute=COMPUTE, instance_type=queue.instance_type)
     task = HfTask(model_name=test_model_name).get_task()
     logger.info(f"Task is this : {task} for the model : {test_model_name}")
-    timestamp = str(int(time.time()))
-    exp_model_name = test_model_name.replace('/', '-')
+    #timestamp = str(int(time.time()))
+    #exp_model_name = test_model_name.replace('/', '-')
     # try:
     #     pipeline_object = model_import_pipeline(
     #         compute_name=compute,
@@ -310,10 +310,10 @@ if __name__ == "__main__":
 
     
 
-    registered_model_detail = ModelDetail(
-        workspace_ml_client=workspace_ml_client)
-    registered_model = registered_model_detail.get_model_detail(
-        test_model_name=registered_model_name)
+    # registered_model_detail = ModelDetail(
+    #     workspace_ml_client=workspace_ml_client)
+    # registered_model = registered_model_detail.get_model_detail(
+    #     test_model_name=registered_model_name)
     
 
     # try:
@@ -393,6 +393,6 @@ if __name__ == "__main__":
     InferenceAndDeployment.model_infernce_and_deployment(
         instance_type=instance_type,
         task=task,
-        latest_model=registered_model,
+        latest_model=foundation_model,
         compute=compute
     )

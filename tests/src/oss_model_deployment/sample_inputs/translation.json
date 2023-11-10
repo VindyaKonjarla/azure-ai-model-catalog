@@ -1,6 +1,11 @@
 {
-    "input_data": [
+    "input_data": {
+      "input_string":[
       "I like you. I love you",
       "Today was a horrible day"
-    ]
+      ]
+    },
+    "parameters": {
+      "task_type": "translation_en_to_fr"
+  }
 }
