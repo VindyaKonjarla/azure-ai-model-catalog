@@ -187,7 +187,7 @@ def evaluation_pipeline(task, mlflow_model, test_data, input_column_names, label
             instance_type= "donotdelete-DS4v2",
             # Evaluation settings
             task=task,
-            compute=compute
+            compute=compute,
             # config file containing the details of evaluation metrics to calculate
             # evaluation_config=Input(
             #     type=AssetTypes.URI_FILE, path="./evaluation/eval_config.json"),
