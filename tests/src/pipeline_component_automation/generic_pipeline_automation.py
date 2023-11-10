@@ -324,33 +324,34 @@ if __name__ == "__main__":
     #     logger.error(f"The exception occured at this line no : {exc_tb.tb_lineno}" +
     #                  f" skipping the further process and the exception is this one : {ex}")
     #     sys.exit(1)
-    # registered_model_detail = ModelDetail(
-    #     workspace_ml_client=workspace_ml_client)
-    # registered_model = registered_model_detail.get_model_detail(
-    #     test_model_name=test_model_name)
-    # try:
-    #     flavour = registered_model.flavors
-    #     if flavour.get("python_function", None) == None:
-    #         logger.info(
-    #             f"This model {registered_model.name} is not registered in the mlflow flavour so skipping the further process")
-    #         raise Exception(
-    #             f"This model {registered_model.name} is not registered in the mlflow flavour so skipping the further process")
-    #     else:
-    #         if flavour.get("python_function").get("loader_module", None) == "mlflow.transformers":
-    #             logger.info(
-    #                 f"This model {registered_model.name} is registered in the mlflow flavour")
-    #         else:
-    #             logger.info(
-    #                 f"This model {registered_model.name} is not registered in the mlflow flavour so skipping the further process")
-    #             raise Exception(
-    #                 f"This model {registered_model.name} is not registered in the mlflow flavour so skipping the further process")
-    # except Exception as ex:
-    #     _, _, exc_tb = sys.exc_info()
-    #     logger.error(f"::error:: Not able to initiate job \n")
-    #     logger.error(f"The exception occured at this line no : {exc_tb.tb_lineno}" +
-    #                  f" skipping the further process and the exception is this one : {ex}")
-    #     sys.exit(1)
-# -----------------------------------------
+    # -----------------------------------------
+    registered_model_detail = ModelDetail(
+        workspace_ml_client=workspace_ml_client)
+    registered_model = registered_model_detail.get_model_detail(
+        test_model_name=test_model_name)
+    try:
+        flavour = registered_model.flavors
+        if flavour.get("python_function", None) == None:
+            logger.info(
+                f"This model {registered_model.name} is not registered in the mlflow flavour so skipping the further process")
+            raise Exception(
+                f"This model {registered_model.name} is not registered in the mlflow flavour so skipping the further process")
+        else:
+            if flavour.get("python_function").get("loader_module", None) == "mlflow.transformers":
+                logger.info(
+                    f"This model {registered_model.name} is registered in the mlflow flavour")
+            else:
+                logger.info(
+                    f"This model {registered_model.name} is not registered in the mlflow flavour so skipping the further process")
+                raise Exception(
+                    f"This model {registered_model.name} is not registered in the mlflow flavour so skipping the further process")
+    except Exception as ex:
+        _, _, exc_tb = sys.exc_info()
+        logger.error(f"::error:: Not able to initiate job \n")
+        logger.error(f"The exception occured at this line no : {exc_tb.tb_lineno}" +
+                     f" skipping the further process and the exception is this one : {ex}")
+        sys.exit(1)
+
     data_path = get_file_path(task=task)
     input_column_names, label_column_name = get_dataset(task=task, data_path=data_path,
                                                         latest_model=registered_model)
