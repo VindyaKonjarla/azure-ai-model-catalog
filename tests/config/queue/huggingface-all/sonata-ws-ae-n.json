@@ -1,7 +1,7 @@
 {
     "queue_name": "sonata-ws-ae-n",
     "models": [
-        "Llama-2-7b"
+        "meta-llama/Llama-2-7b"
     ],
     "workspace": "sonata-ws-ae",
     "subscription": "ed2cab61-14cc-4fb3-ac23-d72609214cfd",
