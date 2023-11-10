@@ -184,7 +184,7 @@ def evaluation_pipeline(task, mlflow_model, test_data, input_column_names, label
             label_column_name=label_column_name,
             # compute settings
             # specify the instance type for serverless job
-            # instance_type= "STANDARD_NC24",
+            instance_type= "donotdelete-DS4v2",
             # Evaluation settings
             task=task,
             # config file containing the details of evaluation metrics to calculate
@@ -371,7 +371,7 @@ if __name__ == "__main__":
         )
         # don't reuse cached results from previous jobs
         pipeline_object.settings.force_rerun = True
-        pipeline_object.settings.default_compute = COMPUTE
+        pipeline_object.settings.default_compute = compute_name
 
         # set continue on step failure to False
         pipeline_object.settings.continue_on_step_failure = False
