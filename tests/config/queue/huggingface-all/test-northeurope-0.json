@@ -9,5 +9,5 @@
     "registry": "azureml-preview-test1",
     "environment": "automate-venv",
     "compute": "Standard-D96a-v4",
-    "instance_type": "Standard_D96a_v4"
+    "instance_type": "Standard_E64s_v3"
 }

@@ -268,7 +268,7 @@ class ModelInferenceAndDeployemnt:
             endpoint_name=online_endpoint_name,
             environment=model_package,
             instance_type=instance_type,
-            instance_count=1
+            instance_count=3
         )
         try:
             deployment = self.workspace_ml_client.online_deployments.begin_create_or_update(
