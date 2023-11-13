@@ -1,4 +1,4 @@
-name: MLFlow-mistralai/Mistral-7B-Instruct-v0.1
+name: MLFlow-DI-mistralai/Mistral-7B-Instruct-v0.1
 
 on: 
   workflow_dispatch:
