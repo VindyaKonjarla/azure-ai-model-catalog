@@ -413,7 +413,7 @@ if __name__ == "__main__":
     workspace_ml_client.jobs.stream(job.name)
     print("Deleting the Batch Endpoint")
     
-    workspace_ml_client.batch_endpoints.begin_delete(name=endpoint_name).result()
+    #workspace_ml_client.batch_endpoints.begin_delete(name=endpoint_name).result()
 
    
 
