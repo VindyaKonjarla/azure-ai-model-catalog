@@ -395,8 +395,8 @@ if __name__ == "__main__":
 
     print("model name replaced with - :", {test_model_name})
     
-    #foundation_model, foundation_model_name = get_latest_model_version(workspace_ml_client, test_model_name.lower())
-    foundation_model, foundation_model_name = get_latest_model_version(workspace_ml_client, test_model_name)
+    foundation_model, foundation_model_name = get_latest_model_version(workspace_ml_client, test_model_name.lower())
+    #foundation_model, foundation_model_name = get_latest_model_version(workspace_ml_client, test_model_name)
     #endpoint = create_and_configure_batch_endpoint(foundation_model_name , foundation_model, queue.compute, workspace_ml_client)
     
     # task = foundation_model.flavors["transformers"]["task"]
