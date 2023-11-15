@@ -396,5 +396,5 @@ if __name__ == "__main__":
         instance_type=queue.instance_type,
         task=task,
         latest_model=foundation_model,
-        compute=compute
+        compute=queue.compute
     )
