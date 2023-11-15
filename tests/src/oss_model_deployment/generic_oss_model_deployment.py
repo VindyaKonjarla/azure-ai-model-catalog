@@ -259,11 +259,13 @@ if __name__ == "__main__":
     model_detail = ModelDetail(workspace_ml_client=workspace_ml_client)
     foundation_model = model_detail.get_model_detail(
         test_model_name=registered_model_name)
-    instance_type = foundation_model.properties.get("evaluation-recommended-sku")
-    # a = computelist.index(',')
-    # instance_type = computelist[:a]
-    compute = instance_type.replace("_", "-")
-    logger.info(f"instance : {instance_type} and compute is : {compute}")
+    
+    # instance_type = foundation_model.properties.get("evaluation-recommended-sku")
+    # # a = computelist.index(',')
+    # # instance_type = computelist[:a]
+    # compute = instance_type.replace("_", "-")
+    # logger.info(f"instance : {instance_type} and compute is : {compute}")
+
     # compute_target = create_or_get_compute_target(
     #                  ml_client=workspace_ml_client,
     #                  compute=compute,
