@@ -115,7 +115,7 @@ class ModelInferenceAndDeployemnt:
             logger.info(f"Input data is this one : {scoring_input}")
             try:
                 configbox_obj =  self.get_task_params()
-                input_data = configbox_obj.get("t5-small", None)
+                input_data = configbox_obj.get(self.test_model_name, None)
                 if input_data == None:
                     response = self.workspace_ml_client.online_endpoints.invoke(
                         endpoint_name=online_endpoint_name,
