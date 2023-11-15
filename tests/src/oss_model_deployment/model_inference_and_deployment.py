@@ -103,6 +103,10 @@ class ModelInferenceAndDeployemnt:
         logger.info("Started deleting the file...")
         os.remove(path=file_name)
 
+    def get_task_params(self) -> ConfigBox:
+        queue_file = f"task_params.json"
+        with open(queue_file) as f:
+            return ConfigBox(json.load(f))
     def cloud_inference(self, scoring_file, scoring_input, online_endpoint_name, deployment_name, task, latest_model):
         try:
             json_file_name = ''
@@ -110,11 +114,25 @@ class ModelInferenceAndDeployemnt:
             logger.info(f"deployment_name : {deployment_name}")
             logger.info(f"Input data is this one : {scoring_input}")
             try:
-                response = self.workspace_ml_client.online_endpoints.invoke(
-                    endpoint_name=online_endpoint_name,
-                    deployment_name=deployment_name,
-                    request_file=scoring_file,
-                )
+                configbox_obj =  self.get_task_params()
+                input_data = configbox_obj.get("t5-small", None)
+                if input_data == None:
+                    response = self.workspace_ml_client.online_endpoints.invoke(
+                        endpoint_name=online_endpoint_name,
+                        deployment_name=deployment_name,
+                        request_file=scoring_file,
+                    )
+                else:
+                    json_file_name, scoring_input = self.create_json_file(
+                    file_name=deployment_name, dicitonary=dic_obj)
+                    logger.info("Online endpoint invoking satrted...")
+                    response = self.workspace_ml_client.online_endpoints.invoke(
+                        endpoint_name=online_endpoint_name,
+                        deployment_name=deployment_name,
+                        request_file=json_file_name,
+                    )
+                logger.info(
+                    f"Getting the reposne from the endpoint is this one : {response}")
             except Exception as ex:
                 logger.warning(
                     "::warning:: Trying to invoking the endpoint again by changing the input data and file")
@@ -153,6 +171,7 @@ class ModelInferenceAndDeployemnt:
             logger.error(f"::error:: Could not invoke endpoint: \n")
             logger.info(f"::error::The exception here is this : \n {e}")
             raise Exception(e)
+        return json_file_name, scoring_input
 
     def create_model_package(self, latest_model, endpoint):
         logger.info("In create_model_package...")
@@ -304,7 +323,7 @@ class ModelInferenceAndDeployemnt:
             model_package=model_package,
             instance_type=instance_type
         )
-        self.cloud_inference(
+        json_file_name, scoring_input = self.cloud_inference(
             scoring_file=scoring_file,
             scoring_input=scoring_input,
             online_endpoint_name=online_endpoint_name,
@@ -319,12 +338,20 @@ class ModelInferenceAndDeployemnt:
             deployment_name=deployment_name,
             task=task
         )
-        dynamic_installation.model_infernce_and_deployment(
-            instance_type=instance_type,
-            latest_model=latest_model,
-            scoring_file=scoring_file,
-            scoring_input = scoring_input
-        )
+        if not json_file_name:
+            dynamic_installation.model_infernce_and_deployment(
+                instance_type=instance_type,
+                latest_model=latest_model,
+                scoring_file=scoring_file,
+                scoring_input = scoring_input
+            )
+        else:
+             dynamic_installation.model_infernce_and_deployment(
+                instance_type=instance_type,
+                latest_model=latest_model,
+                scoring_file=json_file_name,
+                scoring_input = scoring_input
+            )
         # batch_deployment = ModelBatchDeployment(
         #     model=latest_model,
         #     workspace_ml_client=self.workspace_ml_client,
