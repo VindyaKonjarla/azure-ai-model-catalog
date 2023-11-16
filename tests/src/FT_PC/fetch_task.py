@@ -17,8 +17,7 @@ class HfTask:
 
     def get_task(self):
         hf_api = HfApi()
-        logger.info(
-            print("Fetching all data from the transformer sorted based on the last modified date")
+        print("Fetching all data from the transformer sorted based on the last modified date")
         # Get all the1 models in the list
         models = hf_api.list_models(
             full=True, sort='lastModified', direction=-1)
