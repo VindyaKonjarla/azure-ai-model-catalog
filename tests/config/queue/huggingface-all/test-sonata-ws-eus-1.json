@@ -1,11 +1,6 @@
 {
-    "queue_name": "test-sonata-ws-eus-0",
+    "queue_name": "test-sonata-ws-eus-1",
     "models": [
-        "MLFlow-Batch-distilbert-base-cased-distilled-squad",
-        "MLFlow-Import-t5-small",
-        "MLFlow-Import-bert-base-cased",
-        "MLFlow-Import-deepset/minilm-uncased-squad2",
-        "MLFlow-Import-deepset/roberta-base-squad2",
         "MLFlow-Import-distilbert-base-cased-distilled-squad",
         "MLFlow-Import-distilbert-base-uncased-distilled-squad"
     ],
