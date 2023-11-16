@@ -1,8 +1,7 @@
 {
     "queue_name": "test-sonata-ws-eus-1",
     "models": [
-        "MLFlow-Import-distilbert-base-cased-distilled-squad",
-        "MLFlow-Import-distilbert-base-uncased-distilled-squad"
+        
         "MLFlow-Import-distilgpt2",
         "MLFlow-Import-gpt2",
         "MLFlow-Import-gpt2-large",
