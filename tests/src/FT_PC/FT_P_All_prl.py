@@ -198,7 +198,7 @@ if __name__ == "__main__":
 
     if primary_task:
         # Fetch fine-tune tasks for the specified model
-        fine_tune_tasks = foundation_model.properties.get("finetune-recommended-sku", [])
+        fine_tune_tasks = foundation_model.properties.get("finetuning-tasks", [])
         print("finetune tasks from model card are:", {fine_tune_tasks})
 
         if fine_tune_tasks:
