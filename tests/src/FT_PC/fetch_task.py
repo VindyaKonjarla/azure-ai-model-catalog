@@ -1,14 +1,14 @@
 import re
 from huggingface_hub import HfApi
 import pandas as pd
-from utils.logging import get_logger
+# from utils.logging import get_logger
 URL = "https://huggingface.co/api/models?sort=downloads&direction=-1&limit=10000"
 LIST_OF_COLUMNS = ['modelId', 'downloads',
                    'lastModified', 'tags', 'pipeline_tag']
 TASK_NAME = ['fill-mask', 'token-classification', 'question-answering',
              'summarization', 'text-generation', 'text-classification', 'translation']
 STRING_TO_CHECK = 'transformers'
-logger = get_logger(__name__)
+# logger = get_logger(__name__)
 
 
 class HfTask:
@@ -18,7 +18,7 @@ class HfTask:
     def get_task(self):
         hf_api = HfApi()
         logger.info(
-            "Fetching all data from the transformer sorted based on the last modified date")
+            print("Fetching all data from the transformer sorted based on the last modified date")
         # Get all the1 models in the list
         models = hf_api.list_models(
             full=True, sort='lastModified', direction=-1)
@@ -57,5 +57,5 @@ class HfTask:
         pattern = r'[0-9\s+]'
         # Replace number and space
         final_data = re.sub(pattern, '', required_data)
-        logger.info(f"The specified task is this one : {final_data}")
+        print("The specified task is this one : {final_data}")
         return final_data
