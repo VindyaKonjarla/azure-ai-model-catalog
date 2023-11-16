@@ -194,12 +194,21 @@ if __name__ == "__main__":
 
     primary_task = HfTask(model_name=test_model_name).get_task()
     print("Task is this: ", primary_task)
+    # fine_tune_tasks = foundation_model.properties.get("finetune-recommended-sku", [])
+    # fine_tune_tasks_str = foundation_model.properties.get("finetune-recommended-sku", "")
+    # fine_tune_tasks = [task.strip() for task in fine_tune_tasks_str.split(",")] if fine_tune_tasks_str else []
+
+
 
 
     if primary_task:
         # Fetch fine-tune tasks for the specified model
-        fine_tune_tasks = foundation_model.properties.get("finetuning-tasks", [])
-        print("finetune tasks from model card are:", {fine_tune_tasks})
+        #fine_tune_tasks = foundation_model.properties.get("finetuning-tasks", [])
+        fine_tune_tasks_str = foundation_model.properties.get("finetuning-tasks", "")
+        fine_tune_tasks = [task.strip() for task in fine_tune_tasks_str.split(",")] if fine_tune_tasks_str else []
+
+        print("1 finetune tasks from model card are:", {fine_tune_tasks_str})
+        print("2 finetune tasks from model card are:", {fine_tune_tasks})
 
         if fine_tune_tasks:
             # Run fine-tuning tasks in parallel
