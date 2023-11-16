@@ -1,5 +1,5 @@
 {
-    "queue_name": "test-sonata-ws-eus-1",
+    "queue_name": "test-sonata-ws-eus-2",
     "models": [
         
         "MLFlow-Import-distilgpt2",
