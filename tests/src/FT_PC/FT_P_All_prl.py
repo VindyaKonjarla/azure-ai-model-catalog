@@ -99,60 +99,60 @@ def get_latest_model_version(workspace_ml_client, test_model_name):
     #print(f"Model Config : {latest_model.config}")
     return foundation_model
 
-# def run_script(script):
-#     command = f"python {script}"
-#     return_code = os.system(command)
-#     return script, return_code
+def run_script(script):
+    command = f"python {script}"
+    return_code = os.system(command)
+    return script, return_code
 
-def run_script(script_name):
-    subprocess.run(["python", script_name])
+# def run_script(script_name):
+#     subprocess.run(["python", script_name])
 
-def run_fine_tuning_task(task):
+# def run_fine_tuning_task(task):
+#     task_script_mapping = {
+#         "text-classification": "FT_P_TC.py",
+#         "question-answering": "FT_P_QA.py",
+#         "token-classification": "FT_P_TC.py"
+#         # Add more mappings as needed
+#     }
+
+#     script_name = task_script_mapping.get(task)
+#     if script_name:
+#         run_script(script_name)
+#     else:
+#         print(f"No script found for the fine-tune task: {task}")
+
+# def run_fine_tuning_tasks(fine_tune_tasks):
+#     with concurrent.futures.ProcessPoolExecutor() as executor:
+#         futures = [executor.submit(run_fine_tuning_task, task) for task in fine_tune_tasks]
+
+#         for future in concurrent.futures.as_completed(futures):
+#             try:
+#                 future.result()
+#             except Exception as e:
+#                 print(f"Error running fine-tuning task: {e}")
+
+
+def run_fine_tuning_tasks(fine_tune_tasks):
     task_script_mapping = {
         "text-classification": "FT_P_TC.py",
         "question-answering": "FT_P_QA.py",
         "token-classification": "FT_P_TC.py"
-        # Add more mappings as needed
     }
 
-    script_name = task_script_mapping.get(task)
-    if script_name:
-        run_script(script_name)
+    scripts = task_script_mapping.get(fine_tune_tasks, [])
+    if scripts:
+        with concurrent.futures.ProcessPoolExecutor() as executor:
+            futures = [executor.submit(run_script, script) for script in scripts]
+
+            for future in concurrent.futures.as_completed(futures):
+                try:
+                    result = future.result()
+                    script, return_code = result
+                    print(f"Script '{script}' completed with return code {return_code}")
+                except Exception as e:
+                    print(f"Error running script '{script}': {e}")
     else:
-        print(f"No script found for the fine-tune task: {task}")
-
-def run_fine_tuning_tasks(fine_tune_tasks):
-    with concurrent.futures.ProcessPoolExecutor() as executor:
-        futures = [executor.submit(run_fine_tuning_task, task) for task in fine_tune_tasks]
-
-        for future in concurrent.futures.as_completed(futures):
-            try:
-                future.result()
-            except Exception as e:
-                print(f"Error running fine-tuning task: {e}")
-
-
-# def run_fine_tuning(primary_task):
-#     task_script_mapping = {
-#         "text-classification": ["FT_P_TC.py", "FT_P_QA.py"],
-#         "summarization": ["summarization.py", "translation.py"],
-#         # Add more tasks and scripts as needed
-#     }
-
-#     scripts = task_script_mapping.get(primary_task, [])
-#     if scripts:
-#         with concurrent.futures.ProcessPoolExecutor() as executor:
-#             futures = [executor.submit(run_script, script) for script in scripts]
-
-#             for future in concurrent.futures.as_completed(futures):
-#                 try:
-#                     result = future.result()
-#                     script, return_code = result
-#                     print(f"Script '{script}' completed with return code {return_code}")
-#                 except Exception as e:
-#                     print(f"Error running script '{script}': {e}")
-#     else:
-#         print(f"No scripts found for the primary task: {primary_task}")
+        print(f"No scripts found for the primary task: {fine_tune_tasks}")
 
 if __name__ == "__main__":
     if test_model_name is None or test_sku_type is None or test_queue is None or test_set is None or test_trigger_next_model is None or test_keep_looping is None:
