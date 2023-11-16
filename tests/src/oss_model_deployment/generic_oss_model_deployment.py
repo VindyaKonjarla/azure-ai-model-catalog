@@ -259,6 +259,7 @@ if __name__ == "__main__":
     model_detail = ModelDetail(workspace_ml_client=workspace_ml_client)
     foundation_model = model_detail.get_model_detail(
         test_model_name=registered_model_name)
+    logger.info(f"instance : {queue.instance_type}")
     
     # instance_type = foundation_model.properties.get("evaluation-recommended-sku")
     # # a = computelist.index(',')
