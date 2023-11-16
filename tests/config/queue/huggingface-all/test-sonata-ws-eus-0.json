@@ -5,7 +5,8 @@
         "MLFlow-Import-t5-small",
         "MLFlow-Import-bert-base-cased",
         "MLFlow-Import-deepset/minilm-uncased-squad2",
-        "MLFlow-Import-deepset/roberta-base-squad2"
+        "MLFlow-Import-deepset/roberta-base-squad2",
+        "MLFlow-Import-distilbert-base-cased-distilled-squad"
     ],
     "workspace": "sonata-ws-eus",
     "subscription": "ed2cab61-14cc-4fb3-ac23-d72609214cfd",
