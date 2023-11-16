@@ -3,11 +3,11 @@
     "models": [
         "bert-base-uncased"
     ],
-    "workspace": "test-northeurope",
-    "subscription": "80c77c76-74ba-4c8c-8229-4c3b2957990c",
-    "resource_group": "huggingface-registry-test1",
+    "workspace": "sonata-ws-ae",
+    "subscription": "ed2cab61-14cc-4fb3-ac23-d72609214cfd",
+    "resource_group": "sonata-oss-testing-rg",
     "registry": "azureml-preview-test1",
-    "environment": "automate-venv",
-    "compute": "Standard-E64s-v3",
-    "instance_type": "Standard_E64s_v3"
+    "environment": "automate-env",
+    "compute": "NC24",
+    "instance_type": "Standard_NC24s_v3"
 }
