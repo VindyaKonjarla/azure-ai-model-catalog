@@ -110,6 +110,7 @@ def run_fine_tuning_task(task):
     task_script_mapping = {
         "text-classification": "FT_P_TC.py",
         "question-answering": "FT_P_QA.py",
+        "token-classification": "FT_P_TC.py"
         # Add more mappings as needed
     }
 
