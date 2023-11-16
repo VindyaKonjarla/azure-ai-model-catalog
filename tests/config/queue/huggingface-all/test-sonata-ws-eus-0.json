@@ -5,8 +5,7 @@
         "MLFlow-Import-t5-small",
         "MLFlow-Import-bert-base-cased",
         "MLFlow-Import-deepset/minilm-uncased-squad2",
-        "MLFlow-Import-mistralai/Mistral-7B-v0.1",
-        "MLFlow-Import-mistralai/Mistral-7B-Instruct-v0.1"
+        "MLFlow-Import-deepset/roberta-base-squad2"
     ],
     "workspace": "sonata-ws-eus",
     "subscription": "ed2cab61-14cc-4fb3-ac23-d72609214cfd",
