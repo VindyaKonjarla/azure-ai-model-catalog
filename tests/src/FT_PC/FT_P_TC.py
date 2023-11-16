@@ -395,13 +395,13 @@ if __name__ == "__main__":
     )
     mlflow.set_tracking_uri(ws.get_mlflow_tracking_uri())
     registry_ml_client = MLClient(credential, registry_name="azureml-preview-test1")
-    experiment_name = "Auto_text-classification-emotion-detection"
+    experiment_name = "text-classification-emotion-detection"
 
     # # generating a unique timestamp that can be used for names and versions that need to be unique
     # timestamp = str(int(time.time()))
 
     # Define the compute cluster name and size
-    compute_cluster = "gpu-cluster-big"
+    compute_cluster = "Standard-NC6s-v3"
     compute_cluster_size = "Standard_NC6s_v3"
     
     # Optional: Define a list of allowed compute sizes (if any)
