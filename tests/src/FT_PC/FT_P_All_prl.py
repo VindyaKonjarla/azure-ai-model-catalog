@@ -1,6 +1,7 @@
 import os
 import json
 import concurrent.futures
+import subprocess
 from fetch_task import HfTask
 from box import ConfigBox
 #from model_inference_and_deployment import ModelInferenceAndDeployemnt
