@@ -139,7 +139,8 @@ def run_fine_tuning_tasks(fine_tune_tasks):
         "token-classification": "FT_P_TC.py"
     }
 
-    scripts = task_script_mapping.get(fine_tune_tasks, [])
+    # scripts = task_script_mapping.get(fine_tune_tasks, [])
+    scripts = task_script_mapping.get(fine_tune_tasks, "")
     if scripts:
         with concurrent.futures.ProcessPoolExecutor() as executor:
             futures = [executor.submit(run_script, script) for script in scripts]
