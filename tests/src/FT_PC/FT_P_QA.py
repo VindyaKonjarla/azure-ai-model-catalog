@@ -404,7 +404,7 @@ if __name__ == "__main__":
     # timestamp = str(int(time.time()))
 
     # Define the compute cluster name and size
-    compute_cluster = "gpu-cluster-big"
+    compute_cluster = "Standard-NC6s-v3"
     compute_cluster_size = "Standard_NC6s_v3"
     
     # Optional: Define a list of allowed compute sizes (if any)
