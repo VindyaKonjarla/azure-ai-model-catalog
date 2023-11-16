@@ -208,7 +208,7 @@ if __name__ == "__main__":
         fine_tune_tasks = [task.strip() for task in fine_tune_tasks_str.split(",")] if fine_tune_tasks_str else []
 
         print("1 finetune tasks from model card are:", {fine_tune_tasks_str})
-        print("2 finetune tasks from model card are:", {fine_tune_tasks})
+        #print("2 finetune tasks from model card are:", {fine_tune_tasks})
 
         if fine_tune_tasks:
             # Run fine-tuning tasks in parallel
