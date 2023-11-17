@@ -9,7 +9,8 @@
         "MLFlow-Import-distilbert-base-cased-distilled-squad",
         "MLFlow-Import-distilbert-base-uncased-distilled-squad",
         "MLFlow-Import-finiteautomata/bertweet-base-sentiment-analysis",
-        "MLFlow-Import-microsoft/deberta-base-mnli"
+        "MLFlow-Import-microsoft/deberta-base-mnli",
+        "MLFlow-Import-Jean-Baptiste-camembert-ner"
     ],
     "workspace": "sonata-ws-eus",
     "subscription": "ed2cab61-14cc-4fb3-ac23-d72609214cfd",
