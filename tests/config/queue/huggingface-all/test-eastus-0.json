@@ -3,7 +3,8 @@
     "models": [
         "distilgpt2-oss",
         "gpt2-oss",
-        "gpt2-large-oss"
+        "gpt2-large-oss",
+        "deepset-minilm-uncased-squad2-oss"
     ],
     "workspace": "test-eastus",
     "subscription": "80c77c76-74ba-4c8c-8229-4c3b2957990c",
