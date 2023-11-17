@@ -208,37 +208,6 @@ def create_or_get_aml_compute(workspace_ml_client, compute_cluster, compute_clus
     
     return compute, gpus_per_node, compute_cluster
 
-#Download dataset
-
-def download_and_process_dataset():
-    # Download the dataset using the helper script.
-    exit_status = os.system("python ./download-datasetconll.py --download_dir conll2003-dataset")
-    if exit_status != 0:
-        raise Exception("Error downloading dataset")
-
-    # Load the train.jsonl, validation.jsonl, and test.jsonl files.
-    test_df = pd.read_json("./conll2003-dataset/test.jsonl", lines=True)
-    train_df = pd.read_json("./conll2003-dataset/train.jsonl", lines=True)
-    validation_df = pd.read_json("./conll2003-dataset/validation.jsonl", lines=True)
-
-    # Set the fraction parameter to control the number of examples to be saved.
-    frac = 0.1  # You can adjust this value as needed.
-
-    # Save a fraction of the rows from the dataframes with a "small_" prefix in the ./wmt16-en-ro-dataset folder.
-    train_df.sample(frac=frac).to_json(
-        "./conll2003-dataset/small_train.jsonl", orient="records", lines=True
-    )
-    validation_df.sample(frac=frac).to_json(
-        "./conll2003-dataset/small_validation.jsonl", orient="records", lines=True
-    )
-    test_df.sample(frac=frac).to_json(
-        "./conll2003-dataset/small_test.jsonl", orient="records", lines=True
-    )
-
-# Example usage:
-download_and_process_dataset()
-
-
 def create_and_run_azure_ml_pipeline(
     foundation_model,
     compute_cluster,
