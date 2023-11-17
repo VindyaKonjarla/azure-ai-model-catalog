@@ -136,7 +136,10 @@ def run_fine_tuning_tasks(fine_tune_tasks):
     task_script_mapping = {
         "text-classification": "FT_P_TC.py",
         "question-answering": "FT_P_QA.py",
-        "token-classification": "FT_P_TC.py"
+        "token-classification": "FT_P_NER.py",
+        "summarization": "FT_P_TS.py",
+        "translation": "FT_P_TT.py",
+        "text-generation": "FT_P_TG.py"
     }
 
     # scripts = task_script_mapping.get(task, [])
