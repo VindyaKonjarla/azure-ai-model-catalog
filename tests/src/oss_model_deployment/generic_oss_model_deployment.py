@@ -264,7 +264,7 @@ if __name__ == "__main__":
     # instance_type = foundation_model.properties.get("evaluation-recommended-sku")
     # # a = computelist.index(',')
     # # instance_type = computelist[:a]
-    compute = queue.instance_type.replace("_", "-")
+    # compute = instance_type.replace("_", "-")
     # logger.info(f"instance : {instance_type} and compute is : {compute}")
 
     # compute_target = create_or_get_compute_target(
@@ -273,8 +273,8 @@ if __name__ == "__main__":
     #                  instance_type=instance_type
     #                  )
 
-    compute_target = create_or_get_compute_target(
-        ml_client=workspace_ml_client, compute=compute, instance_type=queue.instance_type)
+    # compute_target = create_or_get_compute_target(
+    #     ml_client=workspace_ml_client, compute=COMPUTE, instance_type=queue.instance_type)
     task = HfTask(model_name=test_model_name).get_task()
     logger.info(f"Task is this : {task} for the model : {test_model_name}")
     #timestamp = str(int(time.time()))
@@ -397,5 +397,5 @@ if __name__ == "__main__":
         instance_type=queue.instance_type,
         task=task,
         latest_model=foundation_model,
-        compute=compute
+        compute=queue.compute
     )
