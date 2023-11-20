@@ -259,8 +259,7 @@ if __name__ == "__main__":
     mlflow.set_tracking_uri(ws.get_mlflow_tracking_uri())
        
     model_detail = ModelDetail(workspace_ml_client=azureml_registry)
-    foundation_model = model_detail.get_model_detail(
-        test_model_name=test_model_name)
+    foundation_model = model_detail.get_model_detail(test_model_name=test_model_name)
     computelist = foundation_model.properties.get(
         "evaluation-recommended-sku", "donotdelete-DS4v2")
     # a = computelist.index(',')
@@ -325,10 +324,8 @@ if __name__ == "__main__":
                      f" skipping the further process and the exception is this one : {ex}")
         sys.exit(1)
     # -----------------------------------------
-    registered_model_detail = ModelDetail(
-        workspace_ml_client=workspace_ml_client)
-    registered_model = registered_model_detail.get_model_detail(
-        test_model_name=test_model_name)
+    registered_model_detail = ModelDetail(workspace_ml_client=workspace_ml_client)
+    registered_model = registered_model_detail.get_model_detail(test_model_name=test_model_name)
     try:
         flavour = registered_model.flavors
         if flavour.get("python_function", None) == None:
