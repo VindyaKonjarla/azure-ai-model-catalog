@@ -261,8 +261,8 @@ if __name__ == "__main__":
         test_model_name=registered_model_name)
     logger.info(f"instance : {queue.instance_type}")
     
-    instance_type_lst = list(foundation_model.properties.get("inference-recommended-sku"))
-    instance_type = instance_type_lst[0]
+    #instance_type_lst = list(foundation_model.properties.get("inference-recommended-sku"))
+    instance_type = list(foundation_model.properties.get("inference-recommended-sku").split(","))[0]
     # # a = computelist.index(',')
     # # instance_type = computelist[:a]
     compute = instance_type.replace("_", "-")
