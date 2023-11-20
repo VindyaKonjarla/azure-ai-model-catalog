@@ -235,7 +235,7 @@ def create_and_run_azure_ml_pipeline(
             type="uri_file", path="./truthful_qa-dataset/small_train.jsonl"),
             validation_file_path=Input(type="uri_file", path="./truthful_qa-dataset/small_validation.jsonl"),
             test_file_path=Input(type="uri_file", path="./truthful_qa-dataset/small_test.jsonl"),
-            evaluation_config=Input(type="uri_file", path="./text-generation-config.json"),
+            evaluation_config=Input(type="uri_file", path="./truthful_qa-dataset/text-generation-config.json"),
         
             ground_truth_key= "summary",
             text_key= "text", 
