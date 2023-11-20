@@ -2,11 +2,11 @@
     "queue_name": "sonata-ws-ae-0",
     "models": [
         "distilgpt2-oss",
-        "gpt2-oss",
-        "gpt2-large-oss"
+        "gpt2-large-oss",
+        "gpt2-oss"
     ],
     "workspace": "sonata-ws-eus",
     "subscription": "ed2cab61-14cc-4fb3-ac23-d72609214cfd",
     "resource_group": "sonata-oss-testing-rg",
-    "instance_type": "STANDARD_DS4_V2"
+    "instance_type": "Standard_E64s_v3"
 }

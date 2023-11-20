@@ -332,18 +332,18 @@ class ModelInferenceAndDeployemnt:
         #     latest_model=latest_model
         # )
         # self.delete_online_endpoint(online_endpoint_name=online_endpoint_name)
-        # dynamic_installation = ModelDynamicInstallation(
-        #     test_model_name=self.test_model_name,
-        #     workspace_ml_client=self.workspace_ml_client,
-        #     deployment_name=deployment_name,
-        #     task=task
-        # )
-        # dynamic_installation.model_infernce_and_deployment(
-        #         instance_type=instance_type,
-        #         latest_model=latest_model,
-        #         scoring_file=scoring_file,
-        #         scoring_input = scoring_input
-        # )
+        dynamic_installation = ModelDynamicInstallation(
+            test_model_name=self.test_model_name,
+            workspace_ml_client=self.workspace_ml_client,
+            deployment_name=deployment_name,
+            task=task
+        )
+        dynamic_installation.model_infernce_and_deployment(
+                instance_type=instance_type,
+                latest_model=latest_model,
+                scoring_file=scoring_file,
+                scoring_input = scoring_input
+        )
         # if not json_file_name:
         #     dynamic_installation.model_infernce_and_deployment(
         #         instance_type=instance_type,
@@ -357,7 +357,7 @@ class ModelInferenceAndDeployemnt:
         #         latest_model=latest_model,
         #         scoring_file=json_file_name,
         #         scoring_input = scoring_input
-        #     )
+        #    )
                           
         batch_deployment = ModelBatchDeployment(
             model=latest_model,

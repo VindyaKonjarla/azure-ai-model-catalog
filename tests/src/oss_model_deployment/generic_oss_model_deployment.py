@@ -261,11 +261,12 @@ if __name__ == "__main__":
         test_model_name=registered_model_name)
     logger.info(f"instance : {queue.instance_type}")
     
-    # instance_type = foundation_model.properties.get("evaluation-recommended-sku")
+    instance_type_lst = list(foundation_model.properties.get("inference-recommended-sku"))
+    instance_type = instance_type_lst[0]
     # # a = computelist.index(',')
     # # instance_type = computelist[:a]
-    # compute = instance_type.replace("_", "-")
-    # logger.info(f"instance : {instance_type} and compute is : {compute}")
+    compute = instance_type.replace("_", "-")
+    logger.info(f"instance : {instance_type} and compute is : {compute}")
 
     # compute_target = create_or_get_compute_target(
     #                  ml_client=workspace_ml_client,
@@ -273,8 +274,8 @@ if __name__ == "__main__":
     #                  instance_type=instance_type
     #                  )
 
-    # compute_target = create_or_get_compute_target(
-    #     ml_client=workspace_ml_client, compute=COMPUTE, instance_type=queue.instance_type)
+    compute_target = create_or_get_compute_target(
+        ml_client=workspace_ml_client, compute=compute, instance_type=queue.instance_type)
     task = HfTask(model_name=test_model_name).get_task()
     logger.info(f"Task is this : {task} for the model : {test_model_name}")
     #timestamp = str(int(time.time()))
@@ -394,8 +395,8 @@ if __name__ == "__main__":
         workspace_ml_client=workspace_ml_client
     )
     InferenceAndDeployment.model_infernce_and_deployment(
-        instance_type=queue.instance_type,
+        instance_type=instance_type,
         task=task,
         latest_model=foundation_model,
-        compute=queue.compute
+        compute=compute
     )
