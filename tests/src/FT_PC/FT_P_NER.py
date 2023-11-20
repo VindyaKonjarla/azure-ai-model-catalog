@@ -270,6 +270,7 @@ def create_and_run_azure_ml_pipeline(
 
     # Wait for the pipeline job to complete
     workspace_ml_client.jobs.stream(pipeline_job.name)
+    return pipeline_job
     
     
 if __name__ == "__main__":
@@ -352,20 +353,20 @@ if __name__ == "__main__":
     print(f"Number of GPUs in compute: {gpus_per_node}")
 
 
-    try:
-        pipeline_job = create_and_run_azure_ml_pipeline(
-            foundation_model, compute_cluster, gpus_per_node, training_parameters, optimization_parameters, experiment_name
-        )
-        print("Azure ML Pipeline completed successfully.")
-    except Exception as e:
-        # If an exception occurs, print the error message and exit with a non-zero exit code
-        print(f"Error running Azure ML Pipeline: {str(e)}")
-        exit(1)
+    # try:
+    #     pipeline_job = create_and_run_azure_ml_pipeline(
+    #         foundation_model, compute_cluster, gpus_per_node, training_parameters, optimization_parameters, experiment_name
+    #     )
+    #     print("Azure ML Pipeline completed successfully.")
+    # except Exception as e:
+    #     # If an exception occurs, print the error message and exit with a non-zero exit code
+    #     print(f"Error running Azure ML Pipeline: {str(e)}")
+    #     exit(1)
 
 
 
     
-    #pipeline_job = create_and_run_azure_ml_pipeline(foundation_model, compute_cluster, gpus_per_node, training_parameters, optimization_parameters, experiment_name)
+    pipeline_job = create_and_run_azure_ml_pipeline(foundation_model, compute_cluster, gpus_per_node, training_parameters, optimization_parameters, experiment_name)
     print("Completed")
 
 
