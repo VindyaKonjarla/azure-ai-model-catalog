@@ -263,7 +263,7 @@ if __name__ == "__main__":
         foundation_model = model_detail.get_model_detail(test_model_name=test_model_name)
         computelist = foundation_model.properties.get(
         "evaluation-recommended-sku", "donotdelete-DS4v2")
-    except:
+    except UnboundLocalError:
         model_detail = ModelDetail(workspace_ml_client=azureml_meta_registry)
         foundation_model = model_detail.get_model_detail(test_model_name=test_model_name)
         computelist = foundation_model.properties.get(
