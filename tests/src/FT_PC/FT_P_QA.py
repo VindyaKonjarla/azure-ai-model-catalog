@@ -404,8 +404,8 @@ if __name__ == "__main__":
     # timestamp = str(int(time.time()))
 
     # Define the compute cluster name and size
-    compute_cluster = "Standard-NC6s-v3"
-    compute_cluster_size = "Standard_NC6s_v3"
+    compute_cluster = "Standard-NC24s-v3"
+    compute_cluster_size = "Standard_NC24s_v3 "
     
     # Optional: Define a list of allowed compute sizes (if any)
     computes_allow_list = ["standard_nc6s_v3", "standard_nc12s_v2"]
