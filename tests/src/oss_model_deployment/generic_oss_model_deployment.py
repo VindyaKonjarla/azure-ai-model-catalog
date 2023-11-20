@@ -255,13 +255,18 @@ if __name__ == "__main__":
     # )
     #
     #mlflow.set_tracking_uri(ws.get_mlflow_tracking_uri())
+    
     registered_model_name = test_model_name.replace("/", "-").lower()
     model_detail = ModelDetail(workspace_ml_client=workspace_ml_client)
-    foundation_model = model_detail.get_model_detail(
+    registered_model = model_detail.get_model_detail(
         test_model_name=registered_model_name)
-    logger.info(f"instance : {queue.instance_type}")
     
-    #instance_type_lst = list(foundation_model.properties.get("inference-recommended-sku"))
+    azureml_registry = MLClient(credential, registry_name="azureml")
+          
+    model_detail = ModelDetail(workspace_ml_client=azureml_registry)
+    foundation_model = model_detail.get_model_detail(
+        test_model_name=test_model_name.replace("/", "-"))
+    
     instance_type = list(foundation_model.properties.get("inference-recommended-sku").split(","))[0]
     # # a = computelist.index(',')
     # # instance_type = computelist[:a]
@@ -275,7 +280,7 @@ if __name__ == "__main__":
     #                  )
 
     compute_target = create_or_get_compute_target(
-        ml_client=workspace_ml_client, compute=compute, instance_type=queue.instance_type)
+        ml_client=workspace_ml_client, compute=compute, instance_type=instance_type)
     task = HfTask(model_name=test_model_name).get_task()
     logger.info(f"Task is this : {task} for the model : {test_model_name}")
     #timestamp = str(int(time.time()))
@@ -397,6 +402,6 @@ if __name__ == "__main__":
     InferenceAndDeployment.model_infernce_and_deployment(
         instance_type=instance_type,
         task=task,
-        latest_model=foundation_model,
+        latest_model=registered_model,
         compute=compute
     )
