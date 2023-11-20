@@ -350,6 +350,7 @@ def create_and_run_azure_ml_pipeline(
 
     # Wait for the pipeline job to complete
     workspace_ml_client.jobs.stream(pipeline_job.name)
+    return pipeline_job
 
 
 
