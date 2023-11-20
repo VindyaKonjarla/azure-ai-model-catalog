@@ -240,7 +240,7 @@ def create_and_run_azure_ml_pipeline(
             test_file_path=Input(
                 type="uri_file", path="./news-summary-dataset/small_test.jsonl"
             ),
-            evaluation_config=Input(type="uri_file", path="./summarization-config.json"),
+            evaluation_config=Input(type="uri_file", path="./news-summary-dataset/summarization-config.json"),
             document_key="article",
             # summary_key parameter maps to the "highlights" field in the news summary dataset
             summary_key="highlights",
