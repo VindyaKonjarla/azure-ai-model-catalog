@@ -8,6 +8,6 @@
     "resource_group": "sonata-oss-testing-rg",
     "registry": "azureml-preview-test1",
     "environment": "automate-env",
-    "compute": "NC24",
-    "instance_type": "Standard_NC24s_v3"
+    "compute": "Standard-E64s-v3",
+    "instance_type": "Standard_E64s_v3"
 }
