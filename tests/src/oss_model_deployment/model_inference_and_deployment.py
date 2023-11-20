@@ -138,20 +138,20 @@ class ModelInferenceAndDeployemnt:
                     "::warning:: Trying to invoking the endpoint again by changing the input data and file")
                 logger.warning(
                     f"::warning:: This is failed due to this :\n {ex}")
-                dic_obj = self.get_model_output(
-                    task=task, latest_model=latest_model, scoring_input=scoring_input)
-                logger.info(f"Our new input is this one: {dic_obj}")
-                json_file_name, scoring_input = self.create_json_file(
-                    file_name=deployment_name, dicitonary=dic_obj)
-                logger.info("Online endpoint invoking satrted...")
-                response = self.workspace_ml_client.online_endpoints.invoke(
-                    endpoint_name=online_endpoint_name,
-                    deployment_name=deployment_name,
-                    request_file=json_file_name,
-                )
-                logger.info(
-                    f"Getting the reposne from the endpoint is this one : {response}")
-                self.delete_file(file_name=json_file_name)
+                # dic_obj = self.get_model_output(
+                #     task=task, latest_model=latest_model, scoring_input=scoring_input)
+                # logger.info(f"Our new input is this one: {dic_obj}")
+                # json_file_name, scoring_input = self.create_json_file(
+                #     file_name=deployment_name, dicitonary=dic_obj)
+                # logger.info("Online endpoint invoking satrted...")
+                # response = self.workspace_ml_client.online_endpoints.invoke(
+                #     endpoint_name=online_endpoint_name,
+                #     deployment_name=deployment_name,
+                #     request_file=json_file_name,
+                # )
+                # logger.info(
+                #     f"Getting the reposne from the endpoint is this one : {response}")
+                # self.delete_file(file_name=json_file_name)
             response_json = json.loads(response)
             output = json.dumps(response_json, indent=2)
             logger.info(f"response: \n\n{output}")
@@ -165,9 +165,9 @@ class ModelInferenceAndDeployemnt:
                 print(f'{output}', file=fh)
                 print(f'```', file=fh)
         except Exception as e:
-            if os.path.exists(json_file_name):
-                logger.info(f"Deleting the json file : {json_file_name}")
-                self.delete_file(file_name=json_file_name)
+            # if os.path.exists(json_file_name):
+            #     logger.info(f"Deleting the json file : {json_file_name}")
+            #     self.delete_file(file_name=json_file_name)
             logger.error(f"::error:: Could not invoke endpoint: \n")
             logger.info(f"::error::The exception here is this : \n {e}")
             raise Exception(e)
@@ -252,28 +252,28 @@ class ModelInferenceAndDeployemnt:
         else:
             deployment_name = latest_model_name
         logger.info(f"deployment name is this one : {deployment_name}")
-        # deployment_config = ManagedOnlineDeployment(
-        #     name=deployment_name,
-        #     model=latest_model,
-        #     endpoint_name=online_endpoint_name,
-        #     environment=model_package,
-        #     instance_type=instance_type,
-        #     instance_count=1
-        # )
-        # try:
-        #     deployment = self.workspace_ml_client.online_deployments.begin_create_or_update(
-        #         deployment_config).result()
-        # except Exception as e:
-        #     _, _, exc_tb = sys.exc_info()
-        #     logger.error(f"::error:: Could not create deployment\n")
-        #     logger.error(f"The exception occured at this line no : {exc_tb.tb_lineno}" +
-        #                  f" the exception is this one : {e}")
-        #     self.prase_logs(str(e))
-        #     self.get_online_endpoint_logs(
-        #         deployment_name, online_endpoint_name)
-        #     self.workspace_ml_client.online_endpoints.begin_delete(
-        #         name=online_endpoint_name).wait()
-        #     sys.exit(1)
+        deployment_config = ManagedOnlineDeployment(
+            name=deployment_name,
+            model=latest_model,
+            endpoint_name=online_endpoint_name,
+            environment=model_package,
+            instance_type=instance_type,
+            instance_count=1
+        )
+        try:
+            deployment = self.workspace_ml_client.online_deployments.begin_create_or_update(
+                deployment_config).result()
+        except Exception as e:
+            _, _, exc_tb = sys.exc_info()
+            logger.error(f"::error:: Could not create deployment\n")
+            logger.error(f"The exception occured at this line no : {exc_tb.tb_lineno}" +
+                         f" the exception is this one : {e}")
+            self.prase_logs(str(e))
+            self.get_online_endpoint_logs(
+                deployment_name, online_endpoint_name)
+            self.workspace_ml_client.online_endpoints.begin_delete(
+                name=online_endpoint_name).wait()
+            sys.exit(1)
 
         return deployment_name
 
@@ -315,49 +315,49 @@ class ModelInferenceAndDeployemnt:
             name=online_endpoint_name,
             auth_mode="key",
         )
-        # model_package = self.create_model_package(
-        #     latest_model=latest_model, endpoint=endpoint)
+        model_package = self.create_model_package(
+            latest_model=latest_model, endpoint=endpoint)
         deployment_name = self.create_online_deployment(
             latest_model=latest_model,
             online_endpoint_name=online_endpoint_name,
-            model_package="",
+            model_package=model_package,
             instance_type=instance_type
         )
-        # json_file_name, scoring_input = self.cloud_inference(
-        #     scoring_file=scoring_file,
-        #     scoring_input=scoring_input,
-        #     online_endpoint_name=online_endpoint_name,
-        #     deployment_name=deployment_name,
-        #     task=task,
-        #     latest_model=latest_model
-        # )
-        # self.delete_online_endpoint(online_endpoint_name=online_endpoint_name)
-        # dynamic_installation = ModelDynamicInstallation(
-        #     test_model_name=self.test_model_name,
-        #     workspace_ml_client=self.workspace_ml_client,
-        #     deployment_name=deployment_name,
-        #     task=task
-        # )
-        # dynamic_installation.model_infernce_and_deployment(
-        #         instance_type=instance_type,
-        #         latest_model=latest_model,
-        #         scoring_file=scoring_file,
-        #         scoring_input = scoring_input
-        # )
-        # if not json_file_name:
-        #     dynamic_installation.model_infernce_and_deployment(
-        #         instance_type=instance_type,
-        #         latest_model=latest_model,
-        #         scoring_file=scoring_file,
-        #         scoring_input = scoring_input
-        #     )
-        # else:
-        #      dynamic_installation.model_infernce_and_deployment(
-        #         instance_type=instance_type,
-        #         latest_model=latest_model,
-        #         scoring_file=json_file_name,
-        #         scoring_input = scoring_input
-        #     )
+        json_file_name, scoring_input = self.cloud_inference(
+            scoring_file=scoring_file,
+            scoring_input=scoring_input,
+            online_endpoint_name=online_endpoint_name,
+            deployment_name=deployment_name,
+            task=task,
+            latest_model=latest_model
+        )
+        self.delete_online_endpoint(online_endpoint_name=online_endpoint_name)
+        dynamic_installation = ModelDynamicInstallation(
+            test_model_name=self.test_model_name,
+            workspace_ml_client=self.workspace_ml_client,
+            deployment_name=deployment_name,
+            task=task
+        )
+        dynamic_installation.model_infernce_and_deployment(
+                instance_type=instance_type,
+                latest_model=latest_model,
+                scoring_file=scoring_file,
+                scoring_input = scoring_input
+        )
+        if not json_file_name:
+            dynamic_installation.model_infernce_and_deployment(
+                instance_type=instance_type,
+                latest_model=latest_model,
+                scoring_file=scoring_file,
+                scoring_input = scoring_input
+            )
+        else:
+             dynamic_installation.model_infernce_and_deployment(
+                instance_type=instance_type,
+                latest_model=latest_model,
+                scoring_file=json_file_name,
+                scoring_input = scoring_input
+            )
                           
         batch_deployment = ModelBatchDeployment(
             model=latest_model,
