@@ -297,6 +297,7 @@ if __name__ == "__main__":
     # compute_target = create_or_get_compute_target(
     #     ml_client=workspace_ml_client, compute=COMPUTE, instance_type=queue.instance_type)
     task = HfTask(model_name=test_model_name).get_task()
+    print("Task--------------",task)
     logger.info(f"Task is this : {task} for the model : {test_model_name}")
     timestamp = str(int(time.time()))
     exp_model_name = test_model_name.replace('/', '-')
