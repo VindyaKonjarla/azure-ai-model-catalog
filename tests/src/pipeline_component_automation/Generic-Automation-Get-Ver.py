@@ -264,7 +264,7 @@ if __name__ == "__main__":
         # "evaluation-recommended-sku", "donotdelete-DS4v2")
     # except UnboundLocalError:
     model_detail = ModelDetail(workspace_ml_client=azureml_registry)
-    foundation_model = model_detail.get_model_detail(test_model_name=test_model_name)
+    registered_model = model_detail.get_model_detail(test_model_name=test_model_name)
     transformers_version = registered_model.flavors
     transformers_version.get("transformers").get("transformers_version")
     print(transformers_version)
