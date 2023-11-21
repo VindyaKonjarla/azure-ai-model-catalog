@@ -259,7 +259,7 @@ if __name__ == "__main__":
     
     azureml_meta_registry = MLClient(credential, registry_name="azureml-meta")
     mlflow.set_tracking_uri(ws.get_mlflow_tracking_uri())
-    if "llma" in test_model_name:
+    if "lama" in test_model_name:
         model_detail = ModelDetail(workspace_ml_client=azureml_meta_registry)
         foundation_model = model_detail.get_model_detail(test_model_name=test_model_name)
         computelist = foundation_model.properties.get(
