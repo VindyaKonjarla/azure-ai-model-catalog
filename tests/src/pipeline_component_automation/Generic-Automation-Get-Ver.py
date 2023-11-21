@@ -265,8 +265,8 @@ if __name__ == "__main__":
     # except UnboundLocalError:
     model_detail = ModelDetail(workspace_ml_client=azureml_registry)
     foundation_model = model_detail.get_model_detail(test_model_name=test_model_name)
-    computelist = foundation_model.properties.get(
-        "evaluation-recommended-sku", "donotdelete-DS4v2")
+    flavour = registered_model.flavors
+    flavour.get("python_function").get("loader_module", None) == "mlflow.transformers"
     # a = computelist.index(',')
     # COMPUTE = computelist[:a]
     COMPUTE = computelist
