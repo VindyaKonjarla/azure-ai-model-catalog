@@ -343,7 +343,9 @@ if __name__ == "__main__":
       mlflow_version = registered_model.mlflow_version
       flavour = registered_model.flavors
       transformers_version=flavour.get("transformers").get("transformers_version", None)
-      if mlflow_version==2.8.0 && transformers_version==4.34.0:
+      tv=flavour.get("hftransformersv2").get("transformers_version", None)
+        
+      if mlflow_version==2.8.0 && (transformers_version==4.34.0 || tv==4.34.0):
         logger.info(
                 f"This model {registered_model.name} is in mlflow_version==2.8.0 && transformers_version==4.34.0")
       else:
