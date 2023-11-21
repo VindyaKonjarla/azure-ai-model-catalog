@@ -267,9 +267,9 @@ if __name__ == "__main__":
     foundation_model = model_detail.get_model_detail(test_model_name=test_model_name)
     computelist = foundation_model.properties.get(
         "evaluation-recommended-sku", "donotdelete-DS4v2")
-    a = computelist.index(',')
-    COMPUTE = computelist[:a]
-    # COMPUTE = computelist
+    # a = computelist.index(',')
+    # COMPUTE = computelist[:a]
+    COMPUTE = computelist
     print("COMPUTE----------",COMPUTE)
     compute_name="donotdelete-"+COMPUTE.replace("_", "-")
     # compute_name=COMPUTE.replace("_", "-")
