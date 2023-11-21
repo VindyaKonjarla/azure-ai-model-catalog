@@ -255,9 +255,9 @@ if __name__ == "__main__":
         credential=credential,
         registry_name="azureml-preview-test1"
     )
-    # azureml_registry = MLClient(credential, registry_name="azureml")
+    azureml_registry = MLClient(credential, registry_name="azureml")
     
-    azureml_meta_registry = MLClient(credential, registry_name="azureml-meta")
+    # azureml_meta_registry = MLClient(credential, registry_name="azureml-meta")
     mlflow.set_tracking_uri(ws.get_mlflow_tracking_uri())
     # try:   
         # model_detail = ModelDetail(workspace_ml_client=azureml_registry)
