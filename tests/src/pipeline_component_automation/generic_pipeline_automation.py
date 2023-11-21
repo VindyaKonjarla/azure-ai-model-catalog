@@ -271,7 +271,7 @@ if __name__ == "__main__":
         "evaluation-recommended-sku", "donotdelete-DS4v2")
     a = computelist.index(',')
     COMPUTE = computelist[:a]
-    COMPUTE = computelist
+    # COMPUTE = computelist
     print("COMPUTE----------",COMPUTE)
     compute_name="donotdelete-"+COMPUTE.replace("_", "-")
     # compute_name=COMPUTE.replace("_", "-")
