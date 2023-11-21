@@ -156,6 +156,7 @@ def run_fine_tuning_tasks(fine_tune_tasks):
                     print(f"Script '{script}' completed with return code {return_code}")
                 except Exception as e:
                     print(f"Error running script '{script}': {e}")
+                    sys.exit(1)
     else:
         print(f"No scripts found for the primary task: {fine_tune_tasks}")
 
