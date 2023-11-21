@@ -194,15 +194,15 @@ def run_fine_tuning_tasks(fine_tune_tasks):
                     # Set the error flag to True if any script fails
                     error_occurred = True
     
-    # If an error occurred, print a message and exit with status 1
-    if error_occurred:
-        print("Error: At least one script failed.")
-        sys.exit(1)
-    else:
-        print("All scripts completed successfully.")
-
+        # If an error occurred, print a message and exit with status 1
+        if error_occurred:
+            print("Error: At least one script failed.")
+            sys.exit(1)
+        else:
+            print("All scripts completed successfully.")
     else:
         print(f"No scripts found for the primary task: {fine_tune_tasks}")
+
 
 if __name__ == "__main__":
     if test_model_name is None or test_sku_type is None or test_queue is None or test_set is None or test_trigger_next_model is None or test_keep_looping is None:
