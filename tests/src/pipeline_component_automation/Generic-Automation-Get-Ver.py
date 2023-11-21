@@ -266,8 +266,8 @@ if __name__ == "__main__":
     model_detail = ModelDetail(workspace_ml_client=azureml_registry)
     registered_model = model_detail.get_model_detail(test_model_name=test_model_name)
     transformers_version = registered_model.flavors
-    transformers_version.get("transformers").get("transformers_version", None) == "mlflow.transformers"
-    print(transformers_version)
+    t_ver = transformers_version.get("transformers").get("transformers_version", None)
+    print(t_ver)
     mlflow_version = registered_model.mlflow_version
     print(mlflow_version)
     # a = computelist.index(',')
