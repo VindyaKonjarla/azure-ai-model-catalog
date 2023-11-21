@@ -451,7 +451,18 @@ if __name__ == "__main__":
     training_parameters, optimization_parameters = get_training_and_optimization_parameters(foundation_model)
     #gpus_per_node = find_gpus_in_compute(workspace_ml_client, compute)
     print(f"Number of GPUs in compute: {gpus_per_node}")
-    pipeline_job = create_and_run_azure_ml_pipeline(foundation_model, compute_cluster, gpus_per_node, training_parameters, optimization_parameters, experiment_name)
+
+    try:
+    pipeline_job = create_and_run_azure_ml_pipeline(
+        foundation_model, compute_cluster, gpus_per_node, training_parameters, optimization_parameters, experiment_name
+    )
+    print("Azure ML Pipeline completed successfully.")
+    except Exception as e:
+        # If an exception occurs, print the error message and exit with a non-zero exit code
+        print(f"Error running Azure ML Pipeline: {str(e)}")
+        sys.exit(1) 
+        
+    #pipeline_job = create_and_run_azure_ml_pipeline(foundation_model, compute_cluster, gpus_per_node, training_parameters, optimization_parameters, experiment_name)
     print("Completed")
 
 
