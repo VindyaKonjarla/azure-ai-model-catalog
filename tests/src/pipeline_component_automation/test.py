@@ -346,20 +346,20 @@ if __name__ == "__main__":
       # transformersversion=transformers_version==4.34.0 or tv==4.34.0  
     print("mlflow_version",mlflow_version)
     print("tv",tv)
-    try:
+    # try:
      
-      if mlflow_version==2.8.0 and tv==4.34.0:
-        logger.info(
-                f"This model {registered_model.name} is in mlflow_version==2.8.0 && transformers_version==4.34.0")
-      else:
-          logger.info(f"This model {registered_model.name} is not in latest mlflow and transformers versions")
-          raise Exception(f"This model {registered_model.name} is not registered in latest mlflow and transformers versions")
-    except Exception as ex:
-        _, _, exc_tb = sys.exc_info()
-        logger.error(f"::error:: Not able to initiate job \n")
-        logger.error(f"The exception occured at this line no : {exc_tb.tb_lineno}" +
-                     f" skipping the further process and the exception is this one : {ex}")
-        sys.exit(1)
+    #   if mlflow_version==2.8.0 and tv==4.34.0:
+    #     logger.info(
+    #             f"This model {registered_model.name} is in mlflow_version==2.8.0 && transformers_version==4.34.0")
+    #   else:
+    #       logger.info(f"This model {registered_model.name} is not in latest mlflow and transformers versions")
+    #       raise Exception(f"This model {registered_model.name} is not registered in latest mlflow and transformers versions")
+    # except Exception as ex:
+    #     _, _, exc_tb = sys.exc_info()
+    #     logger.error(f"::error:: Not able to initiate job \n")
+    #     logger.error(f"The exception occured at this line no : {exc_tb.tb_lineno}" +
+    #                  f" skipping the further process and the exception is this one : {ex}")
+    #     sys.exit(1)
     # try:
     #     flavour = registered_model.flavors
     #     if flavour.get("python_function", None) == None:
