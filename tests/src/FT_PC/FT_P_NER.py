@@ -383,12 +383,15 @@ if __name__ == "__main__":
         # Check the status of the pipeline job
         if pipeline_job.status != "Completed":
             print(f"Azure ML Pipeline failed with status: {pipeline_job.status}")
-            sys.exit(1)  # Exit with a non-zero status code
+            # sys.exit(1)  # Exit with a non-zero status code
+            
+    
 
     except Exception as e:
         # If an exception occurs, print the error message and exit with a non-zero exit code
         print(f"Error running Azure ML Pipeline: {str(e)}")
-        sys.exit(1)  # Exit with a non-zero status code
+        # sys.exit(1)  # Exit with a non-zero status code
+        raise Exception("Pipeline job failed")
 
     print("Completed")
 
