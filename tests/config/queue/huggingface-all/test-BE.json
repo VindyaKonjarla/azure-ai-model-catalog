@@ -1,7 +1,7 @@
 {
     "queue_name": "test-BE",
     "models": [
-        "distilbert-base-uncased-finetuned-sst-2-english"
+        "bert-base-cased"
     ],
     "workspace": "sonata-ws-ae",
     "subscription": "ed2cab61-14cc-4fb3-ac23-d72609214cfd",
