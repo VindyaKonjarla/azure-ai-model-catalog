@@ -266,7 +266,7 @@ if __name__ == "__main__":
     #     "evaluation-recommended-sku", "donotdelete-DS4v2")
     # except UnboundLocalError:
     model_detail = ModelDetail(workspace_ml_client=azureml_meta_registry)
-    foundation_model = model_detail.get_model_detail(test_model_name=test_model_name)
+    foundation_model = model_detail.get_model_detail(test_model_name="CodeLlama-13b-hf")
     computelist = foundation_model.properties.get(
         "evaluation-recommended-sku", "donotdelete-DS4v2")
     # a = computelist.index(',')
