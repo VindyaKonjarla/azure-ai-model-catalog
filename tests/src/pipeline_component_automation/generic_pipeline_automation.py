@@ -260,15 +260,15 @@ if __name__ == "__main__":
     azureml_meta_registry = MLClient(credential, registry_name="azureml-meta")
     mlflow.set_tracking_uri(ws.get_mlflow_tracking_uri())
     # try:   
-        model_detail = ModelDetail(workspace_ml_client=azureml_registry)
-        foundation_model = model_detail.get_model_detail(test_model_name=test_model_name)
-        computelist = foundation_model.properties.get(
-        "evaluation-recommended-sku", "donotdelete-DS4v2")
+        # model_detail = ModelDetail(workspace_ml_client=azureml_registry)
+        # foundation_model = model_detail.get_model_detail(test_model_name=test_model_name)
+        # computelist = foundation_model.properties.get(
+        # "evaluation-recommended-sku", "donotdelete-DS4v2")
     # except UnboundLocalError:
-    # model_detail = ModelDetail(workspace_ml_client=azureml_meta_registry)
-    # foundation_model = model_detail.get_model_detail(test_model_name=test_model_name)
-    # computelist = foundation_model.properties.get(
-    #     "evaluation-recommended-sku", "donotdelete-DS4v2")
+    model_detail = ModelDetail(workspace_ml_client=azureml_registry)
+    foundation_model = model_detail.get_model_detail(test_model_name=test_model_name)
+    computelist = foundation_model.properties.get(
+        "evaluation-recommended-sku", "donotdelete-DS4v2")
     a = computelist.index(',')
     COMPUTE = computelist[:a]
     # COMPUTE = computelist
