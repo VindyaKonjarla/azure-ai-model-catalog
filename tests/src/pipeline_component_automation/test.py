@@ -344,7 +344,7 @@ if __name__ == "__main__":
     # transformers_version=flavour.get("transformers").get("transformers_version", None)
     tv=flavour.get("hftransformersv2").get("transformers_version", None)
       # transformersversion=transformers_version==4.34.0 or tv==4.34.0  
-    print("mlflow_version",mlflow_version)
+    # print("mlflow_version",mlflow_version)
     print("tv",tv)
     # try:
      
