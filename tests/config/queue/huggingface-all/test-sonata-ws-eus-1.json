@@ -6,7 +6,7 @@
         "MLFlow-Import-distilbert-base-uncased-finetuned-sst-2-english",
         "MLFlow-Import-facebook-bart-large-cnn",
         "MLFlow-Import-sshleifer/distilbart-cnn-12-6",
-        "MLFlow-Import-CodeLlama-13b-hf",
+        "MLFlow-Import-codellama/CodeLlama-13b-hf",
         "MLFlow-Import-meta-llama/Llama-2-7b",
         "MLFlow-Import-databricks/dolly-v2-12b"
     ],
