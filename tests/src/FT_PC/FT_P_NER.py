@@ -18,6 +18,7 @@ from azure.ai.ml.entities import CommandComponent, PipelineComponent, Job, Compo
 from azure.ai.ml import PyTorchDistribution, Input
 from azure.ai.ml.entities import Model
 from azure.ai.ml.constants import AssetTypes
+import sys
 
 check_override = True
 # model to test
@@ -269,7 +270,17 @@ def create_and_run_azure_ml_pipeline(
     )
 
     # Wait for the pipeline job to complete
-    workspace_ml_client.jobs.stream(pipeline_job.name)
+    try:
+        workspace_ml_client.jobs.stream(pipeline_job.name)
+
+    except Exception as ex:
+        _, _, exc_tb = sys.exc_info()
+        # logger.error(f"::error:: Not able to initiate job \n")
+        # logger.error(f"The exception occured at this line no : {exc_tb.tb_lineno}" +
+        #              f" skipping the further process and the exception is this one : {ex}")
+        print("::error:: Not able to initiate job")
+        print(f"The exception occurred at this line no: {exc_tb.tb_lineno}" + f" skipping the further process, and the exception is: {ex}")
+        sys.exit(1)
     return pipeline_job
     
     
