@@ -353,15 +353,34 @@ if __name__ == "__main__":
     print(f"Number of GPUs in compute: {gpus_per_node}")
 
 
+    # try:
+    #     pipeline_job = create_and_run_azure_ml_pipeline(
+    #         foundation_model, compute_cluster, gpus_per_node, training_parameters, optimization_parameters, experiment_name
+    #     )
+    #     print("Azure ML Pipeline completed successfully.")
+    # except Exception as e:
+    #     # If an exception occurs, print the error message and exit with a non-zero exit code
+    #     print(f"Error running Azure ML Pipeline: {str(e)}")
+    #     exit(1)
+
     try:
         pipeline_job = create_and_run_azure_ml_pipeline(
             foundation_model, compute_cluster, gpus_per_node, training_parameters, optimization_parameters, experiment_name
         )
         print("Azure ML Pipeline completed successfully.")
+        
+        # Check the status of the pipeline job
+        if pipeline_job.status != "Completed":
+            print(f"Azure ML Pipeline failed with status: {pipeline_job.status}")
+            sys.exit(1)  # Exit with a non-zero status code
+
     except Exception as e:
         # If an exception occurs, print the error message and exit with a non-zero exit code
         print(f"Error running Azure ML Pipeline: {str(e)}")
-        exit(1)
+        sys.exit(1)  # Exit with a non-zero status code
+
+    print("Completed")
+
 
 
 
