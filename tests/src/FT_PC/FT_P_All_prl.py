@@ -160,6 +160,53 @@ def run_script(script):
 #     else:
 #         print(f"No scripts found for the primary task: {fine_tune_tasks}")
 
+# def run_fine_tuning_tasks(fine_tune_tasks):
+#     task_script_mapping = {
+#         "text-classification": "FT_P_TC.py",
+#         "question-answering": "FT_P_QA.py",
+#         "token-classification": "FT_P_NER.py",
+#         "summarization": "FT_P_TS.py",
+#         "translation": "FT_P_TT.py",
+#         "text-generation": "FT_P_TG.py"
+#     }
+
+#     # scripts = task_script_mapping.get(task, [])
+#     scripts = [task_script_mapping.get(task, "")for task in fine_tune_tasks]
+#     scripts = [script for script in scripts if script]
+    
+#     # Add an error flag
+#     error_occurred = False
+    
+#     if scripts:
+#         with concurrent.futures.ProcessPoolExecutor() as executor:
+#             futures = [executor.submit(run_script, script) for script in scripts]
+
+#             for future in concurrent.futures.as_completed(futures):
+#                 try:
+#                     result = future.result()
+#                     script, return_code = result
+#                     print(f"Script '{script}' completed with return code {return_code}")
+#                     if return_code != 0:
+#                         # Set the error flag to True if any script fails
+#                         error_occurred = True
+#                 except Exception as e:
+#                     print(f"Error running script '{script}': {e}")
+#                     # Set the error flag to True if any script fails
+#                     error_occurred = True
+    
+#         # If an error occurred, print a message and exit with status 1
+#         if error_occurred:
+#             print("Error: At least one script failed.")
+#             sys.exit(1)
+#         else:
+#             print("All scripts completed successfully.")
+#     else:
+#         print(f"No scripts found for the primary task: {fine_tune_tasks}")
+
+
+
+
+
 def run_fine_tuning_tasks(fine_tune_tasks):
     task_script_mapping = {
         "text-classification": "FT_P_TC.py",
@@ -176,7 +223,8 @@ def run_fine_tuning_tasks(fine_tune_tasks):
     
     # Add an error flag
     error_occurred = False
-    
+    failed_scripts = []
+
     if scripts:
         with concurrent.futures.ProcessPoolExecutor() as executor:
             futures = [executor.submit(run_script, script) for script in scripts]
@@ -189,19 +237,24 @@ def run_fine_tuning_tasks(fine_tune_tasks):
                     if return_code != 0:
                         # Set the error flag to True if any script fails
                         error_occurred = True
+                        failed_scripts.append(script)
                 except Exception as e:
                     print(f"Error running script '{script}': {e}")
                     # Set the error flag to True if any script fails
                     error_occurred = True
+                    failed_scripts.append(script)
     
-        # If an error occurred, print a message and exit with status 1
+        # If an error occurred, print a message with the names of failed scripts and exit with status 1
         if error_occurred:
-            print("Error: At least one script failed.")
+            print("Error: The following scripts failed:")
+            for failed_script in failed_scripts:
+                print(f"- {failed_script}")
             sys.exit(1)
         else:
             print("All scripts completed successfully.")
     else:
         print(f"No scripts found for the primary task: {fine_tune_tasks}")
+
 
 
 if __name__ == "__main__":
