@@ -354,67 +354,6 @@ def create_or_get_aml_compute(workspace_ml_client, compute_cluster, compute_clus
 
 
 
-# def create_and_run_azure_ml_pipeline(
-#     foundation_model,
-#     compute_cluster,
-#     gpus_per_node,
-#     training_parameters,
-#     optimization_parameters,
-#     experiment_name,
-# ):
-#     # Fetch the pipeline component
-#     pipeline_component_func = registry_ml_client.components.get(
-#         name="text_classification_pipeline_for_oss", label="latest"
-#     )
-
-#     # Define the pipeline job
-#     @pipeline()
-#     def create_pipeline():
-#         text_classification_pipeline = pipeline_component_func(
-#             mlflow_model_path=foundation_model.id,
-#             compute_model_import=compute_cluster,
-#             compute_preprocess=compute_cluster,
-#             compute_finetune=compute_cluster,
-#             compute_model_evaluation=compute_cluster,
-#             train_file_path=Input(
-#                 type="uri_file", path="./emotion-dataset/small_train.jsonl"
-#             ),
-#             validation_file_path=Input(
-#                 type="uri_file", path="./emotion-dataset/small_validation.jsonl"
-#             ),
-#             test_file_path=Input(
-#                 type="uri_file", path="./emotion-dataset/small_test.jsonl"
-#             ),
-#             evaluation_config=Input(
-#                 type="uri_file", path="./emotion-dataset/text-classification-config.json"
-#             ),
-#             sentence1_key="text",
-#             label_key="label_string",
-#             number_of_gpu_to_use_finetuning=gpus_per_node,
-#             **training_parameters,
-#             **optimization_parameters
-#         )
-#         return {
-#             "trained_model": text_classification_pipeline.outputs.mlflow_model_folder
-#         }
-
-#     # Create the pipeline object
-#     pipeline_object = create_pipeline()
-
-#     # Configure pipeline settings
-#     pipeline_object.settings.force_rerun = True
-#     pipeline_object.settings.continue_on_step_failure = False
-
-#     # Submit the pipeline job
-#     pipeline_job = workspace_ml_client.jobs.create_or_update(
-#         pipeline_object, experiment_name=experiment_name
-#     )
-
-#     # Wait for the pipeline job to complete
-#     workspace_ml_client.jobs.stream(pipeline_job.name)
-#     return pipeline_job
-# ... (existing imports)
-
 def create_and_run_azure_ml_pipeline(
     foundation_model,
     compute_cluster,
@@ -473,35 +412,33 @@ def create_and_run_azure_ml_pipeline(
 
     # Wait for the pipeline job to complete
     workspace_ml_client.jobs.stream(pipeline_job.name)
-
-    # Check if the pipeline job was successful
-    if pipeline_job.status == "Completed":
-        # Code to register the model
-        print("\nRegistering the model...")
-        model_path_from_job = "azureml://jobs/{0}/outputs/{1}".format(
-            pipeline_job.name, "trained_model"
-        )
-
-        finetuned_model_name = "FT-NER-"+str(test_model_name)+"-oss"
-        finetuned_model_name = finetuned_model_name.replace("/", "-")
-
-        print("Path to register model: ", model_path_from_job)
-        prepare_to_register_model = Model(
-            path=model_path_from_job,
-            type=AssetTypes.MLFLOW_MODEL,
-            name=finetuned_model_name,
-            version=timestamp,  # use timestamp as version to avoid version conflict
-            description=test_model_name + " fine-tuned model for text-classification-emotion detection",
-        )
-        print("Prepare to register model: \n", prepare_to_register_model)
-
-        # Register the model from pipeline job output
-        registered_model = workspace_ml_client.models.create_or_update(
-            prepare_to_register_model
-        )
-        print("Registered model: \n", registered_model)
-
     return pipeline_job
+
+def register_model_to_workspace(workspace_ml_client, pipeline_job, test_model_name, timestamp):
+    print("Registering the model...")
+    model_path_from_job = "azureml://jobs/{0}/outputs/{1}".format(
+        pipeline_job.name, "trained_model"
+    )
+
+    finetuned_model_name = "FT-NER-"+str(test_model_name)+"-oss"
+    finetuned_model_name = finetuned_model_name.replace("/", "-")
+
+    print("Path to register model: ", model_path_from_job)
+    prepare_to_register_model = Model(
+        path=model_path_from_job,
+        type=AssetTypes.MLFLOW_MODEL,
+        name=finetuned_model_name,
+        version=timestamp,  # use timestamp as version to avoid version conflict
+        description=test_model_name + " fine-tuned model for text-classification-emotion detection",
+    )
+    print("Prepare to register model: \n", prepare_to_register_model)
+
+    # Register the model from pipeline job output
+    registered_model = workspace_ml_client.models.create_or_update(
+        prepare_to_register_model
+    )
+    print("Registered model: \n", registered_model)
+
 
 
 
@@ -607,11 +544,29 @@ if __name__ == "__main__":
     print(f"Number of GPUs in compute: {gpus_per_node}")
 
 
+    # try:
+    #     pipeline_job = create_and_run_azure_ml_pipeline(
+    #         foundation_model, compute_cluster, gpus_per_node, training_parameters, optimization_parameters, experiment_name
+    #     )
+    #     print("Azure ML Pipeline completed successfully.")
+    # except Exception as e:
+    #     # If an exception occurs, print the error message and exit with a non-zero exit code
+    #     print(f"Error running Azure ML Pipeline: {str(e)}")
+    #     sys.exit(1) 
+
     try:
         pipeline_job = create_and_run_azure_ml_pipeline(
             foundation_model, compute_cluster, gpus_per_node, training_parameters, optimization_parameters, experiment_name
         )
         print("Azure ML Pipeline completed successfully.")
+
+        # Check if the pipeline job was successful
+        if pipeline_job.status == "Completed":
+            # Call the function to register the model
+            register_model_to_workspace(workspace_ml_client, pipeline_job, test_model_name, timestamp)
+        else:
+            print("Azure ML Pipeline failed. Model registration will not be performed.")
+
     except Exception as e:
         # If an exception occurs, print the error message and exit with a non-zero exit code
         print(f"Error running Azure ML Pipeline: {str(e)}")
