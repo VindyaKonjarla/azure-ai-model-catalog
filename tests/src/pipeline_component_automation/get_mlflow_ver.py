@@ -350,7 +350,7 @@ if __name__ == "__main__":
     # print("tv",tv)
     print("transformers_version---",transformers_version)
     mlflow_version = registered_model.mlflow_version.get("mlflow_version", None)
-    print(mlflow_version)
+    print("mlflow_version---------",mlflow_version)
     # try:
      
     #   if mlflow_version==2.8.0 and tv==4.34.0:
