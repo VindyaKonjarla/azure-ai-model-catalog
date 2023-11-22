@@ -346,7 +346,7 @@ if __name__ == "__main__":
     # tv=flavour.get("hftransformersv2").get("transformers_version", None)
       # transformersversion=transformers_version==4.34.0 or tv==4.34.0  
     print("registered_model",registered_model)
-    print("tv",tv)
+    # print("tv",tv)
     print("transformers_version",transformers_version)
     # try:
      
