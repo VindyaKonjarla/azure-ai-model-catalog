@@ -107,6 +107,7 @@ class ModelInferenceAndDeployemnt:
         queue_file = f"task_params.json"
         with open(queue_file) as f:
             return ConfigBox(json.load(f))
+
     def cloud_inference(self, scoring_file, scoring_input, online_endpoint_name, deployment_name, task, latest_model):
         try:
             json_file_name = ''
@@ -114,7 +115,7 @@ class ModelInferenceAndDeployemnt:
             logger.info(f"deployment_name : {deployment_name}")
             logger.info(f"Input data is this one : {scoring_input}")
             try:
-                configbox_obj =  self.get_task_params()
+                configbox_obj = self.get_task_params()
                 input_data = configbox_obj.get(self.test_model_name, None)
                 if input_data == None:
                     response = self.workspace_ml_client.online_endpoints.invoke(
@@ -124,7 +125,7 @@ class ModelInferenceAndDeployemnt:
                     )
                 else:
                     json_file_name, scoring_input = self.create_json_file(
-                    file_name=deployment_name, dicitonary=dic_obj)
+                        file_name=deployment_name, dicitonary=dic_obj)
                     logger.info("Online endpoint invoking satrted...")
                     response = self.workspace_ml_client.online_endpoints.invoke(
                         endpoint_name=online_endpoint_name,
@@ -302,7 +303,7 @@ class ModelInferenceAndDeployemnt:
                 f"::Error:: Could not find scoring_file: {scoring_file}. Finishing without sample scoring: \n{e}")
         return scoring_file, scoring_input
 
-    def model_infernce_and_deployment(self, instance_type, task, latest_model, compute):
+    def model_infernce_and_deployment(self, instance_type, task, latest_model, compute, endpoint):
         logger.info(f"latest_model is this : {latest_model}")
         logger.info(f"Task is : {task}")
         scoring_file, scoring_input = self.get_task_specified_input(task=task)
@@ -311,10 +312,10 @@ class ModelInferenceAndDeployemnt:
         online_endpoint_name = task + str(timestamp)
         #online_endpoint_name = "Testing" + str(timestamp)
         logger.info(f"online_endpoint_name: {online_endpoint_name}")
-        endpoint = ManagedOnlineEndpoint(
-            name=online_endpoint_name,
-            auth_mode="key",
-        )
+        # endpoint = ManagedOnlineEndpoint(
+        #     name=online_endpoint_name,
+        #     auth_mode="key",
+        # )
         # model_package = self.create_model_package(
         #     latest_model=latest_model, endpoint=endpoint)
         deployment_name = self.create_online_deployment(
@@ -333,19 +334,20 @@ class ModelInferenceAndDeployemnt:
         # )
         # self.delete_online_endpoint(online_endpoint_name=online_endpoint_name)
 
-        # dynamic_installation = ModelDynamicInstallation(
-        #     test_model_name=self.test_model_name,
-        #     workspace_ml_client=self.workspace_ml_client,
-        #     deployment_name=deployment_name,
-        #     task=task
-        # )
-        # dynamic_installation.model_infernce_and_deployment(
-        #         instance_type=instance_type,
-        #         latest_model=latest_model,
-        #         scoring_file=scoring_file,
-        #         scoring_input = scoring_input
-        # )
-        
+        dynamic_installation = ModelDynamicInstallation(
+            test_model_name=self.test_model_name,
+            workspace_ml_client=self.workspace_ml_client,
+            deployment_name=deployment_name,
+            task=task
+        )
+        dynamic_installation.model_infernce_and_deployment(
+                instance_type=instance_type,
+                latest_model=latest_model,
+                scoring_file=scoring_file,
+                scoring_input = scoring_input,
+                endpoint=endpoint
+        )
+
         # if not json_file_name:
         #     dynamic_installation.model_infernce_and_deployment(
         #         instance_type=instance_type,
@@ -360,7 +362,6 @@ class ModelInferenceAndDeployemnt:
         #         scoring_file=json_file_name,
         #         scoring_input = scoring_input
         #    )
-                          
         batch_deployment = ModelBatchDeployment(
             model=latest_model,
             workspace_ml_client=self.workspace_ml_client,

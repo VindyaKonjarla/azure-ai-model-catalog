@@ -3,7 +3,12 @@ from model_inference_and_deployment import ModelInferenceAndDeployemnt
 from azure.identity import DefaultAzureCredential, InteractiveBrowserCredential
 from azure.ai.ml.entities import AmlCompute
 from azure.ai.ml import MLClient, UserIdentityConfiguration
-from azure.core.exceptions import ResourceNotFoundError
+from azure.core.exceptions import (
+    ResourceNotFoundError
+)
+from azure.ai.ml.entities import (
+    ManagedOnlineEndpoint
+)
 from azure.ai.ml import Input
 from azure.ai.ml.constants import AssetTypes
 import mlflow
@@ -95,7 +100,8 @@ def set_next_trigger_model(queue):
     elif import_alias_model_name in model_list:
         index = model_list.index(import_alias_model_name)
     else:
-        index = model_list.index(test_model_name.replace("/", "-").lower()+"-oss")
+        index = model_list.index(
+            test_model_name.replace("/", "-").lower()+"-oss")
 
     logger.info(f"index of {test_model_name} in queue: {index}")
 # if index is not the last element in the list, get the next element in the list
@@ -153,6 +159,22 @@ def get_pipeline_task(task):
     return pipeline_task.get(task)
 
 
+def create_endpoint(workspace_ml_client, endpoint_name):
+    try:
+        endpoint = workspace_ml_client.online_endpoints.get(name=endpoint_name)
+        return endpoint
+    except ResourceNotFoundError as e:
+        logger.warn("The endpoint do not exist and now creting new endpoint")
+        endpoint = ManagedOnlineEndpoint(
+            name=endpoint_name,
+            auth_mode="key"
+        )
+        workspace_ml_client.online_endpoints.begin_create_or_update(
+            endpoint).wait()
+        return endpoint
+    except Exception as e:
+        logger.error(f"Failed due to this : {e}")
+        sys.exit(1)
 # @pipeline
 # def model_import_pipeline(compute_name, update_existing_model, task_name):
 #     import_model = registry_ml_client.components.get(
@@ -254,22 +276,20 @@ if __name__ == "__main__":
     #     registry_name=queue.registry
     # )
     #
-    #mlflow.set_tracking_uri(ws.get_mlflow_tracking_uri())
-    
+    # mlflow.set_tracking_uri(ws.get_mlflow_tracking_uri())
+
     registered_model_name = test_model_name.replace("/", "-").lower()
     model_detail = ModelDetail(workspace_ml_client=workspace_ml_client)
     registered_model = model_detail.get_model_detail(
         test_model_name=registered_model_name)
-    
+
     azureml_registry = MLClient(credential, registry_name="azureml")
-          
+
     model_detail = ModelDetail(workspace_ml_client=azureml_registry)
     foundation_model = model_detail.get_model_detail(
         test_model_name=test_model_name.replace("/", "-"))
-    
-    instance_type = list(foundation_model.properties.get("inference-recommended-sku").split(","))[0]
-    # # a = computelist.index(',')
-    # # instance_type = computelist[:a]
+    instance_type = list(foundation_model.properties.get(
+        "inference-recommended-sku").split(","))[0]
     compute = instance_type.replace("_", "-")
     logger.info(f"instance : {instance_type} and compute is : {compute}")
 
@@ -281,6 +301,10 @@ if __name__ == "__main__":
 
     compute_target = create_or_get_compute_target(
         ml_client=workspace_ml_client, compute=compute, instance_type=instance_type)
+    endpoint = create_endpoint(
+        workspace_ml_client=workspace_ml_client,
+        endpoint_name=instance_type.lower()
+    )
     task = HfTask(model_name=test_model_name).get_task()
     logger.info(f"Task is this : {task} for the model : {test_model_name}")
     #timestamp = str(int(time.time()))
@@ -317,13 +341,10 @@ if __name__ == "__main__":
     #                  f" skipping the further process and the exception is this one : {ex}")
     #     sys.exit(1)
 
-    
-
     # registered_model_detail = ModelDetail(
     #     workspace_ml_client=workspace_ml_client)
     # registered_model = registered_model_detail.get_model_detail(
     #     test_model_name=registered_model_name)
-    
 
     # try:
     #     flavour = registered_model.flavors
@@ -403,5 +424,6 @@ if __name__ == "__main__":
         instance_type=instance_type,
         task=task,
         latest_model=registered_model,
-        compute=compute
+        compute=compute,
+        endpoint=endpoint
     )
