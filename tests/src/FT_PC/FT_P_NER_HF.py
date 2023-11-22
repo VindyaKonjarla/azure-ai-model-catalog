@@ -90,9 +90,9 @@ def create_and_get_job_studio_url(command_job, workspace_ml_client):
     # wait for the job to complete
     workspace_ml_client.jobs.stream(returned_job.name)
     return returned_job.studio_url
-def get_latest_model_version(workspace_ml_client, test_model_name):
+def get_latest_model_version(registry_ml_client_model, test_model_name):
     print("In get_latest_model_version...")
-    version_list = list(workspace_ml_client.models.list(test_model_name))
+    version_list = list(registry_ml_client_model.models.list(test_model_name))
     
     if len(version_list) == 0:
         print("Model not found in registry")
@@ -100,7 +100,7 @@ def get_latest_model_version(workspace_ml_client, test_model_name):
         foundation_model_id = None  # Set id to None as well
     else:
         model_version = version_list[0].version
-        foundation_model = workspace_ml_client.models.get(
+        foundation_model = registry_ml_client_model.models.get(
             test_model_name, model_version)
         print(
             "\n\nUsing model name: {0}, version: {1}, id: {2} for inferencing".format(
@@ -327,9 +327,9 @@ if __name__ == "__main__":
         resource_group=queue.resource_group,
         workspace_name=queue.workspace
     )
-    azureml_registry = MLClient(credential, registry_name="azureml")
     mlflow.set_tracking_uri(ws.get_mlflow_tracking_uri())
     registry_ml_client = MLClient(credential, registry_name="azureml-preview-test1")
+    registry_ml_client_model = MLClient(credential, registry_name="azureml")
     model = Model(name=test_model_name,workspace_ml_client=azureml_registry)
     experiment_name = "token-classification-ner"
     # # generating a unique timestamp that can be used for names and versions that need to be unique
@@ -345,7 +345,6 @@ if __name__ == "__main__":
     # Call the function
     compute, gpus_per_node, compute_cluster = create_or_get_aml_compute(workspace_ml_client, compute_cluster, compute_cluster_size, computes_allow_list)
 
-    # compute = create_or_get_compute_target(workspace_ml_client, queue.compute)
     print("printing:",{compute})
     env_list = workspace_ml_client.environments.list(name=queue.environment)
     latest_version = 0
@@ -356,11 +355,23 @@ if __name__ == "__main__":
     latest_env = workspace_ml_client.environments.get(
         name=queue.environment, version=str(latest_version))
     print("Latest Environment :", latest_env)
+    expression_to_ignore = ["/", "\\", "|", "@", "#", ".",
+                            "$", "%", "^", "&", "*", "<", ">", "?", "!", "~"]
+    # Create the regular expression to ignore
+    regx_for_expression = re.compile(
+        '|'.join(map(re.escape, expression_to_ignore)))
+    # Check the model_name contains any of there character
+    expression_check = re.findall(regx_for_expression, test_model_name)
+    if expression_check:
+        # Replace the expression with hyphen
+        test_model_name  = regx_for_expression.sub("-", test_model_name)
+
+    print("model name replaced with - :", {test_model_name})
     version_list = list(workspace_ml_client.models.list(test_model_name))
 
     client = MlflowClient()
     #foundation_model, foundation_model_name = get_latest_model_version(workspace_ml_client, test_model_name.lower())
-    foundation_model = get_latest_model_version(workspace_ml_client, test_model_name.lower())
+    foundation_model = get_latest_model_version(registry_ml_client_model, test_model_name.lower())
     training_parameters, optimization_parameters = get_training_and_optimization_parameters(foundation_model)
     #gpus_per_node = find_gpus_in_compute(workspace_ml_client, compute)
     print(f"Number of GPUs in compute: {gpus_per_node}")
