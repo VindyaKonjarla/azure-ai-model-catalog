@@ -2,7 +2,7 @@
     "queue_name": "test-sonata-ws-eus-1",
     "models": [
         "MLFlow-Import-distilbert-base-cased-distilled-squad",
-        "MLFlow-Import-databricks/dolly-v2-12b"
+        "MLFlow-Import-gpt2-large"
     ],
     "workspace": "sonata-ws-ae",
     "subscription": "ed2cab61-14cc-4fb3-ac23-d72609214cfd",
