@@ -349,6 +349,7 @@ if __name__ == "__main__":
     print("registered_model---------",registered_model)
     # print("tv",tv)
     print("transformers_version---",transformers_version)
+    print(type(mlflow_version))
     mlflow_version = flavour.mlflow_version.get("mlflow_version", None)
     print("mlflow_version---------",mlflow_version)
     # try:
