@@ -47,7 +47,7 @@ jobs:
       run: pip install datasets
     - name: deploy-model-step
       id: deploy-model-step
-      run: python Generic-Automation-Get-Ver.py
+      run: python test.py
       working-directory: tests/src/pipeline_component_automation
     - name: trigger-next-model-step
       env:
