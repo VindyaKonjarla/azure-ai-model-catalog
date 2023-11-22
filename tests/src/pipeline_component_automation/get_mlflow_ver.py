@@ -341,6 +341,7 @@ if __name__ == "__main__":
     registered_model = registered_model_detail.get_model_detail(test_model_name=test_model_name)
     # mlflow_version = registered_model.mlflow_version
     print(registered_model)
+    print(registered_model.get("conda.yaml"))
     # tv=registered_model.transformers_version
     flavour = registered_model.flavors
     print(flavour)
