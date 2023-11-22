@@ -352,8 +352,9 @@ if __name__ == "__main__":
     # print("tv",tv)
     print("transformers_version---",transformers_version)
     #print(type(mlflow_version))
-    mlflow_version = registered_model.mlflow_version
-    print(type(mlflow_version))
+    mlflow_versions = registered_model.mlflow_version
+    print(mlflow_versions)
+    print(type(mlflow_versions))
     print("mlflow_version---------",mlflow_version)
     # try:
      
