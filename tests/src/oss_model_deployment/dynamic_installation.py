@@ -97,6 +97,10 @@ class ModelDynamicInstallation:
     def delete_file(self, file_name):
         logger.info("Started deleting the file...")
         os.remove(path=file_name)
+    def get_task_params(self) -> ConfigBox:
+        queue_file = f"task_params.json"
+        with open(queue_file) as f:
+            return ConfigBox(json.load(f))
 
     def cloud_inference(self, scoring_file, scoring_input, online_endpoint_name, latest_model):
         try:
@@ -104,11 +108,26 @@ class ModelDynamicInstallation:
             logger.info(f"deployment_name : {self.deployment_name}")
             logger.info(f"Input data is this one : {scoring_input}")
             try:
-                response = self.workspace_ml_client.online_endpoints.invoke(
-                    endpoint_name=online_endpoint_name,
-                    deployment_name=self.deployment_name,
-                    request_file=scoring_file,
-                )
+                configbox_obj = self.get_task_params()
+                input_data = configbox_obj.get(self.test_model_name, None)
+                if input_data == None:
+                    response = self.workspace_ml_client.online_endpoints.invoke(
+                        endpoint_name=online_endpoint_name,
+                        deployment_name=self.deployment_name,
+                        request_file=scoring_file,
+                    )
+                else:
+                    logger.info(f"Testing the model with params")
+                    json_file_name, scoring_input = self.create_json_file(
+                        file_name=self.deployment_name, dicitonary=dic_obj)
+                    logger.info("Online endpoint invoking satrted...")
+                    response = self.workspace_ml_client.online_endpoints.invoke(
+                        endpoint_name=online_endpoint_name,
+                        deployment_name=self.deployment_name,
+                        request_file=json_file_name,
+                    )
+                logger.info(
+                    f"Getting the reposne from the endpoint is this one : {response}")
             except Exception as ex:
                 logger.warning(
                     "::warning:: Trying to invoking the endpoint again by changing the input data and file")
