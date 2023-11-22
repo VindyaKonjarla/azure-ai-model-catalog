@@ -349,7 +349,7 @@ if __name__ == "__main__":
     print("registered_model---------",registered_model)
     # print("tv",tv)
     print("transformers_version---",transformers_version)
-    mlflow_version = registered_model.get("mlflow_version", None)
+    mlflow_version = registered_model.mlflow_version.get("mlflow_version", None)
     print(mlflow_version)
     # try:
      
