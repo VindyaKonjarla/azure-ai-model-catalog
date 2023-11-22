@@ -349,6 +349,8 @@ if __name__ == "__main__":
     print("registered_model---------",registered_model)
     # print("tv",tv)
     print("transformers_version---",transformers_version)
+    mlflow_version = registered_model.get("mlflow_version", None)
+    print(mlflow_version)
     # try:
      
     #   if mlflow_version==2.8.0 and tv==4.34.0:
