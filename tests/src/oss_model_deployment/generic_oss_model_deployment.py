@@ -169,6 +169,7 @@ def create_endpoint(workspace_ml_client, endpoint_name):
             name=endpoint_name,
             auth_mode="key"
         )
+        logger.warn("update the endpoint in the workspace")
         workspace_ml_client.online_endpoints.begin_create_or_update(
             endpoint).wait()
         return endpoint
@@ -303,7 +304,7 @@ if __name__ == "__main__":
         ml_client=workspace_ml_client, compute=compute, instance_type=instance_type)
     endpoint = create_endpoint(
         workspace_ml_client=workspace_ml_client,
-        endpoint_name=instance_type.lower()
+        endpoint_name=compute.lower()
     )
     task = HfTask(model_name=test_model_name).get_task()
     logger.info(f"Task is this : {task} for the model : {test_model_name}")
