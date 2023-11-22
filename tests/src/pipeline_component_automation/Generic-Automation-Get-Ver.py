@@ -265,8 +265,8 @@ if __name__ == "__main__":
     # except UnboundLocalError:
     model_detail = ModelDetail(workspace_ml_client=azureml_registry)
     registered_model = model_detail.get_model_detail(test_model_name=test_model_name)
-    transformers_version = registered_model.flavors
-    transformers_version.get("transformers").get("transformers_version", None) == "4.34.0"
+    flavour = registered_model.flavors
+    flavour.get("transformers").get("transformers_version", None) == "4.34.0"
     print("Version is 4.34.0")
     mlflow_version = registered_model.mlflow_version
     print(mlflow_version)
