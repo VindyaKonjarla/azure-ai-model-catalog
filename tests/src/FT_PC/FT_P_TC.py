@@ -490,7 +490,7 @@ if __name__ == "__main__":
     mlflow.set_tracking_uri(ws.get_mlflow_tracking_uri())
     registry_ml_client = MLClient(credential, registry_name="azureml-preview-test1")
     # experiment_name = "text-classification-emotion-detection"
-    experiment_name = "text-classification-emotion-detection-"+ test_model_name
+    experiment_name = "oss-text-classification-emotion-detection-"+ test_model_name
     print("Experiment name is:", {experiment_name})
 
     # # generating a unique timestamp that can be used for names and versions that need to be unique
