@@ -4,6 +4,7 @@
         "MLFlow-Batch-distilbert-base-cased-distilled-squad",
         "MLFlow-Import-t5-small",
         "MLFlow-Import-bert-base-cased",
+        "MLFlow-Import-bert-base-uncased",
         "MLFlow-Import-deepset/minilm-uncased-squad2",
         "MLFlow-Import-deepset/roberta-base-squad2",
         "MLFlow-Import-distilbert-base-cased-distilled-squad",
