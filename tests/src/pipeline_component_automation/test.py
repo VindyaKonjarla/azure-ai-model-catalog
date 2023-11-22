@@ -340,15 +340,15 @@ if __name__ == "__main__":
     registered_model_detail = ModelDetail(workspace_ml_client=workspace_ml_client)
     registered_model = registered_model_detail.get_model_detail(test_model_name=test_model_name)
     # mlflow_version = registered_model.mlflow_version
-    tv=registered_model.transformers_version
+    # tv=registered_model.transformers_version
     flavour = registered_model.flavors
     # mlflow_version=flavour.get("mlflow_version", None)
     transformers_version=flavour.get("transformers").get("transformers_version", None)
     # tv=flavour.get("hftransformersv2").get("transformers_version", None)
       # transformersversion=transformers_version==4.34.0 or tv==4.34.0  
-    print("registered_model",registered_model)
-    print("tv",tv)
-    print("transformers_version",transformers_version)
+    print("registered_model---------",registered_model)
+    # print("tv",tv)
+    print("transformers_version---",transformers_version)
     # try:
      
     #   if mlflow_version==2.8.0 and tv==4.34.0:
