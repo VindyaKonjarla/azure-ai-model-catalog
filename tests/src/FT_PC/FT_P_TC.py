@@ -559,6 +559,8 @@ if __name__ == "__main__":
             foundation_model, compute_cluster, gpus_per_node, training_parameters, optimization_parameters, experiment_name
         )
         print("Azure ML Pipeline completed successfully.")
+        print(f"Pipeline Job Status: {pipeline_job.status}")
+        print(f"Pipeline Job Details: {pipeline_job}")
 
         # Check if the pipeline job was successful
         if pipeline_job.status == "Completed":
