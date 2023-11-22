@@ -19,9 +19,9 @@ jobs:
       run: |
         cd ${{ inputs.test_set }}
         pwd
-        ls -1
-        for file in `ls -1`  
+        ls
+        for file in `ls`  
         do  
-          gh workflow run `cat $file | head -4 | tail 0 | sed 's/,//' | sed 's/"//g'`
+          gh workflow run `cat $file | head -4 | tail -1 | sed 's/,//' | sed 's/"//g'`
         done    
       working-directory: tests/config/queue
