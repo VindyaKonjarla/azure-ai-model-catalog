@@ -17,7 +17,7 @@ jobs:
   deploy-model-job:
     strategy:
       matrix:
-        model: ${{fromJson(inputs.model_list)}}
+        model: ${{fromJson(inputs.test_queue)}}
 
     runs-on: ubuntu-latest
 
