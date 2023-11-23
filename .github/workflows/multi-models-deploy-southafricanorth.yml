@@ -20,7 +20,7 @@ jobs:
     runs-on: ubuntu-latest
     strategy:
       matrix:
-        model: ${{ fromJson(file(inputs.test-eastus-0.json')).models }}
+        model: ${{ fromJson(file(test-eastus-0.json')).models }}
     steps:
       - name: check-out-repo-step
         uses: actions/checkout@v3
