@@ -574,20 +574,30 @@ if __name__ == "__main__":
         pipeline_job = create_and_run_azure_ml_pipeline(
             foundation_model, compute_cluster, gpus_per_node, training_parameters, optimization_parameters, experiment_name
         )
+        pipeline_job_name = pipeline_job.name
+        wait_for_pipeline_completion(workspace_ml_client, pipeline_job_name)
+        pipeline_status = pipeline_job.status.lower()
+        if pipeline_status == "completed":
+        # Call the function to register the model
+            register_model_to_workspace(workspace_ml_client, pipeline_job, test_model_name, timestamp)
+            print("Azure ML Pipeline completed successfully.")
+        else:
+            print(f"Azure ML Pipeline failed with status: {pipeline_status}. Model registration will not be performed.")
+
         # print("Azure ML Pipeline completed successfully.")
         # print(f"Pipeline Job Status: {pipeline_job.status}")
         # print(f"Pipeline Job Details: {pipeline_job}")
-        pipeline_job_name = pipeline_job.name
-        print("Azure ML Pipeline job submitted successfully.")
-        # Wait for the pipeline job to complete
-        wait_for_pipeline_completion(workspace_ml_client, pipeline_job_name)
+        # pipeline_job_name = pipeline_job.name
+        # print("Azure ML Pipeline job submitted successfully.")
+        # # Wait for the pipeline job to complete
+        # wait_for_pipeline_completion(workspace_ml_client, pipeline_job_name)
 
         # Check if the pipeline job was successful
-        if pipeline_job.status == "Completed":
-            # Call the function to register the model
-            register_model_to_workspace(workspace_ml_client, pipeline_job, test_model_name, timestamp)
-        else:
-            print("Azure ML Pipeline failed. Model registration will not be performed.")
+        # if pipeline_job.status == "Completed":
+        #     # Call the function to register the model
+        #     register_model_to_workspace(workspace_ml_client, pipeline_job, test_model_name, timestamp)
+        # else:
+        #     print("Azure ML Pipeline failed. Model registration will not be performed.")
 
     except Exception as e:
         # If an exception occurs, print the error message and exit with a non-zero exit code
