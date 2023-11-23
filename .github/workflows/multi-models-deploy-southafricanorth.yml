@@ -5,7 +5,7 @@ on:
     inputs:
       test_queue:
         description: 'List of models to deploy'
-        default: test-sonata-ws-eus
+        default: test-sonata-ws-eus-0
 
 
 env:
