@@ -8,14 +8,14 @@ on:
         default: huggingface-all
 
 
-env:
-   test_sku_type: cpu
-   test_set: huggingface-all
-   test_queue: test-eastus
+# env:
+#    test_sku_type: cpu
+#    test_set: huggingface-all
+#    test_queue: test-eastus
 
 jobs:
-  start-tests-job:
-    runs-on: ubuntu-latest
+  # start-tests-job:
+  #   runs-on: ubuntu-latest
   deploy-model-job:
     runs-on: ubuntu-latest
     strategy:
