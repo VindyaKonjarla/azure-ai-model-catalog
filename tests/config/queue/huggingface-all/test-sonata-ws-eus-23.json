@@ -2,8 +2,8 @@
     "queue_name": "test-sonata-ws-eus-23",
     "models": [
         
-        "oss-base-gpt2"
-        #"oss-train-gpt2"
+        "hf-base-gpt2"
+        #"hf-train-gpt2"
         
     ],
     "workspace": "sonata-ws-eus",
