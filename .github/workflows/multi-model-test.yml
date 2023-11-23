@@ -8,7 +8,10 @@ on:
         default: HF
 
 jobs:
-  start-tests-job:
+  deploy-model-job:
+    strategy:
+      matrix:
+        model: ${{fromJson(inputs.test_queue)}}
     runs-on: ubuntu-latest
     steps:
     - name: check-out-repo-step
