@@ -290,10 +290,10 @@ def main():
     else:
         print (f"::error Invalid mode {args.mode}")
         exit (1)
+    workflownames=workflow_names(models)
     filtered_models = [model for model in workflownames if model.startswith(("oss-base-", "hf-base-", "oss-train-", "hf-train-"))]
     print (f"Found {len(filtered_models)} models")
     print (f"models: {filtered_models}")
-    workflownames=workflow_names(models)
     
     # load workspace_list_json
     workspace_list = load_workspace_config()
