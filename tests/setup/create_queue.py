@@ -220,12 +220,12 @@ def write_single_workflow_file(model, q, secret_name):
     os.system(f"sed -i 's/test_secret_name: .*/test_secret_name: {secret_name}/g' {workflow_file}")
     # # Read in the file
     # github_token="GITHUB_TOKEN"
-    repository_owner="Konjarla-Vindya"
-    repository_name="son-azureml-oss-models"
+    repository_owner="Azure"
+    repository_name="azure-ai-model-catalog"
 
 
   
-    workflow_filename=f".github/workflows/oss-base-{workflowname}.yml"
+    workflow_filename=f".github/workflows/{workflowname}.yml"
     # workflow_sha="main"  # You need to provide the correct SHA
     new_workflow_name={model}
     new_job_name={model}
