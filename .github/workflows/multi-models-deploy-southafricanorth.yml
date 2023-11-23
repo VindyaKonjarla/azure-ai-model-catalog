@@ -3,9 +3,9 @@ name: multi-models-deploy
 on: 
   workflow_dispatch:
     inputs:
-      model_list:
+      test_set:
         description: 'List of models to deploy'
-        default: "distilgpt2-oss"
+        default: HF
 
 
 env:
@@ -14,13 +14,13 @@ env:
    test_queue: test-eastus
 
 jobs:
+  start-tests-job:
+    runs-on: ubuntu-latest
   deploy-model-job:
+    runs-on: ubuntu-latest
     strategy:
       matrix:
-        model: ${{fromJson(inputs.model_list)}}
-
-    runs-on: ubuntu-latest
-
+        model: ${{ fromJson(file(inputs.test-eastus-0.json')).models }}
     steps:
       - name: check-out-repo-step
         uses: actions/checkout@v3
