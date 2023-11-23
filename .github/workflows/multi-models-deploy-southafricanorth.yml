@@ -5,7 +5,7 @@ on:
     inputs:
       test_set:
         description: 'List of models to deploy'
-        default: HF
+        default: huggingface-all
 
 
 env:
