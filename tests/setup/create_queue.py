@@ -190,7 +190,7 @@ def write_single_workflow_file(model, q, secret_name):
 
 
   
-    workflow_file=f"{args.workflow_dir}/oss-base-{workflowname}.yml"
+    workflow_file=f"{args.workflow_dir}/{workflowname}.yml"
     # os.system(f"rm -rf {args.workflow_dir}/MLFlow-{workflowname}.yml") 
     # print("yml file----------------------------------------",workflow_file)
     # # print(workflow_file['env']['test_queue'])
