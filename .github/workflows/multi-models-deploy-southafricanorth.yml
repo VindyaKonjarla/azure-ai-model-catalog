@@ -3,15 +3,15 @@ name: multi-models-deploy
 on: 
   workflow_dispatch:
     inputs:
-      model_list:
+      test_queue:
         description: 'List of models to deploy'
-        required: true
+        default: test-sonata-ws-eus
 
 
 env:
    test_sku_type: cpu
-   test_set: huggingface-all
-   test_queue: test-southafricanorth
+   test_set: HF
+   test_queue: test-sonata-ws-eus
 
 jobs:
   deploy-model-job:
