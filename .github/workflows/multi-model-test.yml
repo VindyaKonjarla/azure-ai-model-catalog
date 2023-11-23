@@ -8,7 +8,7 @@ on:
         default: HF
 
 jobs:
-  start-tests-job:
+  deploy-model-job:
     runs-on: ubuntu-latest
     steps:
     - name: check-out-repo-step
