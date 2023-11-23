@@ -3,9 +3,9 @@ name: multi-models-deploy
 on: 
   workflow_dispatch:
     inputs:
-      test_queue:
+      test_queue: test-sonata-ws-eus
         description: 'List of models to deploy'
-        default: test-sonata-ws-eus
+        # default: test-sonata-ws-eus
 
 
 env:
