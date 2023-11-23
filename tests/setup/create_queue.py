@@ -110,24 +110,27 @@ def create_queue_files(queue, workspace_list):
                     
 def assign_models_to_queues(models, workspace_list):
     queue = {}
-    i=0
+    i = 0
+    prefixes_to_include = ["oss-base-", "hf-base-", "oss-train-", "hf-train-"]
+    
     while i < len(models):
         for workspace in workspace_list:
-            print (f"workspace instance: {workspace}")
+            print(f"workspace instance: {workspace}")
             for thread in range(parallel_tests):
-                print (f"thread instance: {thread}")
+                print(f"thread instance: {thread}")
                 if i < len(models):
-                    if workspace not in queue:
-                        queue[workspace] = {}
-                        print("queue[workspace]",queue[workspace])
-                    if thread not in queue[workspace]:
-                        queue[workspace][thread] = []
-                    queue[workspace][thread].append("oss-base-"+models[i])
-                    print("queue[workspace][thread]",queue[workspace][thread])
-                    i=i+1
-                    #print (f"Adding model {models[i]} at index {i} to queue {workspace}-{thread}")
+                    model = models[i]
+                    # Check if the model starts with any of the specified prefixes
+                    if any(model.startswith(prefix) for prefix in prefixes_to_include):
+                        if workspace not in queue:
+                            queue[workspace] = {}
+                            print("queue[workspace]", queue[workspace])
+                        # if thread not in queue[workspace]:
+                        #     queue[workspace][thread] = []
+                        # queue[workspace][thread].append("MLFlow-DI-" + model)
+                        print("queue[workspace][thread]", queue[workspace][thread])
+                    i = i + 1
                 else:
-                    #print (f"Reached end of models list, breaking out of loop")
                     if LOG:
                         print("current working directory is:", os.getcwd())
                         # if assign_models_to_queues under log_dir does not exist, create it
