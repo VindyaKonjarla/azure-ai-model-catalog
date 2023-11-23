@@ -269,18 +269,8 @@ def create_and_run_azure_ml_pipeline(
         pipeline_object, experiment_name=experiment_name
     )
 
-    # Wait for the pipeline job to complete
-    try:
-        workspace_ml_client.jobs.stream(pipeline_job.name)
 
-    except Exception as ex:
-        _, _, exc_tb = sys.exc_info()
-        # logger.error(f"::error:: Not able to initiate job \n")
-        # logger.error(f"The exception occured at this line no : {exc_tb.tb_lineno}" +
-        #              f" skipping the further process and the exception is this one : {ex}")
-        print("::error:: Not able to initiate job")
-        print(f"The exception occurred at this line no: {exc_tb.tb_lineno}" + f" skipping the further process, and the exception is: {ex}")
-        sys.exit(1)
+    workspace_ml_client.jobs.stream(pipeline_job.name)
     return pipeline_job
     
     
@@ -356,6 +346,18 @@ if __name__ == "__main__":
     latest_env = workspace_ml_client.environments.get(
         name=queue.environment, version=str(latest_version))
     print("Latest Environment :", latest_env)
+    expression_to_ignore = ["/", "\\", "|", "@", "#", ".",
+                            "$", "%", "^", "&", "*", "<", ">", "?", "!", "~"]
+    # Create the regular expression to ignore
+    regx_for_expression = re.compile(
+        '|'.join(map(re.escape, expression_to_ignore)))
+    # Check the model_name contains any of there character
+    expression_check = re.findall(regx_for_expression, test_model_name)
+    if expression_check:
+        # Replace the expression with hyphen
+        test_model_name  = regx_for_expression.sub("-", test_model_name)
+
+    print("model name replaced with - :", {test_model_name})
     version_list = list(workspace_ml_client.models.list(test_model_name))
 
     client = MlflowClient()
@@ -366,34 +368,19 @@ if __name__ == "__main__":
     print(f"Number of GPUs in compute: {gpus_per_node}")
 
 
-    # try:
-    #     pipeline_job = create_and_run_azure_ml_pipeline(
-    #         foundation_model, compute_cluster, gpus_per_node, training_parameters, optimization_parameters, experiment_name
-    #     )
-    #     print("Azure ML Pipeline completed successfully.")
-    # except Exception as e:
-    #     # If an exception occurs, print the error message and exit with a non-zero exit code
-    #     print(f"Error running Azure ML Pipeline: {str(e)}")
-    #     exit(1)
+
 
     try:
         pipeline_job = create_and_run_azure_ml_pipeline(
             foundation_model, compute_cluster, gpus_per_node, training_parameters, optimization_parameters, experiment_name
         )
         print("Azure ML Pipeline completed successfully.")
-        
-        # Check the status of the pipeline job
-        if pipeline_job.status != "Completed":
-            print(f"Azure ML Pipeline failed with status: {pipeline_job.status}")
-            # sys.exit(1)  # Exit with a non-zero status code
-            
-    
 
     except Exception as e:
         # If an exception occurs, print the error message and exit with a non-zero exit code
         print(f"Error running Azure ML Pipeline: {str(e)}")
         # sys.exit(1)  # Exit with a non-zero status code
-        raise Exception("Pipeline job failed")
+        sys.exit(1) 
 
     print("Completed")
 
