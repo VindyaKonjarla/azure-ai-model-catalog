@@ -5,7 +5,11 @@ on:
     inputs:
       test_queue: 
         description: 'List of models to deploy'
-        # default: test-sonata-ws-eus
+        default: 
+          for file in test-sonata-ws-eus-0  
+          do  
+            gh workflow run `cat $file | head -4 | tail -1 | sed 's/,//' | sed 's/"//g'`
+          done    
 
 
 env:
