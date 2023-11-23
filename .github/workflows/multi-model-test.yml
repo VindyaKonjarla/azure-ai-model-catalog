@@ -3,9 +3,9 @@ name: TRIGGER_TESTS
 on: 
   workflow_dispatch:
     inputs:
-      test_set:
+      test_queue:
         description: 'Test set to run'
-        default: HF
+        default: test-sonata-ws-eus-0
 
 jobs:
   deploy-model-job:
@@ -17,11 +17,11 @@ jobs:
       env:
         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
       run: |
-        cd ${{ inputs.test_set }}
+        cd ${{ inputs.test_queue }}
         pwd
         ls
         for file in `ls`  
         do  
           gh workflow run `cat $file | head -4 | tail -1 | sed 's/,//' | sed 's/"//g'`
         done    
-      working-directory: tests/config/queue
+      working-directory: tests/config/queue/HF
