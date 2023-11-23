@@ -290,9 +290,9 @@ def main():
     else:
         print (f"::error Invalid mode {args.mode}")
         exit (1)
-    
-    print (f"Found {len(models)} models")
-    print (f"models: {models}")
+    filtered_models = [model for model in workflownames if model.startswith(("oss-base-", "hf-base-", "oss-train-", "hf-train-"))]
+    print (f"Found {len(filtered_models)} models")
+    print (f"models: {filtered_models}")
     workflownames=workflow_names(models)
     
     # load workspace_list_json
@@ -305,7 +305,7 @@ def main():
     print("q",q)
     print("queue",queue)
     print (f"Created queues")
-    filtered_models = [model for model in workflownames if model.startswith(("oss-base-", "hf-base-", "oss-train-", "hf-train-"))]
+    
     # create queue files
     create_queue_files(queue, workspace_list)
     print (f"Created queue files")
