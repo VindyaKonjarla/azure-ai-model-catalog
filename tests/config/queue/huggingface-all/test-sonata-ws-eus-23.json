@@ -3,7 +3,7 @@
     "models": [
         
         "hf-base-gpt2"
-        #"hf-train-gpt2"
+        
         
     ],
     "workspace": "sonata-ws-eus",
