@@ -14,7 +14,7 @@ class HfTask:
     def __init__(self, model_name: str) -> None:
         self.model_name = model_name
 
-    def get_task(self):
+    def get_task(self, foundation_model):
         hf_api = HfApi()
         logger.info(
             "Fetching all data from the transformer sorted based on the last modified date")
@@ -50,11 +50,15 @@ class HfTask:
         df = df[df['pipeline_tag'].isin(TASK_NAME)]
         # Find the data with that particular name
         required_data = df[df.modelId.apply(lambda x: x == self.model_name)]
-        # Get the task
-        required_data = required_data["pipeline_tag"].to_string()
-        # Create pattern fiel number and space
-        pattern = r'[0-9\s+]'
-        # Replace number and space
-        final_data = re.sub(pattern, '', required_data)
-        logger.info(f"The specified task is this one : {final_data}")
-        return final_data
+        if not required_data.empty:  
+            # Get the task
+            required_data = required_data["pipeline_tag"].to_string()
+            # Create pattern fiel number and space
+            pattern = r'[0-9\s+]'
+            # Replace number and space
+            final_data = re.sub(pattern, '', required_data)
+            logger.info(f"The specified task is this one : {final_data}")
+            return final_data
+        else:
+            task = foundation_model.flavors["transformers"]["task"]
+            return task
