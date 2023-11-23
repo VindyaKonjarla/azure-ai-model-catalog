@@ -155,29 +155,34 @@ def assign_models_to_queues(models, workspace_list):
                     return queue
 # function to create workflow files
 # !!! any existing workflow files in workflow_dir will be overwritten. backup... !!!
-def create_workflow_files(q,workspace_list):
-    counter=0
-    print (f"Creating workflow files")
+
+
+def create_workflow_files(q, workspace_list, filtered_models):
+    counter = 0
+    print(f"Creating workflow files")
     # check if workflow_dir exists
     if not os.path.exists(args.workflow_dir):
         os.makedirs(args.workflow_dir)
     # generate workflow files
     for workspace in q:
-        print("entered q loop:",workspace)
+        print("entered q loop:", workspace)
         for thread in q[workspace]:
-            print("entered q of workspace loop:",thread)
+            print("entered q of workspace loop:", thread)
             for model in q[workspace][thread]:
-                # for model in models:
-                print("entered q of workspace of thread loop:",model)
-                # print("entered model of workspace of thread loop:",workflownames)
-                write_single_workflow_file(model,f"{workspace}-{thread}", workspace_list[workspace]['secret_name'])
-                # print progress
-                counter=counter+1
-                print("counter:",counter)
-                sys.stdout.write(f'{counter}\r')
-                sys.stdout.flush()
-    print (f"\nCreated {counter} workflow files")
-# function to write a single workflow file
+                if model in filtered_models:
+                    # for model in models:
+                    print("entered q of workspace of thread loop:", model)
+                    # print("entered model of workspace of thread loop:",workflownames)
+                    write_single_workflow_file(
+                        model, f"{workspace}-{thread}", workspace_list[workspace]['secret_name'])
+                    # print progress
+                    counter = counter + 1
+                    print("counter:", counter)
+                    sys.stdout.write(f'{counter}\r')
+                    sys.stdout.flush()
+    print(f"\nCreated {counter} workflow files")
+
+
 def write_single_workflow_file(model, q, secret_name):
     # print a single dot without a newline to show progress
     print (".", end="", flush=True)
@@ -265,14 +270,15 @@ def write_single_workflow_file(model, q, secret_name):
     
 def workflow_names(models):
     workflownames=[]
+    prefixes_to_include = ["oss-base-", "hf-base-", "oss-train-", "hf-train-"]
     j=1
     while j < len(models):
-        for names in models:
-            workflow_modelname=names.replace('/','-')
-            # print(f"workflow_modelname: {workflow_modelname}")
-            # print("beforeworkflow names",workflownames)
-            workflownames.append(workflow_modelname)
-            # print("in loop workflow names",workflownames)
+        for name in models:
+            for prefix in prefixes_to_include:
+                if name.startswith(prefix):
+                    workflow_modelname = name.replace('/', '-')
+                    workflownames.append(workflow_modelname)
+                    break
         j=j+1
     print("out of loop workflow names:",workflownames)
     return workflownames
@@ -301,18 +307,19 @@ def main():
     print("q",q)
     print("queue",queue)
     print (f"Created queues")
+    filtered_models = [model for model in workflownames if model.startswith(("oss-base-", "hf-base-", "oss-train-", "hf-train-"))]
     # create queue files
     create_queue_files(queue, workspace_list)
     print (f"Created queue files")
     # create workflow files
-    create_workflow_files(q, workspace_list)
+    create_workflow_files(q, workspace_list, filtered_models)
     print (f"Created workflow files")
     print (f"Summary:")
-    print (f"  Models: {len(models)}")
+    print (f"  Models: {len(filtered_models)}")
     print (f"  Workspaces: {len(workspace_list)}")
     print (f"  Parallel tests: {parallel_tests}")
     print (f"  Total queues: {len(workspace_list)*parallel_tests}")
-    print (f"  Average models per queue: {int(len(models)/(len(workspace_list)*parallel_tests))}")
+    print (f"  Average models per queue: {int(len(filtered_models)/(len(workspace_list)*parallel_tests))}")
         
 if __name__ == "__main__":
     main()
