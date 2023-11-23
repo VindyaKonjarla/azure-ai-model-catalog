@@ -3,25 +3,21 @@ name: multi-models-deploy
 on: 
   workflow_dispatch:
     inputs:
-      test_queue: 
+      model_list:
         description: 'List of models to deploy'
-        default: 
-          for file in test-sonata-ws-eus-0  
-          do  
-            gh workflow run `cat $file | head -4 | tail -1 | sed 's/,//' | sed 's/"//g'`
-          done    
+        default: "distilgpt2-oss"
 
 
 env:
    test_sku_type: cpu
-   test_set: HF
-   test_queue: test-sonata-ws-eus
+   test_set: huggingface-all
+   test_queue: test-eastus
 
 jobs:
   deploy-model-job:
     strategy:
       matrix:
-        model: ${{fromJson(inputs.test_queue)}}
+        model: ${{fromJson(inputs.model_list)}}
 
     runs-on: ubuntu-latest
 
@@ -69,19 +65,12 @@ jobs:
 
       - name: pip-install-fugashi[unidic-lite]
         run: pip install fugashi[unidic-lite] 
-      # - name: set-model-env-variable
-      #   run: echo "test_model_name=${{ matrix.model }}" >> $GITHUB_ENV
+      - name: set-model-env-variable
+        run: echo "test_model_name=${{ matrix.model }}" >> $GITHUB_ENV
 
       - name: Set Environment Variables
         run: |
-          cd ${{ inputs.test_queue }}
-          pwd
-          ls
-          for file in `ls`  
-          do  
-            gh workflow run `cat $file | head -4 | tail -1 | sed 's/,//' | sed 's/"//g'`
-          done    
-        working-directory: tests/config/queue/HF
+          #echo "test_model_name=your_model_name" >> $GITHUB_ENV
          
       - name: deploy-model-step
         id: deploy-model-step
