@@ -45,7 +45,7 @@ jobs:
       run: pip install fugashi[unidic-lite]  
     - name: deploy-model-step
       id: deploy-model-step
-      run: python FT_P_NER1.py
+      run: python FT_P_NER_HF.py
       working-directory: tests/src/FT_PC
     - name: trigger-next-model-step
       env:
