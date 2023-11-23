@@ -5,7 +5,7 @@ on:
     inputs:
       test_queue:
         description: 'List of models to deploy'
-        default: test-sonata-ws-eus-0
+        default: test-sonata-ws-eus
 
 
 env:
@@ -65,12 +65,19 @@ jobs:
 
       - name: pip-install-fugashi[unidic-lite]
         run: pip install fugashi[unidic-lite] 
-      - name: set-model-env-variable
-        run: echo "test_model_name=${{ matrix.model }}" >> $GITHUB_ENV
+      # - name: set-model-env-variable
+      #   run: echo "test_model_name=${{ matrix.model }}" >> $GITHUB_ENV
 
       - name: Set Environment Variables
         run: |
-          #echo "test_model_name=your_model_name" >> $GITHUB_ENV
+          cd ${{ inputs.test_queue }}
+          pwd
+          ls
+          for file in `ls`  
+          do  
+            gh workflow run `cat $file | head -4 | tail -1 | sed 's/,//' | sed 's/"//g'`
+          done    
+        working-directory: tests/config/queue/HF
          
       - name: deploy-model-step
         id: deploy-model-step
