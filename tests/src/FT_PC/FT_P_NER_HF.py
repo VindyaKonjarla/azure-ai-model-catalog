@@ -331,7 +331,6 @@ if __name__ == "__main__":
     mlflow.set_tracking_uri(ws.get_mlflow_tracking_uri())
     registry_ml_client = MLClient(credential, registry_name="azureml-preview-test1")
     registry_ml_client_model = MLClient(credential, registry_name="azureml")
-    model = Model(name=test_model_name,workspace_ml_client=azureml_registry)
     experiment_name = "token-classification-ner"
     # # generating a unique timestamp that can be used for names and versions that need to be unique
     # timestamp = str(int(time.time()))
