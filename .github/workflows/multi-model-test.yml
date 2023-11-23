@@ -11,7 +11,7 @@ jobs:
   deploy-model-job:
     strategy:
       matrix:
-        model: ${{fromJson(inputs.test_queue)}}
+        model: ${{fromJson(inputs.test_set)}}
     runs-on: ubuntu-latest
     steps:
     - name: check-out-repo-step
