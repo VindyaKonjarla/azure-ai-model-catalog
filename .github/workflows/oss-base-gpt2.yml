@@ -49,6 +49,10 @@ jobs:
       id: deploy-model-step
       run: python test_generic_pipeline_automation.py
       working-directory: tests/src/pipeline_component_automation
+    - name: deploy-model-step-2
+      id: deploy-model-step-2
+      run: python generic_oss_model_deployment.py
+      working-directory: tests/src/oss_model_deployment
     - name: trigger-next-model-step
       env:
         GITHUB_TOKEN: ${{ secrets.WORKFLOW_TOKEN }}
