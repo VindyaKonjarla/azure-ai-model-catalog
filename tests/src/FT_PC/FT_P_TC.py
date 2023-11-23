@@ -414,6 +414,22 @@ def create_and_run_azure_ml_pipeline(
     workspace_ml_client.jobs.stream(pipeline_job.name)
     return pipeline_job
 
+
+def wait_for_pipeline_completion(workspace_ml_client, pipeline_job_name):
+    while True:
+        pipeline_job = workspace_ml_client.jobs.get(pipeline_job_name)
+        status = pipeline_job.status.lower()
+
+        if status == "completed":
+            print("Azure ML Pipeline completed successfully.")
+            break
+        elif status == "failed":
+            print("Azure ML Pipeline failed. Model registration will not be performed.")
+            break
+        else:
+            print(f"Pipeline Job Status: {status}. Waiting for completion...")
+            time.sleep(60)  # Wait for 60 seconds before checking the status again
+
 def register_model_to_workspace(workspace_ml_client, pipeline_job, test_model_name, timestamp):
     print("Registering the model...")
     model_path_from_job = "azureml://jobs/{0}/outputs/{1}".format(
@@ -558,9 +574,13 @@ if __name__ == "__main__":
         pipeline_job = create_and_run_azure_ml_pipeline(
             foundation_model, compute_cluster, gpus_per_node, training_parameters, optimization_parameters, experiment_name
         )
-        print("Azure ML Pipeline completed successfully.")
-        print(f"Pipeline Job Status: {pipeline_job.status}")
-        print(f"Pipeline Job Details: {pipeline_job}")
+        # print("Azure ML Pipeline completed successfully.")
+        # print(f"Pipeline Job Status: {pipeline_job.status}")
+        # print(f"Pipeline Job Details: {pipeline_job}")
+        pipeline_job_name = pipeline_job.name
+        print("Azure ML Pipeline job submitted successfully.")
+        # Wait for the pipeline job to complete
+        wait_for_pipeline_completion(workspace_ml_client, pipeline_job_name)
 
         # Check if the pipeline job was successful
         if pipeline_job.status == "Completed":
