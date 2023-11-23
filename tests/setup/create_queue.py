@@ -61,12 +61,6 @@ except Exception as ex:
 registry_ml_client = MLClient(credential, registry_name="azureml-preview-test1")
 queue = []
 # move this to config file later
-
-
-
-
-
-
 templates=['transformers-cpu-small', 'transformers-cpu-medium', 'transformers-cpu-large','transformers-cpu-extra-large', 'transformers-gpu-medium']
 def load_workspace_config():
     with open(args.workspace_list) as f:
