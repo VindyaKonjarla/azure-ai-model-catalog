@@ -265,9 +265,9 @@ if __name__ == "__main__":
     # except UnboundLocalError:
     model_detail = ModelDetail(workspace_ml_client=azureml_registry)
     foundation_model = model_detail.get_model_detail(test_model_name=test_model_name)
-    flavour = foundation_model.flavors
-    transformers_version=flavour.get("transformers").get("transformers_version", None)
-    print("foundation_model---------",registered_model)
+    #flavour = foundation_model.flavors
+    #transformers_version=flavour.get("transformers").get("transformers_version", None)
+    #print("foundation_model---------",registered_model)
     computelist = foundation_model.properties.get(
         "evaluation-recommended-sku", "donotdelete-DS4v2")
     # a = computelist.index(',')
