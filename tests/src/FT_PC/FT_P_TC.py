@@ -426,6 +426,8 @@ def wait_for_pipeline_completion(workspace_ml_client, pipeline_job_name):
         elif status == "failed":
             print("Azure ML Pipeline failed. Model registration will not be performed.")
             break
+        elif status == "preparing":
+            print("Pipeline Job is still preparing. Waiting for completion...")
         else:
             print(f"Pipeline Job Status: {status}. Waiting for completion...")
             time.sleep(60)  # Wait for 60 seconds before checking the status again
