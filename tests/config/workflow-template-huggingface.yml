@@ -20,15 +20,15 @@ jobs:
     - name: azure-login-step
       uses: azure/login@v1
       with:
-        creds: ${{secrets.AZ_CRED}}
+        creds: ${{secrets.TEST_WS_CRED}}
     - name: pip-install-azure-ai-ml
       run: pip install azure-ai-ml
     - name: pip-install-azureml-core
       run: pip install azureml-core
     - name: pip-install-azureml-mlflow
-      run: pip install azureml-mlflow==1.53.0
+      run: pip install azureml-mlflow
     - name: pip-install-transformers
-      run: pip install transformers==4.34.0
+      run: pip install transformers
     - name: pip-install-transformers[torch]
       run: pip install transformers[torch]
     - name: pip-install-torchvision
