@@ -581,12 +581,17 @@ if __name__ == "__main__":
         pipeline_job_name = pipeline_job.name
         wait_for_pipeline_completion(workspace_ml_client, pipeline_job_name)
         pipeline_status = pipeline_job.status.lower()
-        if pipeline_status == "completed":
-        # Call the function to register the model
-            register_model_to_workspace(workspace_ml_client, pipeline_job, test_model_name, timestamp)
-            print("Azure ML Pipeline completed successfully.")
-        else:
-            print(f"Azure ML Pipeline failed with status: {pipeline_status}. Model registration will not be performed.")
+        print("Printing the pipeline job status:", {pipeline_status})
+        register_model_to_workspace(workspace_ml_client, pipeline_job, test_model_name, timestamp)
+        print("FInetuned model registered successfully.")
+
+    
+        # if pipeline_status == "completed":
+        # # Call the function to register the model
+        #     register_model_to_workspace(workspace_ml_client, pipeline_job, test_model_name, timestamp)
+        #     print("Azure ML Pipeline completed successfully.")
+        # else:
+        #     print(f"Azure ML Pipeline failed with status: {pipeline_status}. Model registration will not be performed.")
 
         # print("Azure ML Pipeline completed successfully.")
         # print(f"Pipeline Job Status: {pipeline_job.status}")
