@@ -472,8 +472,11 @@ def wait_for_pipeline_completion(workspace_ml_client, pipeline_job_name):
 
 def register_model_to_workspace(workspace_ml_client, pipeline_job, test_model_name, timestamp):
     print("Registering the model...")
-    model_path_from_job = "azureml://jobs/{0}/outputs/{1}".format(
-        pipeline_job.name, "trained_model"
+    # model_path_from_job = "azureml://jobs/{0}/outputs/{1}".format(
+    #     pipeline_job.name, "trained_model"
+    # )
+    model_path_from_job = "azureml://models/{0}/{1}".format(
+        test_model_name, timestamp
     )
 
     finetuned_model_name = "FT-NER-"+str(test_model_name)+"-oss"
