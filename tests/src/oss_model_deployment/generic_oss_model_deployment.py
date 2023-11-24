@@ -303,7 +303,7 @@ if __name__ == "__main__":
         workspace_ml_client=workspace_ml_client,
         endpoint_name=compute.lower()
     )
-    task = HfTask(model_name=test_model_name).get_task(foundation_model=foundation_model)
+    task = HfTask(model_name=test_model_name).get_task(foundation_model=registered_model)
     logger.info(f"Task is this : {task} for the model : {test_model_name}")
     #timestamp = str(int(time.time()))
     #exp_model_name = test_model_name.replace('/', '-')

@@ -60,5 +60,6 @@ class HfTask:
             logger.info(f"The specified task is this one : {final_data}")
             return final_data
         else:
-            task = foundation_model.flavors["transformers"]["task"]
+            #task = foundation_model.flavors["transformers"]["task"]
+            task = foundation_model.tags["task"]
             return task
