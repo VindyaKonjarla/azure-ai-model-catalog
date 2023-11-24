@@ -6,6 +6,7 @@ import json
 import os
 import sys
 from box import ConfigBox
+from azure.ai.ml.entities import Model
 from mlflow.tracking.client import MlflowClient
 from azureml.core import Workspace, Environment
 from azure.ai.ml import MLClient
