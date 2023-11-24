@@ -585,6 +585,7 @@ if __name__ == "__main__":
         wait_for_pipeline_completion(workspace_ml_client, pipeline_job_name)
         pipeline_status = pipeline_job.status.lower()
         print("Printing the pipeline job status:", {pipeline_status})
+        timestamp = int(time.time())
         register_model_to_workspace(workspace_ml_client, pipeline_job, test_model_name, timestamp)
         print("FInetuned model registered successfully.")
 
