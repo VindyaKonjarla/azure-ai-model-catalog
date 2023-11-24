@@ -13,6 +13,7 @@ from azure.identity import (
     DefaultAzureCredential,
     InteractiveBrowserCredential
 )
+from azure.ai.ml.constants import AssetTypes
 from azure.ai.ml.entities import AmlCompute
 import time
 from azure.ai.ml.dsl import pipeline
