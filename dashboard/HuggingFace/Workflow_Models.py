@@ -148,11 +148,11 @@ class Dashboard():
         return self.data
 
     def results(self, last_runs_dict):
-        results_dict = {"total_mp": 0, "success_mp": 0, "failure_mp": 0, "cancelled_mp": 0,"running_mp":0, "not_tested_mp": 0, "total_duration_mp": 0,
-                        "total_di": 0, "success_di": 0, "failure_di": 0, "cancelled_di": 0,"running_di":0, "not_tested_di": 0, "total_duration_di": 0,
-                       "total_batch": 0, "success_batch": 0, "failure_batch": 0, "cancelled_batch": 0,"running_batch":0, "not_tested_batch": 0, "total_duration_batch": 0,
-                       "total_import": 0, "success_import": 0, "failure_import": 0, "cancelled_import": 0,"running_import":0, "not_tested_import": 0, "total_duration_import": 0,
-                       "total_eval": 0, "success_eval": 0, "failure_eval": 0, "cancelled_eval": 0,"running_eval":0, "not_tested_eval": 0, "total_duration_eval": 0}
+        results_dict = {"total_oss-base": 0, "success_oss-base": 0, "failure_oss-base": 0, "cancelled_oss-base": 0,"running_oss-base":0, "not_tested_oss-base": 0, "total_duration_oss-base": 0,
+                       "total_oss-train": 0, "success_oss-train": 0, "failure_oss-train": 0, "cancelled_oss-train": 0,"running_oss-train":0, "not_tested_oss-train": 0, "total_duration_oss-train": 0,
+                       "total_hf-base": 0, "success_hf-base": 0, "failure_hf-base": 0, "cancelled_hf-base": 0,"running_hf-base":0, "not_tested_hf-base": 0, "total_duration_hf-base": 0,
+                       "total_hf-train": 0, "success_hf-train": 0, "failure_hf-train": 0, "cancelled_hf-train": 0,"running_hf-train":0, "not_tested_hf-train": 0, "total_duration_hf-train": 0,
+                       }
         summary = []
 
  
