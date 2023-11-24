@@ -10,6 +10,7 @@ from azure.ai.ml.entities import Model
 from mlflow.tracking.client import MlflowClient
 from azureml.core import Workspace, Environment
 from azure.ai.ml import MLClient
+from azureml.core import Model
 from azure.identity import (
     DefaultAzureCredential,
     InteractiveBrowserCredential
@@ -440,6 +441,35 @@ def wait_for_pipeline_completion(workspace_ml_client, pipeline_job_name):
             print(f"Pipeline Job Status: {status}. Waiting for completion...")
             time.sleep(60)  # Wait for 60 seconds before checking the status again
 
+# def register_model_to_workspace(workspace_ml_client, pipeline_job, test_model_name, timestamp):
+#     print("Registering the model...")
+#     model_path_from_job = "azureml://jobs/{0}/outputs/{1}".format(
+#         pipeline_job.name, "trained_model"
+#     )
+
+#     finetuned_model_name = "FT-NER-"+str(test_model_name)+"-oss"
+#     finetuned_model_name = finetuned_model_name.replace("/", "-")
+#     print("The Finetuned model name;", {finetuned_model_name})
+
+#     print("Path to register model: ", model_path_from_job)
+#     prepare_to_register_model = Model(
+#         path=model_path_from_job,
+#         type=AssetTypes.MLFLOW_MODEL,
+#         name=finetuned_model_name,
+#         version=timestamp,  # use timestamp as version to avoid version conflict
+#         description=test_model_name + " fine-tuned model for text-classification-emotion detection",
+#     )
+#     print("Prepare to register model: \n", prepare_to_register_model)
+
+#     # Register the model from pipeline job output
+#     registered_model = workspace_ml_client.models.create_or_update(
+#         prepare_to_register_model
+#     )
+#     print("Registered model: \n", registered_model)
+
+
+
+
 def register_model_to_workspace(workspace_ml_client, pipeline_job, test_model_name, timestamp):
     print("Registering the model...")
     model_path_from_job = "azureml://jobs/{0}/outputs/{1}".format(
@@ -448,23 +478,20 @@ def register_model_to_workspace(workspace_ml_client, pipeline_job, test_model_na
 
     finetuned_model_name = "FT-NER-"+str(test_model_name)+"-oss"
     finetuned_model_name = finetuned_model_name.replace("/", "-")
-    print("The Finetuned model name;", {finetuned_model_name})
+    print("The Finetuned model name:", finetuned_model_name)
 
     print("Path to register model: ", model_path_from_job)
-    prepare_to_register_model = Model(
-        path=model_path_from_job,
-        type=AssetTypes.MLFLOW_MODEL,
-        name=finetuned_model_name,
-        version=timestamp,  # use timestamp as version to avoid version conflict
-        description=test_model_name + " fine-tuned model for text-classification-emotion detection",
-    )
-    print("Prepare to register model: \n", prepare_to_register_model)
 
     # Register the model from pipeline job output
-    registered_model = workspace_ml_client.models.create_or_update(
-        prepare_to_register_model
+    registered_model = Model.register(
+        workspace=workspace_ml_client,
+        model_path=model_path_from_job,
+        model_name=finetuned_model_name,
+        tags={'framework': 'MLflow'},
+        description=test_model_name + " fine-tuned model for text-classification-emotion detection",
     )
     print("Registered model: \n", registered_model)
+
 
 
 
