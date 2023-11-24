@@ -174,8 +174,8 @@ class Dashboard():
         results_dict["failure_oss-train"] = df.loc[(df['status'] == 'completed') & (df['conclusion'] == 'failure') & (df["workflow_name"].str.startswith("oss-train") == True)]['workflow_id'].count()
         results_dict["cancelled_oss-train"] = df.loc[(df['status'] == 'completed') & (df['conclusion'] == 'cancelled') & (df["workflow_name"].str.startswith("oss-train") == True)]['workflow_id'].count()
         results_dict["running_oss-train"] = df.loc[(df['status'] == 'in_progress')& (df["workflow_name"].str.startswith("oss-train") == True)]['workflow_id'].count()  # Add running count
-        # results_dict["not_tested_di"] = df.loc[(df['status'] != 'completed') & (df["workflow_name"].str.startswith("MLFlow-DI") == True)]['workflow_id'].count()
-        results_dict["not_tested_oss-train"] = results_dict["oss-train"] - (results_dict["oss-train"] + results_dict["oss-train"] + results_dict["oss-train"] + results_dict["oss-train"])
+        # results_dict["not_tested_di"] = df.loc[(df['status'] != 'completed') & (df["workflow_name"].str.startswith("oss-train") == True)]['workflow_id'].count()
+        results_dict["not_tested_oss-train"] = results_dict["total_oss-train"] - (results_dict["success_oss-train"] + results_dict["failure_oss-train"] + results_dict["cancelled_oss-train"] + results_dict["running_oss-train"])
 
      
         results_dict["total_hf-base"] = df.loc[df["workflow_name"].str.startswith("hf-base") == True]["workflow_id"].count()
