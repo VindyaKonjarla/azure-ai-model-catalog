@@ -83,8 +83,7 @@ def create_queue_files(queue, workspace_list):
     for workspace in queue:
         for thread in queue[workspace]:
             print (f"Generating queue file {args.queue_dir}/{args.test_set}/{workspace}-{thread}.json")
-            q_dict = {"queue_name": f"{workspace}-{thread}", "models": "oss-base-t5-base.yml"
-}
+            q_dict = {"queue_name": f"{workspace}-{thread}", "models": queue[workspace][thread]}
             # get the workspace from workspace_list
             q_dict["workspace"] = workspace
             q_dict["subscription"] = workspace_list[workspace]["subscription"]
@@ -105,27 +104,24 @@ def create_queue_files(queue, workspace_list):
                     
 def assign_models_to_queues(models, workspace_list):
     queue = {}
-    i = 0
-    prefixes_to_include = ["oss-base-", "hf-base-", "oss-train-", "hf-train-"]
-    
+    i=0
     while i < len(models):
         for workspace in workspace_list:
-            print(f"workspace instance: {workspace}")
+            print (f"workspace instance: {workspace}")
             for thread in range(parallel_tests):
-                print(f"thread instance: {thread}")
+                print (f"thread instance: {thread}")
                 if i < len(models):
-                    model = models[i]
-                    # Check if the model starts with any of the specified prefixes
-                    if any(model.startswith(prefix) for prefix in prefixes_to_include):
-                        if workspace not in queue:
-                            queue[workspace] = {}
-                            print("queue[workspace]", queue[workspace])
-                        if thread not in queue[workspace]:
-                            queue[workspace][thread] = []
-                        queue[workspace][thread].append("oss-base-" + model)
-                        print("queue[workspace][thread]", queue[workspace][thread])
-                    i = i + 1
+                    if workspace not in queue:
+                        queue[workspace] = {}
+                        print("queue[workspace]",queue[workspace])
+                    if thread not in queue[workspace]:
+                        queue[workspace][thread] = []
+                    queue[workspace][thread].append("oss-base-"+models[i])
+                    print("queue[workspace][thread]",queue[workspace][thread])
+                    i=i+1
+                    #print (f"Adding model {models[i]} at index {i} to queue {workspace}-{thread}")
                 else:
+                    #print (f"Reached end of models list, breaking out of loop")
                     if LOG:
                         print("current working directory is:", os.getcwd())
                         # if assign_models_to_queues under log_dir does not exist, create it
@@ -153,54 +149,44 @@ def assign_models_to_queues(models, workspace_list):
                     return queue
 # function to create workflow files
 # !!! any existing workflow files in workflow_dir will be overwritten. backup... !!!
-
-
-def create_workflow_files(q, workspace_list, filtered_models):
-    counter = 0
-    print(f"Creating workflow files")
+def create_workflow_files(q,workspace_list):
+    counter=0
+    print (f"Creating workflow files")
     # check if workflow_dir exists
     if not os.path.exists(args.workflow_dir):
         os.makedirs(args.workflow_dir)
     # generate workflow files
     for workspace in q:
-        print("entered q loop:", workspace)
+        print("entered q loop:",workspace)
         for thread in q[workspace]:
-            print("entered q of workspace loop:", thread)
+            print("entered q of workspace loop:",thread)
             for model in q[workspace][thread]:
-                if model in filtered_models:
-                    # for model in models:
-                    print("entered q of workspace of thread loop:", model)
-                    # print("entered model of workspace of thread loop:",workflownames)
-                    write_single_workflow_file(
-                        model, f"{workspace}-{thread}", workspace_list[workspace]['secret_name'])
-                    # print progress
-                    counter = counter + 1
-                    print("counter:", counter)
-                    sys.stdout.write(f'{counter}\r')
-                    sys.stdout.flush()
-    print(f"\nCreated {counter} workflow files")
-
-
+                # for model in models:
+                print("entered q of workspace of thread loop:",model)
+                # print("entered model of workspace of thread loop:",workflownames)
+                write_single_workflow_file(model,f"{workspace}-{thread}", workspace_list[workspace]['secret_name'])
+                # print progress
+                counter=counter+1
+                print("counter:",counter)
+                sys.stdout.write(f'{counter}\r')
+                sys.stdout.flush()
+    print (f"\nCreated {counter} workflow files")
+# function to write a single workflow file
 def write_single_workflow_file(model, q, secret_name):
     # print a single dot without a newline to show progress
     print (".", end="", flush=True)
+    print(model)
     workflowname=model.replace('/','-')
+    # workflowname = f"oss-base-{model.replace('/', '-')}"
     # workflowname=model.replace('/','-')
     # os.system(f"sed -i 's/name: .*/name: {model}/g' {args.workflow_template}")
-
-
-  
     workflow_file=f"{args.workflow_dir}/{workflowname}.yml"
     # os.system(f"rm -rf {args.workflow_dir}/MLFlow-{workflowname}.yml") 
     # print("yml file----------------------------------------",workflow_file)
     # # print(workflow_file['env']['test_queue'])
     print (f"Generating workflow file: {workflow_file}")
     os.system(f"cp {args.workflow_template} {workflow_file}")
-
-
-
-  
-    test_Model=model.replace("oss-base"," ")
+    test_Model=model.replace("oss-base-"," ")
     test_model_name=test_Model.strip()
     print(test_model_name)
     os.system(f"sed -i s/name: .*/name: {model}/g' {workflow_file}")
@@ -221,11 +207,8 @@ def write_single_workflow_file(model, q, secret_name):
     os.system(f"sed -i 's/test_secret_name: .*/test_secret_name: {secret_name}/g' {workflow_file}")
     # # Read in the file
     # github_token="GITHUB_TOKEN"
-    repository_owner="Azure"
-    repository_name="azure-ai-model-catalog"
-
-
-  
+    repository_owner="Konjarla-Vindya"
+    repository_name="son-azureml-oss-models"
     workflow_filename=f".github/workflows/{workflowname}.yml"
     # workflow_sha="main"  # You need to provide the correct SHA
     new_workflow_name={model}
@@ -268,15 +251,14 @@ def write_single_workflow_file(model, q, secret_name):
     
 def workflow_names(models):
     workflownames=[]
-    prefixes_to_include = ["oss-base-", "hf-base-", "oss-train-", "hf-train-"]
     j=1
     while j < len(models):
-        for name in models:
-            for prefix in prefixes_to_include:
-                if name.startswith(prefix):
-                    workflow_modelname = name.replace('/', '-')
-                    workflownames.append(workflow_modelname)
-                    break
+        for names in models:
+            # workflow_modelname=names.replace('/','-')
+            # print(f"workflow_modelname: {workflow_modelname}")
+            # print("beforeworkflow names",workflownames)
+            workflownames.append(workflow_modelname)
+            # print("in loop workflow names",workflownames)
         j=j+1
     print("out of loop workflow names:",workflownames)
     return workflownames
@@ -290,10 +272,10 @@ def main():
     else:
         print (f"::error Invalid mode {args.mode}")
         exit (1)
+    
+    print (f"Found {len(models)} models")
+    print (f"models: {models}")
     workflownames=workflow_names(models)
-    filtered_models = [model for model in workflownames if model.startswith(("oss-base-", "hf-base-", "oss-train-", "hf-train-"))]
-    print (f"Found {len(filtered_models)} models")
-    print (f"models: {filtered_models}")
     
     # load workspace_list_json
     workspace_list = load_workspace_config()
@@ -305,19 +287,18 @@ def main():
     print("q",q)
     print("queue",queue)
     print (f"Created queues")
-    
     # create queue files
     create_queue_files(queue, workspace_list)
     print (f"Created queue files")
     # create workflow files
-    create_workflow_files(q, workspace_list, filtered_models)
+    create_workflow_files(q, workspace_list)
     print (f"Created workflow files")
     print (f"Summary:")
-    print (f"  Models: {len(filtered_models)}")
+    print (f"  Models: {len(models)}")
     print (f"  Workspaces: {len(workspace_list)}")
     print (f"  Parallel tests: {parallel_tests}")
     print (f"  Total queues: {len(workspace_list)*parallel_tests}")
-    print (f"  Average models per queue: {int(len(filtered_models)/(len(workspace_list)*parallel_tests))}")
+    print (f"  Average models per queue: {int(len(models)/(len(workspace_list)*parallel_tests))}")
         
 if __name__ == "__main__":
     main()
