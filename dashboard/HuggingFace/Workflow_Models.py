@@ -184,7 +184,7 @@ class Dashboard():
         results_dict["cancelled_hf-base"] = df.loc[(df['status'] == 'completed') & (df['conclusion'] == 'cancelled') & (df["workflow_name"].str.startswith("hf-base") == True)]['workflow_id'].count()
         results_dict["running_hf-base"] = df.loc[(df['status'] == 'in_progress')& (df["workflow_name"].str.startswith("hf-base") == True)]['workflow_id'].count()  # Add running count
         # results_dict["not_tested_import"] = df.loc[(df['status'] != 'completed') & (df["workflow_name"].str.startswith("MLFlow-Import") == True)]['workflow_id'].count()
-        results_dict["not_tested_hf-base"] = results_dict["total_hf-base"] - (results_dict["success_hf-base"] + results_dict["failure_hf-base"] + results_dict["cancelled_hf-base"] + results_dict["running_import"])
+        results_dict["not_tested_hf-base"] = results_dict["total_hf-base"] - (results_dict["success_hf-base"] + results_dict["failure_hf-base"] + results_dict["cancelled_hf-base"] + results_dict["running_hf-base"])
 
         
         results_dict["total_hf-train"] = df.loc[df["workflow_name"].str.startswith("hf-train") == True]["workflow_id"].count()
