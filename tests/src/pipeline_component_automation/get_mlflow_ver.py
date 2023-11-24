@@ -346,7 +346,7 @@ if __name__ == "__main__":
     # tv=registered_model.transformers_version
     flavour = registered_model.flavors
     print(flavour)
-    tgs = registered_model.tags
+    tgs = registered_model.tags.get("mlflow.version")
     print(tgs)
     # mlflow_version=flavour.get("mlflow_version", None)
     transformers_version=flavour.get("transformers").get("transformers_version", None)
