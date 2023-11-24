@@ -178,31 +178,25 @@ class Dashboard():
         results_dict["not_tested_oss-train"] = results_dict["oss-train"] - (results_dict["oss-train"] + results_dict["oss-train"] + results_dict["oss-train"] + results_dict["oss-train"])
 
      
-        results_dict["total_import"] = df.loc[df["workflow_name"].str.startswith("MLFlow-Import") == True]["workflow_id"].count()
-        results_dict["success_import"] = df.loc[(df['status'] == 'completed') & (df['conclusion'] == 'success') & (df["workflow_name"].str.startswith("MLFlow-Import") == True)]['workflow_id'].count()
-        results_dict["failure_import"] = df.loc[(df['status'] == 'completed') & (df['conclusion'] == 'failure') & (df["workflow_name"].str.startswith("MLFlow-Import") == True)]['workflow_id'].count()
-        results_dict["cancelled_import"] = df.loc[(df['status'] == 'completed') & (df['conclusion'] == 'cancelled') & (df["workflow_name"].str.startswith("MLFlow-Import") == True)]['workflow_id'].count()
-        results_dict["running_import"] = df.loc[(df['status'] == 'in_progress')& (df["workflow_name"].str.startswith("MLFlow-Import") == True)]['workflow_id'].count()  # Add running count
+        results_dict["total_hf-base"] = df.loc[df["workflow_name"].str.startswith("hf-base") == True]["workflow_id"].count()
+        results_dict["success_hf-base"] = df.loc[(df['status'] == 'completed') & (df['conclusion'] == 'success') & (df["workflow_name"].str.startswith("hf-base") == True)]['workflow_id'].count()
+        results_dict["failure_hf-base"] = df.loc[(df['status'] == 'completed') & (df['conclusion'] == 'failure') & (df["workflow_name"].str.startswith("hf-base") == True)]['workflow_id'].count()
+        results_dict["cancelled_hf-base"] = df.loc[(df['status'] == 'completed') & (df['conclusion'] == 'cancelled') & (df["workflow_name"].str.startswith("hf-base") == True)]['workflow_id'].count()
+        results_dict["running_hf-base"] = df.loc[(df['status'] == 'in_progress')& (df["workflow_name"].str.startswith("hf-base") == True)]['workflow_id'].count()  # Add running count
         # results_dict["not_tested_import"] = df.loc[(df['status'] != 'completed') & (df["workflow_name"].str.startswith("MLFlow-Import") == True)]['workflow_id'].count()
-        results_dict["not_tested_import"] = results_dict["total_import"] - (results_dict["success_import"] + results_dict["failure_import"] + results_dict["cancelled_import"] + results_dict["running_import"])
+        results_dict["not_tested_hf-base"] = results_dict["total_hf-base"] - (results_dict["success_hf-base"] + results_dict["failure_hf-base"] + results_dict["cancelled_hf-base"] + results_dict["running_import"])
 
         
-        results_dict["total_batch"] = df.loc[df["workflow_name"].str.startswith("MLFlow-Batch") == True]["workflow_id"].count()
-        results_dict["success_batch"] = df.loc[(df['status'] == 'completed') & (df['conclusion'] == 'success') & (df["workflow_name"].str.startswith("MLFlow-Batch") == True)]['workflow_id'].count()
-        results_dict["failure_batch"] = df.loc[(df['status'] == 'completed') & (df['conclusion'] == 'failure') & (df["workflow_name"].str.startswith("MLFlow-Batch") == True)]['workflow_id'].count()
-        results_dict["cancelled_batch"] = df.loc[(df['status'] == 'completed') & (df['conclusion'] == 'cancelled') & (df["workflow_name"].str.startswith("MLFlow-Batch") == True)]['workflow_id'].count()
-        results_dict["running_batch"] = df.loc[(df['status'] == 'in_progress')& (df["workflow_name"].str.startswith("MLFlow-Batch") == True)]['workflow_id'].count()  # Add running count
+        results_dict["total_hf-train"] = df.loc[df["workflow_name"].str.startswith("hf-train") == True]["workflow_id"].count()
+        results_dict["success_hf-train"] = df.loc[(df['status'] == 'completed') & (df['conclusion'] == 'success') & (df["workflow_name"].str.startswith("hf-train") == True)]['workflow_id'].count()
+        results_dict["failure_hf-train"] = df.loc[(df['status'] == 'completed') & (df['conclusion'] == 'failure') & (df["workflow_name"].str.startswith("hf-train") == True)]['workflow_id'].count()
+        results_dict["cancelled_hf-train"] = df.loc[(df['status'] == 'completed') & (df['conclusion'] == 'cancelled') & (df["workflow_name"].str.startswith("hf-train") == True)]['workflow_id'].count()
+        results_dict["running_hf-train"] = df.loc[(df['status'] == 'in_progress')& (df["workflow_name"].str.startswith("hf-train") == True)]['workflow_id'].count()  # Add running count
         # results_dict["not_tested_batch"] = df.loc[(df['status'] != 'completed') & (df["workflow_name"].str.startswith("MLFlow-Batch") == True)]['workflow_id'].count()
-        results_dict["not_tested_batch"] = results_dict["total_batch"] - (results_dict["success_batch"] + results_dict["failure_batch"] + results_dict["cancelled_batch"] + results_dict["running_batch"])
+        results_dict["not_tested_hf-train"] = results_dict["total_hf-train"] - (results_dict["success_hf-train"] + results_dict["failure_hf-train"] + results_dict["cancelled_hf-train"] + results_dict["running_hf-train"])
 
      
-        results_dict["total_eval"] = df.loc[df["workflow_name"].str.startswith("MLFlow-Eval") == True]["workflow_id"].count()
-        results_dict["success_eval"] = df.loc[(df['status'] == 'completed') & (df['conclusion'] == 'success') & (df["workflow_name"].str.startswith("MLFlow-Eval") == True)]['workflow_id'].count()
-        results_dict["failure_eval"] = df.loc[(df['status'] == 'completed') & (df['conclusion'] == 'failure') & (df["workflow_name"].str.startswith("MLFlow-Eval") == True)]['workflow_id'].count()
-        results_dict["cancelled_eval"] = df.loc[(df['status'] == 'completed') & (df['conclusion'] == 'cancelled') & (df["workflow_name"].str.startswith("MLFlow-Eval") == True)]['workflow_id'].count()
-        results_dict["running_eval"] = df.loc[(df['status'] == 'in_progress')& (df["workflow_name"].str.startswith("MLFlow-Eval") == True)]['workflow_id'].count()  # Add running count
-        # results_dict["not_tested_eval"] = df.loc[(df['status'] != 'completed') & (df["workflow_name"].str.startswith("MLFlow-Eval") == True)]['workflow_id'].count()
-        results_dict["not_tested_eval"] = results_dict["total_eval"] - (results_dict["success_eval"] + results_dict["failure_eval"] + results_dict["cancelled_eval"] + results_dict["running_eval"])
+  
 
      
         summary.append("|Category|🚀Total|✅Pass|Pass%|❌Failure|Failure%|🚫Cancelled|⏳Running|Others") 
@@ -212,11 +206,11 @@ class Dashboard():
         #summary.append("🚀Total|✅Success|❌Failure|🚫Cancelled|⏳Running|")
         #summary.append("-----|-------|-------|-------|-------|")
         
-        summary.append(f"Online Endpoint - Dynamic Installation|{results_dict['total_di']}|{results_dict['success_di']}|{results_dict['success_di']/results_dict['total_di']:.2%}|{results_dict['failure_di']}|{results_dict['failure_di']/results_dict['total_di']:.2%}|{results_dict['cancelled_di']}|{results_dict['running_di']}|{results_dict['not_tested_di']}|")
-        summary.append(f"Online Endpoint - Model Packaging|{results_dict['total_mp']}|{results_dict['success_mp']}|{results_dict['success_mp']/results_dict['total_mp']:.2%}|{results_dict['failure_mp']}|{results_dict['failure_mp']/results_dict['total_mp']:.2%}|{results_dict['cancelled_mp']}|{results_dict['running_mp']}|{results_dict['not_tested_mp']}|")
-        summary.append(f"Batch Endpoint|{results_dict['total_batch']}|{results_dict['success_batch']}|{results_dict['success_batch']/results_dict['total_batch']:.2%}|{results_dict['failure_batch']}|{results_dict['failure_batch']/results_dict['total_batch']:.2%}|{results_dict['cancelled_batch']}|{results_dict['running_batch']}|{results_dict['not_tested_batch']}|")
-        summary.append(f"Import|{results_dict['total_import']}|{results_dict['success_import']}|{results_dict['success_import']/results_dict['total_import']:.2%}|{results_dict['failure_import']}|{results_dict['failure_import']/results_dict['total_import']:.2%}|{results_dict['cancelled_import']}|{results_dict['running_import']}|{results_dict['not_tested_import']}|")
-        summary.append(f"Evaluate|{results_dict['total_eval']}|{results_dict['success_eval']}|{results_dict['success_eval']/results_dict['total_eval']:.2%}|{results_dict['failure_eval']}|{results_dict['failure_eval']/results_dict['total_eval']:.2%}|{results_dict['cancelled_eval']}|{results_dict['running_eval']}|{results_dict['not_tested_eval']}|")
+        summary.append(f"Oss-Base|{results_dict['total_oss-base']}|{results_dict['success_oss-base']}|{results_dict['success_oss-base']/results_dict['total_oss-base']:.2%}|{results_dict['failure_oss-base']}|{results_dict['failure_oss-base']/results_dict['total_oss-base']:.2%}|{results_dict['cancelled_oss-base']}|{results_dict['running_oss-base']}|{results_dict['not_tested_oss-base']}|")
+        summary.append(f"Oss-Train|{results_dict['total_oss-train']}|{results_dict['success_oss-train']}|{results_dict['success_oss-train']/results_dict['total_oss-train']:.2%}|{results_dict['failure_oss-train']}|{results_dict['failure_oss-train']/results_dict['total_oss-train']:.2%}|{results_dict['cancelled_oss-train']}|{results_dict['running_oss-train']}|{results_dict['not_tested_oss-train']}|")
+        summary.append(f"Hf-Base|{results_dict['total_hf-base']}|{results_dict['success_hf-base']}|{results_dict['success_hf-base']/results_dict['total_hf-base']:.2%}|{results_dict['failure_hf-base']}|{results_dict['failure_hf-base']/results_dict['total_hf-base']:.2%}|{results_dict['cancelled_hf-base']}|{results_dict['running_hf-base']}|{results_dict['not_tested_hf-base']}|")
+        summary.append(f"Hf-Train|{results_dict['total_hf-train']}|{results_dict['success_hf-train']}|{results_dict['success_hf-train']/results_dict['total_hf-train']:.2%}|{results_dict['failure_hf-train']}|{results_dict['failure_hf-train']/results_dict['total_hf-train']:.2%}|{results_dict['cancelled_hf-train']}|{results_dict['running_hf-train']}|{results_dict['not_tested_hf-train']}|")
+        #summary.append(f"Evaluate|{results_dict['total_eval']}|{results_dict['success_eval']}|{results_dict['success_eval']/results_dict['total_eval']:.2%}|{results_dict['failure_eval']}|{results_dict['failure_eval']/results_dict['total_eval']:.2%}|{results_dict['cancelled_eval']}|{results_dict['running_eval']}|{results_dict['not_tested_eval']}|")
      
         models_df = pandas.DataFrame.from_dict(self.models_data)
         models_md = models_df.to_markdown()
@@ -225,7 +219,7 @@ class Dashboard():
 
         summary_text = "\n".join(summary)
        
-        with open("FoundationModels_dashboard.md", "w", encoding="utf-8") as f:
+        with open("Workflow_Models.md", "w", encoding="utf-8") as f:
             f.write(summary_text)
             f.write(os.linesep)
             f.write(os.linesep)
