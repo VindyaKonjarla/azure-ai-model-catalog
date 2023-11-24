@@ -20,7 +20,9 @@ from azure.ai.ml.entities import CommandComponent, PipelineComponent, Job, Compo
 from azure.ai.ml import PyTorchDistribution, Input
 import ast
 import re
-import timestamp
+from datetime import datetime
+import time
+
 # from azure.ai.ml.entities import MLClient
 
 check_override = True
