@@ -1,13 +1,13 @@
-name: hf-base-gpt2
+name: hf-base-gpt2-large
 
 on: 
   workflow_dispatch:
 
 env:
-  test_model_name: gpt2
+  test_model_name: gpt2-large
   test_sku_type: cpu
   test_trigger_next_model: true
-  test_queue: test-eastus-2
+  test_queue: test-southafricanorth-1
   test_set: huggingface-all
   test_keep_looping: false
 
