@@ -22,6 +22,8 @@ import ast
 import re
 from datetime import datetime
 import time
+from azureml.core import Model
+
 
 # from azure.ai.ml.entities import MLClient
 
@@ -444,6 +446,7 @@ def register_model_to_workspace(workspace_ml_client, pipeline_job, test_model_na
 
     finetuned_model_name = "FT-NER-"+str(test_model_name)+"-oss"
     finetuned_model_name = finetuned_model_name.replace("/", "-")
+    print("The Finetuned model name;", {finetuned_model_name})
 
     print("Path to register model: ", model_path_from_job)
     prepare_to_register_model = Model(
