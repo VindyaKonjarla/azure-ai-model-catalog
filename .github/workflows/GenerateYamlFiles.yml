@@ -33,6 +33,14 @@ jobs:
       id: deploy-model-step
       run: python create_queue.py
       working-directory: tests/setup
+    - name: deploy-model-step-1
+      id: deploy-model-step-1
+      run: python test_generic_pipeline_automation.py
+      working-directory: tests/src/pipeline_component_automation
+    - name: deploy-model-step-2
+      id: deploy-model-step-2
+      run: python generic_oss_model_deployment.py
+      working-directory: tests/src/oss_model_deployment
     - name: Commit files
       id: commit
       run: | 
