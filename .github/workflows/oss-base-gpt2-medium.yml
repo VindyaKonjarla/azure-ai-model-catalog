@@ -1,13 +1,13 @@
-name: oss-base-gpt2
+name: oss-base-gpt2-medium
 
 on: 
   workflow_dispatch:
 
 env:
-  test_model_name: gpt2
+  test_model_name: gpt2-medium
   test_sku_type: cpu
   test_trigger_next_model: true
-  test_queue: test-eastus-2
+  test_queue: test-norwayeast-2
   test_set: huggingface-all
   test_keep_looping: false
 
