@@ -254,7 +254,7 @@ def workflow_names(models):
     j=1
     while j < len(models):
         for names in models:
-            # workflow_modelname=names.replace('/','-')
+            workflow_modelname=names.replace('/','-')
             # print(f"workflow_modelname: {workflow_modelname}")
             # print("beforeworkflow names",workflownames)
             workflownames.append(workflow_modelname)
