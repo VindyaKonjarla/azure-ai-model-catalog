@@ -132,7 +132,7 @@ class Dashboard():
                     "Status": f"{'✅ PASS' if last_run['conclusion'] == 'success' else '❌ FAIL' if last_run['conclusion'] == 'failure' else '🚫 CANCELLED' if last_run['conclusion'] == 'cancelled' else '⏳ RUNNING'}",
                     "LastRunLink": f"[Link]({run_link})",
                     "LastRunTimestamp": last_run["created_at"],
-                    "Category": f"""{'Model Package' if workflow_name.startswith("MLFlow-MP") == True else 'Dynmaic Installation' if workflow_name.startswith("MLFlow-DI") == True else 'Batch' if workflow_name.startswith("MLFlow-Batch") == True else 'Import' if workflow_name.startswith("MLFlow-Import") == True  else 'None' }"""
+                    "Category": f"""{'Oss-Base' if workflow_name.startswith("oss-base") == True else 'Oss-Train' if workflow_name.startswith("oss-train") == True else 'Hf-Base' if workflow_name.startswith("hf-base") == True else 'Hf-Train' if workflow_name.startswith("hf-train") == True  else 'None' }"""
                 }
 
                 self.models_data.append(models_entry)
