@@ -362,6 +362,92 @@ def create_or_get_aml_compute(workspace_ml_client, compute_cluster, compute_clus
 
 
 
+# def create_and_run_azure_ml_pipeline(
+#     foundation_model,
+#     compute_cluster,
+#     gpus_per_node,
+#     training_parameters,
+#     optimization_parameters,
+#     experiment_name,
+# ):
+#     # Fetch the pipeline component
+#     pipeline_component_func = registry_ml_client.components.get(
+#         name="text_classification_pipeline_for_oss", label="latest"
+#     )
+
+#     # Define the pipeline job
+#     @pipeline()
+#     def create_pipeline():
+#         text_classification_pipeline = pipeline_component_func(
+#             mlflow_model_path=foundation_model.id,
+#             compute_model_import=compute_cluster,
+#             compute_preprocess=compute_cluster,
+#             compute_finetune=compute_cluster,
+#             compute_model_evaluation=compute_cluster,
+#             train_file_path=Input(
+#                 type="uri_file", path="./emotion-dataset/small_train.jsonl"
+#             ),
+#             validation_file_path=Input(
+#                 type="uri_file", path="./emotion-dataset/small_validation.jsonl"
+#             ),
+#             test_file_path=Input(
+#                 type="uri_file", path="./emotion-dataset/small_test.jsonl"
+#             ),
+#             evaluation_config=Input(
+#                 type="uri_file", path="./emotion-dataset/text-classification-config.json"
+#             ),
+#             sentence1_key="text",
+#             label_key="label_string",
+#             number_of_gpu_to_use_finetuning=gpus_per_node,
+#             **training_parameters,
+#             **optimization_parameters
+#         )
+#         return {
+#             "trained_model": text_classification_pipeline.outputs.mlflow_model_folder
+#         }
+
+#     # Create the pipeline object
+#     pipeline_object = create_pipeline()
+
+#     # Configure pipeline settings
+#     pipeline_object.settings.force_rerun = True
+#     pipeline_object.settings.continue_on_step_failure = False
+
+#     # Submit the pipeline job
+#     pipeline_job = workspace_ml_client.jobs.create_or_update(
+#         pipeline_object, experiment_name=experiment_name
+#     )
+
+#     # Wait for the pipeline job to complete
+#     workspace_ml_client.jobs.stream(pipeline_job.name)
+#     print("PJC")
+#     try:
+#         # Retrieve the model name from the pipeline outputs
+#         model_name_from_output = pipeline_job.outputs.get("trained_model").name
+#         print("model_name_from_output:", {model_name_from_output})
+
+#         # Modify the model name as needed
+#         finetuned_model_name = "FT-NER-" + str(model_name_from_output) + "-oss"
+#         finetuned_model_name = finetuned_model_name.replace("/", "-")
+
+#         # Register the model using the retrieved model name
+#         registered_model = Model.register(
+#             workspace=workspace_ml_client,
+#             model_path=f"azureml://models/{model_name_from_output}",
+#             model_name=finetuned_model_name,
+#             tags={'framework': 'MLflow'},
+#             description=f"{model_name_from_output} fine-tuned model for text-classification-emotion detection",
+#         )
+#         print("Registered model: \n", registered_model)
+
+#     except Exception as e:
+#         # Handle any exceptions
+#         print(f"Error registering the model: {str(e)}")
+#     return pipeline_job
+
+
+from azure.ai.ml.entities import Model
+
 def create_and_run_azure_ml_pipeline(
     foundation_model,
     compute_cluster,
@@ -374,6 +460,33 @@ def create_and_run_azure_ml_pipeline(
     pipeline_component_func = registry_ml_client.components.get(
         name="text_classification_pipeline_for_oss", label="latest"
     )
+
+    # Model registration function
+    def register_model_to_workspace(
+        workspace_ml_client, pipeline_job, test_model_name, timestamp
+    ):
+        print("Registering the model...")
+        model_path_from_job = "azureml://jobs/{0}/outputs/{1}".format(
+            pipeline_job.name, "trained_model"
+        )
+        finetuned_model_name = (
+            "FT-NER-" + str(test_model_name) + "-" + str(timestamp) + "-oss"
+        )
+        finetuned_model_name = finetuned_model_name.replace("/", "-")
+        print("The Finetuned model name:", finetuned_model_name)
+
+        print("Path to register model: ", model_path_from_job)
+
+        # Register the model from pipeline job output
+        registered_model = Model.register(
+            workspace=workspace_ml_client,
+            model_path=model_path_from_job,
+            model_name=finetuned_model_name,
+            tags={"framework": "MLflow"},
+            description=test_model_name
+            + " fine-tuned model for text-classification-emotion detection",
+        )
+        print("Registered model: \n", registered_model)
 
     # Define the pipeline job
     @pipeline()
@@ -394,7 +507,8 @@ def create_and_run_azure_ml_pipeline(
                 type="uri_file", path="./emotion-dataset/small_test.jsonl"
             ),
             evaluation_config=Input(
-                type="uri_file", path="./emotion-dataset/text-classification-config.json"
+                type="uri_file",
+                path="./emotion-dataset/text-classification-config.json",
             ),
             sentence1_key="text",
             label_key="label_string",
@@ -402,9 +516,7 @@ def create_and_run_azure_ml_pipeline(
             **training_parameters,
             **optimization_parameters
         )
-        return {
-            "trained_model": text_classification_pipeline.outputs.mlflow_model_folder
-        }
+        return {"trained_model": text_classification_pipeline.outputs.mlflow_model_folder}
 
     # Create the pipeline object
     pipeline_object = create_pipeline()
@@ -421,29 +533,14 @@ def create_and_run_azure_ml_pipeline(
     # Wait for the pipeline job to complete
     workspace_ml_client.jobs.stream(pipeline_job.name)
     print("PJC")
-    try:
-        # Retrieve the model name from the pipeline outputs
-        model_name_from_output = pipeline_job.outputs.get("trained_model").name
-        print("model_name_from_output:", {model_name_from_output})
 
-        # Modify the model name as needed
-        finetuned_model_name = "FT-NER-" + str(model_name_from_output) + "-oss"
-        finetuned_model_name = finetuned_model_name.replace("/", "-")
+    # Call the model registration function
+    register_model_to_workspace(
+        workspace_ml_client, pipeline_job, "your_test_model_name", "timestamp_here"
+    )
 
-        # Register the model using the retrieved model name
-        registered_model = Model.register(
-            workspace=workspace_ml_client,
-            model_path=f"azureml://models/{model_name_from_output}",
-            model_name=finetuned_model_name,
-            tags={'framework': 'MLflow'},
-            description=f"{model_name_from_output} fine-tuned model for text-classification-emotion detection",
-        )
-        print("Registered model: \n", registered_model)
-
-    except Exception as e:
-        # Handle any exceptions
-        print(f"Error registering the model: {str(e)}")
     return pipeline_job
+
 
 
 def wait_for_pipeline_completion(workspace_ml_client, pipeline_job_name):
