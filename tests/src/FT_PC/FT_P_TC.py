@@ -464,7 +464,7 @@ def create_and_run_azure_ml_pipeline(
 
     # Model registration function
     def register_model_to_workspace(
-        workspace_ml_client, pipeline_job, test_model_name
+        workspace_ml_client, pipeline_job, test_model_name, timestamp
     ):
         print("Registering the model...")
         model_path_from_job = "azureml://jobs/{0}/outputs/{1}".format(
@@ -477,7 +477,7 @@ def create_and_run_azure_ml_pipeline(
         print("The Finetuned model name:", finetuned_model_name)
 
         print("Path to register model: ", model_path_from_job)
-        model = Model(workspace=workspace_ml_client, id=model_path_from_job)
+        #model = Model(workspace=workspace_ml_client, id=model_path_from_job)
 
         # # Register the model from pipeline job output
         # registered_model = Model.register(
@@ -489,12 +489,26 @@ def create_and_run_azure_ml_pipeline(
         #     + " fine-tuned model for text-classification-emotion detection",
         # )
 
-        registered_model = model.register(
-        model_name=finetuned_model_name,
-        tags={"framework": "MLflow"},
-        description=test_model_name
-            + " fine-tuned model for text-classification-emotion detection",
+        # registered_model = model.register(
+        # model_name=finetuned_model_name,
+        # tags={"framework": "MLflow"},
+        # description=test_model_name
+        #     + " fine-tuned model for text-classification-emotion detection",
+        # )
+
+        prepare_to_register_model = Model(
+        path=model_path_from_job,
+        type=AssetTypes.MLFLOW_MODEL,
+        name=finetuned_model_name,
+        version=timestamp,  # use timestamp as version to avoid version conflict
+        description=model_name + " fine tuned model for emotion detection",
         )
+        print("prepare to register model:", prepare_to_register_model)
+    
+        registered_model = workspace_ml_client.models.create_or_update(
+            prepare_to_register_model
+        )
+    
         print("Registered model: \n", registered_model)
 
     # Define the pipeline job
@@ -545,7 +559,7 @@ def create_and_run_azure_ml_pipeline(
 
     # Call the model registration function
     register_model_to_workspace(
-        workspace_ml_client, pipeline_job, test_model_name
+        workspace_ml_client, pipeline_job, test_model_name, timestamp
     )
 
     return pipeline_job
