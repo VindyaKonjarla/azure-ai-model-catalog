@@ -108,36 +108,57 @@ class ModelInferenceAndDeployemnt:
     def delete_file(self, file_name):
         logger.info("Started deleting the file...")
         os.remove(path=file_name)
+    
+    def get_task_params(self) -> ConfigBox:
+        queue_file = f"task_params.json"
+        with open(queue_file) as f:
+            return ConfigBox(json.load(f))
 
-    def cloud_inference(self, scoring_file, scoring_input, online_endpoint_name, latest_model, task, deployment_name):
+    def cloud_inference(self, scoring_file, scoring_input, online_endpoint_name, deployment_name):
         try:
+            json_file_name = ''
             logger.info(f"endpoint_name : {online_endpoint_name}")
             logger.info(f"deployment_name : {deployment_name}")
             logger.info(f"Input data is this one : {scoring_input}")
             try:
-                response = self.workspace_ml_client.online_endpoints.invoke(
-                    endpoint_name=online_endpoint_name,
-                    deployment_name=deployment_name,
-                    request_file=scoring_file,
-                )
+                configbox_obj = self.get_task_params()
+                input_data = configbox_obj.get(self.test_model_name, None)
+                if input_data == None:
+                    response = self.workspace_ml_client.online_endpoints.invoke(
+                        endpoint_name=online_endpoint_name,
+                        deployment_name=deployment_name,
+                        request_file=scoring_file,
+                    )
+                else:
+                    json_file_name, scoring_input = self.create_json_file(
+                        file_name=deployment_name, dicitonary=input_data)
+                    logger.info("Online endpoint invoking satrted...")
+                    response = self.workspace_ml_client.online_endpoints.invoke(
+                        endpoint_name=online_endpoint_name,
+                        deployment_name=deployment_name,
+                        request_file=json_file_name,
+                    )
+                logger.info(
+                    f"Getting the reposne from the endpoint is this one : {response}")
             except Exception as ex:
                 logger.warning(
                     "::warning:: Trying to invoking the endpoint again by changing the input data and file")
                 logger.warning(
                     f"::warning:: This is failed due to this :\n {ex}")
-                dic_obj = self.get_model_output(latest_model=latest_model, scoring_input=scoring_input, task=task)
-                logger.info(f"Our new input is this one: {dic_obj}")
-                json_file_name, scoring_input = self.create_json_file(
-                    file_name=deployment_name, dicitonary=dic_obj)
-                logger.info("Online endpoint invoking satrted...")
-                response = self.workspace_ml_client.online_endpoints.invoke(
-                    endpoint_name=online_endpoint_name,
-                    deployment_name=deployment_name,
-                    request_file=json_file_name,
-                )
-                logger.info(
-                    f"Getting the reposne from the endpoint is this one : {response}")
-                self.delete_file(file_name=json_file_name)
+                # dic_obj = self.get_model_output(latest_model=latest_model, scoring_input=scoring_input, task=task)
+                # logger.info(f"Our new input is this one: {dic_obj}")
+                # json_file_name, scoring_input = self.create_json_file(
+                #     file_name=deployment_name, dicitonary=dic_obj)
+                # logger.info("Online endpoint invoking satrted...")
+                # response = self.workspace_ml_client.online_endpoints.invoke(
+                #     endpoint_name=online_endpoint_name,
+                #     deployment_name=deployment_name,
+                #     request_file=json_file_name,
+                # )
+                # logger.info(
+                #     f"Getting the reposne from the endpoint is this one : {response}")
+                # self.delete_file(file_name=json_file_name)
+                sys.exit(1)
 
             response_json = json.loads(response)
             output = json.dumps(response_json, indent=2)
@@ -287,22 +308,40 @@ class ModelInferenceAndDeployemnt:
                          f" the exception is this one : {e}")
             logger.error(f"::warning:: Could not delete endpoint: : \n{e}")
             exit(0)
+            
+    def delete_online_deployment(self, endpoint, online_endpoint_name, deployment_name):
+        try:
+            logger.info(
+                "Bringing down the live trafic allocation to zero and then update the endpoint")
+            endpoint.traffic = {deployment_name: 0}
+            self.workspace_ml_client.begin_create_or_update(endpoint).result()
+            logger.info("\n Started deleting online_deployment.....")
+            self.workspace_ml_client.online_deployments.begin_delete(
+                name=deployment_name, endpoint_name=online_endpoint_name).wait()
+        except Exception as e:
+            _, _, exc_tb = sys.exc_info()
+            logger.error(
+                "::Error:: Could not delete deployment from the endpoint due to below reason")
+            logger.error(f"The exception occured at this line no : {exc_tb.tb_lineno}" +
+                         f" the exception is this one : {e}")
+            exit(0)
 
-    def model_infernce_and_deployment(self, instance_type, task, latest_model):  
+    def model_infernce_and_deployment(self, instance_type, task, latest_model, endpoint):  
         logger.info(f"latest_model: {latest_model}")
         logger.info(f"Task is : {task}")
         scoring_file, scoring_input = self.get_task_specified_input(task=task)
         # endpoint names need to be unique in a region, hence using timestamp to create unique endpoint name
-        timestamp = int(time.time())
-        online_endpoint_name = task + str(timestamp)
+        # timestamp = int(time.time())
+        # online_endpoint_name = task + str(timestamp)
+        online_endpoint_name = endpoint.name
         #online_endpoint_name = "Testing" + str(timestamp)
         logger.info(f"online_endpoint_name: {online_endpoint_name}")
-        endpoint = ManagedOnlineEndpoint(
-            name=online_endpoint_name,
-            auth_mode="key",
-        )
+        # endpoint = ManagedOnlineEndpoint(
+        #     name=online_endpoint_name,
+        #     auth_mode="key",
+        # )
         logger.info(f"ManageOnlieEndpoint : {endpoint}")
-        self.create_online_endpoint(endpoint=endpoint)
+        #self.create_online_endpoint(endpoint=endpoint)
         deployment_name = self.create_online_deployment(
             latest_model=latest_model,
             online_endpoint_name=online_endpoint_name,
@@ -317,4 +356,5 @@ class ModelInferenceAndDeployemnt:
             task=task,
             deployment_name = deployment_name
         )
-        self.delete_online_endpoint(online_endpoint_name=online_endpoint_name)
+        ##self.delete_online_endpoint(online_endpoint_name=online_endpoint_name)
+        self.delete_online_deployment(endpoint=endpoint, online_endpoint_name=online_endpoint_name, deployment_name=deployment_name)

@@ -13,6 +13,9 @@ from fetch_model_detail import ModelDetail
 from fetch_task import HfTask
 import time
 import pandas as pd
+from azure.ai.ml.entities import (
+    ManagedOnlineEndpoint
+)
 
 # constants
 check_override = True
@@ -118,9 +121,25 @@ def create_or_get_compute_target(ml_client, compute, instance_type):
             name=cpu_compute_target, size=instance_type, idle_time_before_scale_down=120, min_instances=0, max_instances=4
         )
         ml_client.compute.begin_create_or_update(compute).result()
-
     return compute
-
+def create_endpoint(workspace_ml_client, endpoint_name):
+    try:
+        endpoint = workspace_ml_client.online_endpoints.get(name=endpoint_name)
+        return endpoint
+    except ResourceNotFoundError as e:
+        logger.warn("The endpoint do not exist and now creting new endpoint")
+        endpoint = ManagedOnlineEndpoint(
+            name=endpoint_name,
+            auth_mode="key"
+        )
+        logger.warn("update the endpoint in the workspace")
+        workspace_ml_client.online_endpoints.begin_create_or_update(
+            endpoint).wait()
+        return endpoint
+    except Exception as e:
+        logger.error(f"Failed due to this : {e}")
+        sys.exit(1)
+        
 
 if __name__ == "__main__":
     # if any of the above are not set, exit with error
@@ -180,12 +199,15 @@ if __name__ == "__main__":
     instance_type = foundation_model.properties.get("evaluation-recommended-sku")
     compute = instance_type.replace("_", "-")
     logger.info(f"instance : {instance_type} and compute is : {compute}")
-    # compute_target = create_or_get_compute_target(
-    #                  ml_client=workspace_ml_client,
-    #                  compute=compute,
-    #                  instance_type=instance_type
-    #                  )
-
+    compute_target = create_or_get_compute_target(
+                     ml_client=workspace_ml_client,
+                     compute=compute,
+                     instance_type=instance_type
+                     )
+    endpoint = create_endpoint(
+        workspace_ml_client=workspace_ml_client,
+        endpoint_name=compute.lower()
+    )
     task = HfTask(model_name=test_model_name).get_task()
     logger.info(f"Task is this : {task} for the model : {test_model_name}")
 
@@ -202,5 +224,6 @@ if __name__ == "__main__":
     InferenceAndDeployment.model_infernce_and_deployment(
         instance_type=instance_type,
         task=task,
-        latest_model=foundation_model
+        latest_model=foundation_model,
+        endpoint = endpoint
     )
