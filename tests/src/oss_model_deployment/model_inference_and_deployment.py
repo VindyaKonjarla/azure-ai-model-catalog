@@ -125,7 +125,7 @@ class ModelInferenceAndDeployemnt:
                     )
                 else:
                     json_file_name, scoring_input = self.create_json_file(
-                        file_name=deployment_name, dicitonary=dic_obj)
+                        file_name=deployment_name, dicitonary=input_data)
                     logger.info("Online endpoint invoking satrted...")
                     response = self.workspace_ml_client.online_endpoints.invoke(
                         endpoint_name=online_endpoint_name,
