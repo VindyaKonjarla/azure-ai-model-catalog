@@ -5,7 +5,8 @@
         "gpt2-large-oss",
         "gpt2-oss",
         "oss-base-t5-base",
-        "oss-base-t5-small"
+        "oss-base-t5-small",
+        "hf-base-t5-small"
     ],
     "workspace": "sonata-ws-eus",
     "subscription": "ed2cab61-14cc-4fb3-ac23-d72609214cfd",
