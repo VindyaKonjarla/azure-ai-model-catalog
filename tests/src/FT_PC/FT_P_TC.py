@@ -463,7 +463,7 @@ def create_and_run_azure_ml_pipeline(
     )
 
     # Model registration function
-    timestamp = int(time.time())
+    timestamp = str(time.time())
     def register_model_to_workspace(
         workspace_ml_client, pipeline_job, test_model_name, timestamp
     ):
