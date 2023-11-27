@@ -196,7 +196,8 @@ if __name__ == "__main__":
     model_detail = ModelDetail(workspace_ml_client=azureml_registry)
     foundation_model = model_detail.get_model_detail(
         test_model_name=test_model_name)
-    instance_type = foundation_model.properties.get("evaluation-recommended-sku")
+    instance_type = list(foundation_model.properties.get(
+        "inference-recommended-sku").split(","))[0]
     compute = instance_type.replace("_", "-")
     logger.info(f"instance : {instance_type} and compute is : {compute}")
     compute_target = create_or_get_compute_target(
