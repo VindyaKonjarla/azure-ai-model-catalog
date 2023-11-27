@@ -326,9 +326,10 @@ class ModelInferenceAndDeployemnt:
         logger.info(f"Task is : {task}")
         scoring_file, scoring_input = self.get_task_specified_input(task=task)
         # endpoint names need to be unique in a region, hence using timestamp to create unique endpoint name
-        timestamp = int(time.time())
-        online_endpoint_name = task + str(timestamp)
+        #timestamp = int(time.time())
+        #online_endpoint_name = task + str(timestamp)
         #online_endpoint_name = "Testing" + str(timestamp)
+        online_endpoint_name = endpoint.name
         logger.info(f"online_endpoint_name: {online_endpoint_name}")
         # endpoint = ManagedOnlineEndpoint(
         #     name=online_endpoint_name,
