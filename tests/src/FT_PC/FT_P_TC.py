@@ -463,7 +463,9 @@ def create_and_run_azure_ml_pipeline(
     )
 
     # Model registration function
-    timestamp = str(time.time())
+    #timestamp = str(time.time())
+   
+
     def register_model_to_workspace(
         workspace_ml_client, pipeline_job, test_model_name, timestamp
     ):
@@ -742,6 +744,13 @@ if __name__ == "__main__":
     training_parameters, optimization_parameters = get_training_and_optimization_parameters(foundation_model)
     #gpus_per_node = find_gpus_in_compute(workspace_ml_client, compute)
     print(f"Number of GPUs in compute: {gpus_per_node}")
+
+    timestamp_str = str(time.time())
+    timestamp = timestamp_str.split(".")[0]
+    print("timestamp_str:",{timestamp_str})
+    print("timestamp:",{timestamp})
+    
+    
 
 
     # try:
