@@ -304,15 +304,15 @@ class ModelInferenceAndDeployemnt:
                 f"::Error:: Could not find scoring_file: {scoring_file}. Finishing without sample scoring: \n{e}")
         return scoring_file, scoring_input
 
-    def delete_online_deployment(self, endpoint, online_endpoint_name):
+    def delete_online_deployment(self, endpoint, online_endpoint_name, deployment_name):
         try:
             logger.info(
                 "Bringing down the live trafic allocation to zero and then update the endpoint")
-            endpoint.traffic = {self.deployment_name: 0}
+            endpoint.traffic = {deployment_name: 0}
             self.workspace_ml_client.begin_create_or_update(endpoint).result()
             logger.info("\n Started deleting online_deployment.....")
             self.workspace_ml_client.online_deployments.begin_delete(
-                name=self.deployment_name, endpoint_name=online_endpoint_name).wait()
+                name=deployment_name, endpoint_name=online_endpoint_name).wait()
         except Exception as e:
             _, _, exc_tb = sys.exc_info()
             logger.error(
@@ -351,7 +351,7 @@ class ModelInferenceAndDeployemnt:
             task=task,
             latest_model=latest_model
         )
-        self.delete_online_deployment(endpoint=endpoint, online_endpoint_name=online_endpoint_name)
+        self.delete_online_deployment(endpoint=endpoint, online_endpoint_name=online_endpoint_name, deployment_name=deployment_name)
 
         dynamic_installation = ModelDynamicInstallation(
             test_model_name=self.test_model_name,
