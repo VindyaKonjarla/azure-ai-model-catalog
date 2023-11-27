@@ -56,5 +56,5 @@ jobs:
       run: gh workflow run ${{ steps.deploy-model-step.outputs.NEXT_MODEL }} --ref ${{ github.ref_name }}
     - name: deploy-model-step
       id: deploy-model-step
-      run: python test_generic_oss_model_deployment.py
+      run: python generic_oss_model_deployment.py
       working-directory: tests/src/oss_model_deployment
