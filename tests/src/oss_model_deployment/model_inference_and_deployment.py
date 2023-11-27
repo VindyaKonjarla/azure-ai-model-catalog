@@ -335,7 +335,7 @@ class ModelInferenceAndDeployemnt:
         #     auth_mode="key",
         # )
         model_package = self.create_model_package(
-            latest_model=latest_model, endpoint=endpoint)
+            latest_model=latest_model)
         deployment_name = self.create_online_deployment(
             latest_model=latest_model,
             online_endpoint_name=online_endpoint_name,
