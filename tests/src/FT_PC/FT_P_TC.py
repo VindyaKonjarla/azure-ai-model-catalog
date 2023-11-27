@@ -26,6 +26,7 @@ import re
 from datetime import datetime
 import time
 from azureml.core import Model
+from azure.ml.entities import Workspace
 
 
 # from azure.ai.ml.entities import MLClient
@@ -463,27 +464,35 @@ def create_and_run_azure_ml_pipeline(
 
     # Model registration function
     def register_model_to_workspace(
-        workspace_ml_client, pipeline_job, test_model_name, timestamp
+        workspace_ml_client, pipeline_job, test_model_name
     ):
         print("Registering the model...")
         model_path_from_job = "azureml://jobs/{0}/outputs/{1}".format(
             pipeline_job.name, "trained_model"
         )
         finetuned_model_name = (
-            "FT-NER-" + str(test_model_name) + "-" + str(timestamp) + "-oss"
+            "FT-NER-" + str(test_model_name) + "-oss"
         )
         finetuned_model_name = finetuned_model_name.replace("/", "-")
         print("The Finetuned model name:", finetuned_model_name)
 
         print("Path to register model: ", model_path_from_job)
+        model = Model(workspace=Workspace.current, id=model_path_from_job)
 
-        # Register the model from pipeline job output
-        registered_model = Model.register(
-            workspace=workspace_ml_client,
-            model_path=model_path_from_job,
-            model_name=finetuned_model_name,
-            tags={"framework": "MLflow"},
-            description=test_model_name
+        # # Register the model from pipeline job output
+        # registered_model = Model.register(
+        #     workspace=workspace_ml_client,
+        #     model_path=model_path_from_job,
+        #     model_name=finetuned_model_name,
+        #     tags={"framework": "MLflow"},
+        #     description=test_model_name
+        #     + " fine-tuned model for text-classification-emotion detection",
+        # )
+
+        registered_model = model.register(
+        model_name=finetuned_model_name,
+        tags={"framework": "MLflow"},
+        description=test_model_name
             + " fine-tuned model for text-classification-emotion detection",
         )
         print("Registered model: \n", registered_model)
@@ -536,7 +545,7 @@ def create_and_run_azure_ml_pipeline(
 
     # Call the model registration function
     register_model_to_workspace(
-        workspace_ml_client, pipeline_job, "your_test_model_name", "timestamp_here"
+        workspace_ml_client, pipeline_job, test_model_name
     )
 
     return pipeline_job
