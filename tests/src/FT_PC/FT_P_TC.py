@@ -477,7 +477,7 @@ def create_and_run_azure_ml_pipeline(
         print("The Finetuned model name:", finetuned_model_name)
 
         print("Path to register model: ", model_path_from_job)
-        model = Model(workspace=Workspace.current, id=model_path_from_job)
+        model = Model(workspace=workspace_ml_client, id=model_path_from_job)
 
         # # Register the model from pipeline job output
         # registered_model = Model.register(
