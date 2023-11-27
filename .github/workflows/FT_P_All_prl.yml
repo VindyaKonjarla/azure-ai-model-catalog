@@ -42,9 +42,7 @@ jobs:
     - name: pip-install-sentencepiece
       run: pip install sentencepiece
     - name: pip-install-fugashi[unidic-lite]
-      run: pip install fugashi[unidic-lite]  
-    - name: pip install azureml-sdk
-      run: pip install azureml-sdk 
+      run: pip install fugashi[unidic-lite]   
     - name: deploy-model-step
       id: deploy-model-step
       run: python FT_P_TC.py
