@@ -421,6 +421,28 @@ def create_and_run_azure_ml_pipeline(
     # Wait for the pipeline job to complete
     workspace_ml_client.jobs.stream(pipeline_job.name)
     print("PJC")
+    try:
+        # Retrieve the model name from the pipeline outputs
+        model_name_from_output = pipeline_job.outputs.get("trained_model").name
+        print("model_name_from_output:", {model_name_from_output})
+
+        # Modify the model name as needed
+        finetuned_model_name = "FT-NER-" + str(model_name_from_output) + "-oss"
+        finetuned_model_name = finetuned_model_name.replace("/", "-")
+
+        # Register the model using the retrieved model name
+        registered_model = Model.register(
+            workspace=workspace_ml_client,
+            model_path=f"azureml://models/{model_name_from_output}",
+            model_name=finetuned_model_name,
+            tags={'framework': 'MLflow'},
+            description=f"{model_name_from_output} fine-tuned model for text-classification-emotion detection",
+        )
+        print("Registered model: \n", registered_model)
+
+    except Exception as e:
+        # Handle any exceptions
+        print(f"Error registering the model: {str(e)}")
     return pipeline_job
 
 
