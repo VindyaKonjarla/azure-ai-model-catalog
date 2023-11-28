@@ -25,7 +25,6 @@ import ast
 import re
 from datetime import datetime
 import time
-from azureml.core import Model
 # from azure.ml.entities import Workspace
 
 
