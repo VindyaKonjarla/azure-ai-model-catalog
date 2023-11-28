@@ -297,17 +297,17 @@ class ModelInferenceAndDeployemnt:
         logger.info(f"Deployment object is this one: {deployment_obj}")
         return deployment_name
 
-    def delete_online_endpoint(self, online_endpoint_name):
-        try:
-            logger.info("\n In delete_online_endpoint.....")
-            self.workspace_ml_client.online_endpoints.begin_delete(
-                name=online_endpoint_name).wait()
-        except Exception as e:
-            _, _, exc_tb = sys.exc_info()
-            logger.error(f"The exception occured at this line no : {exc_tb.tb_lineno}" +
-                         f" the exception is this one : {e}")
-            logger.error(f"::warning:: Could not delete endpoint: : \n{e}")
-            exit(0)
+    # def delete_online_endpoint(self, online_endpoint_name):
+    #     try:
+    #         logger.info("\n In delete_online_endpoint.....")
+    #         self.workspace_ml_client.online_endpoints.begin_delete(
+    #             name=online_endpoint_name).wait()
+    #     except Exception as e:
+    #         _, _, exc_tb = sys.exc_info()
+    #         logger.error(f"The exception occured at this line no : {exc_tb.tb_lineno}" +
+    #                      f" the exception is this one : {e}")
+    #         logger.error(f"::warning:: Could not delete endpoint: : \n{e}")
+    #         exit(0)
             
     def delete_online_deployment(self, endpoint, online_endpoint_name, deployment_name):
         try:
@@ -352,8 +352,6 @@ class ModelInferenceAndDeployemnt:
             scoring_file=scoring_file,
             scoring_input=scoring_input,
             online_endpoint_name=online_endpoint_name,
-            latest_model=latest_model,
-            task=task,
             deployment_name = deployment_name
         )
         ##self.delete_online_endpoint(online_endpoint_name=online_endpoint_name)
