@@ -200,7 +200,7 @@ if __name__ == "__main__":
     
     # instance_type = list(foundation_model.properties.get(
     #     "inference-recommended-sku").split(","))[0]
-    recomended_sku_list = foundation_model.properties.get("inference-recommended-su", None)
+    recomended_sku_list = foundation_model.properties.get("inference-recommended-sku", None)
     if recomended_sku_list != None:
         instance_type = list(recomended_sku_list.split(','))[0]
         logger.info(f"Recomended SKU type is this one {instance_type}")
