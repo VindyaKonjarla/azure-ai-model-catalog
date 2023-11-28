@@ -161,12 +161,12 @@ def create_endpoint(workspace_ml_client, endpoint_name):
         endpoint = workspace_ml_client.online_endpoints.get(name=endpoint_name)
         return endpoint
     except ResourceNotFoundError as e:
-        logger.warn("The endpoint do not exist and now creting new endpoint")
+        logger.warning("The endpoint do not exist and now creting new endpoint")
         endpoint = ManagedOnlineEndpoint(
             name=endpoint_name,
             auth_mode="key"
         )
-        logger.warn("update the endpoint in the workspace")
+        logger.warning("update the endpoint in the workspace")
         workspace_ml_client.online_endpoints.begin_create_or_update(
             endpoint).wait()
         return endpoint
