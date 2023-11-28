@@ -3,7 +3,6 @@
     "models": [
         "t5-small",
         "bert-base-cased",
-        "bert-base-uncased",
         "Jean-Baptiste/camembert-ner"
     ],
     "workspace": "sonata-ws-eus",
