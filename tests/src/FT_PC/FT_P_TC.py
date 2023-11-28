@@ -53,11 +53,6 @@ test_set = os.environ.get('test_set')
 # which means that the first model in the queue is triggered again after the last model is tested
 test_keep_looping = os.environ.get('test_keep_looping')
 
-# function to load the workspace details from test queue file
-# even model we need to test belongs to a queue. the queue name is passed as environment variable test_queue
-# the queue file contains the list of models to test with with a specific workspace
-# the queue file also contains the details of the workspace, registry, subscription, resource group
-
 
 def get_test_queue() -> ConfigBox:
     queue_file = f"../../config/queue/{test_set}/{test_queue}.json"
@@ -402,10 +397,14 @@ if __name__ == "__main__":
     print("Experiment name is:", {experiment_name})
 
     registry_ml_client_sku = MLClient(credential, registry_name="azureml")
-    fine_tune_sku = foundation_model.properties.get("finetune-recommended-sku", "")
+    fine_tune_sku = foundation_model.properties.get("finetune-recommended-sku")
+    print("Finetune-recommended-sku:", {fine_tune_sku})
     # Define the compute cluster name and size
-    compute_cluster = "Standard-NC24s-v3"
-    compute_cluster_size = "Standard_NC24s_v3 "
+    # compute_cluster = "Standard-NC24s-v3"
+    # compute_cluster_size = "Standard_NC24s_v3 "
+
+    compute_cluster = "finetuning-recommended-sku"
+    compute_cluster_size = "fine_tune_sku"
     
     # Optional: Define a list of allowed compute sizes (if any)
     computes_allow_list = ["standard_nc6s_v3", "standard_nc12s_v2","standard_nc24s_v3"]
