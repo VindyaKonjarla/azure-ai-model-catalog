@@ -401,6 +401,8 @@ if __name__ == "__main__":
     experiment_name = "oss-text-classification-emotion-detection-"+ test_model_name
     print("Experiment name is:", {experiment_name})
 
+    registry_ml_client_sku = MLClient(credential, registry_name="azureml")
+    fine_tune_sku = foundation_model.properties.get("finetune-recommended-sku", "")
     # Define the compute cluster name and size
     compute_cluster = "Standard-NC24s-v3"
     compute_cluster_size = "Standard_NC24s_v3 "
