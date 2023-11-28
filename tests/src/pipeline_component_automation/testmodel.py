@@ -264,12 +264,12 @@ if __name__ == "__main__":
             a = model_name.index('/')+1
             model=model_name[a:]
             model_detail = ModelDetail(workspace_ml_client=azureml_meta_registry)
-            foundation_model = model_detail.get_model_detail(model_name=model)
+            foundation_model = model_detail.get_model_detail(test_model_name=model)
             computelist = foundation_model.properties.get(
             "evaluation-recommended-sku", "donotdelete-DS4v2")
         else:
             model_detail = ModelDetail(workspace_ml_client=azureml_registry)
-            foundation_model = model_detail.get_model_detail(model_name=model_name)
+            foundation_model = model_detail.get_model_detail(test_model_name=model_name)
             computelist = foundation_model.properties.get(
             "evaluation-recommended-sku", "donotdelete-DS4v2")
         if "," in computelist:
@@ -301,7 +301,7 @@ if __name__ == "__main__":
         exp_model_name = model_name.replace('/', '-')
 
         registered_model_detail = ModelDetail(workspace_ml_client=workspace_ml_client)
-        registered_model = registered_model_detail.get_model_detail(model_name=model_name)
+        registered_model = registered_model_detail.get_model_detail(test_model_name=model_name)
         # mlflow_version = registered_model.mlflow_version
         # tv=registered_model.transformers_version
         flavour = registered_model.flavors
