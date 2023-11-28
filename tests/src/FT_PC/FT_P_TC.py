@@ -440,7 +440,7 @@ if __name__ == "__main__":
     compute_cluster_size = "fine_tune_sku"
     
     # Optional: Define a list of allowed compute sizes (if any)
-    computes_allow_list = ["standard_nc6s_v3", "standard_nc12s_v2","standard_nc24s_v3"]
+    computes_allow_list = ["standard_nc6s_v3", "standard_nc12s_v2","standard_nc24s_v3","standard_nc24rs_v3"]
     
     # Call the function
     compute, gpus_per_node, compute_cluster = create_or_get_aml_compute(workspace_ml_client, compute_cluster, compute_cluster_size, computes_allow_list)
