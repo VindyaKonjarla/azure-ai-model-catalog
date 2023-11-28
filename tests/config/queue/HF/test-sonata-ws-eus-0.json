@@ -3,8 +3,8 @@
     "models": [
         "t5-small",
         "bert-base-cased",
-        "MLFlow-Import-bert-base-uncased",
-        "MLFlow-Import-Jean-Baptiste/camembert-ner"
+        "bert-base-uncased",
+        "Jean-Baptiste/camembert-ner"
     ],
     "workspace": "sonata-ws-eus",
     "subscription": "ed2cab61-14cc-4fb3-ac23-d72609214cfd",
