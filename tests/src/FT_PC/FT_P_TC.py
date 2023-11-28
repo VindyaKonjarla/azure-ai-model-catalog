@@ -309,6 +309,7 @@ def create_and_run_azure_ml_pipeline(
         print("Path to register model: ", model_path_from_job)
 
         prepare_to_register_model = Model(
+        workspace=workspace_ml_client,
         path=model_path_from_job,
         type=AssetTypes.MLFLOW_MODEL,
         name=finetuned_model_name,
