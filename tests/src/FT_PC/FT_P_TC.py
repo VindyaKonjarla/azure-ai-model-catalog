@@ -116,6 +116,38 @@ def create_and_get_job_studio_url(command_job, workspace_ml_client):
     return returned_job.studio_url
 
 
+def get_latest_model_version_ft(registry_ml_client_sku, test_model_name):
+    print("In get_latest_model_version...")
+    version_list = list(registry_ml_client_sku.models.list(test_model_name))
+    
+    if len(version_list) == 0:
+        print("Model not found in registry")
+        foundation_model_name = None  # Set to None if the model is not found
+        foundation_model_id = None  # Set id to None as well
+    else:
+        model_version = version_list[0].version
+        foundation_model = registry_ml_client_sku.models.get(
+            test_model_name, model_version)
+        print(
+            "\n\nUsing model name: {0}, version: {1}, id: {2} for inferencing".format(
+                foundation_model.name, foundation_model.version, foundation_model.id
+            )
+        )
+        foundation_model_name = foundation_model.name  # Assign the value to a new variable
+        foundation_model_id = foundation_model.id  # Assign the id to a new variable
+    
+    # Check if foundation_model_name and foundation_model_id are None or have values
+    if foundation_model_name and foundation_model_id:
+        print(f"Latest model {foundation_model_name} version {foundation_model.version} created at {foundation_model.creation_context.created_at}")
+        print("foundation_model.name:", foundation_model_name)
+        print("foundation_model.id:", foundation_model_id)
+    else:
+        print("No model found in the registry.")
+    
+    #print(f"Model Config : {latest_model.config}")
+    return foundation_model_ft
+
+
 def get_latest_model_version(workspace_ml_client, test_model_name):
     print("In get_latest_model_version...")
     version_list = list(workspace_ml_client.models.list(test_model_name))
@@ -397,7 +429,8 @@ if __name__ == "__main__":
     print("Experiment name is:", {experiment_name})
 
     registry_ml_client_sku = MLClient(credential, registry_name="azureml")
-    fine_tune_sku = foundation_model.properties.get("finetune-recommended-sku")
+    foundation_model_ft = get_latest_model_version_ft(registry_ml_client_sku, test_model_name.lower())
+    fine_tune_sku = foundation_model_ft.properties.get("finetune-recommended-sku")
     print("Finetune-recommended-sku:", {fine_tune_sku})
     # Define the compute cluster name and size
     # compute_cluster = "Standard-NC24s-v3"
