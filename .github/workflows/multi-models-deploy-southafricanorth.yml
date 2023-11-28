@@ -1,0 +1,84 @@
+name: multi-models-deploy
+
+on: 
+  workflow_dispatch:
+    inputs:
+      test_set:
+        description: 'List of models to deploy'
+        default: huggingface-all
+
+
+# env:
+#    test_sku_type: cpu
+#    test_set: huggingface-all
+#    test_queue: test-eastus
+
+jobs:
+  # start-tests-job:
+  #   runs-on: ubuntu-latest
+  deploy-model-job:
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        model: ${{ fromJson(file(test-eastus-0.json')).models }}
+    steps:
+      - name: check-out-repo-step
+        uses: actions/checkout@v3
+
+      - name: azure-login-step
+        uses: azure/login@v1
+        with:
+          creds: ${{secrets.AZURE_CREDENTIALS}}
+
+      - name: pip-install-azure-ai-ml
+        run: pip install azure-ai-ml
+
+      - name: pip-install-azureml-core
+        run: pip install azureml-core
+
+      - name: pip-install-datasets
+        run: pip install datasets
+
+      - name: pip-install-azureml-mlflow
+        run: pip install azureml-mlflow==1.53.0
+
+      - name: pip-install-transformers
+        run: pip install transformers
+
+      - name: pip-install-transformers[torch]
+        run: pip install transformers[torch]
+
+      - name: pip-install-torchvision
+        run: pip install torchvision 
+
+      - name: pip-install-mlflow
+        run: pip install mlflow
+
+      - name: pip-install-python-box
+        run: pip install python-box 
+
+      - name: pip-install-sacremoses
+        run: pip install sacremoses
+
+      - name: pip-install-sentencepiece
+        run: pip install sentencepiece
+
+      - name: pip-install-fugashi[unidic-lite]
+        run: pip install fugashi[unidic-lite] 
+      - name: set-model-env-variable
+        run: echo "test_model_name=${{ matrix.model }}" >> $GITHUB_ENV
+
+      - name: Set Environment Variables
+        run: |
+          #echo "test_model_name=your_model_name" >> $GITHUB_ENV
+         
+      - name: deploy-model-step
+        id: deploy-model-step
+        working-directory: tests/src/automation_for_constant_library
+        run: python generic_initial_automation_test.py ${{ matrix.model }}
+        continue-on-error: true
+        
+
+      - name: handle-deploy-model-failure
+        if: failure()
+        run: echo "Deployment failed for ${{ matrix.model }}"
