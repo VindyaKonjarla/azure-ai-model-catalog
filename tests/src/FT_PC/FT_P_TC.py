@@ -766,7 +766,7 @@ if __name__ == "__main__":
     pipeline_job = create_and_run_azure_ml_pipeline(
             foundation_model, compute_cluster, gpus_per_node, training_parameters, optimization_parameters, experiment_name
         )
-        print("pipeline job completed")
+    print("pipeline job completed")
         # pipeline_job_name = pipeline_job.name
         # wait_for_pipeline_completion(workspace_ml_client, pipeline_job_name)
         # pipeline_status = pipeline_job.status.lower()
