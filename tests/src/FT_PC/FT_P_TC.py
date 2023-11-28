@@ -145,7 +145,7 @@ def get_latest_model_version_ft(registry_ml_client_sku, test_model_name):
         print("No model found in the registry.")
     
     #print(f"Model Config : {latest_model.config}")
-    return foundation_model_ft
+    return foundation_model
 
 
 def get_latest_model_version(workspace_ml_client, test_model_name):
