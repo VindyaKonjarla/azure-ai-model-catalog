@@ -1,8 +1,8 @@
 {
     "queue_name": "test-sonata-ws-eus-0",
     "models": [
-        "MLFlow-Import-t5-small",
-        "MLFlow-Import-bert-base-cased",
+        "t5-small",
+        "bert-base-cased",
         "MLFlow-Import-bert-base-uncased",
         "MLFlow-Import-Jean-Baptiste/camembert-ner"
     ],
