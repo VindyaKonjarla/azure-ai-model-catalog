@@ -1,4 +1,4 @@
-name: multi-models-deploy
+name: multi-models-deploy-southafricanorth
 
 on: 
   workflow_dispatch:
