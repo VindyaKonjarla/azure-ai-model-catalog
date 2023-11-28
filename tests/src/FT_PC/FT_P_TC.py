@@ -431,7 +431,7 @@ if __name__ == "__main__":
 
 
     # Define the compute cluster name and size
-    compute_cluster = "Standard_NC24rs_v3"
+    compute_cluster = "finetuning-recommended-sku"
     compute_cluster_size = "fine_tune_sku"
     
     # Optional: Define a list of allowed compute sizes (if any)
