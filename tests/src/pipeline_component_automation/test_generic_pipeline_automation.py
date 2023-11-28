@@ -89,11 +89,10 @@ def set_next_trigger_model(queue):
     #model_name_without_slash = test_model_name.replace('/', '-')
     check_oss_base_model = "oss-base-"+test_model_name
 
-    if check_oss_base_model in model_list:
-        index = model_list.index(check_oss_base_model)
-    else:
-        index = model_list.index(
-            test_model_name.replace("/", "-").lower()+"-oss")
+    index = model_list.index(check_oss_base_model)
+    #index = model_list.index(test_model_name)
+    #index = model_list.index(test_model_name)
+    print(f"index of {test_model_name} in queue: {index}")
 
     logger.info(f"index of {test_model_name} in queue: {index}")
 # if index is not the last element in the list, get the next element in the list
