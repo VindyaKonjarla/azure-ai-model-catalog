@@ -147,6 +147,37 @@ def get_latest_model_version(workspace_ml_client, test_model_name):
     #print(f"Model Config : {latest_model.config}")
     return foundation_model
 
+def get_latest_model_version_ft(registry_ml_client_sku, test_model_name):
+    print("In get_latest_model_version...")
+    version_list = list(registry_ml_client_sku.models.list(test_model_name))
+    
+    if len(version_list) == 0:
+        print("Model not found in registry")
+        foundation_model_ft_name = None  # Set to None if the model is not found
+        foundation_model_ft_id = None  # Set id to None as well
+    else:
+        model_version = version_list[0].version
+        foundation_model_ft = registry_ml_client_sku.models.get(
+            test_model_name, model_version)
+        print(
+            "\n\nUsing model name: {0}, version: {1}, id: {2} for inferencing".format(
+                foundation_model_ft.name, foundation_model_ft.version, foundation_model_ft.id
+            )
+        )
+        foundation_model_ft_name = foundation_model_ft.name  # Assign the value to a new variable
+        foundation_model_ft_id = foundation_model_ft.id  # Assign the id to a new variable
+    
+    # Check if foundation_model_name and foundation_model_id are None or have values
+    if foundation_model_ft_name and foundation_model_ft_id:
+        print(f"Latest model {foundation_model_ft_name} version {foundation_model_ft.version} created at {foundation_model_ft.creation_context.created_at}")
+        print("foundation_model.name:", foundation_model_ft_name)
+        print("foundation_model.id:", foundation_model_ft_id)
+    else:
+        print("No model found in the registry.")
+    
+    #print(f"Model Config : {latest_model.config}")
+    return foundation_model_ft
+
 
 def get_training_and_optimization_parameters(foundation_model):
     # Training parameters
@@ -389,6 +420,10 @@ if __name__ == "__main__":
         workspace_name=queue.workspace
     )
     mlflow.set_tracking_uri(ws.get_mlflow_tracking_uri())
+    registry_ml_client_sku = MLClient(credential, registry_name="azureml")
+    foundation_model_ft = get_latest_model_version_ft(registry_ml_client_sku, test_model_name.lower())
+    fine_tune_sku = foundation_model_ft.properties.get("finetune-recommended-sku")
+    print("Finetune-recommended-sku:", {fine_tune_sku})
     registry_ml_client = MLClient(credential, registry_name="azureml-preview-test1")
     # experiment_name = "text-classification-emotion-detection"
     experiment_name = "oss-text-classification-emotion-detection-"+ test_model_name
@@ -396,11 +431,11 @@ if __name__ == "__main__":
 
 
     # Define the compute cluster name and size
-    compute_cluster = "Standard-NC24s-v3"
-    compute_cluster_size = "Standard_NC24s_v3 "
+    compute_cluster = "Standard_NC24rs_v3"
+    compute_cluster_size = "fine_tune_sku"
     
     # Optional: Define a list of allowed compute sizes (if any)
-    computes_allow_list = ["standard_nc6s_v3", "standard_nc12s_v2","standard_nc24s_v3"]
+    computes_allow_list = ["standard_nc6s_v3", "standard_nc12s_v2","standard_nc24s_v3","Standard_NC24rs_v3"]
     
     # Call the function
     compute, gpus_per_node, compute_cluster = create_or_get_aml_compute(workspace_ml_client, compute_cluster, compute_cluster_size, computes_allow_list)
