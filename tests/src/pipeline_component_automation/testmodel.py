@@ -217,7 +217,7 @@ if __name__ == "__main__":
     # if sku_override is None:
     #     check_override = False
     model_list = list(queue.models)
-    for model_name in model_list
+    for model_name in model_list:
         # if test_trigger_next_model == "true":
         #     set_next_trigger_model(queue)
         # print values of all above variables
