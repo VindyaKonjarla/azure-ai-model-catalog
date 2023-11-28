@@ -136,6 +136,7 @@ def create_endpoint(workspace_ml_client, endpoint_name):
         logger.warn("update the endpoint in the workspace")
         workspace_ml_client.online_endpoints.begin_create_or_update(
             endpoint).wait()
+        logger.info(f"Endpoint created successfully {endpoint}")
         return endpoint
     except Exception as e:
         logger.error(f"Failed due to this : {e}")
