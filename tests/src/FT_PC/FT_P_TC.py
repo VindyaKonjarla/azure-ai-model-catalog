@@ -469,7 +469,7 @@ def create_and_run_azure_ml_pipeline(
     def register_model_to_workspace(
         workspace_ml_client, pipeline_job, test_model_name, timestamp
     ):
-        print("Registering the model...")
+        print("Registering the model inside loop...")
         model_path_from_job = "azureml://jobs/{0}/outputs/{1}".format(
             pipeline_job.name, "trained_model"
         )
@@ -477,9 +477,9 @@ def create_and_run_azure_ml_pipeline(
             "FT-NER-" + str(test_model_name) + "-oss"
         )
         finetuned_model_name = finetuned_model_name.replace("/", "-")
-        print("The Finetuned model name:", finetuned_model_name)
+        print("The Finetuned model name inside loop:", finetuned_model_name)
 
-        print("Path to register model: ", model_path_from_job)
+        print("Path to register model inside loop: ", model_path_from_job)
         #model = Model(workspace=workspace_ml_client, id=model_path_from_job)
 
         # # Register the model from pipeline job output
@@ -506,13 +506,13 @@ def create_and_run_azure_ml_pipeline(
         version=timestamp,  # use timestamp as version to avoid version conflict
         description= test_model_name + " fine tuned model for emotion detection",
         )
-        print("prepare to register model:", prepare_to_register_model)
+        print("prepare to register model inside loop:", prepare_to_register_model)
     
         registered_model = workspace_ml_client.models.create_or_update(
             prepare_to_register_model
         )
     
-        print("Registered model: \n", registered_model)
+        print("Registered model inside loop: \n", registered_model)
 
     # Define the pipeline job
     @pipeline()
