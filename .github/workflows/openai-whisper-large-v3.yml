@@ -35,6 +35,8 @@ jobs:
       run: pip install torchvision 
     - name: pip-install-mlflow
       run: pip install mlflow
+    - name: pip-install-dataset_loader
+      run: pip install dataset_loader
     - name: pip-install-python-box
       run: pip install python-box 
     - name: pip-install-sacremoses
