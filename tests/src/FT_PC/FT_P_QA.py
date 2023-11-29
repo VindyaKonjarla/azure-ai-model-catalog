@@ -1,4 +1,3 @@
-#from model_inference_and_deployment import ModelInferenceAndDeployemnt
 from transformers import AutoModelForSeq2SeqLM, AutoTokenizer, Seq2SeqTrainingArguments, Trainer, DataCollatorForSeq2Seq, TrainingArguments
 from azure.ai.ml import command
 import mlflow
@@ -6,13 +5,16 @@ import json
 import os
 import sys
 from box import ConfigBox
+from azure.ai.ml.entities import Model
 from mlflow.tracking.client import MlflowClient
 from azureml.core import Workspace, Environment
 from azure.ai.ml import MLClient
+from azureml.core import Model
 from azure.identity import (
     DefaultAzureCredential,
     InteractiveBrowserCredential
 )
+from azure.ai.ml.constants import AssetTypes
 from azure.ai.ml.entities import AmlCompute
 import time
 from azure.ai.ml.dsl import pipeline
@@ -20,7 +22,10 @@ from azure.ai.ml.entities import CommandComponent, PipelineComponent, Job, Compo
 from azure.ai.ml import PyTorchDistribution, Input
 import ast
 import re
-# from azure.ai.ml.entities import MLClient
+from datetime import datetime
+import time
+from azureml.core import Model
+from azure.ai.ml.entities import Model
 
 check_override = True
 
@@ -44,10 +49,6 @@ test_set = os.environ.get('test_set')
 # which means that the first model in the queue is triggered again after the last model is tested
 test_keep_looping = os.environ.get('test_keep_looping')
 
-# function to load the workspace details from test queue file
-# even model we need to test belongs to a queue. the queue name is passed as environment variable test_queue
-# the queue file contains the list of models to test with with a specific workspace
-# the queue file also contains the details of the workspace, registry, subscription, resource group
 
 
 def get_test_queue() -> ConfigBox:
@@ -67,8 +68,6 @@ def get_sku_override():
         return None
 
 
-# finds the next model in the queue and sends it to github step output
-# so that the next step in this job can pick it up and trigger the next model using 'gh workflow run' cli command
 def set_next_trigger_model(queue):
     print("In set_next_trigger_model...")
 # file the index of test_model_name in models list queue dictionary
@@ -92,18 +91,6 @@ def set_next_trigger_model(queue):
         print(f'NEXT_MODEL={next_model}', file=fh)
 
 
-# def create_or_get_compute_target(ml_client,  compute):
-#     cpu_compute_target = compute
-#     try:
-#         compute = ml_client.compute.get(cpu_compute_target)
-#     except Exception:
-#         print("Creating a new cpu compute target...")
-#         compute = AmlCompute(
-#             name=cpu_compute_target, size=compute, min_instances=0, max_instances=3, idle_time_before_scale_down = 120
-#         )
-#         ml_client.compute.begin_create_or_update(compute).result()
-#     print(f"New compute target created: {compute.name}")
-#     return compute
 
 def run_azure_ml_job(code, command_to_run, environment, compute, environment_variables):
     command_job = command(
@@ -124,18 +111,6 @@ def create_and_get_job_studio_url(command_job, workspace_ml_client):
     workspace_ml_client.jobs.stream(returned_job.name)
     return returned_job.studio_url
 
-
-# def load_model(model_detail):
-#     loaded_model = mlflow.transformers.load_model(model_uri=model_detail.source, return_type="pipeline")
-#     print("Inside load model")
-#     print("loaded_model---------------",loaded_model)
-#     return loaded_model
-# def classify_text(texts, FT_loaded_model, fine_tuned_tokenizer):    
-#     inputs = tokenizer(texts, return_tensors="pt", padding=True, truncation=True, max_length=256)
-#     with torch.no_grad():
-#         logits = model(**inputs).logits  
-#     predicted_labels = torch.argmax(logits, dim=1).tolist()
-#     return predicted_labels    
 
 
 
@@ -171,6 +146,38 @@ def get_latest_model_version(workspace_ml_client, test_model_name):
     return foundation_model
 
 
+def get_latest_model_version_ft(registry_ml_client_sku, test_model_name):
+    print("In get_latest_model_version...")
+    version_list = list(registry_ml_client_sku.models.list(test_model_name))
+    
+    if len(version_list) == 0:
+        print("Model not found in registry")
+        foundation_model_ft_name = None  # Set to None if the model is not found
+        foundation_model_ft_id = None  # Set id to None as well
+    else:
+        model_version = version_list[0].version
+        foundation_model_ft = registry_ml_client_sku.models.get(
+            test_model_name, model_version)
+        print(
+            "\n\nUsing model name: {0}, version: {1}, id: {2} for inferencing".format(
+                foundation_model_ft.name, foundation_model_ft.version, foundation_model_ft.id
+            )
+        )
+        foundation_model_ft_name = foundation_model_ft.name  # Assign the value to a new variable
+        foundation_model_ft_id = foundation_model_ft.id  # Assign the id to a new variable
+    
+    # Check if foundation_model_name and foundation_model_id are None or have values
+    if foundation_model_ft_name and foundation_model_ft_id:
+        print(f"Latest model {foundation_model_ft_name} version {foundation_model_ft.version} created at {foundation_model_ft.creation_context.created_at}")
+        print("foundation_model.name:", foundation_model_ft_name)
+        print("foundation_model.id:", foundation_model_ft_id)
+    else:
+        print("No model found in the registry.")
+    
+    #print(f"Model Config : {latest_model.config}")
+    return foundation_model_ft
+
+
 def get_training_and_optimization_parameters(foundation_model):
     # Training parameters
     training_parameters = {
@@ -196,26 +203,6 @@ def get_training_and_optimization_parameters(foundation_model):
     return training_parameters, optimization_parameters
 
 
-# def find_gpus_in_compute(workspace_ml_client, compute):
-#     gpu_count_found = False
-#     workspace_compute_sku_list = workspace_ml_client.compute.list_sizes()
-#     available_sku_sizes = []
-#     gpus_per_node = 0
-
-#     for compute_sku in workspace_compute_sku_list:
-#         available_sku_sizes.append(compute_sku.name)
-#         if compute_sku.name.lower() == compute.size.lower():
-#             gpus_per_node = compute_sku.gpus
-#             gpu_count_found = True
-
-#     if gpu_count_found:
-#         print(f"Number of GPU's in compute {compute.size}: {gpus_per_node}")
-#         return gpus_per_node
-#     else:
-#         raise ValueError(
-#             f"Number of GPU's in compute {compute.size} not found. Available skus are: {available_sku_sizes}. "
-#             f"This should not happen. Please check the selected compute cluster: {compute_cluster} and try again."
-#         )
 
 
 
@@ -302,6 +289,32 @@ def create_and_run_azure_ml_pipeline(
         name="question_answering_pipeline_for_oss", label="latest"
     )
 
+
+    def register_model_to_workspace(workspace_ml_client, pipeline_job, test_model_name, timestamp):
+        print("Registering the model inside loop...")
+        model_path_from_job = "azureml://jobs/{0}/outputs/{1}".format(
+        pipeline_job.name, "trained_model")
+        finetuned_model_name = ("FT-NER-" + str(test_model_name) + "-oss")
+        finetuned_model_name = finetuned_model_name.replace("/", "-")
+        print("The Finetuned model name inside loop:", finetuned_model_name)
+
+        print("Path to register model inside loop: ", model_path_from_job)
+
+        prepare_to_register_model = Model(
+        path=model_path_from_job,
+        type=AssetTypes.MLFLOW_MODEL,
+        name=finetuned_model_name,
+        version=timestamp,  # use timestamp as version to avoid version conflict
+        description= test_model_name + " fine tuned model for emotion detection",
+        )
+        print("prepare to register model inside loop:", prepare_to_register_model)
+    
+        registered_model = workspace_ml_client.models.create_or_update(
+            prepare_to_register_model
+        )
+    
+        print("Registered model inside loop: \n", registered_model)
+
     # Define the pipeline job
     @pipeline()
     def create_pipeline():
@@ -350,6 +363,10 @@ def create_and_run_azure_ml_pipeline(
 
     # Wait for the pipeline job to complete
     workspace_ml_client.jobs.stream(pipeline_job.name)
+    print("Pipeline Job Completed")
+    register_model_to_workspace(
+        workspace_ml_client, pipeline_job, test_model_name, timestamp
+    )
     return pipeline_job
 
 
@@ -399,6 +416,10 @@ if __name__ == "__main__":
         workspace_name=queue.workspace
     )
     mlflow.set_tracking_uri(ws.get_mlflow_tracking_uri())
+    registry_ml_client_sku = MLClient(credential, registry_name="azureml")
+    foundation_model_ft = get_latest_model_version_ft(registry_ml_client_sku, test_model_name.lower())
+    fine_tune_sku = foundation_model_ft.properties.get("finetune-recommended-sku")
+    print("Finetune-recommended-sku:", {fine_tune_sku})
     registry_ml_client = MLClient(credential, registry_name="azureml-preview-test1")
     # experiment_name = "Auto_question_answering"
     experiment_name = "Auto_question_answering-"+ test_model_name
@@ -407,12 +428,13 @@ if __name__ == "__main__":
     # # generating a unique timestamp that can be used for names and versions that need to be unique
     # timestamp = str(int(time.time()))
 
-    # Define the compute cluster name and size
-    compute_cluster = "Standard-NC24s-v3"
-    compute_cluster_size = "Standard_NC24s_v3 "
+    compute_cluster_size = fine_tune_sku
+    compute_cluster = compute_cluster_size.replace('_', '-')
+    print("Modified compute_cluster_size:", compute_cluster_size)
+    print("Modified compute_cluster_size:", {compute_cluster})
     
     # Optional: Define a list of allowed compute sizes (if any)
-    computes_allow_list = ["standard_nc6s_v3", "standard_nc12s_v2","standard_nc24s_v3"]
+    computes_allow_list = ["standard_nc6s_v3", "standard_nc12s_v2","standard_nc24s_v3","standard_NC24rs_v3"]
     
     # Call the function
     compute, gpus_per_node, compute_cluster = create_or_get_aml_compute(workspace_ml_client, compute_cluster, compute_cluster_size, computes_allow_list)
@@ -454,11 +476,17 @@ if __name__ == "__main__":
     #gpus_per_node = find_gpus_in_compute(workspace_ml_client, compute)
     print(f"Number of GPUs in compute: {gpus_per_node}")
 
+
+    timestamp_str = str(time.time())
+    timestamp = timestamp_str.split(".")[0]
+    print("timestamp_str:",{timestamp_str})
+    print("timestamp:",{timestamp})
+
     try:
         pipeline_job = create_and_run_azure_ml_pipeline(
             foundation_model, compute_cluster, gpus_per_node, training_parameters, optimization_parameters, experiment_name
         )
-        print("Azure ML Pipeline completed successfully.")
+        print("Pipeline job completed")
     except Exception as e:
         # If an exception occurs, print the error message and exit with a non-zero exit code
         print(f"Error running Azure ML Pipeline: {str(e)}")
@@ -466,18 +494,3 @@ if __name__ == "__main__":
         
     #pipeline_job = create_and_run_azure_ml_pipeline(foundation_model, compute_cluster, gpus_per_node, training_parameters, optimization_parameters, experiment_name)
     print("Completed")
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
