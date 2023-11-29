@@ -207,8 +207,8 @@ def evaluation_pipeline(task, mlflow_model, test_data, input_column_names, label
 
 if __name__ == "__main__":
     # if any of the above are not set, exit with error
-    if model_name is None or test_sku_type is None or test_queue is None or test_set is None or test_trigger_next_model is None or test_keep_looping is None:
-        logger.error("::error:: One or more of the environment variables model_name, test_sku_type, test_queue, test_set, test_trigger_next_model, test_keep_looping are not set")
+    if model_name is None or test_sku_type is None or test_queue is None or test_set is None or  or test_keep_looping is None:
+        logger.error("::error:: One or more of the environment variables model_name, test_sku_type, test_queue, test_set, test_keep_looping are not set")
         exit(1)
 
     queue = get_test_queue()
@@ -219,8 +219,8 @@ if __name__ == "__main__":
         # if sku_override is None:
         #     check_override = False
     
-        if test_trigger_next_model == "true":
-            set_next_trigger_model(queue)
+        # if test_trigger_next_model == "true":
+        #     set_next_trigger_model(queue)
         # print values of all above variables
         logger.info(f"test_subscription_id: {queue['subscription']}")
         logger.info(f"test_resource_group: {queue['subscription']}")
@@ -228,7 +228,7 @@ if __name__ == "__main__":
         logger.info(f"model_name: {model_name}")
         logger.info(f"test_sku_type: {test_sku_type}")
         logger.info(f"test_registry: {queue['registry']}")
-        logger.info(f"test_trigger_next_model: {test_trigger_next_model}")
+        # logger.info(f"test_trigger_next_model: {test_trigger_next_model}")
         logger.info(f"test_queue: {test_queue}")
         logger.info(f"test_set: {test_set}")
         logger.info(f"Here is my test model name : {model_name}")
