@@ -30,7 +30,7 @@ COLUMNS_TO_READ = ["modelId", "pipeline_tag", "tags"]
 LIST_OF_COLUMNS = ['modelId', 'downloads',
                    'lastModified', 'tags', 'pipeline_tag']
 TASK_NAME = ['fill-mask', 'token-classification', 'question-answering',
-             'summarization', 'text-generation', 'text-classification', 'translation','Automatic Speech Recognition']
+             'summarization', 'text-generation', 'text-classification', 'translation','automatic-speech-recognition']
 STRING_TO_CHECK = 'transformers'
 FILE_NAME = "task_and_library.json"
 ACCESS_TOKEN = "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"
