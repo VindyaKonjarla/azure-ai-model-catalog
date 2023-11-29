@@ -1,4 +1,4 @@
-name: MLFlow-Import-t5-small
+name: t5-small
 
 on: 
   workflow_dispatch:
