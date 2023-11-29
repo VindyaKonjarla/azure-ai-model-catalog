@@ -467,4 +467,4 @@ if __name__ == "__main__":
         # sys.exit(1)  # Exit with a non-zero status code
         sys.exit(1) 
 
-    print("Completed")
+    print("Finetuned and the registered model for Token-classification successfully")
