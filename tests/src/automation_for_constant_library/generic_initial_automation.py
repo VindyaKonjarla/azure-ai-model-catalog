@@ -182,6 +182,7 @@ if __name__ == "__main__":
         environment_variables = {"AZUREML_ARTIFACTS_DEFAULT_TIMEOUT":600.0,"test_model_name": model_name}
         env_list = workspace_ml_client.environments.list(name=queue.environment)
         latest_version = 0
+        print("env_list---",env_list)
         for env in env_list:
             if latest_version <= int(env.version):
                 latest_version = int(env.version)
