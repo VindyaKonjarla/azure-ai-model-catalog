@@ -1,0 +1,10 @@
+{
+    "queue_name": "sonata-ws-eus-2",
+    "models": [
+        "hf-base-Jean-Baptiste-camembert-ner"
+    ],
+    "workspace": "sonata-ws-eus",
+    "subscription": "ed2cab61-14cc-4fb3-ac23-d72609214cfd",
+    "resource_group": "sonata-oss-testing-rg",
+    "instance_type": "Standard_E64s_v3"
+}
