@@ -1,5 +1,5 @@
 {
-    "queue_name": "test-sonata-ws-eus-0",
+    "queue_name": "v",
     "models": [
         "t5-small",
         "bert-base-cased"
