@@ -9,6 +9,7 @@ from mlflow.models import infer_signature
 from mlflow.transformers import generate_signature_output
 from mlflow.tracking.client import MlflowClient
 from mlflow.store.artifact.models_artifact_repo import ModelsArtifactRepository
+from mlflow.models.utils import _contains_params
 from transformers import pipeline
 from huggingface_hub import HfApi
 from utils.logging import get_logger
