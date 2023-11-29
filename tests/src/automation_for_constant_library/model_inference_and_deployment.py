@@ -180,7 +180,7 @@ class ModelInferenceAndDeployemnt:
             logger.info(f"Registered model name is this : {latest_model.name}")
             package_name = f"package-v2-{latest_model.name}"
             package_config = ModelPackage(
-                target_environment_name=package_name,
+                target_environment=package_name,
                 inferencing_server=AzureMLOnlineInferencingServer(),
                 model_configuration=model_configuration
             )
