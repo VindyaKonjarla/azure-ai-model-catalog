@@ -1,4 +1,4 @@
-name: MLFlow-Import-distilbert-base-cased-distilled-squad
+name: distilbert-base-cased-distilled-squad
 
 on: 
   workflow_dispatch:
