@@ -40,9 +40,7 @@ jobs:
     - name: pip-install-sacremoses
       run: pip install sacremoses
     - name: pip-install-sentencepiece
-      run: pip install sentencepiece
-    - name: pip-install-fetch_model_detail
-      run: pip install fetch_model_detail  
+      run: pip install sentencepiece 
     - name: pip-install-fugashi[unidic-lite]
       run: pip install fugashi[unidic-lite]  
     - name: deploy-model-step
