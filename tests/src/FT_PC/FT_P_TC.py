@@ -435,8 +435,8 @@ if __name__ == "__main__":
     # compute_cluster_size = "fine_tune_sku"
 
     
-    compute_cluster_size = "fine_tune_sku"
-    compute_cluster = fine_tune_sku.replace('_', '-')
+    compute_cluster_size = fine_tune_sku
+    compute_cluster = compute_cluster_size.replace('_', '-')
     print("Modified compute_cluster_size:", compute_cluster_size)
     print("Modified compute_cluster_size:", {compute_cluster})
 
