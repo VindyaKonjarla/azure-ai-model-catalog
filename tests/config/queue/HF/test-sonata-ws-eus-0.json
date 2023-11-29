@@ -1,7 +1,7 @@
 {
     "queue_name": "test-sonata-ws-eus-0",
     "models": [
-        "MLFlow-Import-t5-small",
+        "t5-small",
         "MLFlow-Import-bert-base-cased"
     ],
     "workspace": "sonata-ws-eus",
