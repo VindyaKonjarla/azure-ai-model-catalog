@@ -1,7 +1,8 @@
 {
     "queue_name": "sonata-ws-eus-0",
     "models": [
-        "hf-base-microsoft-deberta-xlarge"
+        "hf-base-microsoft-deberta-xlarge",
+        "hf-base-distilbert-base-uncased-distilled-squad"
     ],
     "workspace": "sonata-ws-eus",
     "subscription": "ed2cab61-14cc-4fb3-ac23-d72609214cfd",
