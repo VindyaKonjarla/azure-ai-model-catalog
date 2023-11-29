@@ -500,4 +500,4 @@ if __name__ == "__main__":
         sys.exit(1) 
 
     #pipeline_job = create_and_run_azure_ml_pipeline(foundation_model, compute_cluster, gpus_per_node, training_parameters, optimization_parameters, experiment_name)
-    print("Completed")
+    print("Finetuned and the registered model for Text-classification successfully")
