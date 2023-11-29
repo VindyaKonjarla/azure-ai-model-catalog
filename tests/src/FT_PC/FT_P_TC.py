@@ -26,10 +26,6 @@ from datetime import datetime
 import time
 from azureml.core import Model
 from azure.ai.ml.entities import Model
-# from azure.ml.entities import Workspace
-
-
-# from azure.ai.ml.entities import MLClient
 
 check_override = True
 
