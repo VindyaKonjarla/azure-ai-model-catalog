@@ -431,8 +431,15 @@ if __name__ == "__main__":
 
 
     # Define the compute cluster name and size
-    compute_cluster = "finetuning-recommended-sku"
+    # compute_cluster = "finetuning-recommended-sku"
+    # compute_cluster_size = "fine_tune_sku"
+
+    
     compute_cluster_size = "fine_tune_sku"
+    compute_cluster = fine_tune_sku.replace('_', '-')
+    print("Modified compute_cluster_size:", compute_cluster_size)
+    print("Modified compute_cluster_size:", {compute_cluster})
+
     
     # Optional: Define a list of allowed compute sizes (if any)
     computes_allow_list = ["standard_nc6s_v3", "standard_nc12s_v2","standard_nc24s_v3","Standard_NC24rs_v3"]
