@@ -125,6 +125,7 @@ def create_or_get_compute_target(ml_client, compute, instance_type):
     return compute
 def create_endpoint(workspace_ml_client, endpoint_name):
     try:
+        logger.info(f"Endpoint name is this  {endpoint_name}")
         endpoint = workspace_ml_client.online_endpoints.get(name=endpoint_name)
         return endpoint
     except ResourceNotFoundError as e:
@@ -133,7 +134,7 @@ def create_endpoint(workspace_ml_client, endpoint_name):
             name=endpoint_name,
             auth_mode="key"
         )
-        logger.warn("update the endpoint in the workspace")
+        logger.warn(f"update the endpoint in the workspace {endpoint}")
         workspace_ml_client.online_endpoints.begin_create_or_update(
             endpoint).wait()
         logger.info(f"Endpoint created successfully {endpoint}")
