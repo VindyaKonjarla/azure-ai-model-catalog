@@ -207,7 +207,7 @@ def evaluation_pipeline(task, mlflow_model, test_data, input_column_names, label
 
 if __name__ == "__main__":
     # if any of the above are not set, exit with error
-    if model_name is None or test_sku_type is None or test_queue is None or test_set is None or  or test_keep_looping is None:
+    if model_name is None or test_sku_type is None or test_queue is None or test_set is None or test_keep_looping is None:
         logger.error("::error:: One or more of the environment variables model_name, test_sku_type, test_queue, test_set, test_keep_looping are not set")
         exit(1)
 
