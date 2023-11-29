@@ -388,6 +388,10 @@ if __name__ == "__main__":
         workspace_name=queue.workspace
     )
     mlflow.set_tracking_uri(ws.get_mlflow_tracking_uri())
+    registry_ml_client_sku = MLClient(credential, registry_name="azureml")
+    foundation_model_ft = get_latest_model_version_ft(registry_ml_client_sku, test_model_name.lower())
+    fine_tune_sku = foundation_model_ft.properties.get("finetune-recommended-sku")
+    print("Finetune-recommended-sku:", {fine_tune_sku})
     registry_ml_client = MLClient(credential, registry_name="azureml-preview-test1")
     # experiment_name = "token-classification-ner"
     experiment_name = "oss-token-classification-ner-"+ test_model_name
