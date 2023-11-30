@@ -422,7 +422,7 @@ if __name__ == "__main__":
     print("Finetune-recommended-sku:", {fine_tune_sku})
     registry_ml_client = MLClient(credential, registry_name="azureml-preview-test1")
     # experiment_name = "text-classification-emotion-detection"
-    experiment_name = "oss-text-classification-emotion-detection-"+ test_model_name
+    experiment_name = "oss-text-classification-"+ test_model_name
     print("Experiment name is:", {experiment_name})
 
 
