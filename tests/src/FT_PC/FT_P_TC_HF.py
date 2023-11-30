@@ -511,7 +511,7 @@ if __name__ == "__main__":
     print("Experiment name is:", {experiment_name})
 
     foundation_model = get_latest_model_version(registry_ml_client_model, test_model_name.lower())
-    fine_tune_sku = foundation_model_ft.properties.get("finetune-recommended-sku")
+    fine_tune_sku = foundation_model.properties.get("finetune-recommended-sku")
     print("Finetune-recommended-sku:", {fine_tune_sku})
 
     # # generating a unique timestamp that can be used for names and versions that need to be unique
@@ -592,39 +592,7 @@ if __name__ == "__main__":
 
     
     
-    # registered_model_detail = client.get_latest_versions(
-    #     name=test_model_name, stages=["None"])
-    # model_detail = registered_model_detail[0]
-    
-    # print("Latest registered model version is : ", model_detail.version)
-    
-    # loaded_model = mlflow.transformers.load_model(model_uri=model_detail.source, return_type="pipeline")
-    # model_source_uri = foundation_model.properties["mlflow.modelSourceUri"]
-    # print("model_source_uri---------------------",model_source_uri)
-    # loaded_model = mlflow.transformers.load_model(model_uri=model_source_uri)
-    # LM=load_model(model_detail)
-    # print("LM-----------------------------",LM)
-    # environment_variables = {"test_model_name": test_model_name
-    #                         ,"model_source_uri": model_detail.source}
-    # print("environment_variables-------------",environment_variables)
-    # print("queue.compute---",queue.compute)
-    # print("queue.workspace====",queue.workspace)
-    # command_job = run_azure_ml_job(code="./", command_to_run="python FTTest.py",
-    #                                environment=latest_env, compute=queue.compute, environment_variables=environment_variables)
-    
-    # create_and_get_job_studio_url(command_job, workspace_ml_client)
 
-    # FT_model_name = f"FT_P-TC-{test_model_name}"
-   
-
-    # InferenceAndDeployment = ModelInferenceAndDeployemnt(
-    #     test_model_name=FT_model_name,
-    #     workspace_ml_client=workspace_ml_client,
-    #     registry=queue.registry
-    # )
-    # InferenceAndDeployment.model_infernce_and_deployment(
-    #     instance_type=queue.instance_type
-    # )
 
 
 
