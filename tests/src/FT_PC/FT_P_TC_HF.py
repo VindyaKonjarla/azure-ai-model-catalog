@@ -510,6 +510,10 @@ if __name__ == "__main__":
     experiment_name = "hf-text-classification-"+ test_model_name
     print("Experiment name is:", {experiment_name})
 
+    foundation_model = get_latest_model_version(registry_ml_client_model, test_model_name.lower())
+    fine_tune_sku = foundation_model_ft.properties.get("finetune-recommended-sku")
+    print("Finetune-recommended-sku:", {fine_tune_sku})
+
     # # generating a unique timestamp that can be used for names and versions that need to be unique
     # timestamp = str(int(time.time()))
 
@@ -560,9 +564,7 @@ if __name__ == "__main__":
     client = MlflowClient()
     
     #foundation_model, foundation_model_name = get_latest_model_version(workspace_ml_client, test_model_name.lower())
-    foundation_model = get_latest_model_version(registry_ml_client_model, test_model_name.lower())
-    fine_tune_sku = foundation_model_ft.properties.get("finetune-recommended-sku")
-    print("Finetune-recommended-sku:", {fine_tune_sku})
+    
     training_parameters, optimization_parameters = get_training_and_optimization_parameters(foundation_model)
     #gpus_per_node = find_gpus_in_compute(workspace_ml_client, compute)
     print(f"Number of GPUs in compute: {gpus_per_node}")
