@@ -5,13 +5,16 @@ import json
 import os
 import sys
 from box import ConfigBox
+from azure.ai.ml.entities import Model
 from mlflow.tracking.client import MlflowClient
 from azureml.core import Workspace, Environment
 from azure.ai.ml import MLClient
+from azureml.core import Model
 from azure.identity import (
     DefaultAzureCredential,
     InteractiveBrowserCredential
 )
+from azure.ai.ml.constants import AssetTypes
 from azure.ai.ml.entities import AmlCompute
 import time
 from azure.ai.ml.dsl import pipeline
@@ -19,6 +22,11 @@ from azure.ai.ml.entities import CommandComponent, PipelineComponent, Job, Compo
 from azure.ai.ml import PyTorchDistribution, Input
 import ast
 import re
+from datetime import datetime
+import time
+from azureml.core import Model
+from azure.ai.ml.entities import Model
+
 
 check_override = True
 # model to test
@@ -119,6 +127,40 @@ def get_latest_model_version(workspace_ml_client, test_model_name):
         
     #print(f"Model Config : {latest_model.config}")
     return foundation_model
+
+def get_latest_model_version_ft(registry_ml_client_sku, test_model_name):
+    print("In get_latest_model_version...")
+    version_list = list(registry_ml_client_sku.models.list(test_model_name))
+    
+    if len(version_list) == 0:
+        print("Model not found in registry")
+        foundation_model_ft_name = None  # Set to None if the model is not found
+        foundation_model_ft_id = None  # Set id to None as well
+    else:
+        model_version = version_list[0].version
+        foundation_model_ft = registry_ml_client_sku.models.get(
+            test_model_name, model_version)
+        print(
+            "\n\nUsing model name: {0}, version: {1}, id: {2} for inferencing".format(
+                foundation_model_ft.name, foundation_model_ft.version, foundation_model_ft.id
+            )
+        )
+        foundation_model_ft_name = foundation_model_ft.name  # Assign the value to a new variable
+        foundation_model_ft_id = foundation_model_ft.id  # Assign the id to a new variable
+    
+    # Check if foundation_model_name and foundation_model_id are None or have values
+    if foundation_model_ft_name and foundation_model_ft_id:
+        print(f"Latest model {foundation_model_ft_name} version {foundation_model_ft.version} created at {foundation_model_ft.creation_context.created_at}")
+        print("foundation_model.name:", foundation_model_ft_name)
+        print("foundation_model.id:", foundation_model_ft_id)
+    else:
+        print("No model found in the registry.")
+    
+    #print(f"Model Config : {latest_model.config}")
+    return foundation_model_ft
+
+
+
 # Training parameters
 def get_training_and_optimization_parameters(foundation_model):
     # Training parameters
@@ -221,6 +263,37 @@ def create_and_run_azure_ml_pipeline(
     pipeline_component_func = registry_ml_client.components.get(
         name="text_generation_pipeline_for_oss", label="latest"
     )
+    def register_model_to_workspace(
+    workspace_ml_client, pipeline_job, test_model_name, timestamp):
+        print("Registering the model inside loop...")
+        model_path_from_job = "azureml://jobs/{0}/outputs/{1}".format(
+            pipeline_job.name, "trained_model"
+        )
+        finetuned_model_name = (
+            "FT-TG-" + str(test_model_name) + "-oss"
+        )
+        finetuned_model_name = finetuned_model_name.replace("/", "-")
+        print("The Finetuned model name inside loop:", finetuned_model_name)
+    
+        print("Path to register model inside loop: ", model_path_from_job)
+    
+        prepare_to_register_model = Model(
+        path=model_path_from_job,
+        type=AssetTypes.MLFLOW_MODEL,
+        name=finetuned_model_name,
+        version=timestamp,  # use timestamp as version to avoid version conflict
+        description= test_model_name + " fine tuned model for emotion detection",
+        )
+        print("prepare to register model inside loop:", prepare_to_register_model)
+    
+        registered_model = workspace_ml_client.models.create_or_update(
+            prepare_to_register_model
+        )
+    
+        print("Registered model inside loop: \n", registered_model)
+
+
+    
     # Model Training and Pipeline Setup
     @pipeline()
     def create_pipeline():
@@ -264,6 +337,12 @@ def create_and_run_azure_ml_pipeline(
 
     # Wait for the pipeline job to complete
     workspace_ml_client.jobs.stream(pipeline_job.name)
+    print("Pipeline Job Completed")
+
+    # Call the model registration function
+    register_model_to_workspace(
+        workspace_ml_client, pipeline_job, test_model_name, timestamp
+    )
     return pipeline_job
     
     
@@ -281,6 +360,7 @@ if __name__ == "__main__":
     if test_trigger_next_model == "true":
         set_next_trigger_model(queue)
     # print values of all above variables
+    print("Running for Text Genaration")
     print (f"test_subscription_id: {queue['subscription']}")
     print (f"test_resource_group: {queue['resource_group']}")
     print (f"test_workspace_name: {queue['workspace']}")
@@ -310,19 +390,31 @@ if __name__ == "__main__":
         workspace_name=queue.workspace
     )
     mlflow.set_tracking_uri(ws.get_mlflow_tracking_uri())
+    registry_ml_client_sku = MLClient(credential, registry_name="azureml")
+    foundation_model_ft = get_latest_model_version_ft(registry_ml_client_sku, test_model_name.lower())
+    fine_tune_sku = foundation_model_ft.properties.get("finetune-recommended-sku")
+    print("Finetune-recommended-sku:", {fine_tune_sku})
     registry_ml_client = MLClient(credential, registry_name="azureml-preview-test1")
     # experiment_name = "text-generation-qna"
-    experiment_name = "text-generation-qna-"+ test_model_name
+    experiment_name = "oss-text-generation-truthful_qa-dataset-"+ test_model_name
     print("Experiment name is:", {experiment_name}
     # # generating a unique timestamp that can be used for names and versions that need to be unique
     # timestamp = str(int(time.time()))
 
-    # Define the compute cluster name and size
-    compute_cluster = "Standard-NC24s-v3"
-    compute_cluster_size = "Standard_NC24s_v3 "
+    # # Define the compute cluster name and size
+    # compute_cluster = "Standard-NC24s-v3"
+    # compute_cluster_size = "Standard_NC24s_v3 "
+
+    compute_cluster_size = fine_tune_sku
+    compute_cluster = compute_cluster_size.replace('_', '-')
+    print("Modified compute_cluster_size:", compute_cluster_size)
+    print("Modified compute_cluster_size:", {compute_cluster})
+
+
+          
     
     # Optional: Define a list of allowed compute sizes (if any)
-    computes_allow_list = ["standard_nc6s_v3", "standard_nc12s_v2","standard_nc24s_v3"]
+    computes_allow_list = ["standard_nc6s_v3", "standard_nc12s_v2","standard_nc24s_v3","standard_NC24rs_v3","Standard_NC12s_v3"]
     
     # Call the function
     compute, gpus_per_node, compute_cluster = create_or_get_aml_compute(workspace_ml_client, compute_cluster, compute_cluster_size, computes_allow_list)
@@ -358,18 +450,25 @@ if __name__ == "__main__":
     training_parameters, optimization_parameters = get_training_and_optimization_parameters(foundation_model)
     #gpus_per_node = find_gpus_in_compute(workspace_ml_client, compute)
     print(f"Number of GPUs in compute: {gpus_per_node}")
+
+    timestamp_str = str(time.time())
+    timestamp = timestamp_str.split(".")[0]
+    print("timestamp_str:",{timestamp_str})
+    print("timestamp:",{timestamp})
+
+
     try:
         pipeline_job = create_and_run_azure_ml_pipeline(
             foundation_model, compute_cluster, gpus_per_node, training_parameters, optimization_parameters, experiment_name
         )
-        print("Azure ML Pipeline completed successfully.")
+        print("Pipeline job completed")
     except Exception as e:
         # If an exception occurs, print the error message and exit with a non-zero exit code
         print(f"Error running Azure ML Pipeline: {str(e)}")
         sys.exit(1) 
         
     #pipeline_job = create_and_run_azure_ml_pipeline(foundation_model, compute_cluster, gpus_per_node, training_parameters, optimization_parameters, experiment_name)
-    print("Completed")
+    print("Finetuned and the registered model for Text-generation successfully")
     
 
 
