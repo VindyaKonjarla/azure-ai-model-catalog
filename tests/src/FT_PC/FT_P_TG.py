@@ -396,7 +396,7 @@ if __name__ == "__main__":
     print("Finetune-recommended-sku:", {fine_tune_sku})
     registry_ml_client = MLClient(credential, registry_name="azureml-preview-test1")
     # experiment_name = "text-generation-qna"
-    experiment_name = "oss-text-generation-truthful_qa-dataset-"+ test_model_name
+    experiment_name = "oss-text-generation-"+ test_model_name
     print("Experiment name is:", {experiment_name}
     # # generating a unique timestamp that can be used for names and versions that need to be unique
     # timestamp = str(int(time.time()))
