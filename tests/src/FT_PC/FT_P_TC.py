@@ -387,7 +387,7 @@ if __name__ == "__main__":
     queue = get_test_queue()
 
 
-    if test_trigger_next_model == "true":
+    # if test_trigger_next_model == "true":
         # set_next_trigger_model(queue)
     # print values of all above variables
     print("Running for TC")
