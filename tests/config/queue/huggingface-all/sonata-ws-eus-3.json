@@ -1,8 +1,7 @@
 {
-    "queue_name": "sonata-ws-eus-2",
+    "queue_name": "sonata-ws-eus-3",
     "models": [
-        "hf-base-Jean-Baptiste-camembert-ner",
-        "hf-base-t5-small"
+        "hf-base-facebook-bart-large-cnn"
     ],
     "workspace": "sonata-ws-eus",
     "subscription": "ed2cab61-14cc-4fb3-ac23-d72609214cfd",
