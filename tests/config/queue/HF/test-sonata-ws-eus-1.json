@@ -10,5 +10,5 @@
     "registry": "HuggingFace",
     "environment": "automate-venv",
     "compute": "Standard-NC12s-v3",
-    "instance_type": "Standard_E64s_v3"
+    "instance_type": "Standard_NC12s_v3"
 }
