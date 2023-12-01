@@ -225,9 +225,10 @@ if __name__ == "__main__":
                      compute=compute,
                      instance_type=instance_type
                      )
+    endpoint_name = queue.workspace.split("-")[-1] + "-" + compute.lower()
     endpoint = create_endpoint(
         workspace_ml_client=workspace_ml_client,
-        endpoint_name=compute.lower()
+        endpoint_name=endpoint_name
     )
     #task = HfTask(model_name=test_model_name).get_task()
     task = foundation_model.tags["task"]
