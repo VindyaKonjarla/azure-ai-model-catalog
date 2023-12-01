@@ -1,4 +1,4 @@
-name: distilbert-base-cased-distilled-squad
+name: Multiple model run
 
 on: 
   workflow_dispatch:
