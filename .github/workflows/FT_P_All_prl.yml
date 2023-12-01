@@ -1,4 +1,4 @@
-name: bert-base-cased
+name: MLFlow-FT-bert-base-cased-oss
 
 on: 
   workflow_dispatch:
