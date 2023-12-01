@@ -383,7 +383,7 @@ if __name__ == "__main__":
     # if sku_override is None:
     #     check_override = False
 
-    if test_trigger_next_model == "true":
+    # if test_trigger_next_model == "true":
         #set_next_trigger_model(queue)
     # print values of all above variables
     print("Running for QA")
