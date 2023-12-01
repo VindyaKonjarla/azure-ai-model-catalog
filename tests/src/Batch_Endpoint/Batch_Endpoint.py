@@ -30,7 +30,6 @@ from mlflow.tracking.client import MlflowClient
 import re
 from datetime import datetime
 
-ACCESS_TOKEN = "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"
 
 # constants
 check_override = True
