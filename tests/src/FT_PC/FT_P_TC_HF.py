@@ -51,18 +51,11 @@ test_set = os.environ.get('test_set')
 # which means that the first model in the queue is triggered again after the last model is tested
 test_keep_looping = os.environ.get('test_keep_looping')
 
-# function to load the workspace details from test queue file
-# even model we need to test belongs to a queue. the queue name is passed as environment variable test_queue
-# the queue file contains the list of models to test with with a specific workspace
-# the queue file also contains the details of the workspace, registry, subscription, resource group
-
 
 def get_test_queue() -> ConfigBox:
     queue_file = f"../../config/queue/{test_set}/{test_queue}.json"
     with open(queue_file) as f:
         return ConfigBox(json.load(f))
-# function to load the sku override details from sku-override file
-# this is useful if you want to force a specific sku for a model
 
 
 def get_sku_override():
@@ -74,8 +67,6 @@ def get_sku_override():
         return None
 
 
-# finds the next model in the queue and sends it to github step output
-# so that the next step in this job can pick it up and trigger the next model using 'gh workflow run' cli command
 def set_next_trigger_model(queue):
     print("In set_next_trigger_model...")
 # file the index of test_model_name in models list queue dictionary
