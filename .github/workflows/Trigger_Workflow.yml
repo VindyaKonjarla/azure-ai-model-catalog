@@ -1,0 +1,10 @@
+name: Trigger Workflow
+
+on:
+ workflow_dispatch:
+
+ Jobs:
+   call-workflow-in-local-repo:
+   uses: ./.github/workflows/MLFlow-t5-small.yml
+   call-workflow-in-local-repo:
+   uses: ./.github/workflows/MLFlow-bert-base-cased.yml
