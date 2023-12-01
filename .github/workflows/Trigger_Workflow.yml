@@ -4,6 +4,7 @@ on:
  workflow_dispatch:
 
  jobs:
+ 
    call-workflow-in-local-repo:
     uses: ./.github/workflows/MLFlow-t5-small.yml
    # call-workflow-in-local-repo:
