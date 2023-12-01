@@ -3,9 +3,10 @@
     "models": [
         "distilbert-base-cased-distilled-squad",
         "gpt2-large",
-        "MLFlow-Import-distilbert-base-cased-distilled-squad"
         "MLFlow-Import-distilbert-base-cased-distilled-squad",
-        "MLFlow-Import-gpt2-large"
+        "MLFlow-Import-distilbert-base-cased-distilled-squad",
+        "MLFlow-Import-gpt2-large",
+        "MLFlow-Eval-t5-small"
         
     ],
     "workspace": "sonata-ws-eus",
