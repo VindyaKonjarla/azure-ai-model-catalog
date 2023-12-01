@@ -5,9 +5,12 @@ import json
 import os
 import sys
 from box import ConfigBox
+from azure.ai.ml.entities import Model
 from mlflow.tracking.client import MlflowClient
 from azureml.core import Workspace, Environment
 from azure.ai.ml import MLClient
+from azureml.core import Model
+from azure.ai.ml.constants import AssetTypes
 from azure.identity import (
     DefaultAzureCredential,
     InteractiveBrowserCredential
@@ -19,6 +22,11 @@ from azure.ai.ml.entities import CommandComponent, PipelineComponent, Job, Compo
 from azure.ai.ml import PyTorchDistribution, Input
 import ast
 import re
+from datetime import datetime
+import time
+from azureml.core import Model
+from azure.ai.ml.entities import Model
+
 
 
 check_override = True
@@ -222,6 +230,38 @@ def create_and_run_azure_ml_pipeline(
     pipeline_component_func = registry_ml_client.components.get(
         name="token_classification_pipeline_for_oss", label="latest"
     )
+
+    def register_model_to_workspace(
+        workspace_ml_client, pipeline_job, test_model_name, timestamp
+    ):
+        print("Registering the model inside loop...")
+        model_path_from_job = "azureml://jobs/{0}/outputs/{1}".format(
+            pipeline_job.name, "trained_model"
+        )
+        finetuned_model_name = (
+            "FT-NER-" + str(test_model_name) + "-hf"
+        )
+        finetuned_model_name = finetuned_model_name.replace("/", "-")
+        print("The Finetuned model name inside loop:", finetuned_model_name)
+
+        print("Path to register model inside loop: ", model_path_from_job)
+
+        prepare_to_register_model = Model(
+        path=model_path_from_job,
+        type=AssetTypes.MLFLOW_MODEL,
+        name=finetuned_model_name,
+        version=timestamp,  # use timestamp as version to avoid version conflict
+        description= test_model_name + " fine tuned model for emotion detection",
+        )
+        print("prepare to register model inside loop:", prepare_to_register_model)
+    
+        registered_model = workspace_ml_client.models.create_or_update(
+            prepare_to_register_model
+        )
+    
+        print("Registered model inside loop: \n", registered_model)
+
+    
     # Model Training and Pipeline Setup
     @pipeline()
     def create_pipeline():
@@ -270,18 +310,24 @@ def create_and_run_azure_ml_pipeline(
         pipeline_object, experiment_name=experiment_name
     )
 
-    # Wait for the pipeline job to complete
-    try:
-        workspace_ml_client.jobs.stream(pipeline_job.name)
+    # # Wait for the pipeline job to complete
+    # try:
+    workspace_ml_client.jobs.stream(pipeline_job.name)
+    print("Pipeline Job Completed")
 
-    except Exception as ex:
-        _, _, exc_tb = sys.exc_info()
-        # logger.error(f"::error:: Not able to initiate job \n")
-        # logger.error(f"The exception occured at this line no : {exc_tb.tb_lineno}" +
-        #              f" skipping the further process and the exception is this one : {ex}")
-        print("::error:: Not able to initiate job")
-        print(f"The exception occurred at this line no: {exc_tb.tb_lineno}" + f" skipping the further process, and the exception is: {ex}")
-        sys.exit(1)
+    # Call the model registration function
+    register_model_to_workspace(
+        workspace_ml_client, pipeline_job, test_model_name, timestamp
+    )
+
+    # except Exception as ex:
+    #     _, _, exc_tb = sys.exc_info()
+    #     # logger.error(f"::error:: Not able to initiate job \n")
+    #     # logger.error(f"The exception occured at this line no : {exc_tb.tb_lineno}" +
+    #     #              f" skipping the further process and the exception is this one : {ex}")
+    #     print("::error:: Not able to initiate job")
+    #     print(f"The exception occurred at this line no: {exc_tb.tb_lineno}" + f" skipping the further process, and the exception is: {ex}")
+    #     sys.exit(1)
     return pipeline_job
     
     
@@ -331,16 +377,26 @@ if __name__ == "__main__":
     mlflow.set_tracking_uri(ws.get_mlflow_tracking_uri())
     registry_ml_client = MLClient(credential, registry_name="azureml-preview-test1")
     registry_ml_client_model = MLClient(credential, registry_name="azureml")
-    experiment_name = "token-classification-ner"
+    experiment_name = "hf-token-classification-"+ test_model_name
+    print("Experiment name is:", {experiment_name})
+
+    foundation_model = get_latest_model_version(registry_ml_client_model, test_model_name.lower())
+    fine_tune_sku = foundation_model.properties.get("finetune-recommended-sku")
+    print("Finetune-recommended-sku:", {fine_tune_sku})
     # # generating a unique timestamp that can be used for names and versions that need to be unique
     # timestamp = str(int(time.time()))
 
-    # Define the compute cluster name and size
-    compute_cluster = "Standard-NC24s-v3"
-    compute_cluster_size = "Standard_NC24s_v3 "
+    # # Define the compute cluster name and size
+    # compute_cluster = "Standard-NC24s-v3"
+    # compute_cluster_size = "Standard_NC24s_v3 "
+    
+    compute_cluster_size = fine_tune_sku
+    compute_cluster = compute_cluster_size.replace('_', '-')
+    print("Modified compute_cluster_size:", compute_cluster_size)
+    print("Modified compute_cluster_size:", {compute_cluster})
     
     # Optional: Define a list of allowed compute sizes (if any)
-    computes_allow_list = ["standard_nc6s_v3", "standard_nc12s_v2","standard_nc24s_v3"]
+    computes_allow_list = ["standard_nc6s_v3", "standard_nc12s_v2","standard_nc24s_v3","standard_NC24rs_v3","Standard_NC12s_v3"]
     
     # Call the function
     compute, gpus_per_node, compute_cluster = create_or_get_aml_compute(workspace_ml_client, compute_cluster, compute_cluster_size, computes_allow_list)
@@ -366,15 +422,20 @@ if __name__ == "__main__":
         # Replace the expression with hyphen
         test_model_name  = regx_for_expression.sub("-", test_model_name)
 
-    print("model name replaced with - :", {test_model_name})
+    print("model name replaced with hyphen :", {test_model_name})
     version_list = list(workspace_ml_client.models.list(test_model_name))
 
     client = MlflowClient()
     #foundation_model, foundation_model_name = get_latest_model_version(workspace_ml_client, test_model_name.lower())
-    foundation_model = get_latest_model_version(registry_ml_client_model, test_model_name.lower())
+    #foundation_model = get_latest_model_version(registry_ml_client_model, test_model_name.lower())
     training_parameters, optimization_parameters = get_training_and_optimization_parameters(foundation_model)
     #gpus_per_node = find_gpus_in_compute(workspace_ml_client, compute)
     print(f"Number of GPUs in compute: {gpus_per_node}")
+
+    timestamp_str = str(time.time())
+    timestamp = timestamp_str.split(".")[0]
+    print("timestamp_str:",{timestamp_str})
+    print("timestamp:",{timestamp})
 
 
     # try:
@@ -391,14 +452,15 @@ if __name__ == "__main__":
         pipeline_job = create_and_run_azure_ml_pipeline(
             foundation_model, compute_cluster, gpus_per_node, training_parameters, optimization_parameters, experiment_name
         )
-        print("Azure ML Pipeline completed successfully.")
+        print("Pipeline job completed")
     except Exception as e:
         # If an exception occurs, print the error message and exit with a non-zero exit code
         print(f"Error running Azure ML Pipeline: {str(e)}")
         sys.exit(1) 
 
     #pipeline_job = create_and_run_azure_ml_pipeline(foundation_model, compute_cluster, gpus_per_node, training_parameters, optimization_parameters, experiment_name)
-    print("Completed")
+    print("Finetuned and the registered model for Token-classification successfully")
+
 
 
 
