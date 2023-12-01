@@ -1,7 +1,8 @@
 {
     "queue_name": "test-BE",
     "models": [
-        "MLFlow-FT-bert-base-cased-oss"
+        "bert-base-cased",
+        "bert-base-uncased"
     ],
     "workspace": "sonata-ws-ae",
     "subscription": "ed2cab61-14cc-4fb3-ac23-d72609214cfd",
