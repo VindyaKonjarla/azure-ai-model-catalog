@@ -7,5 +7,5 @@ jobs:
  
    call-workflow-in-local-repo:
     uses: ./.github/workflows/runner.yml
-   # call-workflow-in-local-repo:
-   # uses: ./.github/workflows/MLFlow-bert-base-cased.yml
+   call-workflow-using-branch:
+    uses: ./.github/workflows/runner.yml
