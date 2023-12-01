@@ -45,11 +45,6 @@ jobs:
       run: pip install fugashi[unidic-lite]  
     - name: pip-install-datasets
       run: pip install datasets
-    - name: import-model-step
-      id: import-model-step
-      run: python generic_pipeline_automation.py
-      working-directory: tests/src/pipeline_component_automation
-    # - name: trigger-next-model-step
     - name: deploy-model-step
       id: deploy-model-step
       run: python generic_evaluation_automation.py
