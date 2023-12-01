@@ -1,4 +1,4 @@
-name: multi-models-deploy
+name: runner
 
 on: 
   workflow_dispatch:
