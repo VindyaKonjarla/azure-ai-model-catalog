@@ -1,10 +1,10 @@
-name: distilbert-base-cased-distilled-squad
+name: MLFlow-Import-distilbert-base-cased-distilled-squad
 
 on: 
   workflow_dispatch:
 
 env:
-  # test_model_name: distilbert-base-cased-distilled-squad
+  test_model_name: distilbert-base-cased-distilled-squad
   test_sku_type: cpu
   # test_trigger_next_model: true
   test_queue: test-sonata-ws-eus-1
@@ -47,7 +47,7 @@ jobs:
       run: pip install datasets
     - name: deploy-model-step
       id: deploy-model-step
-      run: python testmodel.py
+      run: python generic_pipeline_automation.py
       working-directory: tests/src/pipeline_component_automation
     # - name: trigger-next-model-step
     #   env:
