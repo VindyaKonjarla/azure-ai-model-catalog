@@ -3,7 +3,7 @@ name: Trigger Workflow
 on:
  workflow_dispatch:
 
- jobs:
+jobs:
  
    call-workflow-in-local-repo:
     uses: ./.github/workflows/runner.yml
