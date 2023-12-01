@@ -396,7 +396,7 @@ if __name__ == "__main__":
     print (f"test_workspace_name: {queue['workspace']}")
     print (f"test_model_name: {test_model_name}")
     print (f"test_sku_type: {test_sku_type}")
-    print (f"test_registry: queue['registry']")
+    print (f"test_registry: {queue['registry']}")
     print (f"test_trigger_next_model: {test_trigger_next_model}")
     print (f"test_queue: {test_queue}")
     print (f"test_set: {test_set}")
