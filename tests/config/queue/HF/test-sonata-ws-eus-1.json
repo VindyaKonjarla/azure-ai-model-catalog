@@ -1,10 +1,33 @@
 {
     "queue_name": "test-sonata-ws-eus-1",
     "models": [
-        "distilbert-base-cased-distilled-squad",
-        "gpt2-large",
-        "MLFlow-Import-distilbert-base-cased-distilled-squad",
-        "MLFlow-Import-gpt2-large"
+        'bert-base-cased'
+        ,'bert-base-uncased'
+        ,'bert-large-cased'
+        ,'bert-large-uncased'
+        ,'camembert-base'
+        ,'distilbert-base-cased'
+        ,'distilbert-base-uncased'
+        ,'distilroberta-base'
+        ,'microsoft-deberta-base'
+        ,'microsoft-deberta-large'
+        ,'roberta-base'
+        ,'deepset-minilm-uncased-squad2'
+        ,'deepset-roberta-base-squad2'
+        ,'distilbert-base-cased-distilled-squad'
+        ,'distilbert-base-uncased-distilled-squad'
+        ,'distilbert-base-uncased-finetuned-sst-2-english'
+        ,'finiteautomata-bertweet-base-sentiment-analysis'
+        ,'microsoft-deberta-base-mnli'
+        ,'microsoft-deberta-large-mnli'
+        ,'microsoft-deberta-xlarge'
+        ,'roberta-base-openai-detector'
+        ,'roberta-large-mnli'
+        ,'roberta-large-openai-detector'
+        ,'facebook-bart-large-cnn'
+        ,'sshleifer-distilbart-cnn-12-6'
+        ,'t5-base'
+        
     ],
     "workspace": "sonata-ws-eus",
     "subscription": "ed2cab61-14cc-4fb3-ac23-d72609214cfd",
