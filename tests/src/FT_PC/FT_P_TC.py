@@ -67,31 +67,31 @@ def get_sku_override():
         return None
 
 
-def set_next_trigger_model(queue):
-    print("In set_next_trigger_model...")
-# file the index of test_model_name in models list queue dictionary
-    model_list = list(queue.models)
-    #model_name_without_slash = test_model_name.replace('/', '-')
-    check_mlflow_model = "MLFlow-FT-"+test_model_name+"-oss"
-    index = model_list.index(check_mlflow_model)
-    print("check_mlflow_model:", {check_mlflow_model})
-    print("index of check_mlflow_model:", {index})
-    #index = model_list.index(test_model_name)
-    #index = model_list.index(test_model_name)
-    print(f"index of {test_model_name} in queue: {index}")
-# if index is not the last element in the list, get the next element in the list
-    if index < len(model_list) - 1:
-        next_model = model_list[index + 1]
-    else:
-        if (test_keep_looping == "true"):
-            next_model = queue[0]
-        else:
-            print("::warning:: finishing the queue")
-            next_model = ""
-# write the next model to github step output
-    with open(os.environ['GITHUB_OUTPUT'], 'a') as fh:
-        print(f'NEXT_MODEL={next_model}')
-        print(f'NEXT_MODEL={next_model}', file=fh)
+# def set_next_trigger_model(queue):
+#     print("In set_next_trigger_model...")
+# # file the index of test_model_name in models list queue dictionary
+#     model_list = list(queue.models)
+#     #model_name_without_slash = test_model_name.replace('/', '-')
+#     check_mlflow_model = "MLFlow-FT-"+test_model_name+"-oss"
+#     index = model_list.index(check_mlflow_model)
+#     print("check_mlflow_model:", {check_mlflow_model})
+#     print("index of check_mlflow_model:", {index})
+#     #index = model_list.index(test_model_name)
+#     #index = model_list.index(test_model_name)
+#     print(f"index of {test_model_name} in queue: {index}")
+# # if index is not the last element in the list, get the next element in the list
+#     if index < len(model_list) - 1:
+#         next_model = model_list[index + 1]
+#     else:
+#         if (test_keep_looping == "true"):
+#             next_model = queue[0]
+#         else:
+#             print("::warning:: finishing the queue")
+#             next_model = ""
+# # write the next model to github step output
+#     with open(os.environ['GITHUB_OUTPUT'], 'a') as fh:
+#         print(f'NEXT_MODEL={next_model}')
+#         print(f'NEXT_MODEL={next_model}', file=fh)
 
 
 
@@ -388,7 +388,7 @@ if __name__ == "__main__":
 
 
     if test_trigger_next_model == "true":
-        set_next_trigger_model(queue)
+        # set_next_trigger_model(queue)
     # print values of all above variables
     print("Running for TC")
     print (f"test_subscription_id: {queue['subscription']}")
