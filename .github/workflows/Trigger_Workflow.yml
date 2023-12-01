@@ -8,4 +8,4 @@ jobs:
    call-workflow-in-local-repo:
     uses: ./.github/workflows/runner.yml
    call-workflow-using-branch:
-    uses: ./.github/workflows/runner.yml
+    uses: ./.github/workflows/runner1.yml
