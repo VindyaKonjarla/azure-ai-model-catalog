@@ -72,7 +72,11 @@ def set_next_trigger_model(queue):
 # file the index of test_model_name in models list queue dictionary
     model_list = list(queue.models)
     #model_name_without_slash = test_model_name.replace('/', '-')
-    index = model_list.index(test_model_name)
+    check_mlflow_model = "MLFlow-FT-"+test_model_name+"-oss"
+    index = model_list.index(check_mlflow_model)
+    print("check_mlflow_model:", {check_mlflow_model})
+    print("index of check_mlflow_model:", {index})
+    #index = model_list.index(test_model_name)
     #index = model_list.index(test_model_name)
     print(f"index of {test_model_name} in queue: {index}")
 # if index is not the last element in the list, get the next element in the list
