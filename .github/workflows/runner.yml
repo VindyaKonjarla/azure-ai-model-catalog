@@ -4,16 +4,13 @@ on:
  workflow_dispatch:
 
  jobs:
-
-   ru1-job1:
-   runs-on: ubuntu-latest
-
-   steps:
+  deploy-model-job:
+    runs-on: ubuntu-latest
+    steps:
     - name: check-out-repo-step
       uses: actions/checkout@v3
-      
-   name: startrun
-   run: |
-    echo "I am in runner.yml"
+    - name: startrun
+      run: |
+       echo "I am in runner.yml"
    # call-workflow-in-local-repo:
    # uses: ./.github/workflows/MLFlow-bert-base-cased.yml
