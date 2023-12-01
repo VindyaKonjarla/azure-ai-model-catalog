@@ -362,52 +362,52 @@ if __name__ == "__main__":
                      f" skipping the further process and the exception is this one : {ex}")
         sys.exit(1)
 
-    data_path = get_file_path(task=task)
-    input_column_names, label_column_name = get_dataset(task=task, data_path=data_path,
-                                                        latest_model=registered_model)
-    pipeline_task = get_pipeline_task(task)
+    # data_path = get_file_path(task=task)
+    # input_column_names, label_column_name = get_dataset(task=task, data_path=data_path,
+    #                                                     latest_model=registered_model)
+    # pipeline_task = get_pipeline_task(task)
  
-    try:
-        pipeline_jobs = []
-        eval_experiment_name = f"{pipeline_task}-{exp_model_name}-evaluation-{timestamp}"
-        pipeline_object = evaluation_pipeline(
-            task=pipeline_task,
-            mlflow_model=Input(type=AssetTypes.MLFLOW_MODEL,
-                               path=f"{registered_model.id}"),
-            test_data=Input(type=AssetTypes.URI_FILE, path=data_path),
-            input_column_names=input_column_names,
-            label_column_name=label_column_name,
-            evaluation_file_path=Input(
-                type=AssetTypes.URI_FILE, path=f"./evaluation/{task}/eval_config.json"),
-            compute=compute_name,
-            #mlflow_model = f"{latest_model.id}",
-            #data_path = data_path
-        )
-        # don't reuse cached results from previous jobs
-        pipeline_object.settings.force_rerun = True
-        pipeline_object.settings.default_compute = compute_name
+    # try:
+    #     pipeline_jobs = []
+    #     eval_experiment_name = f"{pipeline_task}-{exp_model_name}-evaluation-{timestamp}"
+    #     pipeline_object = evaluation_pipeline(
+    #         task=pipeline_task,
+    #         mlflow_model=Input(type=AssetTypes.MLFLOW_MODEL,
+    #                            path=f"{registered_model.id}"),
+    #         test_data=Input(type=AssetTypes.URI_FILE, path=data_path),
+    #         input_column_names=input_column_names,
+    #         label_column_name=label_column_name,
+    #         evaluation_file_path=Input(
+    #             type=AssetTypes.URI_FILE, path=f"./evaluation/{task}/eval_config.json"),
+    #         compute=compute_name,
+    #         #mlflow_model = f"{latest_model.id}",
+    #         #data_path = data_path
+    #     )
+    #     # don't reuse cached results from previous jobs
+    #     pipeline_object.settings.force_rerun = True
+    #     pipeline_object.settings.default_compute = compute_name
 
-        # set continue on step failure to False
-        pipeline_object.settings.continue_on_step_failure = False
+    #     # set continue on step failure to False
+    #     pipeline_object.settings.continue_on_step_failure = False
 
-        pipeline_object.display_name = f"eval-{registered_model.name}-{timestamp}"
-        pipeline_job = workspace_ml_client.jobs.create_or_update(
-            pipeline_object, experiment_name=eval_experiment_name
-        )
-        # add model['name'] and pipeline_job.name as key value pairs to a dictionary
-        pipeline_jobs.append(
-            {"model_name": registered_model.name, "job_name": pipeline_job.name})
-        # wait for the pipeline job to complete
-        workspace_ml_client.jobs.stream(pipeline_job.name)
-        # return pipeline_jobs
-        metrics_df = MetricsCalaulator(
-            pipeline_jobs=pipeline_jobs, mlflow=mlflow, experiment_name=eval_experiment_name).display_metric()
-        logger.info(f"Evaluation result is this : {metrics_df}")
-    except Exception as ex:
-        _, _, exc_tb = sys.exc_info()
-        logger.error(f"The exception occured at this line no : {exc_tb.tb_lineno}" +
-                     f" the exception is this one : \n {ex}")
-        raise Exception(ex)
+    #     pipeline_object.display_name = f"eval-{registered_model.name}-{timestamp}"
+    #     pipeline_job = workspace_ml_client.jobs.create_or_update(
+    #         pipeline_object, experiment_name=eval_experiment_name
+    #     )
+    #     # add model['name'] and pipeline_job.name as key value pairs to a dictionary
+    #     pipeline_jobs.append(
+    #         {"model_name": registered_model.name, "job_name": pipeline_job.name})
+    #     # wait for the pipeline job to complete
+    #     workspace_ml_client.jobs.stream(pipeline_job.name)
+    #     # return pipeline_jobs
+    #     metrics_df = MetricsCalaulator(
+    #         pipeline_jobs=pipeline_jobs, mlflow=mlflow, experiment_name=eval_experiment_name).display_metric()
+    #     logger.info(f"Evaluation result is this : {metrics_df}")
+    # except Exception as ex:
+    #     _, _, exc_tb = sys.exc_info()
+    #     logger.error(f"The exception occured at this line no : {exc_tb.tb_lineno}" +
+    #                  f" the exception is this one : \n {ex}")
+    #     raise Exception(ex)
     # logger.info("Proceeding with inference and deployment")
     # InferenceAndDeployment = ModelInferenceAndDeployemnt(
     #     test_model_name=test_model_name.lower(),
