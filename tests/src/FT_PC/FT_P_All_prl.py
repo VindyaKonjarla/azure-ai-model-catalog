@@ -50,9 +50,14 @@ def get_sku_override():
 def set_next_trigger_model(queue):
     print("In set_next_trigger_model...")
     model_list = list(queue.models)
-    check_mlflow_model = test_model_name
+    check_mlflow_model = "MLFlow-FT-"+test_model_name+"-oss"
     index = model_list.index(check_mlflow_model)
-    print(f"index of {test_model_name} in queue: {index}")
+    print("check_mlflow_model:", {check_mlflow_model})
+    print("index of check_mlflow_model:", {index})
+    
+    # check_mlflow_model = test_model_name
+    # index = model_list.index(check_mlflow_model)
+    # print(f"index of {test_model_name} in queue: {index}")
 
     if index < len(model_list) - 1:
         next_model = model_list[index + 1]
