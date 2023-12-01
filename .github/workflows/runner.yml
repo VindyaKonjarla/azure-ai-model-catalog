@@ -1,9 +1,10 @@
-name: runner
+name: multi-models-deploy
 
-on:
- workflow_dispatch:
+on: 
+  workflow_dispatch:
+   
 
- jobs:
+jobs:
   deploy-model-job:
     runs-on: ubuntu-latest
 
@@ -15,9 +16,9 @@ on:
         uses: azure/login@v1
         with:
           creds: ${{secrets.AZURE_CREDENTIALS}}
+      - name: startrun
+        run: echo "Im in runner"
 
-      - name: set-model-env-variable
-        run: echo "test_model_name
       
-   # call-workflow-in-local-repo:
-   # uses: ./.github/workflows/MLFlow-bert-base-cased.yml
+         
+      
