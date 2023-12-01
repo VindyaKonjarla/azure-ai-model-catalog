@@ -33,6 +33,6 @@
     "subscription": "80c77c76-74ba-4c8c-8229-4c3b2957990c",
     "resource_group": "huggingface-registry-test1",
     "registry": "HuggingFace",
-    "compute": "Standard-D64as-v4",
-    "instance_type": "Standard-D64as-v4"
+    "compute": "donotdelete-Standard-DS4-v2",
+    "instance_type": "STANDARD_DS4_V2"
 }
