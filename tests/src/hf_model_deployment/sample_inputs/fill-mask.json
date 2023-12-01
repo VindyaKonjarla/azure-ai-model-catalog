@@ -1,5 +1,5 @@
 {
-  "inputs": {
+  "input_data": {
     "input_string":[
       "Paris is the [MASK] of France",
       "The goal of life is [MASK]."
