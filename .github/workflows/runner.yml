@@ -12,10 +12,10 @@ jobs:
       - name: check-out-repo-step
         uses: actions/checkout@v3
 
-      - name: azure-login-step
-        uses: azure/login@v1
-        with:
-          creds: ${{secrets.AZURE_CREDENTIALS}}
+      # - name: azure-login-step
+      #   uses: azure/login@v1
+      #   with:
+      #     creds: ${{secrets.AZURE_CREDENTIALS}}
       - name: startrun
         run: echo "Im in runner"
 
