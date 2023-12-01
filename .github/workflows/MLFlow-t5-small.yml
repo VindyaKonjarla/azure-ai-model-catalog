@@ -1,7 +1,7 @@
 name: t5-small
 
 on: 
-  workflow_dispatch:
+  workflow_call:
 
 env:
   # test_model_name: t5-small
