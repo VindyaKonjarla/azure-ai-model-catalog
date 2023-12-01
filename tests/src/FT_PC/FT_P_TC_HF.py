@@ -10,6 +10,7 @@ from mlflow.tracking.client import MlflowClient
 from azureml.core import Workspace, Environment
 from azure.ai.ml import MLClient
 from azureml.core import Model
+from azure.ai.ml.constants import AssetTypes
 from azure.identity import (
     DefaultAzureCredential,
     InteractiveBrowserCredential
