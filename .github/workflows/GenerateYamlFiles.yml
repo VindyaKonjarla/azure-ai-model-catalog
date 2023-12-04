@@ -31,7 +31,7 @@ jobs:
       run: pip install python-box 
     - name: deploy-model-step
       id: deploy-model-step
-      run: python create_queue.py
+      run: python create_queue_copy.py
       working-directory: tests/setup
     - name: Commit files
       id: commit
