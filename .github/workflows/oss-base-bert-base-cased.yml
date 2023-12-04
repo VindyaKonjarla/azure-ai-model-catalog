@@ -4,10 +4,10 @@ on:
   workflow_dispatch:
 
 env:
-  test_model_name: bert-base-cased
+  test_model_name: oss-base-bert-base-cased
   test_sku_type: cpu
   test_trigger_next_model: true
-  test_queue: test-northcentralus-2
+  test_queue: test-eastus-0
   test_set: huggingface-all
   test_keep_looping: false
 
@@ -28,13 +28,13 @@ jobs:
     - name: pip-install-azureml-mlflow
       run: pip install azureml-mlflow==1.53.0
     - name: pip-install-transformers
-      run: pip install transformers==4.34.0
+      run: pip install transformers
     - name: pip-install-transformers[torch]
       run: pip install transformers[torch]
     - name: pip-install-torchvision
       run: pip install torchvision 
     - name: pip-install-mlflow
-      run: pip install mlflow==2.8.0
+      run: pip install mlflow
     - name: pip-install-python-box
       run: pip install python-box 
     - name: pip-install-sacremoses
@@ -45,13 +45,17 @@ jobs:
       run: pip install fugashi[unidic-lite]  
     - name: pip-install-datasets
       run: pip install datasets
-    - name: import-evaluate-step
-      id: import-evaluate-step
-      run: python test_generic_pipeline_automation.py
+    - name: Import_Model
+      id: Import-model-step
+      run: python generic_pipeline_automation.py
+      working-directory: tests/src/pipeline_component_automation
+    - name: deploy-model-step
+      id: Eval-Model
+      run: python generic_eval.py
       working-directory: tests/src/pipeline_component_automation
     - name: deploy-model-step
       id: deploy-model-step
-      run: python test_generic_oss_model_deployment.py
+      run: python generic_oss_model_deployment.py
       working-directory: tests/src/oss_model_deployment
 
     - name: trigger-next-model-step

@@ -1,7 +1,9 @@
 {
     "queue_name": "test-eastus-1",
     "models": [
-        "hf-train-microsoft/deberta-base"
+        "oss-base-bert-base-uncased",
+        "oss-base-distilbert-base-cased",
+        "oss-base-microsoft-deberta-large"
     ],
     "workspace": "test-eastus",
     "subscription": "80c77c76-74ba-4c8c-8229-4c3b2957990c",

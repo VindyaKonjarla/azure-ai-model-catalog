@@ -1,7 +1,9 @@
 {
     "queue_name": "test-eastus-2",
     "models": [
-        "oss-base-gpt2"
+        "oss-base-bert-large-cased",
+        "oss-base-distilbert-base-uncased",
+        "oss-base-microsoft-deberta-xlarge"
     ],
     "workspace": "test-eastus",
     "subscription": "80c77c76-74ba-4c8c-8229-4c3b2957990c",
