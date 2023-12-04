@@ -38,7 +38,7 @@ parser.add_argument("--model_list_file", type=str, default="../config/modellist.
 # test_keep_looping, to keep looping through the queue after all models have been tested
 parser.add_argument("--test_keep_looping", type=str, default="false")
 # test_trigger_next_model, to trigger next model in queue after each model is tested
-parser.add_argument("--test_trigger_next_model", type=str, default="true")
+parser.add_argument("--test_trigger_next_model", type=str, default="false")
 # test_sku_type, to specify sku type to use for testing
 parser.add_argument("--test_sku_type", type=str, default="cpu")
 # parallel_tests, to specify number of parallel tests to run per workspace. 
