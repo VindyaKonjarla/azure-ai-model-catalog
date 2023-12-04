@@ -299,11 +299,13 @@ if __name__ == "__main__":
 
     compute_target = create_or_get_compute_target(
         ml_client=workspace_ml_client, compute=compute, instance_type=instance_type)
+    endpoint_name = queue.workspace.split("-")[-1] + "-" + compute.lower()
     endpoint = create_endpoint(
         workspace_ml_client=workspace_ml_client,
-        endpoint_name=compute.lower()
+        endpoint_name=endpoint_name
     )
-    task = HfTask(model_name=test_model_name).get_task(foundation_model=registered_model)
+    task = foundation_model.tags["task"]
+    #task = HfTask(model_name=test_model_name).get_task(foundation_model=registered_model)
     logger.info(f"Task is this : {task} for the model : {test_model_name}")
     #timestamp = str(int(time.time()))
     #exp_model_name = test_model_name.replace('/', '-')
@@ -415,7 +417,7 @@ if __name__ == "__main__":
     #     raise Exception(ex)
     logger.info("Proceeding with inference and deployment")
     InferenceAndDeployment = ModelInferenceAndDeployemnt(
-        test_model_name=test_model_name,
+        test_model_name=registered_model_name,
         workspace_ml_client=workspace_ml_client
     )
     InferenceAndDeployment.model_infernce_and_deployment(
