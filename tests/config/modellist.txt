@@ -6,8 +6,8 @@ camembert-base
 distilbert-base-cased
 distilbert-base-uncased
 distilroberta-base
-microsoft-deberta-base
-microsoft-deberta-large
-microsoft-deberta-xlarge
+microsoft/deberta-base
+microsoft/deberta-large
+microsoft/deberta-xlarge
 roberta-base
 roberta-large
