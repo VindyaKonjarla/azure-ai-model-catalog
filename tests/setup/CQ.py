@@ -117,7 +117,7 @@ def assign_models_to_queues(models, workspace_list):
                         print("queue[workspace]",queue[workspace])
                     if thread not in queue[workspace]:
                         queue[workspace][thread] = []
-                    queue[workspace][thread].append("MLFlow-DI-"+models[i])
+                    queue[workspace][thread].append("oss-base-"+models[i])
                     print("queue[workspace][thread]",queue[workspace][thread])
                     i=i+1
                     #print (f"Adding model {models[i]} at index {i} to queue {workspace}-{thread}")
