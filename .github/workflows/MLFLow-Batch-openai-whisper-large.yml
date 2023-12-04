@@ -45,6 +45,8 @@ jobs:
       run: pip install fugashi[unidic-lite]
     - name: install-ffmpeg
       run: sudo apt-get update && sudo apt-get install -y ffmpeg
+    - name: install-pydub
+      run: pip install pydub 
     - name: deploy-model-step
       id: deploy-model-step
       run: python Batch_Endpoint.py
