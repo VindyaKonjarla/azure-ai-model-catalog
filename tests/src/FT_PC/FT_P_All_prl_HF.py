@@ -75,9 +75,9 @@ def set_next_trigger_model(queue):
         print(f'NEXT_MODEL={next_model}', file=fh)
 
 
-def get_latest_model_version(workspace_ml_client, test_model_name):
+def get_latest_model_version(registry_ml_client, test_model_name):
     print("In get_latest_model_version...")
-    version_list = list(workspace_ml_client.models.list(test_model_name))
+    version_list = list(registry_ml_client.models.list(test_model_name))
     
     if len(version_list) == 0:
         print("Model not found in registry")
@@ -85,7 +85,7 @@ def get_latest_model_version(workspace_ml_client, test_model_name):
         foundation_model_id = None  # Set id to None as well
     else:
         model_version = version_list[0].version
-        foundation_model = workspace_ml_client.models.get(
+        foundation_model = registry_ml_client.models.get(
             test_model_name, model_version)
         print(
             "\n\nUsing model name: {0}, version: {1}, id: {2} for inferencing".format(
@@ -302,7 +302,9 @@ if __name__ == "__main__":
         workspace_name=queue.workspace
     )
     mlflow.set_tracking_uri(ws.get_mlflow_tracking_uri())
-    foundation_model = get_latest_model_version(workspace_ml_client, test_model_name.lower())
+    #foundation_model = get_latest_model_version(workspace_ml_client, test_model_name.lower())
+    registry_ml_client = MLClient(credential, registry_name="azureml")
+    foundation_model = get_latest_model_version(registry_ml_client, test_model_name.lower())
 
     primary_task = HfTask(model_name=test_model_name).get_task()
     print("Task is this: ", primary_task)
