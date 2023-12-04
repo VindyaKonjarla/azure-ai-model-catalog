@@ -4,7 +4,7 @@ import pandas as pd
 LIST_OF_COLUMNS = ['modelId', 'downloads',
                    'lastModified', 'tags', 'pipeline_tag']
 TASK_NAME = ['fill-mask', 'token-classification', 'question-answering',
-             'summarization', 'text-generation', 'text-classification', 'translation']
+             'summarization', 'text-generation', 'text-classification', 'translation', 'automatic-speech-recognition']
 STRING_TO_CHECK = 'transformers'
 #logger = get_logger(__name__)
 
