@@ -240,6 +240,7 @@ if __name__ == "__main__":
     # print("COMPUTE----------",COMPUTE)
     # compute_name="donotdelete-"+COMPUTE.replace("_", "-")
     # # compute_name=COMPUTE.replace("_", "-")
+    COMPUTE="STANDARD_DS4_V2"
     compute_name="donotdelete-Standard-DS4-v2"
     # try:
     #     _ = workspace_ml_client.compute.get(compute_name)
