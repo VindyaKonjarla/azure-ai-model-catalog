@@ -47,7 +47,7 @@ jobs:
       run: pip install datasets
     - name: Import_Model-step
       id: Import-model-step
-      run: python Import.py
+      run: python generic_pipeline_automation.py
       working-directory: tests/src/pipeline_component_automation
     - name: Eval-model-step
       id: Eval-Model-step
