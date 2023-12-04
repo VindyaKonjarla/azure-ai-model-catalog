@@ -44,7 +44,7 @@ parser.add_argument("--test_sku_type", type=str, default="cpu")
 # this will be used to create multiple queues
 parser.add_argument("--parallel_tests", type=int, default=4)
 # workflow-template.yml file to use as template for generating workflow files
-parser.add_argument("--workflow_template", type=str, default="../config/workflow-template-huggingface.yml")
+parser.add_argument("--workflow_template", type=str, default="..config/workflow-template-huggingface-copy.yml")
 # workspace_list file get workspace metadata
 parser.add_argument("--workspace_list", type=str, default="../config/workspaces.json")
 # directory to write logs
