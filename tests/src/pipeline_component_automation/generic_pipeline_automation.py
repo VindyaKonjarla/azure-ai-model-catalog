@@ -220,47 +220,47 @@ if __name__ == "__main__":
     
     azureml_meta_registry = MLClient(credential, registry_name="azureml-meta")
     mlflow.set_tracking_uri(ws.get_mlflow_tracking_uri())
-    # if "lama" in test_model_name:
-    #     a = test_model_name.index('/')+1
-    #     model=test_model_name[a:]
-    #     model_detail = ModelDetail(workspace_ml_client=azureml_meta_registry)
-    #     foundation_model = model_detail.get_model_detail(test_model_name=model)
-    #     computelist = foundation_model.properties.get(
-    #     "evaluation-recommended-sku", "donotdelete-DS4v2")
-    # else:
-    #     model_detail = ModelDetail(workspace_ml_client=azureml_registry)
-    #     foundation_model = model_detail.get_model_detail(test_model_name=test_model_name)
-    #     computelist = foundation_model.properties.get(
-    #     "evaluation-recommended-sku", "donotdelete-DS4v2")
-    # if "," in computelist:
-    #     a = computelist.index(',')
-    #     COMPUTE = computelist[:a]
-    # else:
-    #     COMPUTE = computelist
-    # print("COMPUTE----------",COMPUTE)
-    # compute_name="donotdelete-"+COMPUTE.replace("_", "-")
-    # # compute_name=COMPUTE.replace("_", "-")
-    COMPUTE="STANDARD_DS4_V2"
-    compute_name="donotdelete-Standard-DS4-v2"
-    # try:
-    #     _ = workspace_ml_client.compute.get(compute_name)
-    #     print("Found existing compute target.")
-    # except ResourceNotFoundError:
-    #     print("Creating a new compute target...")
-    #     compute_config = AmlCompute(
-    #         name=compute_name,
-    #         type="amlcompute",
-    #         size=COMPUTE,
-    #         idle_time_before_scale_down=120,
-    #         min_instances=0,
-    #         max_instances=6,
-    #     )
-    #     workspace_ml_client.begin_create_or_update(compute_config).result()
-    # compute_target = create_or_get_compute_target(
-    #     workspace_ml_client, COMPUTE, instance_type=queue.instance_type)
+    if "lama" in test_model_name:
+        a = test_model_name.index('/')+1
+        model=test_model_name[a:]
+        model_detail = ModelDetail(workspace_ml_client=azureml_meta_registry)
+        foundation_model = model_detail.get_model_detail(test_model_name=model)
+        computelist = foundation_model.properties.get(
+        "evaluation-recommended-sku", "donotdelete-DS4v2")
+    else:
+        model_detail = ModelDetail(workspace_ml_client=azureml_registry)
+        foundation_model = model_detail.get_model_detail(test_model_name=test_model_name)
+        computelist = foundation_model.properties.get(
+        "evaluation-recommended-sku", "donotdelete-DS4v2")
+    if "," in computelist:
+        a = computelist.index(',')
+        COMPUTE = computelist[:a]
+    else:
+        COMPUTE = computelist
+    print("COMPUTE----------",COMPUTE)
+    compute_name="donotdelete-"+COMPUTE.replace("_", "-")
+    # compute_name=COMPUTE.replace("_", "-")
+    # COMPUTE="STANDARD_DS4_V2"
+    # compute_name="donotdelete-Standard-DS4-v2"
+    try:
+        _ = workspace_ml_client.compute.get(compute_name)
+        print("Found existing compute target.")
+    except ResourceNotFoundError:
+        print("Creating a new compute target...")
+        compute_config = AmlCompute(
+            name=compute_name,
+            type="amlcompute",
+            size=COMPUTE,
+            idle_time_before_scale_down=120,
+            min_instances=0,
+            max_instances=6,
+        )
+        workspace_ml_client.begin_create_or_update(compute_config).result()
+    compute_target = create_or_get_compute_target(
+        workspace_ml_client, COMPUTE, instance_type=queue.instance_type)
 
-    # compute_target = create_or_get_compute_target(
-    #     ml_client=workspace_ml_client, compute=COMPUTE, instance_type=queue.instance_type)
+    compute_target = create_or_get_compute_target(
+        ml_client=workspace_ml_client, compute=COMPUTE, instance_type=queue.instance_type)
     task = HfTask(model_name=test_model_name).get_task()
     print("Task--------------",task)
     logger.info(f"Task is this : {task} for the model : {test_model_name}")
