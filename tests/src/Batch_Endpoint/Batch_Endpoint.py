@@ -243,7 +243,8 @@ def create_and_configure_batch_endpoint(
 ):
 
     timestamp = int(time.time())
-    endpoint_name = task + str(timestamp)
+    #endpoint_name = task + str(timestamp)
+    endpoint_name = foundation_model_name + str(timestamp)
 
     #foundation_model_name = get_model_name(foundation_model_name=foundation_model.name)
     
