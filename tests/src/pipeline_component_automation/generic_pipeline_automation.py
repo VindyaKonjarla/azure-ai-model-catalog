@@ -241,20 +241,20 @@ if __name__ == "__main__":
     # compute_name="donotdelete-"+COMPUTE.replace("_", "-")
     # # compute_name=COMPUTE.replace("_", "-")
     compute_name="donotdelete-Standard-DS4-v2"
-    try:
-        _ = workspace_ml_client.compute.get(compute_name)
-        print("Found existing compute target.")
-    except ResourceNotFoundError:
-        print("Creating a new compute target...")
-        compute_config = AmlCompute(
-            name=compute_name,
-            type="amlcompute",
-            size=COMPUTE,
-            idle_time_before_scale_down=120,
-            min_instances=0,
-            max_instances=6,
-        )
-        workspace_ml_client.begin_create_or_update(compute_config).result()
+    # try:
+    #     _ = workspace_ml_client.compute.get(compute_name)
+    #     print("Found existing compute target.")
+    # except ResourceNotFoundError:
+    #     print("Creating a new compute target...")
+    #     compute_config = AmlCompute(
+    #         name=compute_name,
+    #         type="amlcompute",
+    #         size=COMPUTE,
+    #         idle_time_before_scale_down=120,
+    #         min_instances=0,
+    #         max_instances=6,
+    #     )
+    #     workspace_ml_client.begin_create_or_update(compute_config).result()
     # compute_target = create_or_get_compute_target(
     #     workspace_ml_client, COMPUTE, instance_type=queue.instance_type)
 
