@@ -1,28 +1,13 @@
 {
     "queue_name": "test-southcentralus-BE",
     "models": [
-        "MLFlow-Batch-t5-small",
-        "MLFlow-Batch-sshleifer/distilbart-cnn-12-6",
-        "MLFlow-Batch-roberta-base",
-        "MLFlow-Batch-gpt2",
-        "MLFlow-Batch-distilroberta-base",
-        "MLFlow-Batch-distilgpt2",
-        "MLFlow-Batch-distilbert-base-uncased-distilled-squad",
-        "MLFlow-Batch-distilbert-base-uncased",
-        "MLFlow-Batch-distilbert-base-cased-distilled-squad",
-        "MLFlow-Batch-distilbert-base-cased",
-        "MLFlow-Batch-deepset/roberta-base-squad2",
-        "MLFlow-Batch-deepset/minilm-uncased-squad2",
-        "MLFlow-Batch-camembert-base",
-        "MLFlow-Batch-bert-base-uncased",
-        "MLFlow-Batch-bert-base-cased"
-        
+        "MLFlow-Batch-openai/whisper-large"
     ],
-    "workspace": "test-eastus",
-    "subscription": "80c77c76-74ba-4c8c-8229-4c3b2957990c",
-    "resource_group": "huggingface-registry-test1",
+    "workspace": "sonata-ws-ae",
+    "subscription": "ed2cab61-14cc-4fb3-ac23-d72609214cfd",
+    "resource_group": "sonata-oss-testing-rg",
     "registry": "HuggingFace",
-    "environment": "automate-venv",
-    "compute": "Standard-DS2-v2",
-    "instance_type": "Standard_DS2_v2"
+    "environment": "automate-env",
+    "compute": "Standard-DS4-v2",
+    "instance_type": "Standard_DS4_v2"
 }
