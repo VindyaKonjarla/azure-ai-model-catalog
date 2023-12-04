@@ -1,4 +1,4 @@
 "","audio","language"
-"0","https://www2.cs.uic.edu/~i101/SoundFiles/gettysburg.wav","en"
-"1","https://www2.cs.uic.edu/~i101/SoundFiles/preamble.wav","en"
-"2","https://www2.cs.uic.edu/~i101/SoundFiles/gettysburg10.wav","en"
+"0","https://datasets-server.huggingface.co/assets/librispeech_asr/--/clean/test/0/audio/audio.wav","en"
+"1","https://datasets-server.huggingface.co/assets/librispeech_asr/--/clean/test/1/audio/audio.wav","en"
+"2","https://datasets-server.huggingface.co/assets/librispeech_asr/--/clean/test/2/audio/audio.wav","en"
