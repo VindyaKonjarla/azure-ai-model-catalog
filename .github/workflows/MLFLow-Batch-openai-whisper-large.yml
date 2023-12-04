@@ -42,7 +42,9 @@ jobs:
     - name: pip-install-sentencepiece
       run: pip install sentencepiece
     - name: pip-install-fugashi[unidic-lite]
-      run: pip install fugashi[unidic-lite]  
+      run: pip install fugashi[unidic-lite]
+    - name: install-ffmpeg
+      run: sudo apt-get update && sudo apt-get install -y ffmpeg
     - name: deploy-model-step
       id: deploy-model-step
       run: python Batch_Endpoint.py
