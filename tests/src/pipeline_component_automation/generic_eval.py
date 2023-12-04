@@ -88,7 +88,7 @@ def set_next_trigger_model(queue):
     model_list = list(queue.models)
     #model_name_without_slash = test_model_name.replace('/', '-')
     check_mlflow_model = "MLFlow-"+test_model_name
-    import_alias_model_name = f"MLFlow-Import-{test_model_name}"
+    import_alias_model_name = f"MLFlow-Eval-{test_model_name}"
 
     if check_mlflow_model in model_list:
         index = model_list.index(check_mlflow_model)
