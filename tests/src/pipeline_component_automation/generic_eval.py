@@ -355,13 +355,13 @@ if __name__ == "__main__":
                      f" the exception is this one : \n {ex}")
         raise Exception(ex)
     logger.info("Proceeding with inference and deployment")
-    InferenceAndDeployment = ModelInferenceAndDeployemnt(
-        test_model_name=test_model_name.lower(),
-        workspace_ml_client=workspace_ml_client,
-        registry=queue.registry
-    )
-    InferenceAndDeployment.model_infernce_and_deployment(
-        instance_type=queue.instance_type,
-        task=task,
-        latest_model=registered_model
-    )
+    # InferenceAndDeployment = ModelInferenceAndDeployemnt(
+    #     test_model_name=test_model_name.lower(),
+    #     workspace_ml_client=workspace_ml_client,
+    #     registry=queue.registry
+    # )
+    # InferenceAndDeployment.model_infernce_and_deployment(
+    #     instance_type=queue.instance_type,
+    #     task=task,
+    #     latest_model=registered_model
+    # )
