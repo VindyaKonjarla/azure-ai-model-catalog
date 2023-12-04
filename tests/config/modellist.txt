@@ -4,10 +4,3 @@ bert-large-cased
 bert-large-uncased
 camembert-base
 distilbert-base-cased
-distilbert-base-uncased
-distilroberta-base
-microsoft/deberta-base
-microsoft/deberta-large
-microsoft/deberta-xlarge
-roberta-base
-roberta-large
