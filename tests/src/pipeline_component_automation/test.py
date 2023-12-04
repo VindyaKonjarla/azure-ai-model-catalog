@@ -305,37 +305,37 @@ if __name__ == "__main__":
     exp_model_name = test_model_name.replace('/', '-')
 
     # # ---------------------------------------
-    # try:
-    #     pipeline_object = model_import_pipeline(
-    #         compute_name=compute_name,
-    #         task_name=task,
-    #         update_existing_model=True,
-    #     )
-    #     pipeline_object.identity = UserIdentityConfiguration()
-    #     pipeline_object.settings.force_rerun = True
-    #     pipeline_object.settings.default_compute = COMPUTE
-    #     schedule_huggingface_model_import = (
-    #         not huggingface_model_exists_in_registry
-    #         and test_model_name not in [None, "None"]
-    #         and len(test_model_name) > 1
-    #     )
-    #     logger.info(
-    #         f"Need to schedule run for importing {test_model_name}: {schedule_huggingface_model_import}")
+    try:
+        pipeline_object = model_import_pipeline(
+            compute_name=compute_name,
+            task_name=task,
+            update_existing_model=True,
+        )
+        pipeline_object.identity = UserIdentityConfiguration()
+        pipeline_object.settings.force_rerun = True
+        pipeline_object.settings.default_compute = COMPUTE
+        schedule_huggingface_model_import = (
+            not huggingface_model_exists_in_registry
+            and test_model_name not in [None, "None"]
+            and len(test_model_name) > 1
+        )
+        logger.info(
+            f"Need to schedule run for importing {test_model_name}: {schedule_huggingface_model_import}")
 
-    #     huggingface_pipeline_job = None
-    #     # if schedule_huggingface_model_import:
-    #     # submit the pipeline job
-    #     huggingface_pipeline_job = workspace_ml_client.jobs.create_or_update(
-    #         pipeline_object, experiment_name=f"import-pipeline-{exp_model_name}-{timestamp}"
-    #     )
-    #     # wait for the pipeline job to complete
-    #     workspace_ml_client.jobs.stream(huggingface_pipeline_job.name)
-    # except Exception as ex:
-    #     _, _, exc_tb = sys.exc_info()
-    #     logger.error(f"::error:: Not able to initiate job \n")
-    #     logger.error(f"The exception occured at this line no : {exc_tb.tb_lineno}" +
-    #                  f" skipping the further process and the exception is this one : {ex}")
-    #     sys.exit(1)
+        huggingface_pipeline_job = None
+        # if schedule_huggingface_model_import:
+        # submit the pipeline job
+        huggingface_pipeline_job = workspace_ml_client.jobs.create_or_update(
+            pipeline_object, experiment_name=f"import-pipeline-{exp_model_name}-{timestamp}"
+        )
+        # wait for the pipeline job to complete
+        workspace_ml_client.jobs.stream(huggingface_pipeline_job.name)
+    except Exception as ex:
+        _, _, exc_tb = sys.exc_info()
+        logger.error(f"::error:: Not able to initiate job \n")
+        logger.error(f"The exception occured at this line no : {exc_tb.tb_lineno}" +
+                     f" skipping the further process and the exception is this one : {ex}")
+        sys.exit(1)
     # -----------------------------------------
     registered_model_detail = ModelDetail(workspace_ml_client=workspace_ml_client)
     registered_model = registered_model_detail.get_model_detail(test_model_name=test_model_name)
@@ -349,42 +349,42 @@ if __name__ == "__main__":
     print("registered_model---------",registered_model)
     # print("tv",tv)
     print("transformers_version---",transformers_version)
-    # try:
+    try:
      
-    #   if mlflow_version==2.8.0 and tv==4.34.0:
-    #     logger.info(
-    #             f"This model {registered_model.name} is in mlflow_version==2.8.0 && transformers_version==4.34.0")
-    #   else:
-    #       logger.info(f"This model {registered_model.name} is not in latest mlflow and transformers versions")
-    #       raise Exception(f"This model {registered_model.name} is not registered in latest mlflow and transformers versions")
-    # except Exception as ex:
-    #     _, _, exc_tb = sys.exc_info()
-    #     logger.error(f"::error:: Not able to initiate job \n")
-    #     logger.error(f"The exception occured at this line no : {exc_tb.tb_lineno}" +
-    #                  f" skipping the further process and the exception is this one : {ex}")
-    #     sys.exit(1)
-    # try:
-    #     flavour = registered_model.flavors
-    #     if flavour.get("python_function", None) == None:
-    #         logger.info(
-    #             f"This model {registered_model.name} is not registered in the mlflow flavour so skipping the further process")
-    #         raise Exception(
-    #             f"This model {registered_model.name} is not registered in the mlflow flavour so skipping the further process")
-    #     else:
-    #         if flavour.get("python_function").get("loader_module", None) == "mlflow.transformers":
-    #             logger.info(
-    #                 f"This model {registered_model.name} is registered in the mlflow flavour")
-    #         else:
-    #             logger.info(
-    #                 f"This model {registered_model.name} is not registered in the mlflow flavour so skipping the further process")
-    #             raise Exception(
-    #                 f"This model {registered_model.name} is not registered in the mlflow flavour so skipping the further process")
-    # except Exception as ex:
-    #     _, _, exc_tb = sys.exc_info()
-    #     logger.error(f"::error:: Not able to initiate job \n")
-    #     logger.error(f"The exception occured at this line no : {exc_tb.tb_lineno}" +
-    #                  f" skipping the further process and the exception is this one : {ex}")
-    #     sys.exit(1)
+      if transformers_version==4.34.0:
+        logger.info(
+                f"This model {registered_model.name} is in mlflow_version==2.8.0 && transformers_version==4.34.0")
+      else:
+          logger.info(f"This model {registered_model.name} is not in latest mlflow and transformers versions")
+          raise Exception(f"This model {registered_model.name} is not registered in latest mlflow and transformers versions")
+    except Exception as ex:
+        _, _, exc_tb = sys.exc_info()
+        logger.error(f"::error:: Not able to initiate job \n")
+        logger.error(f"The exception occured at this line no : {exc_tb.tb_lineno}" +
+                     f" skipping the further process and the exception is this one : {ex}")
+        sys.exit(1)
+    try:
+        flavour = registered_model.flavors
+        if flavour.get("python_function", None) == None:
+            logger.info(
+                f"This model {registered_model.name} is not registered in the mlflow flavour so skipping the further process")
+            raise Exception(
+                f"This model {registered_model.name} is not registered in the mlflow flavour so skipping the further process")
+        else:
+            if flavour.get("python_function").get("loader_module", None) == "mlflow.transformers":
+                logger.info(
+                    f"This model {registered_model.name} is registered in the mlflow flavour")
+            else:
+                logger.info(
+                    f"This model {registered_model.name} is not registered in the mlflow flavour so skipping the further process")
+                raise Exception(
+                    f"This model {registered_model.name} is not registered in the mlflow flavour so skipping the further process")
+    except Exception as ex:
+        _, _, exc_tb = sys.exc_info()
+        logger.error(f"::error:: Not able to initiate job \n")
+        logger.error(f"The exception occured at this line no : {exc_tb.tb_lineno}" +
+                     f" skipping the further process and the exception is this one : {ex}")
+        sys.exit(1)
 
     # data_path = get_file_path(task=task)
     # input_column_names, label_column_name = get_dataset(task=task, data_path=data_path,
