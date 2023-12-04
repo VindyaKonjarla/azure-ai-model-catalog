@@ -87,8 +87,8 @@ def set_next_trigger_model(queue):
 # file the index of test_model_name in models list queue dictionary
     model_list = list(queue.models)
     #model_name_without_slash = test_model_name.replace('/', '-')
-    check_mlflow_model = "MLFlow-"+test_model_name
-    import_alias_model_name = f"MLFlow-Import-{test_model_name}"
+    check_mlflow_model = "oss-"+test_model_name
+    import_alias_model_name = f"oss-base-{test_model_name}"
 
     if check_mlflow_model in model_list:
         index = model_list.index(check_mlflow_model)
@@ -164,45 +164,6 @@ def model_import_pipeline(compute_name, update_existing_model, task_name):
     import_model_job.settings.continue_on_step_failure = False
     return {"model_registration_details": import_model_job.outputs.model_registration_details}
 
-
-@pipeline()
-def evaluation_pipeline(task, mlflow_model, test_data, input_column_names, label_column_name, evaluation_file_path, compute):
-    try:
-        logger.info("Started configuring the job")
-        #data_path = "./datasets/translation.json"
-        pipeline_component_func = registry_ml_client.components.get(
-            name="mlflow_oss_model_evaluation_pipeline", label="latest"
-        )
-        evaluation_job = pipeline_component_func(
-            # specify the foundation model available in the azureml system registry or a model from the workspace
-            # mlflow_model = Input(type=AssetTypes.MLFLOW_MODEL, path=f"{mlflow_model_path}"),
-            mlflow_model=mlflow_model,
-            # test data
-            test_data=Input(type=AssetTypes.URI_FILE, path=test_data),
-            # The following parameters map to the dataset fields
-            input_column_names=input_column_names,
-            label_column_name=label_column_name,
-            # compute settings
-            # specify the instance type for serverless job
-            instance_type= "donotdelete-DS4v2",
-            # Evaluation settings
-            task=task,
-            compute_name=compute,
-            # config file containing the details of evaluation metrics to calculate
-            # evaluation_config=Input(
-            #     type=AssetTypes.URI_FILE, path="./evaluation/eval_config.json"),
-            evaluation_config=Input(
-                type=AssetTypes.URI_FILE, path=evaluation_file_path),
-            # config cluster/device job is running on
-            # set device to GPU/CPU on basis if GPU count was found
-            device="cpu",
-        )
-        return {"evaluation_result": evaluation_job.outputs.evaluation_result}
-    except Exception as ex:
-        _, _, exc_tb = sys.exc_info()
-        logger.error(f"The exception occured at this line no : {exc_tb.tb_lineno}" +
-                     f" the exception is this one : \n {ex}")
-        raise Exception(ex)
 
 
 if __name__ == "__main__":
