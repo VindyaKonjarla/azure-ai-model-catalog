@@ -258,10 +258,8 @@ if __name__ == "__main__":
         )
         workspace_ml_client.begin_create_or_update(compute_config).result()
     compute_target = create_or_get_compute_target(
-        workspace_ml_client, COMPUTE, instance_type=queue.instance_type)
+        workspace_ml_client, COMPUTE=compute_name, instance_type=queue.instance_type)
 
-    compute_target = create_or_get_compute_target(
-        ml_client=workspace_ml_client, compute=COMPUTE, instance_type=queue.instance_type)
     task = HfTask(model_name=test_model_name).get_task()
     print("Task--------------",task)
     logger.info(f"Task is this : {task} for the model : {test_model_name}")
