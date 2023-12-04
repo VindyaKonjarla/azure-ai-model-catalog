@@ -3,7 +3,7 @@
     "models": [
         "oss-base-bert-base-cased",
         "oss-base-camembert-base",
-        "oss-base-microsoft-deberta-base",
+        "oss-base-microsoft/deberta-base",
         "oss-base-roberta-large"
     ],
     "workspace": "test-eastus",
