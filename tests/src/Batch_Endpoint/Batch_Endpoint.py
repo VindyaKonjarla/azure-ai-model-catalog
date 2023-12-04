@@ -9,6 +9,7 @@ import mlflow
 import json
 import os
 import sys
+import requests
 from box import ConfigBox
 from azureml.core.compute import AmlCompute
 from huggingface_hub import login
