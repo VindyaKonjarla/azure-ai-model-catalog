@@ -87,15 +87,15 @@ def set_next_trigger_model(queue):
 # file the index of test_model_name in models list queue dictionary
     model_list = list(queue.models)
     #model_name_without_slash = test_model_name.replace('/', '-')
-    check_mlflow_model = "oss-base-"+test_model_name
-    import_alias_model_name = f"oss-train-{test_model_name}"
+    check_mlflow_model = "HF-eval-"+test_model_name
+    import_alias_model_name = f"HF-eval-{test_model_name}"
 
     if check_mlflow_model in model_list:
         index = model_list.index(check_mlflow_model)
     elif import_alias_model_name in model_list:
         index = model_list.index(import_alias_model_name)
     else:
-        index = model_list.index(test_model_name.replace("/", "-").lower()+"-oss")
+        index = model_list.index(test_model_name.replace("/", "-").lower())
 
     logger.info(f"index of {test_model_name} in queue: {index}")
 # if index is not the last element in the list, get the next element in the list
@@ -154,15 +154,6 @@ def get_pipeline_task(task):
     return pipeline_task.get(task)
 
 
-@pipeline
-def model_import_pipeline(compute_name, update_existing_model, task_name):
-    import_model = registry_ml_client.components.get(
-        name="import_model_oss_test", label="latest")
-    import_model_job = import_model(model_id=test_model_name, compute=compute_name,
-                                    task_name=task_name, update_existing_model=update_existing_model)
-    # Set job to not continue on failure
-    import_model_job.settings.continue_on_step_failure = False
-    return {"model_registration_details": import_model_job.outputs.model_registration_details}
 
 
 @pipeline()
@@ -171,7 +162,7 @@ def evaluation_pipeline(task, mlflow_model, test_data, input_column_names, label
         logger.info("Started configuring the job")
         #data_path = "./datasets/translation.json"
         pipeline_component_func = registry_ml_client.components.get(
-            name="mlflow_oss_model_uation_pipeline", label="latest"
+            name="mlflow_HF_model_evaluation_pipeline", label="latest"
         )
         uation_job = pipeline_component_func(
             # specify the foundation model available in the azureml system registry or a model from the workspace
