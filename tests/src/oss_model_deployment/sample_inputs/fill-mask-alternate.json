@@ -1,0 +1,6 @@
+{
+    "input_data": [
+      "Paris is the <mask> of France",
+      "The goal of life is <mask>."
+    ]
+}

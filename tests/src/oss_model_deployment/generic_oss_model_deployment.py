@@ -92,7 +92,7 @@ def set_next_trigger_model(queue):
 # file the index of test_model_name in models list queue dictionary
     model_list = list(queue.models)
     #model_name_without_slash = test_model_name.replace('/', '-')
-    check_oss_base_model = "oss-base-"+test_model_name
+    check_oss_base_model = "oss-deployment-"+test_model_name
 
     if check_oss_base_model in model_list:
         index = model_list.index(check_oss_base_model)
@@ -304,8 +304,8 @@ if __name__ == "__main__":
         workspace_ml_client=workspace_ml_client,
         endpoint_name=endpoint_name
     )
-    task = foundation_model.tags["task"]
-    #task = HfTask(model_name=test_model_name).get_task(foundation_model=registered_model)
+    #task = foundation_model.tags["task"]
+    task = HfTask(model_name=test_model_name).get_task(foundation_model=registered_model)
     logger.info(f"Task is this : {task} for the model : {test_model_name}")
     #timestamp = str(int(time.time()))
     #exp_model_name = test_model_name.replace('/', '-')
