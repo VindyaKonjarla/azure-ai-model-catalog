@@ -309,7 +309,7 @@ def create_and_run_azure_ml_pipeline(
 ):
     # Fetch the pipeline component
     pipeline_component_func = registry_ml_client.components.get(
-        name="summarization_pipeline_for_oss", label="latest"
+        name="summarization_pipeline", label="latest"
     )
 
     def register_model_to_workspace(workspace_ml_client, pipeline_job, test_model_name, timestamp):
