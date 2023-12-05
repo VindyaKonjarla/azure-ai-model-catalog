@@ -201,9 +201,10 @@ if __name__ == "__main__":
     # if test_model_name is None or test_sku_type is None or test_queue is None or test_set is None or test_trigger_next_model is None or test_keep_looping is None:
     #     logger.error("::error:: One or more of the environment variables test_model_name, test_sku_type, test_queue, test_set, test_trigger_next_model, test_keep_looping are not set")
     #     exit(1)
+    queue = get_test_queue()
     model_list = list(queue.models)
     for test_model_name in model_list:
-        queue = get_test_queue()
+        
     
         # sku_override = get_sku_override()
         # if sku_override is None:
