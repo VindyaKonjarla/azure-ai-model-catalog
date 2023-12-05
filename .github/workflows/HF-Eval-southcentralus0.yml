@@ -1,4 +1,4 @@
-name: HF-Eval-eastus1
+name: HF-Eval-southcentralus0
 
 on: 
   workflow_dispatch:
