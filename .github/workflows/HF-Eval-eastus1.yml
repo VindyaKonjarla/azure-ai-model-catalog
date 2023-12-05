@@ -1,4 +1,4 @@
-name: HF-eastus1
+name: HF-Eval-eastus1
 
 on: 
   workflow_dispatch:
