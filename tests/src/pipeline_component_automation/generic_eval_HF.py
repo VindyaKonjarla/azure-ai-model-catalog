@@ -157,14 +157,14 @@ def get_pipeline_task(task):
 
 
 @pipeline()
-def evaluation_pipeline(task, mlflow_model, test_data, input_column_names, label_column_name, evaluation_pipeline, compute):
+def evaluation_pipeline(task, mlflow_model, test_data, input_column_names, label_column_name, evaluation_file_path, compute):
     try:
         logger.info("Started configuring the job")
         #data_path = "./datasets/translation.json"
         pipeline_component_func = registry_ml_client.components.get(
             name="mlflow_oss_model_evaluation_pipeline", label="latest"
         )
-        uation_job = pipeline_component_func(
+        evaluation_job = pipeline_component_func(
             # specify the foundation model available in the azureml system registry or a model from the workspace
             # mlflow_model = Input(type=AssetTypes.MLFLOW_MODEL, path=f"{mlflow_model_path}"),
             mlflow_model=mlflow_model,
@@ -176,19 +176,19 @@ def evaluation_pipeline(task, mlflow_model, test_data, input_column_names, label
             # compute settings
             # specify the instance type for serverless job
             instance_type= "donotdelete-DS4v2",
-            # uation settings
+            # Evaluation settings
             task=task,
             compute_name=compute,
-            # config file containing the details of uation metrics to calculate
-            # uation_config=Input(
-            #     type=AssetTypes.URI_FILE, path="./uation/_config.json"),
-            uation_config=Input(
-                type=AssetTypes.URI_FILE, path=evaluation_pipeline),
+            # config file containing the details of evaluation metrics to calculate
+            # evaluation_config=Input(
+            #     type=AssetTypes.URI_FILE, path="./evaluation/eval_config.json"),
+            evaluation_config=Input(
+                type=AssetTypes.URI_FILE, path=evaluation_file_path),
             # config cluster/device job is running on
             # set device to GPU/CPU on basis if GPU count was found
             device="cpu",
         )
-        return {"uation_result": evaluation_job.outputs.evaluation_result}
+        return {"evaluation_result": evaluation_job.outputs.evaluation_result}
     except Exception as ex:
         _, _, exc_tb = sys.exc_info()
         logger.error(f"The exception occured at this line no : {exc_tb.tb_lineno}" +
