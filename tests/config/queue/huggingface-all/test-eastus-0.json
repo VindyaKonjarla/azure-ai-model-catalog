@@ -1,11 +1,11 @@
 {
     "queue_name": "test-eastus-0",
     "models": [
-        "oss-ft-bert-base-cased",
-        "oss-ft-bert-large-cased",
-        "oss-ft-camembert-base",
-        "oss-eval-HF-bert-base-cased",
-        "oss-eval-HF-camembert-base"
+        "distilgpt2",
+        "gpt2",
+        "gpt2-large",
+        "gpt2-medium",
+        "mistralai/Mistral-7B-v0.1"
     ],
     "workspace": "test-eastus",
     "subscription": "80c77c76-74ba-4c8c-8229-4c3b2957990c",
