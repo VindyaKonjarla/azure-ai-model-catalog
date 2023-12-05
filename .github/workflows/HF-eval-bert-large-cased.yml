@@ -1,4 +1,4 @@
-name: oss-eval-HF-bert-large-cased
+name: HF-eval-bert-large-cased
 
 on: 
   workflow_dispatch:
