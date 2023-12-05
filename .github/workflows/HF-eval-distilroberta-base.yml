@@ -1,4 +1,4 @@
-name: oss-eval-HF-distilroberta-base
+name: HF-eval-distilroberta-base
 
 on: 
   workflow_dispatch:
