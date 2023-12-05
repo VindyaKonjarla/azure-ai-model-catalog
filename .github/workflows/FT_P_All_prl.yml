@@ -20,7 +20,7 @@ jobs:
     - name: azure-login-step
       uses: azure/login@v1
       with:
-        creds: ${{secrets.TEST_WS_CRED}}
+        creds: ${{secrets.AZ_CRED}}
     - name: pip-install-azure-ai-ml
       run: pip install azure-ai-ml
     - name: pip-install-azureml-core
@@ -45,7 +45,7 @@ jobs:
       run: pip install fugashi[unidic-lite]   
     - name: deploy-model-step
       id: deploy-model-step
-      run: python FT_P_All_prl.py
+      run: python FT_P_TC.py
       working-directory: tests/src/FT_PC
     - name: trigger-next-model-step
       env:
