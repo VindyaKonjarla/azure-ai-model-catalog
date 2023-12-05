@@ -217,8 +217,8 @@ if __name__ == "__main__":
     # if sku_override is None:
     #     check_override = False
 
-    if test_trigger_next_model == "true":
-        set_next_trigger_model(queue)
+    # if test_trigger_next_model == "true":
+    #     set_next_trigger_model(queue)
     # print values of all above variables
     logger.info(f"test_subscription_id: {queue['subscription']}")
     logger.info(f"test_resource_group: {queue['subscription']}")
@@ -256,20 +256,26 @@ if __name__ == "__main__":
         registry_name="azureml-preview-test1"
     )
     azureml_registry = MLClient(credential, registry_name="azureml")
+    
+    azureml_meta_registry = MLClient(credential, registry_name="azureml-meta")
     mlflow.set_tracking_uri(ws.get_mlflow_tracking_uri())
-    # try:   
-        # model_detail = ModelDetail(workspace_ml_client=azureml_registry)
-        # foundation_model = model_detail.get_model_detail(test_model_name=test_model_name)
-        # computelist = foundation_model.properties.get(
-        # "evaluation-recommended-sku", "donotdelete-DS4v2")
-    # except UnboundLocalError:
-    model_detail = ModelDetail(workspace_ml_client=azureml_registry)
-    foundation_model = model_detail.get_model_detail(test_model_name=test_model_name)
-    computelist = foundation_model.properties.get(
+    if "lama" in test_model_name:
+        a = test_model_name.index('/')+1
+        model=test_model_name[a:]
+        model_detail = ModelDetail(workspace_ml_client=azureml_meta_registry)
+        foundation_model = model_detail.get_model_detail(test_model_name=model)
+        computelist = foundation_model.properties.get(
         "evaluation-recommended-sku", "donotdelete-DS4v2")
-    # a = computelist.index(',')
-    # COMPUTE = computelist[:a]
-    COMPUTE = computelist
+    else:
+        model_detail = ModelDetail(workspace_ml_client=azureml_registry)
+        foundation_model = model_detail.get_model_detail(test_model_name=test_model_name)
+        computelist = foundation_model.properties.get(
+        "evaluation-recommended-sku", "donotdelete-DS4v2")
+    if "," in computelist:
+        a = computelist.index(',')
+        COMPUTE = computelist[:a]
+    else:
+        COMPUTE = computelist
     print("COMPUTE----------",COMPUTE)
     compute_name="donotdelete-"+COMPUTE.replace("_", "-")
     # compute_name=COMPUTE.replace("_", "-")
@@ -292,7 +298,8 @@ if __name__ == "__main__":
 
     # compute_target = create_or_get_compute_target(
     #     ml_client=workspace_ml_client, compute=COMPUTE, instance_type=queue.instance_type)
-    task = HfTask(model_name=test_model_name).get_task()
+    task = HfTask(model_name=test_model_name).get_task(foundation_model=foundation_model)
+    print("Task--------------",task)
     logger.info(f"Task is this : {task} for the model : {test_model_name}")
     timestamp = str(int(time.time()))
     exp_model_name = test_model_name.replace('/', '-')
