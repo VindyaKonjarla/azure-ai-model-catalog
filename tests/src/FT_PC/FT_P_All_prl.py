@@ -302,6 +302,19 @@ if __name__ == "__main__":
     mlflow.set_tracking_uri(ws.get_mlflow_tracking_uri())
 
     registry_ml_client = MLClient(credential, registry_name="azureml")
+    expression_to_ignore = ["/", "\\", "|", "@", "#", ".",
+                            "$", "%", "^", "&", "*", "<", ">", "?", "!", "~"]
+    # Create the regular expression to ignore
+    regx_for_expression = re.compile(
+        '|'.join(map(re.escape, expression_to_ignore)))
+    # Check the model_name contains any of there character
+    expression_check = re.findall(regx_for_expression, test_model_name)
+    if expression_check:
+        # Replace the expression with hyphen
+        test_model_name  = regx_for_expression.sub("-", test_model_name)
+
+
+    print("model name replaced with - :", {test_model_name})
     #foundation_model_ft = get_latest_model_version_ft(registry_ml_client_sku, test_model_name.lower())
     foundation_model = get_latest_model_version(registry_ml_client, test_model_name.lower())
 
