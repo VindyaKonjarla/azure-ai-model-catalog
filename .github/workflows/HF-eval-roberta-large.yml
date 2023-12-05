@@ -1,4 +1,4 @@
-name: oss-eval-HF-roberta-large
+name: HF-eval-roberta-large
 
 on: 
   workflow_dispatch:
