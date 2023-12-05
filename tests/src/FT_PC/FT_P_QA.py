@@ -336,7 +336,7 @@ def create_and_run_azure_ml_pipeline(
 ):
     # Fetch the pipeline component
     pipeline_component_func = registry_ml_client.components.get(
-        name="question_answering_pipeline_for_oss", label="latest"
+        name="question_answering_pipeline", label="latest"
     )
 
 
