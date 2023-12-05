@@ -259,8 +259,8 @@ if __name__ == "__main__":
         workspace_ml_client.begin_create_or_update(compute_config).result()
     # compute_target = create_or_get_compute_target(
     #     workspace_ml_client, COMPUTE=compute_name, instance_type=queue.instance_type)
-
-    task = HfTask(model_name=test_model_name).get_task()
+    task = HfTask(model_name=test_model_name).get_task(foundation_model=foundation_model)
+    # task = HfTask(model_name=test_model_name).get_task()
     print("Task--------------",task)
     logger.info(f"Task is this : {task} for the model : {test_model_name}")
     timestamp = str(int(time.time()))
