@@ -287,8 +287,8 @@ def main():
     print("queue",queue)
     print (f"Created queues")
     # create queue files
-    # create_queue_files(queue, workspace_list)
-    # print (f"Created queue files")
+    create_queue_files(queue, workspace_list)
+    print (f"Created queue files")
     # create workflow files
     create_workflow_files(q, workspace_list)
     print (f"Created workflow files")
