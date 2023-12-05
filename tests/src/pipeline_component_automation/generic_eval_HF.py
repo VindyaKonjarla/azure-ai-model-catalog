@@ -166,7 +166,7 @@ def model_import_pipeline(compute_name, update_existing_model, task_name):
 
 
 @pipeline()
-def evaluation_pipeline(task, mlflow_model, test_data, input_column_names, label_column_name, uation_file_path, compute):
+def evaluation_pipeline(task, mlflow_model, test_data, input_column_names, label_column_name, evaluation_pipeline, compute):
     try:
         logger.info("Started configuring the job")
         #data_path = "./datasets/translation.json"
@@ -192,7 +192,7 @@ def evaluation_pipeline(task, mlflow_model, test_data, input_column_names, label
             # uation_config=Input(
             #     type=AssetTypes.URI_FILE, path="./uation/_config.json"),
             uation_config=Input(
-                type=AssetTypes.URI_FILE, path=uation_file_path),
+                type=AssetTypes.URI_FILE, path=evaluation_pipeline),
             # config cluster/device job is running on
             # set device to GPU/CPU on basis if GPU count was found
             device="cpu",
@@ -321,7 +321,7 @@ if __name__ == "__main__":
             test_data=Input(type=AssetTypes.URI_FILE, path=data_path),
             input_column_names=input_column_names,
             label_column_name=label_column_name,
-            evaluation_file_path=Input(
+            evalevaluation_pipeline=Input(
                 type=AssetTypes.URI_FILE, path=f"./evaluation/{task}/eval_config.json"),
             compute=compute_name,
             #mlflow_model = f"{latest_model.id}",
