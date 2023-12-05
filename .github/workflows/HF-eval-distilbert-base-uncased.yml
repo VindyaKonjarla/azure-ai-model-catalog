@@ -1,4 +1,4 @@
-name: oss-eval-HF-distilbert-base-uncased
+name: HF-eval-distilbert-base-uncased
 
 on: 
   workflow_dispatch:
