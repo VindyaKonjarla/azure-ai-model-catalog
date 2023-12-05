@@ -315,7 +315,7 @@ if __name__ == "__main__":
  
     try:
         pipeline_jobs = []
-        eval_experiment_name = f"{pipeline_task}-{exp_model_name}-evaluation-{timestamp}"
+        eval_experiment_name = f"HF-{pipeline_task}-{exp_model_name}-evaluation-{timestamp}"
         pipeline_object = evaluation_pipeline(
             task=pipeline_task,
             mlflow_model=Input(type=AssetTypes.MLFLOW_MODEL,
@@ -336,7 +336,7 @@ if __name__ == "__main__":
         # set continue on step failure to False
         pipeline_object.settings.continue_on_step_failure = False
 
-        pipeline_object.display_name = f"eval-{registered_model.name}-{timestamp}"
+        pipeline_object.display_name = f"HF-eval-{registered_model.name}-{timestamp}"
         pipeline_job = workspace_ml_client.jobs.create_or_update(
             pipeline_object, experiment_name=eval_experiment_name
         )
