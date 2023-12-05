@@ -1,10 +1,11 @@
 {
     "queue_name": "test-southcentralus-0",
     "models": [
-        "oss-ft-distilbert-base-uncased",
-        "oss-ft-microsoft/deberta-base",
-        "oss-ft-microsoft/deberta-xlarge",
-        "oss-ft-roberta-large"
+        "roberta-base-openai-detector"
+,"roberta-large-mnli"
+,"roberta-large-openai-detector"
+,"distilbert-base-cased-distilled-squad""
+
     ],
     "workspace": "test-southcentralus",
     "subscription": "80c77c76-74ba-4c8c-8229-4c3b2957990c",
