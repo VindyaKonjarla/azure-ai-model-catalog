@@ -1,7 +1,11 @@
 {
     "queue_name": "test-eastus-3",
     "models": [
-        "oss-eval-HF-bert-large-uncased"
+        "finiteautomata/bertweet-base-sentiment-analysis"
+,"microsoft/deberta-base-mnli"
+,"microsoft/deberta-large-mnli"
+,"deepset/minilm-uncased-squad2"
+,"deepset/roberta-base-squad2"
     ],
     "workspace": "test-eastus",
     "subscription": "80c77c76-74ba-4c8c-8229-4c3b2957990c",
