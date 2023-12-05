@@ -10,7 +10,7 @@ env:
   test_queue: test-southcentralus-21
   test_set: huggingface-all
   test_keep_looping: false
-  actual_model_name: microsoft/deberta-v3-base
+  actual_model_name: microsoft/deberta-base
 
 jobs:
   deploy-model-job:
