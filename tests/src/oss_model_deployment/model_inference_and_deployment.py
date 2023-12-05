@@ -261,26 +261,7 @@ class ModelInferenceAndDeployemnt:
             endpoint_name=online_endpoint_name,
             environment=model_package,
             instance_type=instance_type,
-            instance_count=1,
-            request_settings=OnlineRequestSettings(
-                max_concurrent_requests_per_instance=1,
-                request_timeout_ms=90000,
-                max_queue_wait_ms=500,
-            ),
-            liveness_probe=ProbeSettings(
-                failure_threshold=30,
-                success_threshold=1,
-                timeout=2,
-                period=10,
-                initial_delay=2000,
-            ),
-            readiness_probe=ProbeSettings(
-                failure_threshold=10,
-                success_threshold=1,
-                timeout=10,
-                period=10,
-                initial_delay=2000,
-            )
+            instance_count=1
         )
         try:
             deployment = self.workspace_ml_client.online_deployments.begin_create_or_update(
@@ -398,14 +379,16 @@ class ModelInferenceAndDeployemnt:
                 instance_type=instance_type,
                 latest_model=latest_model,
                 scoring_file=scoring_file,
-                scoring_input = scoring_input
+                scoring_input = scoring_input,
+                endpoint=endpoint
             )
         else:
              dynamic_installation.model_infernce_and_deployment(
                 instance_type=instance_type,
                 latest_model=latest_model,
                 scoring_file=json_file_name,
-                scoring_input = scoring_input
+                scoring_input = scoring_input,
+                endpoint=endpoint
            )
         batch_deployment = ModelBatchDeployment(
             model=latest_model,
