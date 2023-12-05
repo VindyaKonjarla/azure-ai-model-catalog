@@ -4,7 +4,7 @@
         "roberta-base-openai-detector"
 ,"roberta-large-mnli"
 ,"roberta-large-openai-detector"
-,"distilbert-base-cased-distilled-squad""
+,"distilbert-base-cased-distilled-squad"
 
     ],
     "workspace": "test-southcentralus",
