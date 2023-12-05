@@ -3,7 +3,9 @@
     "models": [
         "oss-ft-bert-base-uncased",
         "oss-ft-bert-large-uncased",
-        "oss-ft-distilbert-base-cased"
+        "oss-ft-distilbert-base-cased",
+        "oss-eval-HF-bert-base-uncased",
+        "oss-eval-HF-distilbert-base-cased"
     ],
     "workspace": "test-eastus",
     "subscription": "80c77c76-74ba-4c8c-8229-4c3b2957990c",
