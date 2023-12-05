@@ -1,4 +1,4 @@
-name: oss-import-eastus1
+name: oss-import-southcentralus0
 
 on: 
   workflow_dispatch:
