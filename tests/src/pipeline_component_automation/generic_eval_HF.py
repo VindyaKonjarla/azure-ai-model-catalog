@@ -166,14 +166,14 @@ def model_import_pipeline(compute_name, update_existing_model, task_name):
 
 
 @pipeline()
-def evaluation_pipeline(task, mlflow_model, test_data, input_column_names, label_column_name, evaluation_file_path, compute):
+def uation_pipeline(task, mlflow_model, test_data, input_column_names, label_column_name, uation_file_path, compute):
     try:
         logger.info("Started configuring the job")
         #data_path = "./datasets/translation.json"
         pipeline_component_func = registry_ml_client.components.get(
-            name="mlflow_oss_model_evaluation_pipeline", label="latest"
+            name="mlflow_oss_model_uation_pipeline", label="latest"
         )
-        evaluation_job = pipeline_component_func(
+        uation_job = pipeline_component_func(
             # specify the foundation model available in the azureml system registry or a model from the workspace
             # mlflow_model = Input(type=AssetTypes.MLFLOW_MODEL, path=f"{mlflow_model_path}"),
             mlflow_model=mlflow_model,
@@ -185,19 +185,19 @@ def evaluation_pipeline(task, mlflow_model, test_data, input_column_names, label
             # compute settings
             # specify the instance type for serverless job
             instance_type= "donotdelete-DS4v2",
-            # Evaluation settings
+            # uation settings
             task=task,
             compute_name=compute,
-            # config file containing the details of evaluation metrics to calculate
-            # evaluation_config=Input(
-            #     type=AssetTypes.URI_FILE, path="./evaluation/eval_config.json"),
-            evaluation_config=Input(
-                type=AssetTypes.URI_FILE, path=evaluation_file_path),
+            # config file containing the details of uation metrics to calculate
+            # uation_config=Input(
+            #     type=AssetTypes.URI_FILE, path="./uation/_config.json"),
+            uation_config=Input(
+                type=AssetTypes.URI_FILE, path=uation_file_path),
             # config cluster/device job is running on
             # set device to GPU/CPU on basis if GPU count was found
             device="cpu",
         )
-        return {"evaluation_result": evaluation_job.outputs.evaluation_result}
+        return {"uation_result": evaluation_job.outputs.evaluation_result}
     except Exception as ex:
         _, _, exc_tb = sys.exc_info()
         logger.error(f"The exception occured at this line no : {exc_tb.tb_lineno}" +
@@ -313,7 +313,7 @@ if __name__ == "__main__":
  
     try:
         pipeline_jobs = []
-        eval_experiment_name = f"{pipeline_task}-{exp_model_name}-evaluation-{timestamp}"
+        eval_experiment_name = f"HF-{pipeline_task}-{exp_model_name}-evaluation-{timestamp}"
         pipeline_object = evaluation_pipeline(
             task=pipeline_task,
             mlflow_model=Input(type=AssetTypes.MLFLOW_MODEL,
@@ -334,7 +334,7 @@ if __name__ == "__main__":
         # set continue on step failure to False
         pipeline_object.settings.continue_on_step_failure = False
 
-        pipeline_object.display_name = f"eval-{registered_model.name}-{timestamp}"
+        pipeline_object.display_name = f"HF-eval-{registered_model.name}-{timestamp}"
         pipeline_job = workspace_ml_client.jobs.create_or_update(
             pipeline_object, experiment_name=eval_experiment_name
         )
