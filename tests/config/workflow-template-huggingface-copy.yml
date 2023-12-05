@@ -45,8 +45,8 @@ jobs:
       run: pip install fugashi[unidic-lite]  
     - name: pip-install-datasets
       run: pip install datasets
-    - name: Eval_Model-step
-      id: Eval-model-step
+    - name: FT_Model-step
+      id: FT-model-step
       run: python FT_P_All_prl.py
       working-directory: tests/src/FT_PC
     - name: trigger-next-model-step
