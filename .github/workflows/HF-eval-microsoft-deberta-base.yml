@@ -1,4 +1,4 @@
-name: oss-eval-HF-microsoft/deberta-base
+name: HF-eval-microsoft/deberta-base
 
 on: 
   workflow_dispatch:
