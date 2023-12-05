@@ -1,4 +1,4 @@
-name: camembert-base
+name: HF-eval-camembert-base
 
 on: 
   workflow_dispatch:
