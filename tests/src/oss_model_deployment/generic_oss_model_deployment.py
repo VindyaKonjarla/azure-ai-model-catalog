@@ -158,6 +158,7 @@ def get_pipeline_task(task):
 
 def create_endpoint(workspace_ml_client, endpoint_name):
     try:
+        logger.info("Inside creating the endpoint method")
         endpoint = workspace_ml_client.online_endpoints.get(name=endpoint_name)
         return endpoint
     except ResourceNotFoundError as e:
@@ -299,7 +300,8 @@ if __name__ == "__main__":
 
     compute_target = create_or_get_compute_target(
         ml_client=workspace_ml_client, compute=compute, instance_type=instance_type)
-    endpoint_name = queue.workspace.split("-")[-1] + "-" + compute.lower()
+    #endpoint_name = queue.workspace.split("-")[-1] + "-" + compute.lower()
+    endpoint_name = compute.lower()
     endpoint = create_endpoint(
         workspace_ml_client=workspace_ml_client,
         endpoint_name=endpoint_name
