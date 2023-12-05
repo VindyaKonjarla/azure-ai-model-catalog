@@ -1,4 +1,4 @@
-name: oss-eval-HF-bert-base-cased
+name: HF-eval-bert-base-cased
 
 on: 
   workflow_dispatch:
