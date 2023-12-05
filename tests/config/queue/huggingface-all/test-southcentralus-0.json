@@ -2,7 +2,10 @@
     "queue_name": "test-southcentralus-0",
     "models": [
         "oss-eval-HF-distilbert-base-uncased",
-        "oss-eval-HF-microsoft/deberta-xlarge"
+        "oss-eval-HF-microsoft/deberta-xlarge",
+        "oss-eval-microsoft/deberta-xlarge",
+        "oss-eval-microsoft/deberta-large",
+        "oss-eval-microsoft/deberta-base"
     ],
     "workspace": "test-southcentralus",
     "subscription": "80c77c76-74ba-4c8c-8229-4c3b2957990c",
