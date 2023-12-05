@@ -1,4 +1,4 @@
-name: oroberta-base
+name: roberta-base
 
 on: 
   workflow_dispatch:
