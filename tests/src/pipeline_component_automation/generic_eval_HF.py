@@ -304,7 +304,7 @@ if __name__ == "__main__":
  
     try:
         pipeline_jobs = []
-        eval_experiment_name = f"HF-{pipeline_task}-{exp_model_name}-evaluation-{timestamp}"
+        eval_experiment_name = f"{pipeline_task}-{exp_model_name}-evaluation-{timestamp}"
         pipeline_object = evaluation_pipeline(
             task=pipeline_task,
             mlflow_model=Input(type=AssetTypes.MLFLOW_MODEL,
@@ -312,7 +312,7 @@ if __name__ == "__main__":
             test_data=Input(type=AssetTypes.URI_FILE, path=data_path),
             input_column_names=input_column_names,
             label_column_name=label_column_name,
-            evaluation_pipeline=Input(
+            evaluation_file_path=Input(
                 type=AssetTypes.URI_FILE, path=f"./evaluation/{task}/eval_config.json"),
             compute=compute_name,
             #mlflow_model = f"{latest_model.id}",
@@ -325,7 +325,7 @@ if __name__ == "__main__":
         # set continue on step failure to False
         pipeline_object.settings.continue_on_step_failure = False
 
-        pipeline_object.display_name = f"HF-eval-{registered_model.name}-{timestamp}"
+        pipeline_object.display_name = f"eval-{registered_model.name}-{timestamp}"
         pipeline_job = workspace_ml_client.jobs.create_or_update(
             pipeline_object, experiment_name=eval_experiment_name
         )
@@ -343,14 +343,4 @@ if __name__ == "__main__":
         logger.error(f"The exception occured at this line no : {exc_tb.tb_lineno}" +
                      f" the exception is this one : \n {ex}")
         raise Exception(ex)
-    # logger.info("Proceeding with inference and deployment")
-    # InferenceAndDeployment = ModelInferenceAndDeployemnt(
-    #     test_model_name=test_model_name.lower(),
-    #     workspace_ml_client=workspace_ml_client,
-    #     registry=queue.registry
-    # )
-    # InferenceAndDeployment.model_infernce_and_deployment(
-    #     instance_type=queue.instance_type,
-    #     task=task,
-    #     latest_model=registered_model
-    # )
+    logger.info("Proceeding with inference and deployment")
