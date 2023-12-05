@@ -1,4 +1,4 @@
-name: roberta-base
+name: HF-eval-roberta-base
 
 on: 
   workflow_dispatch:
