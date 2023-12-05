@@ -21,6 +21,7 @@ from box import ConfigBox
 from fetch_model_detail import ModelDetail
 import re
 import sys
+from transformers import AutoTokenizer
 
 logger = get_logger(__name__)
 
@@ -137,17 +138,8 @@ class ModelInferenceAndDeployemnt:
             except Exception as ex:
                 logger.warning(
                     "::warning:: Trying to invoking the endpoint again by changing the input data and file")
-                if task == "fill-mask":
-                    scoring_file_alternate = f"sample_inputs/fill-mask-alternate.json"
-                    response = self.workspace_ml_client.online_endpoints.invoke(
-                        endpoint_name=online_endpoint_name,
-                        deployment_name=deployment_name,
-                        request_file=scoring_file_alternate,
-                    )
-                else:
-                    logger.warning(
+                logger.warning(
                     f"::warning:: This is failed due to this :\n {ex}")
-                    sys.exit(1)
                 # dic_obj = self.get_model_output(
                 #     task=task, latest_model=latest_model, scoring_input=scoring_input)
                 # logger.info(f"Our new input is this one: {dic_obj}")
@@ -162,6 +154,7 @@ class ModelInferenceAndDeployemnt:
                 # logger.info(
                 #     f"Getting the reposne from the endpoint is this one : {response}")
                 # self.delete_file(file_name=json_file_name)
+                sys.exit(1)
             response_json = json.loads(response)
             output = json.dumps(response_json, indent=2)
             logger.info(f"response: \n\n{output}")
@@ -318,14 +311,20 @@ class ModelInferenceAndDeployemnt:
             logger.error(f"::warning:: Could not delete endpoint: : \n{e}")
             exit(0)
 
-    def get_task_specified_input(self, task):
+    def get_task_specified_input(self, task, actual_model_name):
         #scoring_file = f"../../config/sample_inputs/{self.registry}/{task}.json"
         scoring_file = f"sample_inputs/{task}.json"
         # check of scoring_file exists
         try:
             with open(scoring_file) as f:
                 scoring_input = ConfigBox(json.load(f))
-                logger.info(f"scoring_input file:\n\n {scoring_input}\n\n")
+            if task == "fill-mask":
+                tokenizer = AutoTokenizer.from_pretrained(actual_model_name)
+                for index in range(len(scoring_input.input_data)):
+                    scoring_input.input_data[index] = scoring_input.input_data[index].replace(
+                        "<mask>", tokenizer.mask_token).replace("[MASK]", tokenizer.mask_token)
+                scoring_file, scoring_input = self.create_json_file(file_name=f"{task}-alternate.json", dicitonary=scoring_input)  
+            logger.info(f"Final scoring_input file:\n\n {scoring_input}\n\n")  
         except Exception as e:
             logger.error(
                 f"::Error:: Could not find scoring_file: {scoring_file}. Finishing without sample scoring: \n{e}")
@@ -348,7 +347,7 @@ class ModelInferenceAndDeployemnt:
                          f" the exception is this one : {e}")
             exit(0)
     
-    def model_infernce_and_deployment(self, instance_type, task, latest_model, compute, endpoint):
+    def model_infernce_and_deployment(self, instance_type, task, latest_model, compute, endpoint, actual_model_name):
         logger.info(f"latest_model is this : {latest_model}")
         logger.info(f"Task is : {task}")
         scoring_file, scoring_input = self.get_task_specified_input(task=task)
@@ -386,32 +385,33 @@ class ModelInferenceAndDeployemnt:
             deployment_name=deployment_name,
             task=task
         )
-        dynamic_installation.model_infernce_and_deployment(
-                instance_type=instance_type,
-                latest_model=latest_model,
-                scoring_file=scoring_file,
-                scoring_input = scoring_input,
-                endpoint=endpoint
-        )
-
-        # if not json_file_name:
-        #     dynamic_installation.model_infernce_and_deployment(
+        # dynamic_installation.model_infernce_and_deployment(
         #         instance_type=instance_type,
         #         latest_model=latest_model,
         #         scoring_file=scoring_file,
-        #         scoring_input = scoring_input
-        #     )
-        # else:
-        #      dynamic_installation.model_infernce_and_deployment(
-        #         instance_type=instance_type,
-        #         latest_model=latest_model,
-        #         scoring_file=json_file_name,
-        #         scoring_input = scoring_input
-        #    )
+        #         scoring_input = scoring_input,
+        #         endpoint=endpoint
+        # )
+
+        if not json_file_name:
+            dynamic_installation.model_infernce_and_deployment(
+                instance_type=instance_type,
+                latest_model=latest_model,
+                scoring_file=scoring_file,
+                scoring_input = scoring_input
+            )
+        else:
+             dynamic_installation.model_infernce_and_deployment(
+                instance_type=instance_type,
+                latest_model=latest_model,
+                scoring_file=json_file_name,
+                scoring_input = scoring_input
+           )
         batch_deployment = ModelBatchDeployment(
             model=latest_model,
             workspace_ml_client=self.workspace_ml_client,
             task=task,
-            model_name=self.test_model_name
+            model_name=self.test_model_name,
+            actual_model_name=actual_model_name
         )
         batch_deployment.batch_deployment(compute=compute)

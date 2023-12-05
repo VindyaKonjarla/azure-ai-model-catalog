@@ -17,11 +17,12 @@ import os
 logger = get_logger(__name__)
 
 class ModelBatchDeployment:
-    def __init__(self, model, workspace_ml_client, task, model_name) -> None:
+    def __init__(self, model, workspace_ml_client, task, model_name, actual_model_name) -> None:
         self.model = model
         self.workspace_ml_client = workspace_ml_client
         self.task = task
         self.model_name = model_name
+        self.actual_model_name = actual_model_name
 
     def get_deployemnt_endpoint_and_name(self):
         timestamp = int(time.time())
@@ -157,7 +158,7 @@ class ModelBatchDeployment:
                 file_input = Input(path=file_path, type=AssetTypes.URI_FILE)
                 # Handle the "fill-mask" task by replacing [MASK] with <mask> in the input data
                 if self.task.lower() == "fill-mask":
-                    tokenizer = AutoTokenizer.from_pretrained(self.model_name)
+                    tokenizer = AutoTokenizer.from_pretrained(self.actual_model_name)
                     #tokenizer = AutoTokenizer.from_pretrained(test_model_name, trust_remote_code=True, use_auth_token=True)
                     mask_token = tokenizer.mask_token  
                     self.process_input_for_fill_mask_task(file_path, mask_token)

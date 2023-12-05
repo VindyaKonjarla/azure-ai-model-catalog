@@ -42,6 +42,8 @@ compute_name = "model-import-cluster"
 # model to test
 test_model_name = os.environ.get('test_model_name')
 
+actual_model_name = os.environ.get('actual_model_name')
+
 # test cpu or gpu template
 test_sku_type = os.environ.get('test_sku_type')
 
@@ -307,7 +309,7 @@ if __name__ == "__main__":
         endpoint_name=endpoint_name
     )
     #task = foundation_model.tags["task"]
-    task = HfTask(model_name=test_model_name).get_task(foundation_model=registered_model)
+    task = HfTask(model_name=actual_model_name).get_task(foundation_model=registered_model)
     logger.info(f"Task is this : {task} for the model : {test_model_name}")
     #timestamp = str(int(time.time()))
     #exp_model_name = test_model_name.replace('/', '-')
@@ -427,5 +429,6 @@ if __name__ == "__main__":
         task=task,
         latest_model=registered_model,
         compute=compute,
-        endpoint=endpoint
+        endpoint=endpoint,
+        actual_model_name=actual_model_name
     )

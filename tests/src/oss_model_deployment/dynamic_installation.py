@@ -131,17 +131,8 @@ class ModelDynamicInstallation:
             except Exception as ex:
                 logger.warning(
                     "::warning:: Trying to invoking the endpoint again by changing the input data and file")
-                if self.task == "fill-mask":
-                    scoring_file_alternate = f"sample_inputs/fill-mask-alternate.json"
-                    response = self.workspace_ml_client.online_endpoints.invoke(
-                        endpoint_name=online_endpoint_name,
-                        deployment_name=self.deployment_name,
-                        request_file=scoring_file_alternate,
-                    )
-                else:
-                    logger.warning(
+                logger.warning(
                     f"::warning:: This is failed due to this :\n {ex}")
-                    sys.exit(1)
                 # dic_obj = self.get_model_output(
                 #     latest_model=latest_model, scoring_input=scoring_input)
                 # logger.info(f"Our new input is this one: {dic_obj}")
@@ -156,7 +147,7 @@ class ModelDynamicInstallation:
                 # logger.info(
                 #     f"Getting the reposne from the endpoint is this one : {response}")
                 # self.delete_file(file_name=json_file_name)
-
+                sys.exit(1)
             response_json = json.loads(response)
             output = json.dumps(response_json, indent=2)
             logger.info(f"response: \n\n{output}")

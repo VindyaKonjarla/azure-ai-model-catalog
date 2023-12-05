@@ -10,6 +10,7 @@ env:
   test_queue: test-eastus-4
   test_set: huggingface-all
   test_keep_looping: false
+  actual_model_name: camembert-base
 
 jobs:
   deploy-model-job:
