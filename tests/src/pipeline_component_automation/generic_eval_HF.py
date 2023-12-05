@@ -321,7 +321,7 @@ if __name__ == "__main__":
             test_data=Input(type=AssetTypes.URI_FILE, path=data_path),
             input_column_names=input_column_names,
             label_column_name=label_column_name,
-            evalevaluation_pipeline=Input(
+            evaluation_pipeline=Input(
                 type=AssetTypes.URI_FILE, path=f"./evaluation/{task}/eval_config.json"),
             compute=compute_name,
             #mlflow_model = f"{latest_model.id}",
