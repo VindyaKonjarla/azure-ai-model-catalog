@@ -1,7 +1,6 @@
-distilbert-base-uncased
-distilroberta-base
-microsoft/deberta-base
-microsoft/deberta-large
-microsoft/deberta-xlarge
-roberta-base
-roberta-large
+bert-base-cased
+bert-base-uncased
+bert-large-cased
+bert-large-uncased
+camembert-base
+distilbert-base-cased
