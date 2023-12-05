@@ -1,4 +1,4 @@
-name: oss-eval-HF-camembert-base
+name: camembert-base
 
 on: 
   workflow_dispatch:
