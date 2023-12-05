@@ -1,10 +1,10 @@
 {
     "queue_name": "test-eastus-1",
     "models": [
-        "databricks-dolly-v2-12b"
-        "openai-whisper-large",
-        "facebook-bart-large-cnn",
-        "mistralai-Mistral-7B-Instruct-v01",
+        "databricks/dolly-v2-12b",
+        "openai/whisper-large-v3",
+        "facebook/bart-large-cnn",
+        "mistralai/Mistral-7B-Instruct-v0.1",
         "t5-large","t5-base"
     ],
     "workspace": "test-eastus",
