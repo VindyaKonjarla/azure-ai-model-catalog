@@ -1,4 +1,4 @@
-name: oss-eval-HF-microsoft/deberta-large
+name: HF-eval-microsoft/deberta-large
 
 on: 
   workflow_dispatch:
