@@ -47,8 +47,8 @@ jobs:
       run: pip install datasets
     - name: Eval_Model-step
       id: Eval-model-step
-      run: python generic_eval_HF.py
-      working-directory: tests/src/pipeline_component_automation
+      run: python FT_P_All_prl.py
+      working-directory: tests/src/FT_PC
     - name: trigger-next-model-step
       env:
         GITHUB_TOKEN: ${{ secrets.WORKFLOW_TOKEN }}
