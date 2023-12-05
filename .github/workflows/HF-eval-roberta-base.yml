@@ -1,4 +1,4 @@
-name: oss-eval-HF-roberta-base
+name: oroberta-base
 
 on: 
   workflow_dispatch:
