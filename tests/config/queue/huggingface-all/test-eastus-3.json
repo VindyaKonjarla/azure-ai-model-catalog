@@ -1,8 +1,7 @@
 {
     "queue_name": "test-eastus-3",
     "models": [
-        "finiteautomata/bertweet-base-sentiment-analysis"
-,"microsoft/deberta-base-mnli"
+"microsoft/deberta-base-mnli"
 ,"microsoft/deberta-large-mnli"
 ,"deepset/minilm-uncased-squad2"
 ,"deepset/roberta-base-squad2"
