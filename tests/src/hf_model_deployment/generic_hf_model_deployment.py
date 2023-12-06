@@ -232,7 +232,7 @@ if __name__ == "__main__":
         workspace_ml_client=workspace_ml_client,
         endpoint_name=endpoint_name
     )
-    task = HfTask(model_name=actual_model_name).get_task()
+    task = HfTask(model_name=actual_model_name).get_task(foundation_model=foundation_model)
     #task = foundation_model.tags["task"]
     logger.info(f"Task is this : {task} for the model : {test_model_name}")
 
