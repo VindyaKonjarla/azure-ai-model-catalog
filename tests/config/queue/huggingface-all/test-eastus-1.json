@@ -1,7 +1,7 @@
 {
     "queue_name": "test-eastus-1",
     "models": [
-        
+        "databricks-dolly-v2-12b",
         "t5-large","t5-base"
     ],
     "workspace": "test-eastus",
