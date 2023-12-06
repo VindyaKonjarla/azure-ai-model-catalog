@@ -1,8 +1,12 @@
 {
     "queue_name": "test-eastus-7",
     "models": [
-       "facebook/bart-large-cnn"
-,"gpt2-large"
+      "databricks/dolly-v2-12b"
+,"openai/whisper-large"
+,"tiiuae/falcon-7b"
+openai/whisper-large-v3
+,"sshleifer/distilbart-cnn-12-6"
+
 
 
 
