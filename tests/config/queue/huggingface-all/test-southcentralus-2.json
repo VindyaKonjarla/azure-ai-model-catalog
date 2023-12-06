@@ -2,9 +2,11 @@
     "queue_name": "test-southcentralus-2",
     "models": [
         
-
-"t5-large"
+"t5-base"
+,"t5-large"
 ,"distilgpt2"
+,"microsoft/deberta-large"
+
 
 
     ],
