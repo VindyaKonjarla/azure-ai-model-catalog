@@ -451,8 +451,22 @@ if __name__ == "__main__":
     # experiment_name = "PC_translation_wmt16"
     experiment_name = "oss-token-classification-"+ test_model_name
     print("Experiment name is:", {experiment_name}
-    # # generating a unique timestamp that can be used for names and versions that need to be unique
-    # timestamp = str(int(time.time()))
+
+    expression_to_ignore = ["/", "\\", "|", "@", "#", ".",
+                            "$", "%", "^", "&", "*", "<", ">", "?", "!", "~"]
+    # Create the regular expression to ignore
+    regx_for_expression = re.compile(
+        '|'.join(map(re.escape, expression_to_ignore)))
+    # Check the model_name contains any of there character
+    expression_check = re.findall(regx_for_expression, test_model_name)
+    if expression_check:
+        # Replace the expression with hyphen
+        test_model_name  = regx_for_expression.sub("-", test_model_name)
+    print("model name replaced with - :", {test_model_name})      
+          
+
+
+    
 
     # # Define the compute cluster name and size
     # compute_cluster = "Standard-NC24s-v3"
