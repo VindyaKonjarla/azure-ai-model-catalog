@@ -1,7 +1,12 @@
 {
     "queue_name": "test-eastus-0",
     "models": [
-        "mistralai/Mistral-7B-v0.1"
+        'openai-whisper-large'
+,'facebook-bart-large-cnn'
+,'gpt2-medium'
+,'tiiuae-falcon-7b'
+,'mistralai-Mistral-7B-Instruct-v01'
+
     ],
     "workspace": "test-eastus",
     "subscription": "80c77c76-74ba-4c8c-8229-4c3b2957990c",
