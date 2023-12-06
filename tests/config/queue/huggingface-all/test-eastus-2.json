@@ -2,9 +2,7 @@
     "queue_name": "test-eastus-2",
     "models": [
    
-"finiteautomata/bertweet-base-sentiment-analysis"
-,"mistralai/Mistral-7B-v01"
-,"sshleifer/distilbart-cnn-12-6"
+"sshleifer/distilbart-cnn-12-6"
 
 
     ],
