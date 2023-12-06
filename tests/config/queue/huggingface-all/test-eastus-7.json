@@ -1,8 +1,8 @@
 {
     "queue_name": "test-eastus-7",
     "models": [
-      "databricks/dolly-v2-12b"
-,"tiiuae/falcon-7b"
+     
+"tiiuae/falcon-7b"
 ,"sshleifer/distilbart-cnn-12-6"
 
 
