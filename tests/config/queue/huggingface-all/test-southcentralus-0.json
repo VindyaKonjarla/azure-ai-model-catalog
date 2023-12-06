@@ -2,9 +2,8 @@
     "queue_name": "test-southcentralus-0",
     "models": [
         
-"deepset/roberta-base-squad2"
-,"roberta-base-openai-detector"
-,"distilbert-base-uncased-finetuned-sst-2-english"
+
+"distilbert-base-uncased-finetuned-sst-2-english"
 ,"microsoft/deberta-base-mnli"
 
 
