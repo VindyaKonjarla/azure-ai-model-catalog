@@ -1,0 +1,21 @@
+{
+    "queue_name": "test-eastus-30",
+    "models": [
+        "hf-deploy-databricks-dolly-v2-12b",
+        "hf-deploy-openai-whisper-large",
+        "hf-deploy-tiiuae-falcon-7b",
+        "hf-deploy-facebook-bart-large-cnn",
+        "hf-deploy-gpt2-medium",
+        "hf-deploy-gpt2",
+        "hf-deploy-mistralai-Mistral-7B-Instruct-v01",
+        "hf-deploy-t5-small",
+        "hf-bert-base-cased"
+    ],
+    "workspace": "test-eastus",
+    "subscription": "80c77c76-74ba-4c8c-8229-4c3b2957990c",
+    "resource_group": "huggingface-registry-test1",
+    "registry": "HuggingFace",
+    "environment": "automate-venv",
+    "compute": "Standard-E64s-v3",
+    "instance_type": "Standard_E64s_v3"
+}
