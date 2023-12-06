@@ -157,7 +157,7 @@ def get_pipeline_task(task):
 @pipeline
 def model_import_pipeline(compute_name, update_existing_model, task_name):
     import_model = registry_ml_client.components.get(
-        name="import_model_oss_test", label="latest")
+        name="import_model", label="latest")
     import_model_job = import_model(model_id=test_model_name, compute=compute_name,
                                     task_name=task_name, update_existing_model=update_existing_model)
     # Set job to not continue on failure
