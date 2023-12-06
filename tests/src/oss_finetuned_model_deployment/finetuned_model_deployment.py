@@ -10,6 +10,13 @@ from box import ConfigBox
 from utils.logging import get_logger
 from fetch_task import HfTask
 from azure.core.exceptions import ResourceNotFoundError
+from fetch_model_detail import ModelDetail
+from azure.core.exceptions import (
+    ResourceNotFoundError
+)
+from azure.ai.ml.entities import (
+    ManagedOnlineEndpoint
+)
 #from azure.ai.ml.entities import Model
 
 logger = get_logger(__name__)
@@ -40,6 +47,10 @@ test_set = os.environ.get('test_set')
 # bool to decide if we want to keep looping through the queue,
 # which means that the first model in the queue is triggered again after the last model is tested
 test_keep_looping = os.environ.get('test_keep_looping')
+
+actual_model_name = os.environ.get('actual_model_name')
+
+azure_ml_model_name = os.environ.get('azure_ml_model_name')
 
 # function to load the workspace details from test queue file
 # even model we need to test belongs to a queue. the queue name is passed as environment variable test_queue
@@ -112,6 +123,25 @@ def set_next_trigger_model(queue):
         logger.info(f'NEXT_MODEL={next_model}')
         print(f'NEXT_MODEL={next_model}', file=fh)
 
+def create_endpoint(workspace_ml_client, endpoint_name):
+    try:
+        logger.info("Inside creating the endpoint method")
+        endpoint = workspace_ml_client.online_endpoints.get(name=endpoint_name)
+        return endpoint
+    except ResourceNotFoundError as e:
+        logger.warning("The endpoint do not exist and now creting new endpoint")
+        endpoint = ManagedOnlineEndpoint(
+            name=endpoint_name,
+            auth_mode="key"
+        )
+        logger.warning("update the endpoint in the workspace")
+        workspace_ml_client.online_endpoints.begin_create_or_update(
+            endpoint).wait()
+        return endpoint
+    except Exception as e:
+        logger.error(f"Failed due to this : {e}")
+        sys.exit(1)
+        
 if __name__ == "__main__":
     # if any of the above are not set, exit with error
     if test_model_name is None or test_sku_type is None or test_queue is None or test_set is None or test_trigger_next_model is None or test_keep_looping is None:
@@ -166,11 +196,42 @@ if __name__ == "__main__":
     # )
     # task = HfTask(model_name=test_model_name).get_task()
     # logger.info(f"Task is this : {task} for the model : {test_model_name}")
-
+    
+    #Fetch model from workspace
+    model_detail = ModelDetail(workspace_ml_client=workspace_ml_client)
+    registered_model = model_detail.get_model_detail(
+        test_model_name=test_model_name)
+    task = registered_model.flavors['transformers']['task']
+    # Connect to registry
+    azureml_registry = MLClient(credential, registry_name="azureml")
+    # Fetch model form the registry
+    model_detail = ModelDetail(workspace_ml_client=azureml_registry)
+    foundation_model = model_detail.get_model_detail(
+        test_model_name=azure_ml_model_name)
+    instance_type = list(foundation_model.properties.get(
+        "inference-recommended-sku").split(","))[0]
+    compute = instance_type.replace("_", "-")
+    logger.info(f"instance : {instance_type} and compute is : {compute}")
+    
+    compute_target = create_or_get_compute_target(
+        ml_client=workspace_ml_client, compute=compute, instance_type=instance_type)
+    #endpoint_name = queue.workspace.split("-")[-1] + "-" + compute.lower()
+    endpoint_name = compute.lower()
+    endpoint = create_endpoint(
+        workspace_ml_client=workspace_ml_client,
+        endpoint_name=endpoint_name
+    )
+    
+    logger.info("Proceeding with inference and deployment")
     InferenceAndDeployment = ModelInferenceAndDeployemnt(
         test_model_name=test_model_name,
         workspace_ml_client=workspace_ml_client
     )
     InferenceAndDeployment.model_infernce_and_deployment(
-        instance_type=queue.instance_type
+        instance_type=instance_type,
+        task=task,
+        latest_model=registered_model,
+        compute=compute,
+        endpoint=endpoint,
+        actual_model_name=actual_model_name
     )
