@@ -4,9 +4,9 @@
         
 "gpt2-large"
 ,"bert-large-uncased"
-,"finiteautomata-bertweet-base-sentiment-analysis"
-,"mistralai-Mistral-7B-v01"
-,"sshleifer-distilbart-cnn-12-6"
+,"finiteautomata/bertweet-base-sentiment-analysis"
+,"mistralai/Mistral-7B-v01"
+,"sshleifer/distilbart-cnn-12-6"
 
 
     ],
