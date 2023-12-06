@@ -1,8 +1,8 @@
 {
     "queue_name": "test-eastus-0",
     "models": [
-"facebook/bart-large-cnn"
-,"openai/whisper-large"
+"bert-large-uncased"
+,"finiteautomata/bertweet-base-sentiment-analysis"
 
     ],
     "workspace": "test-eastus",
