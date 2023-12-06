@@ -1,10 +1,11 @@
 {
     "queue_name": "test-southcentralus-2",
     "models": [
-        "t5-base"
-,"microsoft/deberta-large"
-,"t5-large"
+        
+
+"t5-large"
 ,"distilgpt2"
+
 
     ],
     "workspace": "test-southcentralus",
