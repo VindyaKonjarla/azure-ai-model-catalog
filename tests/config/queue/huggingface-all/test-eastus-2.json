@@ -1,12 +1,13 @@
 {
     "queue_name": "test-eastus-2",
     "models": [
-        "distilbert-base-uncased-finetuned-sst-2-english"
-,"finiteautomata/bertweet-base-sentiment-analysis"
-,"microsoft/deberta-base-mnli"
-,"microsoft/deberta-large-mnli"
-,"deepset/minilm-uncased-squad2"
-,"deepset/roberta-base-squad2"
+        
+"gpt2-large"
+,"bert-large-uncased"
+,"finiteautomata-bertweet-base-sentiment-analysis"
+,"mistralai-Mistral-7B-v01"
+,"sshleifer-distilbart-cnn-12-6"
+
 
     ],
     "workspace": "test-eastus",
