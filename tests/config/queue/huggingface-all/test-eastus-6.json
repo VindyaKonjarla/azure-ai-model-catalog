@@ -2,7 +2,8 @@
     "queue_name": "test-eastus-6",
     "models": [
        
-"sshleifer/distilbart-cnn-12-6"
+"databricks/dolly-v2-12b"
+,"sshleifer/distilbart-cnn-12-6"
 
 
 
