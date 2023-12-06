@@ -418,7 +418,7 @@ if __name__ == "__main__":
     experiment_name = "hf-text_summarization-"+ test_model_name
     print("Experiment name is:", {experiment_name})
 
-     registry_ml_client_sku = MLClient(credential, registry_name="azureml")
+    registry_ml_client_sku = MLClient(credential, registry_name="azureml")
     expression_to_ignore = ["/", "\\", "|", "@", "#", ".",
                             "$", "%", "^", "&", "*", "<", ">", "?", "!", "~"]
     # Create the regular expression to ignore
