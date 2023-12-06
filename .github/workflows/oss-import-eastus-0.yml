@@ -1,4 +1,4 @@
-name: oss-import-eastus0
+name: oss-import-eastus-0
 
 on: 
   workflow_dispatch:
