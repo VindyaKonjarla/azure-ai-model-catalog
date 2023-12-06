@@ -1,8 +1,7 @@
 {
     "queue_name": "test-southcentralus-1",
     "models": [
-       "roberta-large-mnli"
-,"deepset/minilm-uncased-squad2"
+       "deepset/minilm-uncased-squad2"
 ,"distilbert-base-uncased-distilled-squad"
 ,"distilbert-base-cased-distilled-squad"
 
