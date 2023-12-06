@@ -1,7 +1,7 @@
 {
     "queue_name": "test-eastus-20",
     "models": [
-        "oss-deploy-bert-base-uncased"   
+        "oss-deploy-bert-base-uncased",
         "oss-deploy-distilbert-base-uncased-finetuned-sst-2-english",
         "oss-deploy-finiteautomata-bertweet-base-sentiment-analysis",
         "oss-deploy-microsoft-deberta-base-mnli",
