@@ -1,8 +1,7 @@
 {
     "queue_name": "test-eastus-0",
     "models": [
-"tiiuae/falcon-7b"
-,"facebook/bart-large-cnn"
+"facebook/bart-large-cnn"
 ,"openai/whisper-large"
 
     ],
