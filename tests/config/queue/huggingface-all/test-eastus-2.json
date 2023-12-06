@@ -1,10 +1,8 @@
 {
     "queue_name": "test-eastus-2",
     "models": [
-        
-"gpt2-large"
-,"bert-large-uncased"
-,"finiteautomata/bertweet-base-sentiment-analysis"
+   
+"finiteautomata/bertweet-base-sentiment-analysis"
 ,"mistralai/Mistral-7B-v01"
 ,"sshleifer/distilbart-cnn-12-6"
 
