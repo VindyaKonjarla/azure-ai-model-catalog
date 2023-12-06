@@ -1,8 +1,8 @@
 {
     "queue_name": "test-eastus-1",
     "models": [
-        "databricks/dolly-v2-12b"
-        ,"gpt2"
+        
+        "gpt2"
 ,"t5-small"
 ,"bert-base-cased"
 ,"openai/whisper-large"
