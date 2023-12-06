@@ -4,7 +4,7 @@
       "databricks/dolly-v2-12b"
 ,"openai/whisper-large"
 ,"tiiuae/falcon-7b"
-openai/whisper-large-v3
+,"openai/whisper-large-v3"
 ,"sshleifer/distilbart-cnn-12-6"
 
 
