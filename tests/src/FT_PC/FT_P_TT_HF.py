@@ -151,31 +151,85 @@ def get_training_and_optimization_parameters(foundation_model):
 
     return training_parameters, optimization_parameters
 
-def create_or_get_aml_compute(workspace_ml_client, compute_cluster, compute_cluster_size, computes_allow_list=None):
+# def create_or_get_aml_compute(workspace_ml_client, compute_cluster, compute_cluster_size, computes_allow_list=None):
+#     try:
+#         compute = workspace_ml_client.compute.get(compute_cluster)
+#         print(f"The compute cluster '{compute_cluster}' already exists! Reusing it for the current run")
+#     except Exception as ex:
+#         print(f"Looks like the compute cluster '{compute_cluster}' doesn't exist. Creating a new one with compute size '{compute_cluster_size}'!")
+
+#         # Define a list of VM sizes that are not supported for finetuning
+#         unsupported_gpu_vm_list = ["standard_nc6", "standard_nc12", "standard_nc24", "standard_nc24r"]
+
+#         try:
+#             print("Attempt #1 - Trying to create a dedicated compute")
+#             tier = "Dedicated"
+#             if compute_cluster_size.lower() in unsupported_gpu_vm_list:
+#                 raise ValueError(f"VM size '{compute_cluster_size}' is not supported for finetuning.")
+#         except ValueError as e:
+#             print(e)
+#             raise
+
+#         try:
+#             print("Attempt #2 - Trying to create a low priority compute. Since this is a low priority compute, the job could get pre-empted before completion.")
+#             tier = "LowPriority"
+#             if compute_cluster_size.lower() in unsupported_gpu_vm_list:
+#                 raise ValueError(f"VM size '{compute_cluster_size}' is not supported for finetuning.")
+#         except ValueError as e:
+#             print(e)
+#             raise
+
+#         # Provision the compute
+#         compute = AmlCompute(
+#             name=compute_cluster,
+#             size=compute_cluster_size,
+#             tier=tier,
+#             max_instances=2,  # For multi-node training, set this to an integer value more than 1
+#         )
+#         workspace_ml_client.compute.begin_create_or_update(compute).wait()
+
+#     # Sanity check on the created compute
+#     compute = workspace_ml_client.compute.get(compute_cluster)
+
+#     if compute.provisioning_state.lower() == "failed":
+#         raise ValueError(f"Provisioning failed. Compute '{compute_cluster}' is in a failed state. Please try creating a different compute.")
+
+#     if computes_allow_list is not None:
+#         computes_allow_list_lower_case = [x.lower() for x in computes_allow_list]
+#         if compute.size.lower() not in computes_allow_list_lower_case:
+#             raise ValueError(f"VM size '{compute.size}' is not in the allow-listed computes for finetuning.")
+    
+#     # Determine the number of GPUs in a single node of the selected 'compute_cluster_size' compute
+#     gpu_count_found = False
+#     workspace_compute_sku_list = workspace_ml_client.compute.list_sizes()
+#     available_sku_sizes = []
+#     for compute_sku in workspace_compute_sku_list:
+#         available_sku_sizes.append(compute_sku.name)
+#         if compute_sku.name.lower() == compute.size.lower():
+#             gpus_per_node = compute_sku.gpus
+#             gpu_count_found = True
+
+#     # If the GPU count is not found, print an error
+#     if gpu_count_found:
+#         print(f"Number of GPUs in compute '{compute_cluster}': {gpus_per_node}")
+#     else:
+#         raise ValueError(f"Number of GPUs in compute '{compute_cluster}' not found. Available skus are: {available_sku_sizes}. This should not happen. Please check the selected compute cluster: {compute_cluster} and try again.")
+    
+#     return compute, gpus_per_node, compute_cluster
+
+
+def create_or_get_aml_compute(workspace_ml_client, compute_cluster, compute_cluster_size):
     try:
         compute = workspace_ml_client.compute.get(compute_cluster)
         print(f"The compute cluster '{compute_cluster}' already exists! Reusing it for the current run")
     except Exception as ex:
         print(f"Looks like the compute cluster '{compute_cluster}' doesn't exist. Creating a new one with compute size '{compute_cluster_size}'!")
 
-        # Define a list of VM sizes that are not supported for finetuning
-        unsupported_gpu_vm_list = ["standard_nc6", "standard_nc12", "standard_nc24", "standard_nc24r"]
-
         try:
+            # Attempt to create a dedicated compute
             print("Attempt #1 - Trying to create a dedicated compute")
             tier = "Dedicated"
-            if compute_cluster_size.lower() in unsupported_gpu_vm_list:
-                raise ValueError(f"VM size '{compute_cluster_size}' is not supported for finetuning.")
-        except ValueError as e:
-            print(e)
-            raise
-
-        try:
-            print("Attempt #2 - Trying to create a low priority compute. Since this is a low priority compute, the job could get pre-empted before completion.")
-            tier = "LowPriority"
-            if compute_cluster_size.lower() in unsupported_gpu_vm_list:
-                raise ValueError(f"VM size '{compute_cluster_size}' is not supported for finetuning.")
-        except ValueError as e:
+        except Exception as e:
             print(e)
             raise
 
@@ -194,15 +248,11 @@ def create_or_get_aml_compute(workspace_ml_client, compute_cluster, compute_clus
     if compute.provisioning_state.lower() == "failed":
         raise ValueError(f"Provisioning failed. Compute '{compute_cluster}' is in a failed state. Please try creating a different compute.")
 
-    if computes_allow_list is not None:
-        computes_allow_list_lower_case = [x.lower() for x in computes_allow_list]
-        if compute.size.lower() not in computes_allow_list_lower_case:
-            raise ValueError(f"VM size '{compute.size}' is not in the allow-listed computes for finetuning.")
-    
     # Determine the number of GPUs in a single node of the selected 'compute_cluster_size' compute
     gpu_count_found = False
     workspace_compute_sku_list = workspace_ml_client.compute.list_sizes()
     available_sku_sizes = []
+
     for compute_sku in workspace_compute_sku_list:
         available_sku_sizes.append(compute_sku.name)
         if compute_sku.name.lower() == compute.size.lower():
@@ -217,6 +267,8 @@ def create_or_get_aml_compute(workspace_ml_client, compute_cluster, compute_clus
     
     return compute, gpus_per_node, compute_cluster
 
+
+
 def create_and_run_azure_ml_pipeline(
     foundation_model,
     compute_cluster,
@@ -227,7 +279,7 @@ def create_and_run_azure_ml_pipeline(
 ):
     # Fetch the pipeline component
     pipeline_component_func = registry_ml_client.components.get(
-        name="translation_pipeline_for_oss", label="latest"
+        name="translation_pipeline", label="latest"
     )
 
     def register_model_to_workspace(
@@ -337,7 +389,7 @@ if __name__ == "__main__":
     print (f"test_workspace_name: {queue['workspace']}")
     print (f"test_model_name: {test_model_name}")
     print (f"test_sku_type: {test_sku_type}")
-    print (f"test_registry: queue['registry']")
+    print (f"test_registry: {queue['registry']}")
     print (f"test_trigger_next_model: {test_trigger_next_model}")
     print (f"test_queue: {test_queue}")
     print (f"test_set: {test_set}")
@@ -369,6 +421,21 @@ if __name__ == "__main__":
     # # generating a unique timestamp that can be used for names and versions that need to be unique
     # timestamp = str(int(time.time()))
 
+    expression_to_ignore = ["/", "\\", "|", "@", "#", ".",
+                            "$", "%", "^", "&", "*", "<", ">", "?", "!", "~"]
+    # Create the regular expression to ignore
+    regx_for_expression = re.compile(
+        '|'.join(map(re.escape, expression_to_ignore)))
+    # Check the model_name contains any of there character
+    expression_check = re.findall(regx_for_expression, test_model_name)
+    if expression_check:
+        # Replace the expression with hyphen
+        test_model_name  = regx_for_expression.sub("-", test_model_name)
+    print("model name replaced with - :", {test_model_name})
+
+
+    
+
     foundation_model = get_latest_model_version(registry_ml_client_model, test_model_name.lower())
     fine_tune_sku = foundation_model.properties.get("finetune-recommended-sku")
     print("Finetune-recommended-sku:", {fine_tune_sku})
@@ -378,15 +445,15 @@ if __name__ == "__main__":
     # compute_cluster_size = "Standard_NC24s_v3 "
 
     compute_cluster_size = fine_tune_sku
-    compute_cluster = compute_cluster_size.replace('_', '-')
+    compute_cluster = "donotdelete-" + compute_cluster_size.replace('_', '-')
     print("Modified compute_cluster_size:", compute_cluster_size)
     print("Modified compute_cluster_size:", {compute_cluster})
     
-    # Optional: Define a list of allowed compute sizes (if any)
-    computes_allow_list = ["standard_nc6s_v3", "standard_nc12s_v2","standard_nc24s_v3","standard_NC24rs_v3","Standard_NC12s_v3"]
+    # # Optional: Define a list of allowed compute sizes (if any)
+    # computes_allow_list = ["standard_nc6s_v3", "standard_nc12s_v2","standard_nc24s_v3","standard_NC24rs_v3","Standard_NC12s_v3"]
     
     # Call the function
-    compute, gpus_per_node, compute_cluster = create_or_get_aml_compute(workspace_ml_client, compute_cluster, compute_cluster_size, computes_allow_list)
+    compute, gpus_per_node, compute_cluster = create_or_get_aml_compute(workspace_ml_client, compute_cluster, compute_cluster_size)
 
     # compute = create_or_get_compute_target(workspace_ml_client, queue.compute)
     print("printing:",{compute})
@@ -438,74 +505,3 @@ if __name__ == "__main__":
         print(f"Error running Azure ML Pipeline: {str(e)}")
         sys.exit(1)
     print("Finetuned and the registered model for Text-translation successfully")
-
-
-
-# def get_runs_from_mlflow(workspace_ml_client, experiment_name, pipeline_job):
-
-#     mlflow_tracking_uri = workspace_ml_client.workspaces.get(
-#         workspace_ml_client.workspace_name
-#     ).mlflow_tracking_uri
-#     mlflow.set_tracking_uri(mlflow_tracking_uri)
-
-#     # Concatenate 'tags.mlflow.rootRunId=' and pipeline_job.name in single quotes as filter variable
-#     filter = "tags.mlflow.rootRunId='" + pipeline_job.name + "'"
-#     runs = mlflow.search_runs(
-#         experiment_names=[experiment_name], filter_string=filter, output_format="list"
-#     )
-#     training_run = None
-#     evaluation_run = None
-
-#     # Get the training and evaluation runs.
-#     # Using a workaround until the issue 'Bug 2320997: not able to show eval metrics in FT notebooks - mlflow client now showing display names' is fixed
-#     for run in runs:
-#         # Check if run.data.metrics.epoch exists
-#         if "epoch" in run.data.metrics:
-#             training_run = run
-#         # Else, check if run.data.metrics.accuracy exists
-#         elif "bleu_1" in run.data.metrics:
-#             evaluation_run = run
-#     if training_run:
-#         print("Training metrics:\n")
-#         print(json.dumps(training_run.data.metrics, indent=2))
-#     else:
-#         print("No Training job found")
-
-#     if evaluation_run:
-#         print("\nEvaluation metrics:\n")
-#         print(json.dumps(evaluation_run.data.metrics, indent=2))
-#     else:
-#         print("No Evaluation job found")
-
-#     return training_run, evaluation_run
-
-
-
-# def register_model_from_pipeline_output(workspace_ml_client, pipeline_job, model_name, timestamp):
-#     # Check if the `trained_model` output is available
-#     print("Pipeline job outputs: ", workspace_ml_client.jobs.get(pipeline_job.name).outputs)
-
-#     # Fetch the model from pipeline job output - not working, hence fetching from fine-tune child job
-#     model_path_from_job = "azureml://jobs/{0}/outputs/{1}".format(
-#         pipeline_job.name, "trained_model"
-#     )
-
-#     finetuned_model_name = model_name + "-wmt16-en-ro-src"
-#     finetuned_model_name = finetuned_model_name.replace("/", "-")
-#     print("Path to register model: ", model_path_from_job)
-
-#     prepare_to_register_model = Model(
-#         path=model_path_from_job,
-#         type=AssetTypes.MLFLOW_MODEL,
-#         name=finetuned_model_name,
-#         version=timestamp,  # Use timestamp as the version to avoid version conflicts
-#         description=model_name + " fine-tuned model for translation wmt16 en to ro",
-#     )
-#     print("Prepare to register model:\n", prepare_to_register_model)
-
-#     # Register the model from the pipeline job output
-#     registered_model = workspace_ml_client.models.create_or_update(prepare_to_register_model)
-#     print("Registered model:\n", registered_model)
-
-# # Call the function with the appropriate arguments to register the model
-# register_model_from_pipeline_output(workspace_ml_client, pipeline_job, model_name, timestamp)
