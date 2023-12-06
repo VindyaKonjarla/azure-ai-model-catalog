@@ -1,0 +1,22 @@
+{
+    "queue_name": "test-northeurope-01",
+    "models": [
+        "hf-deploy-distilbert-base-uncased-distilled-squad",
+        "hf-deploy-jean-baptiste-camembert-ner",
+        "hf-deploy-deepset-minilm-uncased-squad2",
+        "hf-deploy-microsoft-deberta-base-mnli",
+        "hf-deploy-distilbert-base-uncased-finetuned-sst-2-english",
+        "hf-deploy-t5-base",
+        "hf-deploy-roberta-base-openai-detector",
+        "hf-deploy-roberta-large-mnli",
+        "hf-deploy-deepset-roberta-base-squad2"
+
+    ],
+    "workspace": "test-northeurope",
+    "subscription": "80c77c76-74ba-4c8c-8229-4c3b2957990c",
+    "resource_group": "huggingface-registry-test1",
+    "registry": "azureml-preview-test1",
+    "environment": "automate-venv",
+    "compute": "Standard-D96a-v4",
+    "instance_type": "Standard_E64s_v3"
+}
