@@ -381,8 +381,8 @@ if __name__ == "__main__":
     # sku_override = get_sku_override()
     # if sku_override is None:
     #     check_override = False
-    if test_trigger_next_model == "true":
-        set_next_trigger_model(queue)
+    # if test_trigger_next_model == "true":
+    #     set_next_trigger_model(queue)
     # print values of all above variables
     print (f"test_subscription_id: {queue['subscription']}")
     print (f"test_resource_group: {queue['resource_group']}")
