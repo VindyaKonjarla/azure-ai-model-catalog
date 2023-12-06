@@ -1,8 +1,8 @@
 {
     "queue_name": "test-southcentralus-0",
     "models": [
-        "roberta-base-openai-detector"
-,"roberta-large-mnli"
+        
+"roberta-large-mnli"
 ,"roberta-large-openai-detector"
 ,"distilbert-base-cased-distilled-squad"
 
