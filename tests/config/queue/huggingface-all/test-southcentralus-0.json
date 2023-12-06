@@ -3,8 +3,7 @@
     "models": [
         
 
-"distilbert-base-uncased-finetuned-sst-2-english"
-,"microsoft/deberta-base-mnli"
+"microsoft/deberta-base-mnli"
 
 
     ],
