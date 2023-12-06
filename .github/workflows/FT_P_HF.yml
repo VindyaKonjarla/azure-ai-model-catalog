@@ -1,4 +1,4 @@
-name: bert-base-cased
+name: hf-ft-bert-base-cased
 
 on: 
   workflow_dispatch:
