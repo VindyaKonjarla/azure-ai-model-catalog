@@ -1,8 +1,8 @@
 {
     "queue_name": "test-eastus-5",
     "models": [
-        "bert-base-cased","gpt2-medium"
-,"gpt2"
+        
+"gpt2"
 ,"t5-small","mistralai/Mistral-7B-Instruct-v0.1"
 
 
