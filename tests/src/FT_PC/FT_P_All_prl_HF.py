@@ -24,6 +24,7 @@ import time
 from azure.ai.ml.dsl import pipeline
 from azure.ai.ml.entities import CommandComponent, PipelineComponent, Job, Component
 from azure.ai.ml import PyTorchDistribution, Input
+import re
 import ast
 
 
@@ -50,7 +51,7 @@ def get_sku_override():
 def set_next_trigger_model(queue):
     print("In set_next_trigger_model...")
     model_list = list(queue.models)
-    check_mlflow_model = "MLFlow-FT-"+test_model_name+"-hf"
+    check_mlflow_model = "hf-ft-"+test_model_name
     index = model_list.index(check_mlflow_model)
     print("check_mlflow_model:", {check_mlflow_model})
     print("index of check_mlflow_model:", {index})
@@ -304,6 +305,20 @@ if __name__ == "__main__":
     mlflow.set_tracking_uri(ws.get_mlflow_tracking_uri())
     #foundation_model = get_latest_model_version(workspace_ml_client, test_model_name.lower())
     registry_ml_client = MLClient(credential, registry_name="azureml")
+
+    expression_to_ignore = ["/", "\\", "|", "@", "#", ".",
+                            "$", "%", "^", "&", "*", "<", ">", "?", "!", "~"]
+    # Create the regular expression to ignore
+    regx_for_expression = re.compile(
+        '|'.join(map(re.escape, expression_to_ignore)))
+    # Check the model_name contains any of there character
+    expression_check = re.findall(regx_for_expression, test_model_name)
+    if expression_check:
+        # Replace the expression with hyphen
+        test_model_name  = regx_for_expression.sub("-", test_model_name)
+    print("model name replaced with - :", {test_model_name})
+
+    
     foundation_model = get_latest_model_version(registry_ml_client, test_model_name.lower())
 
     primary_task = HfTask(model_name=test_model_name).get_task()
