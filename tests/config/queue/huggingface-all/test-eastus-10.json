@@ -2,7 +2,12 @@
     "queue_name": "test-eastus-10",
     "models": [
       
-        "MLFlow-TheBloke/Firefly-Llama2-13B-v1.2-GPTQ"
+        'distilbert-base-uncased-finetuned-sst-2-english'
+,'finiteautomata/bertweet-base-sentiment-analysis'
+,'microsoft/deberta-base-mnli'
+,'microsoft/deberta-large-mnli'
+
+
       
     ],
     "workspace": "test-eastus",
