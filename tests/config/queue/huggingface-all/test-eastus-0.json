@@ -2,10 +2,9 @@
     "queue_name": "test-eastus-0",
     "models": [
 "gpt2-medium"
-,"tiiuae-falcon-7b"
-,"mistralai-Mistral-7B-Instruct-v01"
-,"openai-whisper-large"
+,"tiiuae/falcon-7b"
 ,"facebook/bart-large-cnn"
+,"openai/whisper-large"
 
     ],
     "workspace": "test-eastus",
