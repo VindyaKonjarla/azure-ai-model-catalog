@@ -1,9 +1,12 @@
 {
     "queue_name": "test-eastus-5",
     "models": [
-        "MLFlow-cl-tohoku/bert-base-japanese-whole-word-masking",
-        "MLFlow-kit-nlp/bert-base-japanese-sentiment-irony",
-        "MLFlow-koheiduck/bert-japanese-finetuned-sentiment"
+        "bert-base-cased","gpt2-medium"
+,"mistralai/Mistral-7B-Instruct-v0.1"
+,"gpt2"
+,"t5-small"
+
+
     ],
     "workspace": "test-eastus",
     "subscription": "80c77c76-74ba-4c8c-8229-4c3b2957990c",
