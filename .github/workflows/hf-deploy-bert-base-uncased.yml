@@ -1,5 +1,5 @@
 
-name: oss-deploy-bert-base-uncased
+name: hf-deploy-bert-base-uncased
 
 on: 
   workflow_dispatch:
@@ -8,7 +8,7 @@ env:
   test_model_name: bert-base-uncased
   test_sku_type: cpu
   test_trigger_next_model: false
-  test_queue: test-eastus-20
+  test_queue: test-northeurope-0
   test_set: huggingface-all
   test_keep_looping: false
   actual_model_name: bert-base-uncased
@@ -49,5 +49,5 @@ jobs:
       run: pip install datasets
     - name: deploy-model-step
       id: deploy-model-step
-      run: python generic_oss_model_deployment.py
-      working-directory: tests/src/oss_model_deployment
+      run: python generic_hf_model_deployment.py
+      working-directory: tests/src/hf_model_deployment

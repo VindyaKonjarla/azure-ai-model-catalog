@@ -14,6 +14,7 @@ import mlflow
 from box import ConfigBox
 import re
 import sys
+from transformers import AutoTokenizer
 
 logger = get_logger(__name__)
 
@@ -48,42 +49,24 @@ class ModelInferenceAndDeployemnt:
         print(logs)
         self.prase_logs(logs)
 
-    def get_task_specified_input(self, task):
+    def get_task_specified_input(self, task, actual_model_name):
         #scoring_file = f"../../config/sample_inputs/{self.registry}/{task}.json"
         scoring_file = f"sample_inputs/{task}.json"
         # check of scoring_file exists
         try:
             with open(scoring_file) as f:
                 scoring_input = ConfigBox(json.load(f))
-                logger.info(f"scoring_input file:\n\n {scoring_input}\n\n")
+            if task == "fill-mask":
+                tokenizer = AutoTokenizer.from_pretrained(actual_model_name)
+                for index in range(len(scoring_input.input_data)):
+                    scoring_input.input_data[index] = scoring_input.input_data[index].replace(
+                        "<mask>", tokenizer.mask_token).replace("[MASK]", tokenizer.mask_token)
+                scoring_file, scoring_input = self.create_json_file(file_name=f"{task}-alternate.json", dicitonary=scoring_input)
+            logger.info(f"scoring_input file:\n\n {scoring_input}\n\n")  
         except Exception as e:
             logger.error(
                 f"::Error:: Could not find scoring_file: {scoring_file}. Finishing without sample scoring: \n{e}")
         return scoring_file, scoring_input
-
-    def get_model_output(self, latest_model, scoring_input, task):
-        model_sourceuri = latest_model.properties["mlflow.modelSourceUri"]
-        loaded_model_pipeline = mlflow.transformers.load_model(
-            model_uri=model_sourceuri)
-        logger.info(
-            f"Latest model name : {latest_model.name} and latest model version : {latest_model.version}", )
-        if task == "fill-mask":
-            pipeline_tokenizer = loaded_model_pipeline.tokenizer
-            for index in range(len(scoring_input.input_data)):
-                scoring_input.input_data[index] = scoring_input.input_data[index].replace(
-                    "<mask>", pipeline_tokenizer.mask_token).replace("[MASK]", pipeline_tokenizer.mask_token)
-
-        output_from_pipeline = loaded_model_pipeline(scoring_input.input_data)
-        logger.info(f"My outupt is this :  {output_from_pipeline}")
-        #output_from_pipeline = model_pipeline(scoring_input.input_data)
-        for index in range(len(output_from_pipeline)):
-            if len(output_from_pipeline[index]) != 0:
-                logger.info(
-                    f"This model is giving output in this index: {index}")
-                logger.info(
-                    f"Started creating dictionary with this input {scoring_input.input_data[index]}")
-                dic_obj = {"input_data": [scoring_input.input_data[index]]}
-                return dic_obj
 
     def create_json_file(self, file_name, dicitonary):
         logger.info("Inside the create json file method...")
@@ -145,19 +128,6 @@ class ModelInferenceAndDeployemnt:
                     "::warning:: Trying to invoking the endpoint again by changing the input data and file")
                 logger.warning(
                     f"::warning:: This is failed due to this :\n {ex}")
-                # dic_obj = self.get_model_output(latest_model=latest_model, scoring_input=scoring_input, task=task)
-                # logger.info(f"Our new input is this one: {dic_obj}")
-                # json_file_name, scoring_input = self.create_json_file(
-                #     file_name=deployment_name, dicitonary=dic_obj)
-                # logger.info("Online endpoint invoking satrted...")
-                # response = self.workspace_ml_client.online_endpoints.invoke(
-                #     endpoint_name=online_endpoint_name,
-                #     deployment_name=deployment_name,
-                #     request_file=json_file_name,
-                # )
-                # logger.info(
-                #     f"Getting the reposne from the endpoint is this one : {response}")
-                # self.delete_file(file_name=json_file_name)
                 sys.exit(1)
 
             response_json = json.loads(response)
@@ -326,10 +296,10 @@ class ModelInferenceAndDeployemnt:
                          f" the exception is this one : {e}")
             exit(0)
 
-    def model_infernce_and_deployment(self, instance_type, task, latest_model, endpoint):  
+    def model_infernce_and_deployment(self, instance_type, task, latest_model, endpoint, actual_model_name):  
         logger.info(f"latest_model: {latest_model}")
         logger.info(f"Task is : {task}")
-        scoring_file, scoring_input = self.get_task_specified_input(task=task)
+        scoring_file, scoring_input = self.get_task_specified_input(task=task, actual_model_name=actual_model_name)
         # endpoint names need to be unique in a region, hence using timestamp to create unique endpoint name
         # timestamp = int(time.time())
         # online_endpoint_name = task + str(timestamp)

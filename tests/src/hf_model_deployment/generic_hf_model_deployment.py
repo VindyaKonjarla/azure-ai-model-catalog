@@ -56,6 +56,8 @@ test_keep_looping = os.environ.get('test_keep_looping')
 # the queue file contains the list of models to test with with a specific workspace
 # the queue file also contains the details of the workspace, registry, subscription, resource group
 
+actual_model_name = os.environ.get('actual_model_name')
+
 huggingface_model_exists_in_registry = False
 
 FILE_NAME = "pipeline_task.json"
@@ -156,11 +158,10 @@ if __name__ == "__main__":
     # if sku_override is None:
     #     check_override = False
 
-    if test_trigger_next_model == "true":
-        set_next_trigger_model(queue)
+    # if test_trigger_next_model == "true":
+    #     set_next_trigger_model(queue)
     # print values of all above variables
     logger.info(f"test_subscription_id: {queue['subscription']}")
-    logger.info(f"test_resource_group: {queue['subscription']}")
     logger.info(f"test_workspace_name: {queue['workspace']}")
     logger.info(f"test_model_name: {test_model_name}")
     logger.info(f"test_sku_type: {test_sku_type}")
@@ -225,13 +226,14 @@ if __name__ == "__main__":
                      compute=compute,
                      instance_type=instance_type
                      )
-    endpoint_name = queue.workspace.split("-")[-1] + "-" + compute.lower()
+    #endpoint_name = queue.workspace.split("-")[-1] + "-" + compute.lower()
+    endpoint_name = compute.lower()
     endpoint = create_endpoint(
         workspace_ml_client=workspace_ml_client,
         endpoint_name=endpoint_name
     )
-    #task = HfTask(model_name=test_model_name).get_task()
-    task = foundation_model.tags["task"]
+    task = HfTask(model_name=actual_model_name).get_task()
+    #task = foundation_model.tags["task"]
     logger.info(f"Task is this : {task} for the model : {test_model_name}")
 
     # registered_model_detail = ModelDetail(
@@ -248,5 +250,6 @@ if __name__ == "__main__":
         instance_type=instance_type,
         task=task,
         latest_model=foundation_model,
-        endpoint = endpoint
+        endpoint = endpoint,
+        actual_model_name=actual_model_name
     )
