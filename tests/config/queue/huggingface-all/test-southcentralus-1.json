@@ -1,10 +1,11 @@
 {
     "queue_name": "test-southcentralus-1",
     "models": [
-        "distilbert-base-uncased-distilled-squad"
-,"t5-small"
-,"openai/whisper-large"
+       
+
+        "Jean-Baptiste/camembert-ner"
 ,"sshleifer/distilbart-cnn-12-6"
+        ,"openai/whisper-large"
 
     ],
     "workspace": "test-southcentralus",
