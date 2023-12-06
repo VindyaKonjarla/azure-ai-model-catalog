@@ -415,7 +415,7 @@ if __name__ == "__main__":
     registry_ml_client = MLClient(credential, registry_name="azureml-preview-test1")
     registry_ml_client_model = MLClient(credential, registry_name="azureml")
     
-    experiment_name = "hf-text-"summarization-"+ test_model_name
+    experiment_name = "hf-text_summarization-"+ test_model_name
     print("Experiment name is:", {experiment_name})
 
      registry_ml_client_sku = MLClient(credential, registry_name="azureml")
