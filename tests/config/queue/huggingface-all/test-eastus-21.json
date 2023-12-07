@@ -6,7 +6,7 @@
         "oss-deploy-facebook-bart-large-cnn",
         "oss-deploy-t5-small",
         "oss-deploy-bert-base-cased",
-        "oss-deploy-sshleifer-distilbart-cnn-12-6",
+        "oss-deploy-sshleifer-distilbart-cnn-12-6"
         
     ],
     "workspace": "test-eastus",
