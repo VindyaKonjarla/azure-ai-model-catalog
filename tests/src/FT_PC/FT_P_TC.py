@@ -340,6 +340,8 @@ def create_and_run_azure_ml_pipeline(
     pipeline_component_func = registry_ml_client.components.get(
         name="text_classification_pipeline", label="latest"
     )
+    print("Pipeline Component ID:", pipeline_component_func.id)
+
 
     # Model registration function
     #timestamp = str(time.time())
@@ -365,7 +367,7 @@ def create_and_run_azure_ml_pipeline(
         type=AssetTypes.MLFLOW_MODEL,
         name=finetuned_model_name,
         version=timestamp,  # use timestamp as version to avoid version conflict
-        description= test_model_name + " fine tuned model for emotion detection",
+        description= test_model_name + " fine-tuned model to text-classification",
         )
         print("prepare to register model inside loop:", prepare_to_register_model)
     
