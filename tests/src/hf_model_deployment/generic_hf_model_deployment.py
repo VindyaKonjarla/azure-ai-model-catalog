@@ -243,7 +243,7 @@ if __name__ == "__main__":
     
     logger.info("Proceeding with inference and deployment")
     InferenceAndDeployment = ModelInferenceAndDeployemnt(
-        test_model_name=test_model_name,
+        test_model_name=test_model_name.lower(),
         workspace_ml_client=workspace_ml_client
     )
     InferenceAndDeployment.model_infernce_and_deployment(

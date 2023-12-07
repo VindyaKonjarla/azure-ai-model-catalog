@@ -279,7 +279,7 @@ if __name__ == "__main__":
     #
     # mlflow.set_tracking_uri(ws.get_mlflow_tracking_uri())
 
-    registered_model_name = test_model_name.replace("/", "-").lower()
+    registered_model_name = test_model_name.replace("/", "-")
     model_detail = ModelDetail(workspace_ml_client=workspace_ml_client)
     registered_model = model_detail.get_model_detail(
         test_model_name=registered_model_name)
@@ -421,7 +421,7 @@ if __name__ == "__main__":
     #     raise Exception(ex)
     logger.info("Proceeding with inference and deployment")
     InferenceAndDeployment = ModelInferenceAndDeployemnt(
-        test_model_name=registered_model_name,
+        test_model_name=registered_model_name.lower(),
         workspace_ml_client=workspace_ml_client
     )
     InferenceAndDeployment.model_infernce_and_deployment(
