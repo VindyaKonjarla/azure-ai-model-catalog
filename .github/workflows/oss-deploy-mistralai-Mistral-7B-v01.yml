@@ -10,7 +10,7 @@ env:
   test_queue: test-eastus-28
   test_set: huggingface-all
   test_keep_looping: false
-  actual_model_name: mistralai/Mistral-7B-v01
+  actual_model_name: mistralai/Mistral-7B-v0.1
 
 jobs:
   deploy-model-job:
