@@ -5,7 +5,8 @@
         "oss-deploy-mistralai-Mistral-7B-v01",
         "oss-deploy-finiteautomata-bertweet-base-sentiment-analysis",
         "oss-deploy-bert-large-uncased",
-        "oss-deploy-deepset-roberta-base-squad2"
+        "oss-deploy-deepset-roberta-base-squad2",
+        "oss-deploy-databricks-dolly-v2-12b"
         
         
     ],
