@@ -1,8 +1,9 @@
 {
-  "input_data": {
-    "input_string": [
-      "I like you. I love you",
-      "Today was a horrible day"
-    ]
+  "input_data": [
+    "I like you. I love you",
+    "Today was a horrible day"
+  ],
+  "params": {
+    "return_all_scores": true
   }
 }
