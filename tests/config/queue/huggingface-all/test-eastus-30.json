@@ -9,7 +9,7 @@
         "hf-deploy-gpt2",
         "hf-deploy-mistralai-Mistral-7B-Instruct-v01",
         "hf-deploy-t5-small",
-        "HF-eval-databricks/dolly-v2-12b"
+        "HF-eval-databricks-dolly-v2-12b"
         
     ],
     "workspace": "test-eastus",
