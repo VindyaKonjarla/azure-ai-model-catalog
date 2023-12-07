@@ -331,7 +331,7 @@ def create_and_run_azure_ml_pipeline(
         type=AssetTypes.MLFLOW_MODEL,
         name=finetuned_model_name,
         version=timestamp,  # use timestamp as version to avoid version conflict
-        description= test_model_name + " fine tuned model for emotion detection",
+        description= test_model_name + " fine tuned model for translation",
         )
         print("prepare to register model inside loop:", prepare_to_register_model)
     
@@ -444,14 +444,6 @@ if __name__ == "__main__":
     )
     mlflow.set_tracking_uri(ws.get_mlflow_tracking_uri())
     registry_ml_client_sku = MLClient(credential, registry_name="azureml")
-    foundation_model_ft = get_latest_model_version_ft(registry_ml_client_sku, test_model_name.lower())
-    fine_tune_sku = foundation_model_ft.properties.get("finetune-recommended-sku")
-    print("Finetune-recommended-sku:", {fine_tune_sku})
-    registry_ml_client = MLClient(credential, registry_name="azureml-preview-test1")
-    # experiment_name = "PC_translation_wmt16"
-    experiment_name = "oss-token-classification-"+ test_model_name
-    print("Experiment name is:", {experiment_name})
-
     expression_to_ignore = ["/", "\\", "|", "@", "#", ".",
                             "$", "%", "^", "&", "*", "<", ">", "?", "!", "~"]
     # Create the regular expression to ignore
@@ -462,7 +454,15 @@ if __name__ == "__main__":
     if expression_check:
         # Replace the expression with hyphen
         test_model_name  = regx_for_expression.sub("-", test_model_name)
-    print("model name replaced with - :", {test_model_name})      
+    print("model name replaced with - :", {test_model_name})    
+
+    foundation_model_ft = get_latest_model_version_ft(registry_ml_client_sku, test_model_name.lower())
+    fine_tune_sku = foundation_model_ft.properties.get("finetune-recommended-sku")
+    print("Finetune-recommended-sku:", {fine_tune_sku})
+    registry_ml_client = MLClient(credential, registry_name="azureml-preview-test1")
+    # experiment_name = "PC_translation_wmt16"
+    experiment_name = "oss-text-translation-"+ test_model_name
+    print("Experiment name is:", {experiment_name})
           
 
 
