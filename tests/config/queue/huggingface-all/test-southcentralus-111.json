@@ -6,7 +6,8 @@
         "oss-deploy-distilbert-base-cased-distilled-squad",
         "oss-deploy-distilbert-base-uncased-distilled-squad",
         "oss-deploy-jean-baptiste-camembert-ner",
-        "oss-deploy-deepset-minilm-uncased-squad2"
+        "oss-deploy-deepset-minilm-uncased-squad2",
+        "oss-deploy-t5-base"
     ],
     "workspace": "test-southcentralus",
     "subscription": "80c77c76-74ba-4c8c-8229-4c3b2957990c",
