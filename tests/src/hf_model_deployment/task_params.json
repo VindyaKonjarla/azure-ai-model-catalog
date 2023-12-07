@@ -1,6 +1,6 @@
 {
   "t5-base": {
-    "inputs": {
+    "input_data": {
       "input_string": [
         "I like you. I love you",
         "Today was a horrible day"
@@ -11,7 +11,7 @@
     }
   },
   "t5-small": {
-    "inputs": {
+    "input_data": {
       "input_string": [
         "I like you. I love you",
         "Today was a horrible day"
