@@ -1,7 +1,9 @@
 {
     "queue_name": "test-BE",
     "models": [
-        "oss-ft-mistralai/Mistral-7B-v0.1"
+        "oss-ft-t5-small",
+        "oss-ft-mistralai/Mistral-7B-v0.1",
+        "facebook/bart-large-cnn"
     ],
     "workspace": "test-eastus",
     "subscription": "80c77c76-74ba-4c8c-8229-4c3b2957990c",
