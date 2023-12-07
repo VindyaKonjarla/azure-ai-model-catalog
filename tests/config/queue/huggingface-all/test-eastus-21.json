@@ -1,9 +1,13 @@
 {
     "queue_name": "test-eastus-21",
     "models": [
-        "oss-deploy-bert-large-cased",
-        "oss-deploy-bert-large-uncased",
-        "oss-deploy-facebook-bart-large-cnn"
+        "oss-deploy-gpt2-medium",
+        "oss-deploy-gpt2",
+        "oss-deploy-facebook-bart-large-cnn",
+        "oss-deploy-t5-small",
+        "oss-deploy-bert-base-cased",
+        "oss-deploy-sshleifer-distilbart-cnn-12-6",
+        
     ],
     "workspace": "test-eastus",
     "subscription": "80c77c76-74ba-4c8c-8229-4c3b2957990c",
