@@ -410,8 +410,8 @@ if __name__ == "__main__":
     # sku_override = get_sku_override()
     # if sku_override is None:
     #     check_override = False
-    if test_trigger_next_model == "true":
-        set_next_trigger_model(queue)
+    # if test_trigger_next_model == "true":
+    #     set_next_trigger_model(queue)
     # print values of all above variables
     print("Running for Translation")
     print (f"test_subscription_id: {queue['subscription']}")
@@ -450,7 +450,7 @@ if __name__ == "__main__":
     registry_ml_client = MLClient(credential, registry_name="azureml-preview-test1")
     # experiment_name = "PC_translation_wmt16"
     experiment_name = "oss-token-classification-"+ test_model_name
-    print("Experiment name is:", {experiment_name}
+    print("Experiment name is:", {experiment_name})
 
     expression_to_ignore = ["/", "\\", "|", "@", "#", ".",
                             "$", "%", "^", "&", "*", "<", ">", "?", "!", "~"]
