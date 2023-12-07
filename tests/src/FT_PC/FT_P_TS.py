@@ -316,7 +316,7 @@ def create_and_run_azure_ml_pipeline(
         print("Registering the model inside loop...")
         model_path_from_job = "azureml://jobs/{0}/outputs/{1}".format(
         pipeline_job.name, "trained_model")
-        finetuned_model_name = ("FT-NER-" + str(test_model_name) + "-oss")
+        finetuned_model_name = ("FT-TS-" + str(test_model_name) + "-oss")
         finetuned_model_name = finetuned_model_name.replace("/", "-")
         print("The Finetuned model name inside loop:", finetuned_model_name)
 
