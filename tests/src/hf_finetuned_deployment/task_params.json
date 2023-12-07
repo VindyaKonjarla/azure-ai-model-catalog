@@ -1,0 +1,199 @@
+{
+  "t5-base": {
+    "inputs": {
+      "input_string": [
+        "I like you. I love you",
+        "Today was a horrible day"
+      ]
+    },
+    "parameters": {
+      "task_type": "translation_en_to_fr"
+    }
+  },
+  "t5-small": {
+    "inputs": {
+      "input_string": [
+        "I like you. I love you",
+        "Today was a horrible day"
+      ]
+    },
+    "parameters": {
+      "task_type": "translation_en_to_fr"
+    }
+  },
+  "t5-large": {
+    "inputs": {
+      "input_string": [
+        "I like you. I love you",
+        "Today was a horrible day"
+      ]
+    },
+    "parameters": {
+      "task_type": "translation_en_to_fr"
+    }
+  },
+  "Llama-2-7b-chat": {
+    "input_data": [
+      "The answer to the universe is",
+      "Once upon a time, "
+    ],
+    "parameters": {
+      "top_p": 0.8,
+      "temperature": 0.8,
+      "max_new_tokens": 100,
+      "do_sample": true
+    }
+  },
+  "Llama-2-7b": {
+    "input_data": [
+      "The answer to the universe is",
+      "Once upon a time, "
+    ],
+    "parameters": {
+      "top_p": 0.9,
+      "temperature": 0.6,
+      "max_new_tokens": 96,
+      "do_sample": true
+    }
+  },
+  "Llama-2-70b-chat": {
+    "input_data": [
+      "The answer to the universe is",
+      "Once upon a time, "
+    ],
+    "parameters": {
+      "temperature": 0.6,
+      "top_p": 0.9,
+      "do_sample": true,
+      "max_new_tokens": 200
+    }
+  },
+  "Llama-2-70b": {
+    "input_data": [
+      "The answer to the universe is",
+      "Once upon a time, "
+    ],
+    "parameters": {
+      "top_p": 0.8,
+      "temperature": 0.8,
+      "max_new_tokens": 100,
+      "do_sample": true
+    }
+  },
+  "Llama-2-13b-chat": {
+    "input_data": [
+      "The answer to the universe is",
+      "Once upon a time, "
+    ],
+    "parameters": {
+      "temperature": 0.6,
+      "top_p": 0.9,
+      "do_sample": true,
+      "max_new_tokens": 200
+    }
+  },
+  "Llama-2-13b": {
+    "input_data": [
+      "The answer to the universe is",
+      "Once upon a time, "
+    ],
+    "parameters": {
+      "top_p": 0.9,
+      "temperature": 0.7,
+      "max_new_tokens": 50,
+      "do_sample": true
+    }
+  },
+  "CodeLlama-7b-hf": {
+    "input_data": [
+      "The answer to the universe is",
+      "Once upon a time, "
+    ],
+    "parameters": {
+      "top_p": 0.9,
+      "temperature": 0.2,
+      "do_sample": true,
+      "max_new_tokens": 200
+    }
+  },
+  "CodeLlama-7b-Python-hf": {
+    "input_data": [
+      "The answer to the universe is",
+      "Once upon a time, "
+    ],
+    "parameters": {
+      "top_p": 0.9,
+      "temperature": 0.2,
+      "do_sample": true,
+      "max_new_tokens": 200
+    }
+  },
+  "CodeLlama-7b-Instruct-hf": {
+    "input_data": [
+      "The answer to the universe is",
+      "Once upon a time, "
+    ],
+    "parameters": {
+      "top_p": 0.9,
+      "temperature": 0.1,
+      "do_sample": true,
+      "max_new_tokens": 100,
+      "return_full_text": false
+    }
+  },
+  "CodeLlama-34b-Python-hf": {
+    "input_data": [
+      "The answer to the universe is",
+      "Once upon a time, "
+    ],
+    "parameters": {
+      "top_p": 0.9,
+      "temperature": 0.2,
+      "do_sample": true,
+      "max_new_tokens": 100
+    }
+  },
+  "CodeLlama-34b-Instruct-hf": {
+    "input_data": [
+      "The answer to the universe is",
+      "Once upon a time, "
+    ],
+    "parameters": {
+      "return_full_text": false,
+      "do_sample": true
+    }
+  },
+  "CodeLlama-13b-hf": {
+    "input_data": [
+      "The answer to the universe is",
+      "Once upon a time, "
+    ],
+    "parameters": {
+      "top_p": 0.9,
+      "temperature": 0.2,
+      "do_sample": true,
+      "max_new_tokens": 200
+    }
+  },
+  "CodeLlama-13b-Python-hf": {
+    "input_data": [
+      "The answer to the universe is",
+      "Once upon a time, "
+    ],
+    "parameters": {
+      "top_p": 0.9,
+      "temperature": 0.2,
+      "do_sample": true,
+      "max_new_tokens": 100
+    }
+  },
+  "CodeLlama-13b-Instruct-hf": {
+    "input_data": [
+      "The answer to the universe is",
+      "Once upon a time, "
+    ],
+    "parameters": {
+      "do_sample": true
+    }
+  }
+}
