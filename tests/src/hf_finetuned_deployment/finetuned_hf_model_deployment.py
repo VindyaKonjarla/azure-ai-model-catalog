@@ -17,6 +17,7 @@ from azure.core.exceptions import (
 from azure.ai.ml.entities import (
     ManagedOnlineEndpoint
 )
+import re
 #from azure.ai.ml.entities import Model
 
 logger = get_logger(__name__)
@@ -201,15 +202,29 @@ if __name__ == "__main__":
     model_detail = ModelDetail(workspace_ml_client=workspace_ml_client)
     registered_model = model_detail.get_model_detail(
         test_model_name=test_model_name)
-    task = registered_model.flavors['transformers']['task']
+    task = registered_model.flavors['hftransformersv2']['task']
     # Connect to registry
     azureml_registry = MLClient(credential, registry_name="azureml")
     # Fetch model form the registry
     model_detail = ModelDetail(workspace_ml_client=azureml_registry)
     foundation_model = model_detail.get_model_detail(
         test_model_name=azure_ml_model_name)
-    instance_type = list(foundation_model.properties.get(
-        "inference-recommended-sku").split(","))[0]
+    recomended_sku_list = foundation_model.properties.get("inference-recommended-sku", None)
+    if recomended_sku_list != None:
+        instance_type = list(recomended_sku_list.split(','))[0]
+        logger.info(f"Recomended SKU type is this one {instance_type}")
+    else:
+        recomended_sku_list = foundation_model.tags.get("inference_compute_allow_list", None)
+        if recomended_sku_list != None:
+            exp_tobe_replaced = ["[", "]", "'"]
+            regx_for_expression = re.compile('|'.join(map(re.escape, exp_tobe_replaced)))
+            recomended_sku_list = re.sub(regx_for_expression, "", recomended_sku_list)
+            instance_type = recomended_sku_list.split(',')[0]
+            logger.info(f"Recomended SKU type is this one {instance_type}")
+        else:
+            logger.info("Deployment task not supported here")
+            sys.exit(1)
+    
     compute = instance_type.replace("_", "-")
     logger.info(f"instance : {instance_type} and compute is : {compute}")
     
@@ -220,8 +235,7 @@ if __name__ == "__main__":
     endpoint = create_endpoint(
         workspace_ml_client=workspace_ml_client,
         endpoint_name=endpoint_name
-    )
-    
+    )   
     logger.info("Proceeding with inference and deployment")
     InferenceAndDeployment = ModelInferenceAndDeployemnt(
         test_model_name=test_model_name,
@@ -231,7 +245,7 @@ if __name__ == "__main__":
         instance_type=instance_type,
         task=task,
         latest_model=registered_model,
-        compute=compute,
+        #compute=compute,
         endpoint=endpoint,
         actual_model_name=actual_model_name
     )
