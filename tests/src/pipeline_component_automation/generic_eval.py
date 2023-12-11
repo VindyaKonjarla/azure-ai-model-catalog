@@ -129,7 +129,8 @@ def create_or_get_compute_target(ml_client, compute, instance_type):
 
 
 def get_file_path(task):
-    task = task.replace("_", "-")
+    # task = task.replace("_", "-")
+    
     file_name = task+".json"
     data_path = f"./datasets/{task}/{file_name}"
     return data_path
