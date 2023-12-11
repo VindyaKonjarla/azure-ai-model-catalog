@@ -323,6 +323,7 @@ if __name__ == "__main__":
         input_column_names, label_column_name = get_dataset(task=task, data_path=data_path,
                                                             latest_model=registered_model)
         pipeline_task = get_pipeline_task(task)
+        print("pipeline_task",pipeline_task)
      
         try:
             pipeline_jobs = []
