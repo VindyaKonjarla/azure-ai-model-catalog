@@ -202,7 +202,7 @@ if __name__ == "__main__":
     model_detail = ModelDetail(workspace_ml_client=workspace_ml_client)
     registered_model = model_detail.get_model_detail(
         test_model_name=test_model_name)
-    task = registered_model.flavors['hftransformersv2']['task']
+    task = registered_model.flavors['hftransformersv2']['task_type']
     # Connect to registry
     azureml_registry = MLClient(credential, registry_name="azureml")
     # Fetch model form the registry
