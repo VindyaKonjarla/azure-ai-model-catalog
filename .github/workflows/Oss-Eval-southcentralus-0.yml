@@ -1,4 +1,4 @@
-name: HF-Eval-eastus3
+name: Oss-Eval-southcentralus0
 
 on: 
   workflow_dispatch:
