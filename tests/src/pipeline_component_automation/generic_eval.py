@@ -319,7 +319,7 @@ if __name__ == "__main__":
     
         data_path = get_file_path(task=task)
         input_column_names, label_column_name = get_dataset(task="fill_mask", data_path=data_path,
-                                                            latest_model=registered_model)
+                                                            latest_model=test_model_name)
         pipeline_task = get_pipeline_task(task)
      
         try:
