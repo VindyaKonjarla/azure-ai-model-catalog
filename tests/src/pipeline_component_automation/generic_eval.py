@@ -311,7 +311,7 @@ if __name__ == "__main__":
         
     
         data_path = get_file_path(task=task)
-        input_column_names, label_column_name = get_dataset(task=task, data_path=data_path,
+        input_column_names, label_column_name = get_dataset(task="fillmask", data_path=data_path,
                                                             latest_model=registered_model)
         pipeline_task = get_pipeline_task(task)
      
