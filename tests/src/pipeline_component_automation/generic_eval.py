@@ -61,6 +61,7 @@ test_keep_looping = os.environ.get('test_keep_looping')
 huggingface_model_exists_in_registry = False
 
 FILE_NAME = "pipeline_task.json"
+FILE_NAME = "task.json"
 
 
 def get_test_queue() -> ConfigBox:
