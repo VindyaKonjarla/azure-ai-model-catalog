@@ -53,6 +53,9 @@ class LoadDataset:
                     lambda x: x[0] if len(x) > 0 else ""
                 )
                 model_name = self.latest_model.name
+                if "microsoft" in model_name:
+                    a = model_name.index('-')
+                    model_name="microsoft/"+model_name[a+1:]
                 # model_name=self.latest_model
                 tokenizer = AutoTokenizer.from_pretrained(model_name)
                 test_data_df["input_string"] = test_data_df["texts"].apply(lambda x: tokenizer.decode(
