@@ -52,8 +52,8 @@ class LoadDataset:
                 test_data_df["title"] = test_data_df["masks"].apply(
                     lambda x: x[0] if len(x) > 0 else ""
                 )
-                # model_name = self.latest_model.name
-                model_name=self.latest_model
+                model_name = self.latest_model.name
+                # model_name=self.latest_model
                 tokenizer = AutoTokenizer.from_pretrained(model_name)
                 test_data_df["input_string"] = test_data_df["texts"].apply(lambda x: tokenizer.decode(
                     tokenizer.encode(x.replace("<mask>", tokenizer.mask_token), max_length=500, truncation=True,)))
