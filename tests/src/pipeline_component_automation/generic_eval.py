@@ -135,11 +135,17 @@ def get_file_path(task):
 
 
 def get_dataset(task, data_path, latest_model):
-    load_dataset = LoadDataset(
+    try:
+        load_dataset = LoadDataset(
         task=task, data_path=data_path, latest_model=latest_model)
-    task = task.replace("-", "_")
-    attribute = getattr(LoadDataset, task)
-    return attribute(load_dataset)
+        task = task.replace("-", "_")
+        attribute = getattr(LoadDataset, task)
+        return attribute(load_dataset)
+    except Exception as e:
+        logger.error(
+            f"::Error:: Could not find library from here :.Here is the exception\n{e}")
+        
+    
 
 
 def get_pipeline_task(task):
