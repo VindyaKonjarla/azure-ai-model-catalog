@@ -13,7 +13,7 @@ env:
 
 jobs:
   deploy-model-job:
-    runs-on: self-hosted
+    runs-on: ubuntu-latest
     steps:
     - name: check-out-repo-step
       uses: actions/checkout@v3
