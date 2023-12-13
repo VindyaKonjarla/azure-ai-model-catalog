@@ -254,7 +254,7 @@ class ModelInferenceAndDeployemnt:
             deployment_name = model_name.rstrip("-")
         else:
             deployment_name = latest_model_name
-        deployment = deployment + "-mp"
+        deployment_name = deployment_name + "-mp"
         logger.info(f"deployment name is this one : {deployment_name}")
         deployment_config = ManagedOnlineDeployment(
             name=deployment_name,
