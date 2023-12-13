@@ -250,10 +250,11 @@ class ModelInferenceAndDeployemnt:
             latest_model_name = latest_model_name.strip("-")
         # Check the model name is more then 32 character
         if len(latest_model.name) > 32:
-            model_name = latest_model_name[:31]
+            model_name = latest_model_name[:28]
             deployment_name = model_name.rstrip("-")
         else:
             deployment_name = latest_model_name
+        deployment = deployment + "-mp"
         logger.info(f"deployment name is this one : {deployment_name}")
         deployment_config = ManagedOnlineDeployment(
             name=deployment_name,
@@ -369,15 +370,15 @@ class ModelInferenceAndDeployemnt:
             model_package=model_package,
             instance_type=instance_type
         )
-        json_file_name, scoring_input = self.cloud_inference(
-            scoring_file=scoring_file,
-            scoring_input=scoring_input,
-            online_endpoint_name=online_endpoint_name,
-            deployment_name=deployment_name,
-            task=task,
-            latest_model=latest_model
-        )
-        self.delete_online_deployment(endpoint=endpoint, online_endpoint_name=online_endpoint_name, deployment_name=deployment_name)
+        # json_file_name, scoring_input = self.cloud_inference(
+        #     scoring_file=scoring_file,
+        #     scoring_input=scoring_input,
+        #     online_endpoint_name=online_endpoint_name,
+        #     deployment_name=deployment_name,
+        #     task=task,
+        #     latest_model=latest_model
+        # )
+        #self.delete_online_deployment(endpoint=endpoint, online_endpoint_name=online_endpoint_name, deployment_name=deployment_name)
 
         dynamic_installation = ModelDynamicInstallation(
             test_model_name=self.test_model_name,
@@ -385,30 +386,30 @@ class ModelInferenceAndDeployemnt:
             deployment_name=deployment_name,
             task=task
         )
-        # dynamic_installation.model_infernce_and_deployment(
-        #         instance_type=instance_type,
-        #         latest_model=latest_model,
-        #         scoring_file=scoring_file,
-        #         scoring_input = scoring_input,
-        #         endpoint=endpoint
-        # )
-
-        if not json_file_name:
-            dynamic_installation.model_infernce_and_deployment(
+        dynamic_installation.model_infernce_and_deployment(
                 instance_type=instance_type,
                 latest_model=latest_model,
                 scoring_file=scoring_file,
                 scoring_input = scoring_input,
                 endpoint=endpoint
-            )
-        else:
-             dynamic_installation.model_infernce_and_deployment(
-                instance_type=instance_type,
-                latest_model=latest_model,
-                scoring_file=json_file_name,
-                scoring_input = scoring_input,
-                endpoint=endpoint
-           )
+        )
+
+        # if not json_file_name:
+        #     dynamic_installation.model_infernce_and_deployment(
+        #         instance_type=instance_type,
+        #         latest_model=latest_model,
+        #         scoring_file=scoring_file,
+        #         scoring_input = scoring_input,
+        #         endpoint=endpoint
+        #     )
+        # else:
+        #      dynamic_installation.model_infernce_and_deployment(
+        #         instance_type=instance_type,
+        #         latest_model=latest_model,
+        #         scoring_file=json_file_name,
+        #         scoring_input = scoring_input,
+        #         endpoint=endpoint
+        #    )
         batch_deployment = ModelBatchDeployment(
             model=latest_model,
             workspace_ml_client=self.workspace_ml_client,

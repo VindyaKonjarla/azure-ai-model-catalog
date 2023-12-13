@@ -102,71 +102,71 @@ class ModelDynamicInstallation:
         with open(queue_file) as f:
             return ConfigBox(json.load(f))
 
-    def cloud_inference(self, scoring_file, scoring_input, online_endpoint_name, latest_model):
-        try:
-            logger.info(f"endpoint_name : {online_endpoint_name}")
-            logger.info(f"deployment_name : {self.deployment_name}")
-            logger.info(f"Input data is this one : {scoring_input}")
-            try:
-                configbox_obj = self.get_task_params()
-                input_data = configbox_obj.get(self.test_model_name, None)
-                if input_data == None:
-                    response = self.workspace_ml_client.online_endpoints.invoke(
-                        endpoint_name=online_endpoint_name,
-                        deployment_name=self.deployment_name,
-                        request_file=scoring_file,
-                    )
-                else:
-                    logger.info(f"Testing the model with params")
-                    json_file_name, scoring_input = self.create_json_file(
-                        file_name=self.deployment_name, dicitonary=input_data)
-                    logger.info("Online endpoint invoking satrted...")
-                    response = self.workspace_ml_client.online_endpoints.invoke(
-                        endpoint_name=online_endpoint_name,
-                        deployment_name=self.deployment_name,
-                        request_file=json_file_name,
-                    )
-                logger.info(
-                    f"Getting the reposne from the endpoint is this one : {response}")
-            except Exception as ex:
-                logger.warning(
-                    "::warning:: Trying to invoking the endpoint again by changing the input data and file")
-                logger.warning(
-                    f"::warning:: This is failed due to this :\n {ex}")
-                # dic_obj = self.get_model_output(
-                #     latest_model=latest_model, scoring_input=scoring_input)
-                # logger.info(f"Our new input is this one: {dic_obj}")
-                # json_file_name, scoring_input = self.create_json_file(
-                #     file_name=self.deployment_name, dicitonary=dic_obj)
-                # logger.info("Online endpoint invoking satrted...")
-                # response = self.workspace_ml_client.online_endpoints.invoke(
-                #     endpoint_name=online_endpoint_name,
-                #     deployment_name=self.deployment_name,
-                #     request_file=json_file_name,
-                # )
-                # logger.info(
-                #     f"Getting the reposne from the endpoint is this one : {response}")
-                # self.delete_file(file_name=json_file_name)
-                sys.exit(1)
-            response_json = json.loads(response)
-            output = json.dumps(response_json, indent=2)
-            logger.info(f"response: \n\n{output}")
-            with open(os.environ['GITHUB_STEP_SUMMARY'], 'a') as fh:
-                print(f'####Sample input', file=fh)
-                print(f'```json', file=fh)
-                print(f'{scoring_input}', file=fh)
-                print(f'```', file=fh)
-                print(f'####Sample output', file=fh)
-                print(f'```json', file=fh)
-                print(f'{output}', file=fh)
-                print(f'```', file=fh)
-        except Exception as e:
-            if os.path.exists(json_file_name):
-                logger.info(f"Deleting the json file : {json_file_name}")
-                self.delete_file(file_name=json_file_name)
-            logger.error(f"::error:: Could not invoke endpoint: \n")
-            logger.info(f"::error::The exception here is this : \n {e}")
-            raise Exception(e)
+    # def cloud_inference(self, scoring_file, scoring_input, online_endpoint_name, latest_model):
+    #     try:
+    #         logger.info(f"endpoint_name : {online_endpoint_name}")
+    #         logger.info(f"deployment_name : {self.deployment_name}")
+    #         logger.info(f"Input data is this one : {scoring_input}")
+    #         try:
+    #             configbox_obj = self.get_task_params()
+    #             input_data = configbox_obj.get(self.test_model_name, None)
+    #             if input_data == None:
+    #                 response = self.workspace_ml_client.online_endpoints.invoke(
+    #                     endpoint_name=online_endpoint_name,
+    #                     deployment_name=self.deployment_name,
+    #                     request_file=scoring_file,
+    #                 )
+    #             else:
+    #                 logger.info(f"Testing the model with params")
+    #                 json_file_name, scoring_input = self.create_json_file(
+    #                     file_name=self.deployment_name, dicitonary=input_data)
+    #                 logger.info("Online endpoint invoking satrted...")
+    #                 response = self.workspace_ml_client.online_endpoints.invoke(
+    #                     endpoint_name=online_endpoint_name,
+    #                     deployment_name=self.deployment_name,
+    #                     request_file=json_file_name,
+    #                 )
+    #             logger.info(
+    #                 f"Getting the reposne from the endpoint is this one : {response}")
+    #         except Exception as ex:
+    #             logger.warning(
+    #                 "::warning:: Trying to invoking the endpoint again by changing the input data and file")
+    #             logger.warning(
+    #                 f"::warning:: This is failed due to this :\n {ex}")
+    #             # dic_obj = self.get_model_output(
+    #             #     latest_model=latest_model, scoring_input=scoring_input)
+    #             # logger.info(f"Our new input is this one: {dic_obj}")
+    #             # json_file_name, scoring_input = self.create_json_file(
+    #             #     file_name=self.deployment_name, dicitonary=dic_obj)
+    #             # logger.info("Online endpoint invoking satrted...")
+    #             # response = self.workspace_ml_client.online_endpoints.invoke(
+    #             #     endpoint_name=online_endpoint_name,
+    #             #     deployment_name=self.deployment_name,
+    #             #     request_file=json_file_name,
+    #             # )
+    #             # logger.info(
+    #             #     f"Getting the reposne from the endpoint is this one : {response}")
+    #             # self.delete_file(file_name=json_file_name)
+    #             sys.exit(1)
+    #         response_json = json.loads(response)
+    #         output = json.dumps(response_json, indent=2)
+    #         logger.info(f"response: \n\n{output}")
+    #         with open(os.environ['GITHUB_STEP_SUMMARY'], 'a') as fh:
+    #             print(f'####Sample input', file=fh)
+    #             print(f'```json', file=fh)
+    #             print(f'{scoring_input}', file=fh)
+    #             print(f'```', file=fh)
+    #             print(f'####Sample output', file=fh)
+    #             print(f'```json', file=fh)
+    #             print(f'{output}', file=fh)
+    #             print(f'```', file=fh)
+    #     except Exception as e:
+    #         if os.path.exists(json_file_name):
+    #             logger.info(f"Deleting the json file : {json_file_name}")
+    #             self.delete_file(file_name=json_file_name)
+    #         logger.error(f"::error:: Could not invoke endpoint: \n")
+    #         logger.info(f"::error::The exception here is this : \n {e}")
+    #         raise Exception(e)
 
     def create_online_endpoint(self, endpoint):
         logger.info("In create_online_endpoint...")
@@ -186,8 +186,9 @@ class ModelDynamicInstallation:
         logger.info("In create_online_deployment...")
         logger.info(f"latest_model.name is this : {latest_model.name}")
         logger.info(f"deployment name is this one : {self.deployment_name}")
+        deployment_name = self.deployment_name.rstrip("-mp") + "-di"
         deployment_config = ManagedOnlineDeployment(
-            name=self.deployment_name,
+            name=deployment_name,
             model=latest_model.id,
             endpoint_name=online_endpoint_name,
             instance_type=instance_type,
@@ -292,11 +293,11 @@ class ModelDynamicInstallation:
             instance_type=instance_type,
             endpoint=endpoint
         )
-        self.cloud_inference(
-            scoring_file=scoring_file,
-            scoring_input=scoring_input,
-            online_endpoint_name=online_endpoint_name,
-            latest_model=latest_model
-        )
-        self.delete_online_deployment(
-            endpoint=endpoint, online_endpoint_name=online_endpoint_name)
+        # self.cloud_inference(
+        #     scoring_file=scoring_file,
+        #     scoring_input=scoring_input,
+        #     online_endpoint_name=online_endpoint_name,
+        #     latest_model=latest_model
+        # )
+        # self.delete_online_deployment(
+        #     endpoint=endpoint, online_endpoint_name=online_endpoint_name)
