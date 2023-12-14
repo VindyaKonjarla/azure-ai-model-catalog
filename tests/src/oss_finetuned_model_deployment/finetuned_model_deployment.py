@@ -258,7 +258,7 @@ if __name__ == "__main__":
             try:
                 version_list = list(workspace_ml_client.models.list(fianl_model_name))
                 if len(version_list) == 0:
-                    print("Model not found in registry")
+                    logger.info("Model not found in registry")
                 else:
                     model_version = version_list[0].version
                     registered_model = workspace_ml_client.models.get(
