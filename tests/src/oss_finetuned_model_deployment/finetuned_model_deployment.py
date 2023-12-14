@@ -253,7 +253,7 @@ if __name__ == "__main__":
     for task in tasks:
         starting_name = task_shortcut.get(task, None)
         if starting_name != None:
-            fianl_model_name = f"{starting_name}+{test_model_name}"
+            fianl_model_name = f"{starting_name}-{test_model_name}"
             logger.info(f"Final model name needs to be found is {fianl_model_name}")
             try:
                 version_list = list(workspace_ml_client.models.list(fianl_model_name))
