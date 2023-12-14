@@ -162,7 +162,7 @@ def evaluation_pipeline(task, mlflow_model, test_data, input_column_names, label
         logger.info("Started configuring the job")
         #data_path = "./datasets/translation.json"
         pipeline_component_func = registry_ml_client.components.get(
-            name="mlflow_oss_model_evaluation_pipeline", version="0.0.17j.ghyadav_trtr2"
+            name="mlflow_oss_model_evaluation_pipeline", version="0.0.18"
         )
         evaluation_job = pipeline_component_func(
             # specify the foundation model available in the azureml system registry or a model from the workspace
@@ -182,8 +182,8 @@ def evaluation_pipeline(task, mlflow_model, test_data, input_column_names, label
             # config file containing the details of evaluation metrics to calculate
             # evaluation_config=Input(
             #     type=AssetTypes.URI_FILE, path="./evaluation/eval_config.json"),
-            evaluation_config=Input(
-                type=AssetTypes.URI_FILE, path=evaluation_file_path),
+            # evaluation_config=Input(
+            #     type=AssetTypes.URI_FILE, path=evaluation_file_path),
             # config cluster/device job is running on
             # set device to GPU/CPU on basis if GPU count was found
             device="cpu",
