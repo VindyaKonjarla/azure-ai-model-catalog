@@ -1,13 +1,13 @@
-name: oss-eval-roberta-base
+name: roberta-large-mnli
 
 on: 
   workflow_dispatch:
 
 env:
-  test_model_name: roberta-base
+  test_model_name: roberta-large-mnli
   test_sku_type: cpu
   test_trigger_next_model: true
-  test_queue: test-southcentralus-1
+  test_queue: test-northeurope-0
   test_set: huggingface-all
   test_keep_looping: false
 
