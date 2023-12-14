@@ -277,8 +277,7 @@ if __name__ == "__main__":
                     #     actual_model_name=actual_model_name
                     # )
             except ResourceNotFoundError:
-                print("Model Not found in the registry")
-                continue
+                logger.info("Model Resource Not found in the registry")
     
     # InferenceAndDeployment = ModelInferenceAndDeployemnt(
     #     test_model_name=test_model_name,
