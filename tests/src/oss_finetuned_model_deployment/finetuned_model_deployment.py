@@ -200,15 +200,18 @@ if __name__ == "__main__":
     
     #Fetch model from workspace
     model_detail = ModelDetail(workspace_ml_client=workspace_ml_client)
-    registered_model = model_detail.get_model_detail(
-        test_model_name=test_model_name)
-    task = registered_model.flavors['transformers']['task']
+    # registered_model = model_detail.get_model_detail(
+    #     test_model_name=test_model_name)
+    #task = registered_model.flavors['transformers']['task']
+    
     # Connect to registry
     azureml_registry = MLClient(credential, registry_name="azureml")
     # Fetch model form the registry
     model_detail = ModelDetail(workspace_ml_client=azureml_registry)
     foundation_model = model_detail.get_model_detail(
         test_model_name=azure_ml_model_name)
+    
+    #task = foundation_model.tags["task"]
     
     recomended_sku_list = foundation_model.properties.get("inference-recommended-sku", None)
     if recomended_sku_list != None:
@@ -239,15 +242,53 @@ if __name__ == "__main__":
     )
     
     logger.info("Proceeding with inference and deployment")
-    InferenceAndDeployment = ModelInferenceAndDeployemnt(
-        test_model_name=test_model_name,
-        workspace_ml_client=workspace_ml_client
-    )
-    InferenceAndDeployment.model_infernce_and_deployment(
-        instance_type=instance_type,
-        task=task,
-        latest_model=registered_model,
-        compute=compute,
-        endpoint=endpoint,
-        actual_model_name=actual_model_name
-    )
+    
+    tasks = foundation_model.properties["finetuning-tasks"].split(',')
+    tasks = [name.strip() for name in tasks]
+    task_file_loc = f"task_short_name.json"
+    f = open(task_file_loc)
+    task_shortcut = ConfigBox(json.load(f))
+    # with open(task_file_loc) as f:
+    #     ConfigBox(json.load(f))
+    for task in tasks:
+        starting_name = task_shortcut.get(task, None)
+        if starting_name != None:
+            fianl_model_name = f"{starting_name}+{test_model_name}"
+            logger.info(f"Final model name needs to be found is {fianl_model_name}")
+            try:
+                version_list = list(workspace_ml_client.models.list(fianl_model_name))
+                if len(version_list) == 0:
+                    print("Model not found in registry")
+                else:
+                    model_version = version_list[0].version
+                    registered_model = workspace_ml_client.models.get(
+                        fianl_model_name, model_version)
+                    logger.info(f"Registerd model is this : {registered_model}")
+                    # InferenceAndDeployment = ModelInferenceAndDeployemnt(
+                    #     test_model_name=test_model_name,
+                    #     workspace_ml_client=workspace_ml_client
+                    # )
+                    # InferenceAndDeployment.model_infernce_and_deployment(
+                    #     instance_type=instance_type,
+                    #     task=task,
+                    #     latest_model=registered_model,
+                    #     compute=compute,
+                    #     endpoint=endpoint,
+                    #     actual_model_name=actual_model_name
+                    # )
+            except ResourceNotFoundError:
+                print("Model Not found in the registry")
+                continue
+    
+    # InferenceAndDeployment = ModelInferenceAndDeployemnt(
+    #     test_model_name=test_model_name,
+    #     workspace_ml_client=workspace_ml_client
+    # )
+    # InferenceAndDeployment.model_infernce_and_deployment(
+    #     instance_type=instance_type,
+    #     task=task,
+    #     latest_model=registered_model,
+    #     compute=compute,
+    #     endpoint=endpoint,
+    #     actual_model_name=actual_model_name
+    # )

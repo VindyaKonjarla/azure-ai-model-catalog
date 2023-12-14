@@ -1,0 +1,10 @@
+{
+    "summarization":"FT-TS",
+    "text-summarization":"FT-TS",
+    "translation": "FT-TT",
+    "text-translation":"FT-TT",
+    "text-classification":"FT-TC",
+    "text-generation": "FT-TG",
+    "question-answering": "FT-QA",
+    "token-classification": "FT-NER"
+}
