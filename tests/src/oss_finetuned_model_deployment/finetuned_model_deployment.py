@@ -264,18 +264,18 @@ if __name__ == "__main__":
                     registered_model = workspace_ml_client.models.get(
                         fianl_model_name, model_version)
                     logger.info(f"Registerd model is this : {registered_model}")
-                    # InferenceAndDeployment = ModelInferenceAndDeployemnt(
-                    #     test_model_name=test_model_name,
-                    #     workspace_ml_client=workspace_ml_client
-                    # )
-                    # InferenceAndDeployment.model_infernce_and_deployment(
-                    #     instance_type=instance_type,
-                    #     task=task,
-                    #     latest_model=registered_model,
-                    #     compute=compute,
-                    #     endpoint=endpoint,
-                    #     actual_model_name=actual_model_name
-                    # )
+                    InferenceAndDeployment = ModelInferenceAndDeployemnt(
+                        test_model_name=test_model_name,
+                        workspace_ml_client=workspace_ml_client
+                    )
+                    InferenceAndDeployment.model_infernce_and_deployment(
+                        instance_type=instance_type,
+                        task=task,
+                        latest_model=registered_model,
+                        compute=compute,
+                        endpoint=endpoint,
+                        actual_model_name=actual_model_name
+                    )
             except ResourceNotFoundError:
                 logger.info("Model Resource Not found in the registry")
     
