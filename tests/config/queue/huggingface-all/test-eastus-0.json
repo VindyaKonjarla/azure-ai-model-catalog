@@ -1,7 +1,7 @@
 {
     "queue_name": "test-eastus-0",
     "models": [
-        "microsoft-phi-1-5",
+        
         "microsoft-phi-2"
     ],
     "workspace": "test-eastus",
