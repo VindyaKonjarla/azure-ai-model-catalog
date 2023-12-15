@@ -157,7 +157,7 @@ def get_pipeline_task(task):
 @pipeline
 def model_import_pipeline(compute_name, update_existing_model, task_name):
     import_model = registry_ml_client.components.get(
-        name="import_model", version="0.0.20.oss")
+        name="import_model", version="0.0.20.oss.v1")
     import_model_job = import_model(model_id=test_model_name, compute=compute_name,
                                     task_name=task_name, update_existing_model=update_existing_model)
     # Set job to not continue on failure
@@ -252,7 +252,7 @@ if __name__ == "__main__":
         compute_name="donotdelete"+COMPUTE.replace("_", "-")
         # compute_name=COMPUTE.replace("_", "-")
         COMPUTE="Standard_NC6s_v3"
-        # compute_name="donotdelete-Standard-DS4-v2"
+        compute_name="donotdelete-Standard_NC6s_v3"
         print("COMPUTE_Name",compute_name)
         try:
             _ = workspace_ml_client.compute.get(compute_name)
