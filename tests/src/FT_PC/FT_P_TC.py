@@ -121,6 +121,37 @@ def get_latest_model_version(workspace_ml_client, test_model_name):
     #print(f"Model Config : {latest_model.config}")
     return foundation_model
 
+# def get_latest_model_version_ft(registry_ml_client_sku, test_model_name, version_to_fetch):
+#     print("In get_latest_model_version...")
+#     version_list = list(registry_ml_client_sku.models.list(test_model_name))
+    
+#     if len(version_list) == 0:
+#         print("Model not found in registry")
+#         foundation_model_ft_name = None  # Set to None if the model is not found
+#         foundation_model_ft_id = None  # Set id to None as well
+#     else:
+#         model_version = version_list[0].version
+#         foundation_model_ft = registry_ml_client_sku.models.get(
+#             test_model_name, model_version)
+#         print(
+#             "\n\nUsing model name: {0}, version: {1}, id: {2} for inferencing".format(
+#                 foundation_model_ft.name, foundation_model_ft.version, foundation_model_ft.id
+#             )
+#         )
+#         foundation_model_ft_name = foundation_model_ft.name  # Assign the value to a new variable
+#         foundation_model_ft_id = foundation_model_ft.id  # Assign the id to a new variable
+    
+#     # Check if foundation_model_name and foundation_model_id are None or have values
+#     if foundation_model_ft_name and foundation_model_ft_id:
+#         print(f"Latest model {foundation_model_ft_name} version {foundation_model_ft.version} created at {foundation_model_ft.creation_context.created_at}")
+#         print("foundation_model.name:", foundation_model_ft_name)
+#         print("foundation_model.id:", foundation_model_ft_id)
+#     else:
+#         print("No model found in the registry.")
+    
+#     #print(f"Model Config : {latest_model.config}")
+#     return foundation_model_ft
+
 def get_latest_model_version_ft(registry_ml_client_sku, test_model_name, version_to_fetch):
     print("In get_latest_model_version...")
     version_list = list(registry_ml_client_sku.models.list(test_model_name))
@@ -130,9 +161,15 @@ def get_latest_model_version_ft(registry_ml_client_sku, test_model_name, version
         foundation_model_ft_name = None  # Set to None if the model is not found
         foundation_model_ft_id = None  # Set id to None as well
     else:
-        model_version = version_list[0].version
-        foundation_model_ft = registry_ml_client_sku.models.get(
-            test_model_name, model_version)
+        # Find the specified version in the list
+        for model_version in version_list:
+            if model_version.version == version_to_fetch:
+                foundation_model_ft = registry_ml_client_sku.models.get(test_model_name, version_to_fetch)
+                break
+        else:
+            # If the specified version is not found, use the latest version
+            foundation_model_ft = registry_ml_client_sku.models.get(test_model_name, version_list[0].version)
+
         print(
             "\n\nUsing model name: {0}, version: {1}, id: {2} for inferencing".format(
                 foundation_model_ft.name, foundation_model_ft.version, foundation_model_ft.id
@@ -151,6 +188,7 @@ def get_latest_model_version_ft(registry_ml_client_sku, test_model_name, version
     
     #print(f"Model Config : {latest_model.config}")
     return foundation_model_ft
+
 
 
 def get_training_and_optimization_parameters(foundation_model):
