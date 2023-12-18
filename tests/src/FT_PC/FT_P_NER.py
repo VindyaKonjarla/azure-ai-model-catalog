@@ -45,7 +45,7 @@ test_set = os.environ.get('test_set')
 # bool to decide if we want to keep looping through the queue,
 # which means that the first model in the queue is triggered again after the last model is tested
 test_keep_looping = os.environ.get('test_keep_looping')
-# the queue file also contains the details of the workspace, registry, subscription, resource group
+
 def get_test_queue() -> ConfigBox:
     queue_file = f"../../config/queue/{test_set}/{test_queue}.json"
     with open(queue_file) as f:
@@ -332,8 +332,6 @@ def create_and_run_azure_ml_pipeline(
             **optimization_parameters
         )
         return {
-            # map the output of the fine tuning job to the output of the pipeline job so that we can easily register the fine tuned model
-            # registering the model is required to deploy the model to an online or batch endpoint
             "trained_model": token_classification_pipeline.outputs.mlflow_model_folder
         }
     # Create the pipeline object
@@ -365,9 +363,6 @@ if __name__ == "__main__":
 
     queue = get_test_queue()
 
-    # sku_override = get_sku_override()
-    # if sku_override is None:
-    #     check_override = False
     # if test_trigger_next_model == "true":
         #set_next_trigger_model(queue)
     # print values of all above variables
