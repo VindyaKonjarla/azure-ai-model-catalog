@@ -121,7 +121,7 @@ def get_latest_model_version(workspace_ml_client, test_model_name):
     #print(f"Model Config : {latest_model.config}")
     return foundation_model
 
-def get_latest_model_version_ft(registry_ml_client_sku, test_model_name):
+def get_latest_model_version_ft(registry_ml_client_sku, test_model_name, version_to_fetch):
     print("In get_latest_model_version...")
     version_list = list(registry_ml_client_sku.models.list(test_model_name))
     
