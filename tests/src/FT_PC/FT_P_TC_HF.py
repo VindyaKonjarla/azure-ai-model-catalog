@@ -125,11 +125,11 @@ def get_latest_model_version(registry_ml_client_model, test_model_name, version_
     else:
         for model_version in version_list:
             if model_version.version == version_to_fetch:
-                foundation_model = registry_ml_client.models.get(test_model_name, version_to_fetch)
+                foundation_model = registry_ml_client_model.models.get(test_model_name, version_to_fetch)
                 break
         else:
             # If the specified version is not found, use the latest version
-            foundation_model = registry_ml_client.models.get(test_model_name, version_list[0].version)
+            foundation_model = registry_ml_client_model.models.get(test_model_name, version_list[0].version)
         print(
             "\n\nUsing model name: {0}, version: {1}, id: {2} for inferencing".format(
                 foundation_model.name, foundation_model.version, foundation_model.id
