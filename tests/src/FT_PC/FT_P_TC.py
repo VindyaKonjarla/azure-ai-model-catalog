@@ -179,6 +179,11 @@ def get_training_and_optimization_parameters(foundation_model):
 
 
 
+def get_model_version_from_json(test_model_name):
+    with open('models_versions.json', 'r') as json_file:
+        models_versions = json.load(json_file)
+        return models_versions.get(test_model_name, None)
+
 
 def create_or_get_aml_compute(workspace_ml_client, compute_cluster, compute_cluster_size):
     try:
@@ -388,10 +393,16 @@ if __name__ == "__main__":
     if expression_check:
         # Replace the expression with hyphen
         test_model_name  = regx_for_expression.sub("-", test_model_name)
-
-
     print("model name replaced with - :", {test_model_name})
-    foundation_model_ft = get_latest_model_version_ft(registry_ml_client_sku, test_model_name.lower())
+
+    version_to_fetch = get_model_version_from_json(test_model_name.lower())
+    
+    if version_to_fetch is None:
+    print(f"Error: Model version for {test_model_name} not found in the JSON file.")
+
+    
+    foundation_model_ft = get_latest_model_version_ft(registry_ml_client_sku, test_model_name.lower(), version_to_fetch)
+    # foundation_model_ft = get_latest_model_version_ft(registry_ml_client_sku, test_model_name.lower())
     fine_tune_sku = foundation_model_ft.properties.get("finetune-recommended-sku")
     print("Finetune-recommended-sku:", {fine_tune_sku})
     registry_ml_client = MLClient(credential, registry_name="azureml-preview-test1")
