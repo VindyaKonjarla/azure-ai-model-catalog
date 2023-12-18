@@ -16,7 +16,7 @@ class ModelDetail:
         else:
             model_version = version_list[0].version
             foundation_model = self.workspace_ml_client.models.get(
-                model_name, 11)
+                model_name, model_version)
             logger.info(
                 "\n\nUsing model name: {0}, version: {1}, id: {2} for inferencing".format(
                     foundation_model.name, foundation_model.version, foundation_model.id
