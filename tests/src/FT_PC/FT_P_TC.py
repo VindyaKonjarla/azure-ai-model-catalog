@@ -54,7 +54,7 @@ def get_test_queue() -> ConfigBox:
     queue_file = f"../../config/queue/{test_set}/{test_queue}.json"
     with open(queue_file) as f:
         return ConfigBox(json.load(f))
-# function to load the sku override details from sku-override file
+
 # this is useful if you want to force a specific sku for a model
 
 
@@ -366,7 +366,6 @@ def create_and_run_azure_ml_pipeline(
         pipeline_object, experiment_name=experiment_name
     )
 
-    # Wait for the pipeline job to complete
     workspace_ml_client.jobs.stream(pipeline_job.name)
     print("Pipeline Job Completed")
 
@@ -512,5 +511,4 @@ if __name__ == "__main__":
         print(f"Error running Azure ML Pipeline: {str(e)}")
         sys.exit(1) 
 
-    #pipeline_job = create_and_run_azure_ml_pipeline(foundation_model, compute_cluster, gpus_per_node, training_parameters, optimization_parameters, experiment_name)
     print("Finetuned and the registered model for Text-classification successfully")
