@@ -261,6 +261,7 @@ if __name__ == "__main__":
                     model_detail = ModelDetail(workspace_ml_client=workspace_ml_client)
                     registered_model = model_detail.get_model_detail(
                             test_model_name=fianl_model_name)
+                    logger.info(f"The registered model is this : {registered_model}")
                     InferenceAndDeployment = ModelInferenceAndDeployemnt(
                         test_model_name=test_model_name,
                         workspace_ml_client=workspace_ml_client
