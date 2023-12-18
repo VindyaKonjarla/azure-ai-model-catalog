@@ -73,8 +73,13 @@ def set_next_trigger_model(queue):
         print(f'NEXT_MODEL={next_model}')
         print(f'NEXT_MODEL={next_model}', file=fh)
 
+def get_model_version_from_json(test_model_name):
+    with open('models_versions.json', 'r') as json_file:
+        models_versions = json.load(json_file)
+        return models_versions.get(test_model_name, None)
 
-def get_latest_model_version(registry_ml_client, test_model_name):
+
+def get_latest_model_version(registry_ml_client, test_model_name, version_to_fetch):
     print("In get_latest_model_version...")
     version_list = list(registry_ml_client.models.list(test_model_name))
     
@@ -316,8 +321,15 @@ if __name__ == "__main__":
 
 
     print("model name replaced with - :", {test_model_name})
+
+    version_to_fetch = get_model_version_from_json(test_model_name.lower())
+    if version_to_fetch is None:
+        print(f"Error: Model version for {test_model_name} not found in the JSON file.")
+
+    
     #foundation_model_ft = get_latest_model_version_ft(registry_ml_client_sku, test_model_name.lower())
-    foundation_model = get_latest_model_version(registry_ml_client, test_model_name.lower())
+    #foundation_model = get_latest_model_version(registry_ml_client, test_model_name.lower())
+    foundation_model_ft = get_latest_model_version_ft(registry_ml_client_sku, test_model_name.lower(), version_to_fetch)
 
     primary_task = HfTask(model_name=test_model_name).get_task()
     print("Task is this: ", primary_task)
