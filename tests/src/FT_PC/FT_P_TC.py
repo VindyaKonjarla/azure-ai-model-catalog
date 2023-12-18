@@ -398,7 +398,7 @@ if __name__ == "__main__":
     version_to_fetch = get_model_version_from_json(test_model_name.lower())
     
     if version_to_fetch is None:
-    print(f"Error: Model version for {test_model_name} not found in the JSON file.")
+        print(f"Error: Model version for {test_model_name} not found in the JSON file.")
 
     
     foundation_model_ft = get_latest_model_version_ft(registry_ml_client_sku, test_model_name.lower(), version_to_fetch)
