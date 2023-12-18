@@ -1,10 +1,167 @@
 {
-    "summarization":"FT-TS",
-    "text-summarization":"FT-TS",
-    "translation": "FT-TT",
-    "text-translation":"FT-TT",
-    "text-classification":"FT-TC",
-    "text-generation": "FT-TG",
-    "question-answering": "FT-QA",
-    "token-classification": "FT-NER"
+    "bert-base-cased":{
+        "text-classification":"FT-TC",
+        "token-classification": "FT-NER",
+        "question-answering": "FT-QA"
+    },
+    "gpt2":{
+        "text-classification":"FT-TC",
+        "token-classification": "FT-NER"
+    },
+    "gpt2-large":{
+        "text-classification":"FT-TC",
+        "token-classification": "FT-NER"
+    },
+    "mistralai-Mistral-7B-v01":{
+        "text-generation": "FT-TG"
+    },
+    "tiiuae-falcon-7b":{
+        "text-classification":"FT-TC"
+    },
+    "facebook-bart-large-cnn":{
+        "summarization":"FT-TS",
+        "translation": "FT-TT"
+    },
+    "t5-small":{
+        "summarization":"FT-TS",
+        "translation": "FT-TT"
+    },
+    "tiiuae-falcon-40b":{
+        "text-classification":"FT-TC"
+    },
+    "bert-large-uncased":{
+        "text-classification":"FT-TC",
+        "token-classification": "FT-NER",
+        "question-answering": "FT-QA"
+    },
+    "microsoft-deberta-large":{
+        "text-classification":"FT-TC",
+        "token-classification": "FT-NER",
+        "question-answering": "FT-QA"
+    },
+    "microsoft-deberta-xlarge":{
+        "text-classification":"FT-TC",
+        "token-classification": "FT-NER",
+        "question-answering": "FT-QA"
+    },
+    "distilbert-base-uncased":{
+        "text-classification":"FT-TC",
+        "token-classification": "FT-NER",
+        "question-answering": "FT-QA"
+    },
+    "bert-base-uncased":{
+        "text-classification":"FT-TC",
+        "token-classification": "FT-NER",
+        "question-answering": "FT-QA"
+    },
+    "bert-large-cased":{
+        "text-classification":"FT-TC",
+        "token-classification": "FT-NER",
+        "question-answering": "FT-QA"
+    },
+    "roberta-base":{
+        "text-classification":"FT-TC",
+        "token-classification": "FT-NER",
+        "question-answering": "FT-QA"
+    },
+    "microsoft-deberta-base":{
+        "text-classification":"FT-TC",
+        "token-classification": "FT-NER",
+        "question-answering": "FT-QA"
+    },
+    "roberta-large":{
+        "text-classification":"FT-TC",
+        "token-classification": "FT-NER",
+        "question-answering": "FT-QA"
+    },
+    "camembert-base":{
+        "text-classification":"FT-TC",
+        "token-classification": "FT-NER",
+        "question-answering": "FT-QA"
+    },
+    "distilroberta-base":{
+        "text-classification":"FT-TC",
+        "token-classification": "FT-NER",
+        "question-answering": "FT-QA"
+    },
+    "deepset-roberta-base-squad2":{
+        "text-classification":"FT-TC",
+        "token-classification": "FT-NER",
+        "question-answering": "FT-QA"
+    },
+    "deepset-minilm-uncased-squad2":{
+        "text-classification":"FT-TC",
+        "token-classification": "FT-NER",
+        "question-answering": "FT-QA"
+    },
+    "distilbert-base-uncased-distilled-squad":{
+        "text-classification":"FT-TC",
+        "token-classification": "FT-NER",
+        "question-answering": "FT-QA"
+    },
+    "distilbert-base-cased-distilled-squad":{
+        "text-classification":"FT-TC",
+        "token-classification": "FT-NER",
+        "question-answering": "FT-QA"
+    },
+    "finiteautomata-bertweet-base-sentiment-analysis":{
+        "text-classification":"FT-TC"
+    },
+    "roberta-large-mnli":{
+        "text-classification":"FT-TC",
+        "token-classification": "FT-NER"
+    },
+    "roberta-base-openai-detector":{
+        "text-classification":"FT-TC",
+        "token-classification": "FT-NER",
+        "question-answering": "FT-QA"
+    },
+    "distilbert-base-uncased-finetuned-sst-2-english":{
+        "text-classification":"FT-TC",
+        "token-classification": "FT-NER",
+        "question-answering": "FT-QA"
+    },
+    "microsoft-deberta-base-mnli":{
+        "text-classification":"FT-TC",
+        "token-classification": "FT-NER"
+    },
+    "roberta-large-openai-detector":{
+        "text-classification":"FT-TC",
+        "token-classification": "FT-NER",
+        "question-answering": "FT-QA"
+    },
+    "microsoft-deberta-large-mnli":{
+        "text-classification":"FT-TC",
+        "token-classification": "FT-NER"
+    },
+    "gpt2-medium":{
+        "text-classification":"FT-TC",
+        "token-classification": "FT-NER"
+    },
+    "distilgpt2":{
+        "text-classification":"FT-TC",
+        "token-classification": "FT-NER"
+    },
+    "sshleifer-distilbart-cnn-12-6":{
+        "summarization":"FT-TS",
+        "translation": "FT-TT"
+    },
+    "t5-base":{
+        "summarization":"FT-TS",
+        "translation": "FT-TT"
+    },
+    "t5-large":{
+        "summarization":"FT-TS",
+        "translation": "FT-TT"
+    },
+    "Jean-Baptiste-camembert-ner":{
+        "text-classification":"FT-TC",
+        "token-classification": "FT-NER"
+    },
+    "distilbert-base-cased":{
+        "text-classification":"FT-TC",
+        "token-classification": "FT-NER",
+        "question-answering": "FT-QA"
+    }
+    
 }
