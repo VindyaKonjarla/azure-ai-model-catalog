@@ -1,5 +1,6 @@
 {
     "bert-base-cased": "11",
-    "bert-base-uncased": "11"
+    "bert-base-uncased": "11",
+    "t5-small":"10"
   }
   
