@@ -435,7 +435,7 @@ if __name__ == "__main__":
     print("model name replaced with - :", {test_model_name})
 
 
-     version_to_fetch = get_model_version_from_json(test_model_name.lower())
+    version_to_fetch = get_model_version_from_json(test_model_name.lower())
     
     if version_to_fetch is None:
         print(f"Error: Model version for {test_model_name} not found in the JSON file.")
