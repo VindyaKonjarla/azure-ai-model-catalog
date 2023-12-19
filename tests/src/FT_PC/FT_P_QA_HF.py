@@ -373,7 +373,7 @@ if __name__ == "__main__":
     experiment_name = "hf-question-answering-"+ test_model_name
     print("Experiment name is:", {experiment_name})
 
-    registry_ml_client_sku = MLClient(credential, registry_name="azureml")
+    #registry_ml_client_sku = MLClient(credential, registry_name="azureml")
     expression_to_ignore = ["/", "\\", "|", "@", "#", ".",
                             "$", "%", "^", "&", "*", "<", ">", "?", "!", "~"]
     # Create the regular expression to ignore
@@ -441,7 +441,7 @@ if __name__ == "__main__":
     client = MlflowClient()
     
     #foundation_model, foundation_model_name = get_latest_model_version(workspace_ml_client, test_model_name.lower())
-    foundation_model = get_latest_model_version(registry_ml_client_model, test_model_name.lower())
+    #foundation_model = get_latest_model_version(registry_ml_client_model, test_model_name.lower())
     training_parameters, optimization_parameters = get_training_and_optimization_parameters(foundation_model)
     #gpus_per_node = find_gpus_in_compute(workspace_ml_client, compute)
     print(f"Number of GPUs in compute: {gpus_per_node}")
