@@ -180,6 +180,13 @@ def get_latest_model_version_ft(registry_ml_client_sku, test_model_name, version
     #print(f"Model Config : {latest_model.config}")
     return foundation_model_ft
 
+
+def get_model_version_from_json(test_model_name):
+    with open('models_versions.json', 'r') as json_file:
+        models_versions = json.load(json_file)
+        return models_versions.get(test_model_name, None)
+
+
     
 # Training parameters
 def get_training_and_optimization_parameters(foundation_model):
@@ -205,11 +212,6 @@ def get_training_and_optimization_parameters(foundation_model):
 
     return training_parameters, optimization_parameters
 
-
-def get_model_version_from_json(test_model_name):
-    with open('models_versions.json', 'r') as json_file:
-        models_versions = json.load(json_file)
-        return models_versions.get(test_model_name, None)
 
 
 def create_or_get_aml_compute(workspace_ml_client, compute_cluster, compute_cluster_size):
