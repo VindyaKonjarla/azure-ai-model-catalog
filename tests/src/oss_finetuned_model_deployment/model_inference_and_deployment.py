@@ -249,7 +249,7 @@ class ModelInferenceAndDeployemnt:
             latest_model_name = re.sub(num_pattern, '', latest_model_name)
             latest_model_name = latest_model_name.strip("-")
         # Check the model name is more then 32 character
-        if len(latest_model.name) > 32:
+        if len(latest_model.name) > 28:
             model_name = latest_model_name[:28]
             deployment_name = model_name.rstrip("-")
         else:
