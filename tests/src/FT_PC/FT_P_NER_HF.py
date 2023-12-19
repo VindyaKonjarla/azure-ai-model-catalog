@@ -413,7 +413,7 @@ if __name__ == "__main__":
     # if test_trigger_next_model == "true":
     #     set_next_trigger_model(queue)
     # print values of all above variables
-    print("Running for NER")
+    print("Running for Token Classification")
     print (f"test_subscription_id: {queue['subscription']}")
     print (f"test_resource_group: {queue['resource_group']}")
     print (f"test_workspace_name: {queue['workspace']}")
@@ -526,16 +526,6 @@ if __name__ == "__main__":
     print("timestamp_str:",{timestamp_str})
     print("timestamp:",{timestamp})
 
-
-    # try:
-    #     pipeline_job = create_and_run_azure_ml_pipeline(
-    #         foundation_model, compute_cluster, gpus_per_node, training_parameters, optimization_parameters, experiment_name
-    #     )
-    #     print("Azure ML Pipeline completed successfully.")
-    # except Exception as e:
-    #     # If an exception occurs, print the error message and exit with a non-zero exit code
-    #     print(f"Error running Azure ML Pipeline: {str(e)}")
-    #     exit(1)
 
     try:
         pipeline_job = create_and_run_azure_ml_pipeline(
