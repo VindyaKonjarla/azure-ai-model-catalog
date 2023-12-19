@@ -164,31 +164,18 @@ def get_training_and_optimization_parameters(foundation_model):
 
     return training_parameters, optimization_parameters
 
-def create_or_get_aml_compute(workspace_ml_client, compute_cluster, compute_cluster_size, computes_allow_list=None):
+def create_or_get_aml_compute(workspace_ml_client, compute_cluster, compute_cluster_size):
     try:
         compute = workspace_ml_client.compute.get(compute_cluster)
         print(f"The compute cluster '{compute_cluster}' already exists! Reusing it for the current run")
     except Exception as ex:
         print(f"Looks like the compute cluster '{compute_cluster}' doesn't exist. Creating a new one with compute size '{compute_cluster_size}'!")
 
-        # Define a list of VM sizes that are not supported for finetuning
-        unsupported_gpu_vm_list = ["standard_nc6", "standard_nc12", "standard_nc24", "standard_nc24r"]
-
         try:
+            # Attempt to create a dedicated compute
             print("Attempt #1 - Trying to create a dedicated compute")
             tier = "Dedicated"
-            if compute_cluster_size.lower() in unsupported_gpu_vm_list:
-                raise ValueError(f"VM size '{compute_cluster_size}' is not supported for finetuning.")
-        except ValueError as e:
-            print(e)
-            raise
-
-        try:
-            print("Attempt #2 - Trying to create a low priority compute. Since this is a low priority compute, the job could get pre-empted before completion.")
-            tier = "LowPriority"
-            if compute_cluster_size.lower() in unsupported_gpu_vm_list:
-                raise ValueError(f"VM size '{compute_cluster_size}' is not supported for finetuning.")
-        except ValueError as e:
+        except Exception as e:
             print(e)
             raise
 
@@ -207,15 +194,11 @@ def create_or_get_aml_compute(workspace_ml_client, compute_cluster, compute_clus
     if compute.provisioning_state.lower() == "failed":
         raise ValueError(f"Provisioning failed. Compute '{compute_cluster}' is in a failed state. Please try creating a different compute.")
 
-    if computes_allow_list is not None:
-        computes_allow_list_lower_case = [x.lower() for x in computes_allow_list]
-        if compute.size.lower() not in computes_allow_list_lower_case:
-            raise ValueError(f"VM size '{compute.size}' is not in the allow-listed computes for finetuning.")
-    
     # Determine the number of GPUs in a single node of the selected 'compute_cluster_size' compute
     gpu_count_found = False
     workspace_compute_sku_list = workspace_ml_client.compute.list_sizes()
     available_sku_sizes = []
+
     for compute_sku in workspace_compute_sku_list:
         available_sku_sizes.append(compute_sku.name)
         if compute_sku.name.lower() == compute.size.lower():
@@ -345,7 +328,7 @@ if __name__ == "__main__":
     print (f"test_workspace_name: {queue['workspace']}")
     print (f"test_model_name: {test_model_name}")
     print (f"test_sku_type: {test_sku_type}")
-    print (f"test_registry: queue['registry']")
+    print (f"test_registry: {queue['registry']}")
     print (f"test_trigger_next_model: {test_trigger_next_model}")
     print (f"test_queue: {test_queue}")
     print (f"test_set: {test_set}")
@@ -376,6 +359,18 @@ if __name__ == "__main__":
     # # generating a unique timestamp that can be used for names and versions that need to be unique
     # timestamp = str(int(time.time()))
 
+    expression_to_ignore = ["/", "\\", "|", "@", "#", ".",
+                            "$", "%", "^", "&", "*", "<", ">", "?", "!", "~"]
+    # Create the regular expression to ignore
+    regx_for_expression = re.compile(
+        '|'.join(map(re.escape, expression_to_ignore)))
+    # Check the model_name contains any of there character
+    expression_check = re.findall(regx_for_expression, test_model_name)
+    if expression_check:
+        # Replace the expression with hyphen
+        test_model_name  = regx_for_expression.sub("-", test_model_name)
+    print("model name replaced with - :", {test_model_name})
+
     version_to_fetch = get_model_version_from_json(test_model_name.lower())
     
     if version_to_fetch is None:
@@ -383,7 +378,7 @@ if __name__ == "__main__":
 
     foundation_model = get_latest_model_version(registry_ml_client_model, test_model_name.lower(), version_to_fetch)
 
-    foundation_model = get_latest_model_version(registry_ml_client_model, test_model_name.lower())
+    #foundation_model = get_latest_model_version(registry_ml_client_model, test_model_name.lower())
     fine_tune_sku = foundation_model.properties.get("finetune-recommended-sku")
     print("Finetune-recommended-sku:", {fine_tune_sku})
 
