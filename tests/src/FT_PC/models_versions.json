@@ -1,6 +1,37 @@
 {
     "bert-base-cased": "11",
     "bert-base-uncased": "11",
-    "t5-small":"10"
+    "t5-small":"10",
+    "databricks-dolly-v2-12b": "",
+    "gpt2": "",
+    "t5-small": "",
+    "bert-base-cased": "",
+    "gpt2-large": "",
+    "gpt2-medium": "",
+    "t5-base": "",
+    "t5-large": "",
+    "bert-large-cased": "",
+    "bert-base-uncased": "",
+    "bert-large-uncased": "",
+    "camembert-base": "",
+    "deepset-minilm-uncased-squad2": "",
+    "deepset-roberta-base-squad2": "",
+    "distilbert-base-cased-distilled-squad": "",
+    "distilbert-base-uncased-distilled-squad": "",
+    "distilbert-base-uncased-finetuned-sst-2-english": "",
+    "distilbert-base-uncased": "",
+    "distilgpt2": "",
+    "finiteautomata-bertweet-base-sentiment-analysis": "",
+    "microsoft-deberta-base-mnli": "",
+    "microsoft-deberta-base": "",
+    "microsoft-deberta-large-mnli": "",
+    "microsoft-deberta-large": "",
+    "microsoft-deberta-xlarge": "",
+    "roberta-base": "",
+    "roberta-large-mnli": "",
+    "roberta-large-openai-detector": "",
+    "distilroberta-base": "",
+    "roberta-large": ""
+
   }
   
