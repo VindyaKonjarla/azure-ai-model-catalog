@@ -313,6 +313,7 @@ def create_and_run_azure_ml_pipeline(
     pipeline_component_func = registry_ml_client.components.get(
         name="text_classification_pipeline", label="latest"
     )
+    print("Pipeline Component ID:", pipeline_component_func.id)
 
 
     def register_model_to_workspace(
