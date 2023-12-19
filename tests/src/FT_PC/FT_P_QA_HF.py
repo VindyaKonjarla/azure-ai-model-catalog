@@ -99,7 +99,13 @@ def create_and_get_job_studio_url(command_job, workspace_ml_client):
 
 
 
-def get_latest_model_version(registry_ml_client_model, test_model_name):
+def get_model_version_from_json(test_model_name):
+    with open('models_versions.json', 'r') as json_file:
+        models_versions = json.load(json_file)
+        return models_versions.get(test_model_name, None)
+
+
+def get_latest_model_version(registry_ml_client_model, test_model_name, version_to_fetch):
     print("In get_latest_model_version...")
     version_list = list(registry_ml_client_model.models.list(test_model_name))
     
@@ -108,9 +114,13 @@ def get_latest_model_version(registry_ml_client_model, test_model_name):
         foundation_model_name = None  # Set to None if the model is not found
         foundation_model_id = None  # Set id to None as well
     else:
-        model_version = version_list[0].version
-        foundation_model = registry_ml_client_model.models.get(
-            test_model_name, model_version)
+        for model_version in version_list:
+            if model_version.version == version_to_fetch:
+                foundation_model = registry_ml_client_model.models.get(test_model_name, version_to_fetch)
+                break
+        else:
+            # If the specified version is not found, use the latest version
+            foundation_model = registry_ml_client_model.models.get(test_model_name, version_list[0].version)
         print(
             "\n\nUsing model name: {0}, version: {1}, id: {2} for inferencing".format(
                 foundation_model.name, foundation_model.version, foundation_model.id
@@ -129,6 +139,7 @@ def get_latest_model_version(registry_ml_client_model, test_model_name):
     
     #print(f"Model Config : {latest_model.config}")
     return foundation_model
+
 
 
 def get_training_and_optimization_parameters(foundation_model):
@@ -375,8 +386,16 @@ if __name__ == "__main__":
         test_model_name  = regx_for_expression.sub("-", test_model_name)
     print("model name replaced with - :", {test_model_name})
 
+    version_to_fetch = get_model_version_from_json(test_model_name.lower())
     
-    foundation_model = get_latest_model_version(registry_ml_client_model, test_model_name.lower())
+    if version_to_fetch is None:
+        print(f"Error: Model version for {test_model_name} not found in the JSON file.")
+
+    foundation_model = get_latest_model_version(registry_ml_client_model, test_model_name.lower(), version_to_fetch)
+
+
+    
+    #foundation_model = get_latest_model_version(registry_ml_client_model, test_model_name.lower())
     fine_tune_sku = foundation_model.properties.get("finetune-recommended-sku")
     print("Finetune-recommended-sku:", {fine_tune_sku})
 
