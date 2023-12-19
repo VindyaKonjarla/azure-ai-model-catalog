@@ -179,6 +179,13 @@ def get_latest_model_version_ft(registry_ml_client_sku, test_model_name, version
     return foundation_model_ft
 
 
+def get_model_version_from_json(test_model_name):
+    with open('models_versions.json', 'r') as json_file:
+        models_versions = json.load(json_file)
+        return models_versions.get(test_model_name, None)
+
+
+
 # Training parameters
 def get_training_and_optimization_parameters(foundation_model):
     # Training parameters
