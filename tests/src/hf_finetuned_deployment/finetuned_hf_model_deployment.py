@@ -263,7 +263,7 @@ if __name__ == "__main__":
                         instance_type=instance_type,
                         task=task,
                         latest_model=registered_model,
-                        compute=compute,
+                        #compute=compute,
                         endpoint=endpoint,
                         actual_model_name=actual_model_name
                     )
