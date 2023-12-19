@@ -29,6 +29,9 @@ jobs:
         uses: azure/login@v1
         with:
           creds: ${{secrets.AZURE_CREDENTIALS}}
+      - name: set-hf-token
+        run: echo "HF_token=${{ secrets.HF_TOKEN }}" >> $GITHUB_ENV
+
 
       - name: pip-install-azure-ai-ml
         run: pip install azure-ai-ml
@@ -75,7 +78,7 @@ jobs:
       - name: deploy-model-step
         id: deploy-model-step
         working-directory: tests/src/automation_for_constant_library
-        run: python generic_initial_automation_test.py ${{ matrix.model }}
+        run: python generic_initial_automation1.py ${{ matrix.model }}
         continue-on-error: true
         
 
