@@ -299,7 +299,7 @@ class ModelInferenceAndDeployemnt:
     def model_infernce_and_deployment(self, instance_type, task, latest_model, endpoint, actual_model_name):  
         logger.info(f"latest_model: {latest_model}")
         logger.info(f"Task is : {task}")
-        scoring_file, scoring_input = self.get_task_specified_input(task=task, actual_model_name=actual_model_name)
+        # scoring_file, scoring_input = self.get_task_specified_input(task=task, actual_model_name=actual_model_name)
         # endpoint names need to be unique in a region, hence using timestamp to create unique endpoint name
         # timestamp = int(time.time())
         # online_endpoint_name = task + str(timestamp)

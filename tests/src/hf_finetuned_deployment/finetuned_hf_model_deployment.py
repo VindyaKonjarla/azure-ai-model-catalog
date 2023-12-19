@@ -237,15 +237,49 @@ if __name__ == "__main__":
         endpoint_name=endpoint_name
     )   
     logger.info("Proceeding with inference and deployment")
-    InferenceAndDeployment = ModelInferenceAndDeployemnt(
-        test_model_name=test_model_name,
-        workspace_ml_client=workspace_ml_client
-    )
-    InferenceAndDeployment.model_infernce_and_deployment(
-        instance_type=instance_type,
-        task=task,
-        latest_model=registered_model,
-        #compute=compute,
-        endpoint=endpoint,
-        actual_model_name=actual_model_name
-    )
+    
+    task_file_loc = f"task_short_name.json"
+    f = open(task_file_loc)
+    task_shortcut = ConfigBox(json.load(f))
+    # with open(task_file_loc) as f:
+    #     ConfigBox(json.load(f))
+    tasks = task_shortcut.get(azure_ml_model_name, None)
+    if tasks != None:
+        for task, starting_name in tasks.items():
+            #starting_name = task_shortcut.get(task, None)
+            if starting_name != None:
+                fianl_model_name = f"{starting_name}-{test_model_name}"
+                logger.info(f"Final model name needs to be found is {fianl_model_name}")
+                try:
+                    model_detail = ModelDetail(workspace_ml_client=workspace_ml_client)
+                    registered_model = model_detail.get_model_detail(
+                            test_model_name=fianl_model_name)
+                    logger.info(f"The registered model is this : {registered_model}")
+                    InferenceAndDeployment = ModelInferenceAndDeployemnt(
+                        test_model_name=test_model_name,
+                        workspace_ml_client=workspace_ml_client
+                    )
+                    InferenceAndDeployment.model_infernce_and_deployment(
+                        instance_type=instance_type,
+                        task=task,
+                        latest_model=registered_model,
+                        compute=compute,
+                        endpoint=endpoint,
+                        actual_model_name=actual_model_name
+                    )
+                except ResourceNotFoundError:
+                    #logger.warning("Model Resource Not found in the registry")
+                    logger.warning(f"The model not found in the workspace {fianl_model_name}")
+
+    # InferenceAndDeployment = ModelInferenceAndDeployemnt(
+    #     test_model_name=test_model_name,
+    #     workspace_ml_client=workspace_ml_client
+    # )
+    # InferenceAndDeployment.model_infernce_and_deployment(
+    #     instance_type=instance_type,
+    #     task=task,
+    #     latest_model=registered_model,
+    #     #compute=compute,
+    #     endpoint=endpoint,
+    #     actual_model_name=actual_model_name
+    # )
