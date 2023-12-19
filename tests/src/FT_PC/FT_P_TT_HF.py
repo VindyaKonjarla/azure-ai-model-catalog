@@ -399,6 +399,7 @@ if __name__ == "__main__":
     # if test_trigger_next_model == "true":
     #     set_next_trigger_model(queue)
     # print values of all above variables
+    print ("Running for Text Classification")
     print (f"test_subscription_id: {queue['subscription']}")
     print (f"test_resource_group: {queue['resource_group']}")
     print (f"test_workspace_name: {queue['workspace']}")
@@ -458,7 +459,7 @@ if __name__ == "__main__":
 
     
 
-    foundation_model = get_latest_model_version(registry_ml_client_model, test_model_name.lower())
+    #foundation_model = get_latest_model_version(registry_ml_client_model, test_model_name.lower())
     fine_tune_sku = foundation_model.properties.get("finetune-recommended-sku")
     print("Finetune-recommended-sku:", {fine_tune_sku})
 
