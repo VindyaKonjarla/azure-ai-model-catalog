@@ -399,6 +399,7 @@ if __name__ == "__main__":
     # if test_trigger_next_model == "true":
     #     set_next_trigger_model(queue)
     # print values of all above variables
+    print ("Running for Text Summarization")
     print (f"test_subscription_id: {queue['subscription']}")
     print (f"test_resource_group: {queue['resource_group']}")
     print (f"test_workspace_name: {queue['workspace']}")
@@ -431,10 +432,10 @@ if __name__ == "__main__":
     registry_ml_client = MLClient(credential, registry_name="azureml-preview-test1")
     registry_ml_client_model = MLClient(credential, registry_name="azureml")
     
-    experiment_name = "hf-text_summarization-"+ test_model_name
+    experiment_name = "hf-text-summarization-"+ test_model_name
     print("Experiment name is:", {experiment_name})
 
-    registry_ml_client_sku = MLClient(credential, registry_name="azureml")
+    #registry_ml_client_sku = MLClient(credential, registry_name="azureml")
     expression_to_ignore = ["/", "\\", "|", "@", "#", ".",
                             "$", "%", "^", "&", "*", "<", ">", "?", "!", "~"]
     # Create the regular expression to ignore
