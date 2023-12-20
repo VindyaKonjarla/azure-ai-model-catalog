@@ -383,6 +383,7 @@ def create_and_run_azure_ml_pipeline(
     # Configure pipeline settings
     pipeline_object.settings.force_rerun = True
     pipeline_object.settings.continue_on_step_failure = False
+    pipeline_object.display_name = f"HF-ft-{test_model_name}-{timestamp}"
 
     # Submit the pipeline job
     pipeline_job = workspace_ml_client.jobs.create_or_update(
