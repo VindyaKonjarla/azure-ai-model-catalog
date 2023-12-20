@@ -449,8 +449,13 @@ if __name__ == "__main__":
     mlflow.set_tracking_uri(ws.get_mlflow_tracking_uri())
     registry_ml_client = MLClient(credential, registry_name="azureml-preview-test1")
     registry_ml_client_model = MLClient(credential, registry_name="azureml")
+
+    timestamp_str = str(time.time())
+    timestamp = timestamp_str.split(".")[0]
+    print("timestamp_str:",{timestamp_str})
+    print("timestamp:",{timestamp})
     
-    experiment_name = "hf-text-classification-"+ test_model_name
+    experiment_name = "hf-text-classification-"+ test_model_name+"timestamp"
     print("Experiment name is:", {experiment_name})
 
     expression_to_ignore = ["/", "\\", "|", "@", "#", ".",
@@ -474,7 +479,7 @@ if __name__ == "__main__":
     fine_tune_sku = foundation_model.properties.get("finetune-recommended-sku")
     print("Finetune-recommended-sku:", {fine_tune_sku})
 
-    # # generating a unique timestamp that can be used for names and versions that need to be unique
+    # # generating a unique  that can be used for names and versions that need to be unique
     # timestamp = str(int(time.time()))
 
     # # Define the compute cluster name and size
@@ -531,10 +536,10 @@ if __name__ == "__main__":
 
 
     
-    timestamp_str = str(time.time())
-    timestamp = timestamp_str.split(".")[0]
-    print("timestamp_str:",{timestamp_str})
-    print("timestamp:",{timestamp})
+    # timestamp_str = str(time.time())
+    # timestamp = timestamp_str.split(".")[0]
+    # print("timestamp_str:",{timestamp_str})
+    # print("timestamp:",{timestamp})
 
 
     try:
