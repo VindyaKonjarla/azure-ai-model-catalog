@@ -319,8 +319,8 @@ if __name__ == "__main__":
     # sku_override = get_sku_override()
     # if sku_override is None:
     #     check_override = False
-    if test_trigger_next_model == "true":
-        set_next_trigger_model(queue)
+    # if test_trigger_next_model == "true":
+    #     set_next_trigger_model(queue)
     # print values of all above variables
     print("Running for Text-generation")
     print (f"test_subscription_id: {queue['subscription']}")
@@ -387,15 +387,15 @@ if __name__ == "__main__":
     # compute_cluster_size = "Standard_NC24s_v3 "
 
     compute_cluster_size = fine_tune_sku
-    compute_cluster = compute_cluster_size.replace('_', '-')
+    compute_cluster = "donotdelete-" + compute_cluster_size.replace('_', '-')
     print("Modified compute_cluster_size:", compute_cluster_size)
     print("Modified compute_cluster_size:", {compute_cluster})
     
-    # Optional: Define a list of allowed compute sizes (if any)
-    computes_allow_list = ["standard_nc6s_v3", "standard_nc12s_v2","standard_nc24s_v3","standard_NC24rs_v3","Standard_NC12s_v3"]
+    # # Optional: Define a list of allowed compute sizes (if any)
+    # computes_allow_list = ["standard_nc6s_v3", "standard_nc12s_v2","standard_nc24s_v3","standard_NC24rs_v3","Standard_NC12s_v3"]
     
     # Call the function
-    compute, gpus_per_node, compute_cluster = create_or_get_aml_compute(workspace_ml_client, compute_cluster, compute_cluster_size, computes_allow_list)
+    compute, gpus_per_node, compute_cluster = create_or_get_aml_compute(workspace_ml_client, compute_cluster, compute_cluster_size)
 
     # compute = create_or_get_compute_target(workspace_ml_client, queue.compute)
     print("printing:",{compute})
