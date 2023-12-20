@@ -4,7 +4,8 @@
         "microsoft/phi-2"
         ,"microsoft/phi-1-5",
         "deepset-minilm-uncased-squad2-oss",
-        "roberta-large-oss"
+        "roberta-large-oss",
+        "jean-baptiste-camembert-ner-oss"
     ],
     "workspace": "test-southcentralus",
     "subscription": "80c77c76-74ba-4c8c-8229-4c3b2957990c",
