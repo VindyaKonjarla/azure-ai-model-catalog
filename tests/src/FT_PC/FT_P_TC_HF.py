@@ -455,7 +455,8 @@ if __name__ == "__main__":
     print("timestamp_str:",{timestamp_str})
     print("timestamp:",{timestamp})
     
-    experiment_name = "hf-text-classification-"+ test_model_name + {timestamp}
+    experiment_name = f"hf-text-classification - {test_model_name} - {timestamp}"
+    # experiment_name = "hf-text-classification-"+ test_model_name + {timestamp}
     print("Experiment name is:", {experiment_name})
 
     expression_to_ignore = ["/", "\\", "|", "@", "#", ".",
