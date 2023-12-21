@@ -297,35 +297,37 @@ def create_and_run_azure_ml_pipeline(
         name="translation_pipeline", label="latest"
     )
 
-    def register_model_to_workspace(
-        workspace_ml_client, pipeline_job, test_model_name, timestamp
-    ):
-        print("Registering the model inside loop...")
-        model_path_from_job = "azureml://jobs/{0}/outputs/{1}".format(
-            pipeline_job.name, "trained_model"
-        )
-        finetuned_model_name = (
-            "FT-TT-" + str(test_model_name) + "-hf"
-        )
-        finetuned_model_name = finetuned_model_name.replace("/", "-")
-        print("The Finetuned model name inside loop:", finetuned_model_name)
+    # def register_model_to_workspace(
+    #     workspace_ml_client, pipeline_job, test_model_name, timestamp
+    # ):
+    #     print("Registering the model inside loop...")
+    #     model_path_from_job = "azureml://jobs/{0}/outputs/{1}".format(
+    #         pipeline_job.name, "trained_model"
+    #     )
+    #     finetuned_model_name = (
+    #         "FT-TT-" + str(test_model_name) + "-hf"
+    #     )
+    #     finetuned_model_name = finetuned_model_name.replace("/", "-")
+    #     print("The Finetuned model name inside loop:", finetuned_model_name)
 
-        print("Path to register model inside loop: ", model_path_from_job)
+    #     print("Path to register model inside loop: ", model_path_from_job)
 
-        prepare_to_register_model = Model(
-        path=model_path_from_job,
-        type=AssetTypes.MLFLOW_MODEL,
-        name=finetuned_model_name,
-        version=timestamp,  # use timestamp as version to avoid version conflict
-        description= test_model_name + " fine tuned model for emotion detection",
-        )
-        print("prepare to register model inside loop:", prepare_to_register_model)
+    #     prepare_to_register_model = Model(
+    #     path=model_path_from_job,
+    #     type=AssetTypes.MLFLOW_MODEL,
+    #     name=finetuned_model_name,
+    #     version=timestamp,  # use timestamp as version to avoid version conflict
+    #     description= test_model_name + " fine tuned model for emotion detection",
+    #     )
+    #     print("prepare to register model inside loop:", prepare_to_register_model)
     
-        registered_model = workspace_ml_client.models.create_or_update(
-            prepare_to_register_model
-        )
+    #     registered_model = workspace_ml_client.models.create_or_update(
+    #         prepare_to_register_model
+    #     )
     
-        print("Registered model inside loop: \n", registered_model)
+    #     print("Registered model inside loop: \n", registered_model)
+    
+    
     # Model Training and Pipeline Setup
     @pipeline()
     def create_pipeline():
@@ -379,9 +381,9 @@ def create_and_run_azure_ml_pipeline(
     print("Pipeline Job Completed")
 
     # Call the model registration function
-    register_model_to_workspace(
-        workspace_ml_client, pipeline_job, test_model_name, timestamp
-    )
+    # register_model_to_workspace(
+    #     workspace_ml_client, pipeline_job, test_model_name, timestamp
+    # )
     return pipeline_job
     
     
@@ -399,7 +401,7 @@ if __name__ == "__main__":
     # if test_trigger_next_model == "true":
     #     set_next_trigger_model(queue)
     # print values of all above variables
-    print ("Running for Text Translation")
+    print ("Running for Text Translation HF")
     print (f"test_subscription_id: {queue['subscription']}")
     print (f"test_resource_group: {queue['resource_group']}")
     print (f"test_workspace_name: {queue['workspace']}")
@@ -529,4 +531,4 @@ if __name__ == "__main__":
         # If an exception occurs, print the error message and exit with a non-zero exit code
         print(f"Error running Azure ML Pipeline: {str(e)}")
         sys.exit(1)
-    print("Finetuned and the registered model for Text-translation successfully")
+    print("Finetuned and the registered model for Text-translation HF successfully")
