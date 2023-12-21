@@ -277,28 +277,28 @@ def create_and_run_azure_ml_pipeline(
     print("Pipeline Component ID:", pipeline_component_func.id)
 
 
-    def register_model_to_workspace(workspace_ml_client, pipeline_job, test_model_name, timestamp):
-        print("Registering the model inside loop...")
-        model_path_from_job = "azureml://jobs/{0}/outputs/{1}".format(
-        pipeline_job.name, "trained_model")
-        finetuned_model_name = ("FT-TS-" + str(test_model_name) + "-oss")
-        finetuned_model_name = finetuned_model_name.replace("/", "-")
-        print("The Finetuned model name inside loop:", finetuned_model_name)
+    # def register_model_to_workspace(workspace_ml_client, pipeline_job, test_model_name, timestamp):
+    #     print("Registering the model inside loop...")
+    #     model_path_from_job = "azureml://jobs/{0}/outputs/{1}".format(
+    #     pipeline_job.name, "trained_model")
+    #     finetuned_model_name = ("FT-TS-" + str(test_model_name) + "-oss")
+    #     finetuned_model_name = finetuned_model_name.replace("/", "-")
+    #     print("The Finetuned model name inside loop:", finetuned_model_name)
 
-        print("Path to register model inside loop: ", model_path_from_job)
+    #     print("Path to register model inside loop: ", model_path_from_job)
 
-        prepare_to_register_model = Model(
-        path=model_path_from_job,
-        type=AssetTypes.MLFLOW_MODEL,
-        name=finetuned_model_name,
-        version=timestamp,  # use timestamp as version to avoid version conflict
-        description= test_model_name + " fine tuned model for text-summarization",
-        )
-        print("prepare to register model inside loop:", prepare_to_register_model)
+    #     prepare_to_register_model = Model(
+    #     path=model_path_from_job,
+    #     type=AssetTypes.MLFLOW_MODEL,
+    #     name=finetuned_model_name,
+    #     version=timestamp,  # use timestamp as version to avoid version conflict
+    #     description= test_model_name + " fine tuned model for text-summarization",
+    #     )
+    #     print("prepare to register model inside loop:", prepare_to_register_model)
     
-        registered_model = workspace_ml_client.models.create_or_update(
-            prepare_to_register_model
-        )
+    #     registered_model = workspace_ml_client.models.create_or_update(
+    #         prepare_to_register_model
+    #     )
 
 
     
@@ -353,9 +353,9 @@ def create_and_run_azure_ml_pipeline(
     # Wait for the pipeline job to complete
     workspace_ml_client.jobs.stream(pipeline_job.name)
     print("Pipeline Job Completed")
-    register_model_to_workspace(
-        workspace_ml_client, pipeline_job, test_model_name, timestamp
-    )
+    # register_model_to_workspace(
+    #     workspace_ml_client, pipeline_job, test_model_name, timestamp
+    # )
     return pipeline_job
     
     
