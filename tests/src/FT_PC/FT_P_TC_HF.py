@@ -383,7 +383,7 @@ def create_and_run_azure_ml_pipeline(
     # Configure pipeline settings
     pipeline_object.settings.force_rerun = True
     pipeline_object.settings.continue_on_step_failure = False
-    pipeline_object.display_name = f"HF-ft-{test_model_name}-{timestamp}"
+    #pipeline_object.display_name = f"HF-ft-{test_model_name}-{timestamp}"
 
     # Submit the pipeline job
     pipeline_job = workspace_ml_client.jobs.create_or_update(
@@ -455,8 +455,8 @@ if __name__ == "__main__":
     print("timestamp_str:",{timestamp_str})
     print("timestamp:",{timestamp})
     
-    experiment_name = f"hf-text-classification-{test_model_name}-{timestamp}"
-    # experiment_name = "hf-text-classification-"+ test_model_name + {timestamp}
+    #experiment_name = f"hf-text-classification-{test_model_name}-{timestamp}"
+    experiment_name = "hf-text-classification-"+ test_model_name
     print("Experiment name is:", {experiment_name})
 
     expression_to_ignore = ["/", "\\", "|", "@", "#", ".",
@@ -554,4 +554,4 @@ if __name__ == "__main__":
         sys.exit(1) 
 
     #pipeline_job = create_and_run_azure_ml_pipeline(foundation_model, compute_cluster, gpus_per_node, training_parameters, optimization_parameters, experiment_name)
-    print("Finetuned and the registered model for Text-classification successfully")
+    print("Finetuned and the registered model for Text-classification HF successfully")
