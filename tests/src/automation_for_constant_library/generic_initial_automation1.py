@@ -11,6 +11,8 @@ import sys
 from box import ConfigBox
 from utils.logging import get_logger
 
+huggingface_token = os.environ.get("HF_TOKEN")
+
 # constants
 check_override = True
 
