@@ -10,13 +10,16 @@ import os
 import sys
 from box import ConfigBox
 from utils.logging import get_logger
-
+#from HF_credentials import get_huggingface_token
 huggingface_token = os.environ.get("HF_TOKEN")
 
 # constants
 check_override = True
 
 logger = get_logger(__name__)
+
+def get_huggingface_token():
+    return os.environ.get('HF_token', '')
 
 def get_error_messages():
     # load ../config/errors.json into a dictionary
@@ -190,7 +193,7 @@ if __name__ == "__main__":
     latest_env = workspace_ml_client.environments.get(
         name=queue.environment, version=str(latest_version))
     logger.info(f"Latest Environment : {latest_env}")
-    command_job = run_azure_ml_job(code="./", command_to_run="python generic_model_download_and_register.py",
+    command_job = run_azure_ml_job(code="./", command_to_run="python generic_model_download_and_register1.py",
                                    environment=latest_env, compute=queue.compute, environment_variables=environment_variables)
     create_and_get_job_studio_url(command_job, workspace_ml_client)
 
