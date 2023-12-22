@@ -208,7 +208,6 @@ if __name__ == "__main__":
             instance_type=queue.instance_type
         )
     except Exception as ex:
-
         logger.error(f"Error processing model {test_model_name}: {str(ex)}")
         logger.warning("Continuing to the next model in the queue.")
         continue
