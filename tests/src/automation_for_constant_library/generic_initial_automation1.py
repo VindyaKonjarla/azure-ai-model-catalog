@@ -207,4 +207,6 @@ if __name__ == "__main__":
         InferenceAndDeployment.model_infernce_and_deployment(
             instance_type=queue.instance_type
         )
+if test_trigger_next_model:
+    set_next_trigger_model(queue)     
 
