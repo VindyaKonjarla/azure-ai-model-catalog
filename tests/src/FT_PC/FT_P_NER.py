@@ -301,7 +301,7 @@ def create_and_run_azure_ml_pipeline(
     #         prepare_to_register_model
     #     )
     
-        print("Registered model inside loop: \n", registered_model)
+        # print("Registered model inside loop: \n", registered_model)
     # Model Training and Pipeline Setup
     @pipeline()
     def create_pipeline():
