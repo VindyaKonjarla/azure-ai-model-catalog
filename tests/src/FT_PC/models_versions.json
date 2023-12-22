@@ -30,7 +30,8 @@
     "distilroberta-base": "10",
     "roberta-large": "12",
     "facebook-bart-large-cnn": "10",
-    "Jean-Baptiste-camembert-ner": "12"
+    "Jean-Baptiste-camembert-ner": "12",
+    "Llama-2-70b": "15"
 
   }
   
