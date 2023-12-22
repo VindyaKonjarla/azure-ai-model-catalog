@@ -78,7 +78,7 @@ def set_next_trigger_model(queue):
 # file the index of test_model_name in models list queue dictionary
     model_list = list(queue.models)
     #model_name_without_slash = test_model_name.replace('/', '-')
-    check_mlflow_model = test_model_name
+    check_mlflow_model = test_model_name.replace('/', '-')
     if check_mlflow_model in model_list:
         index = model_list.index(check_mlflow_model)
     else:
