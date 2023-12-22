@@ -342,7 +342,7 @@ if __name__ == "__main__":
     )
     mlflow.set_tracking_uri(ws.get_mlflow_tracking_uri())
 
-    registry_ml_client = MLClient(credential, registry_name="azureml")
+    registry_ml_client = MLClient(credential, registry_name="azureml-meta")
     expression_to_ignore = ["/", "\\", "|", "@", "#", ".",
                             "$", "%", "^", "&", "*", "<", ">", "?", "!", "~"]
     # Create the regular expression to ignore
