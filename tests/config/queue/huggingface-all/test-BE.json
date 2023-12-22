@@ -1,7 +1,7 @@
 {
     "queue_name": "test-BE",
     "models": [
-         "hf-ft-finiteautomata/bertweet-base-sentiment-analysis"
+         "oss-ft-t5-small"
 
     ],
     "workspace": "test-eastus",
