@@ -134,15 +134,47 @@ def create_and_get_job_studio_url(command_job, workspace_ml_client):
     workspace_ml_client.jobs.stream(returned_job.name)
     return returned_job.studio_url
 
+
+def run_model(test_model_name, queue, model_list):
+    try:
+        # Code to run the model (using generic_model_download_and_register1.py)
+        command_job = run_azure_ml_job(
+            code="./",
+            command_to_run="python generic_model_download_and_register1.py",
+            environment=latest_env,
+            compute=queue.compute,
+            environment_variables={
+                "AZUREML_ARTIFACTS_DEFAULT_TIMEOUT": 600.0,
+                "test_model_name": test_model_name
+            }
+        )
+        create_and_get_job_studio_url(command_job, workspace_ml_client)
+
+        InferenceAndDeployment = ModelInferenceAndDeployemnt(
+            test_model_name=test_model_name.lower(),
+            workspace_ml_client=workspace_ml_client,
+            registry=queue.registry
+        )
+        InferenceAndDeployment.model_infernce_and_deployment(
+            instance_type=queue.instance_type
+        )
+
+    except Exception as e:
+        print(f"Model {test_model_name} failed with error: {e}")
+        return False  # Indicate model failure
+
+    return True  # Indicate model success
+
+
 if __name__ == "__main__":
     # if any of the above are not set, exit with error
     # if test_model_name is None or test_sku_type is None or test_queue is None or test_set is None or test_trigger_next_model is None or test_keep_looping is None:
     #     logger.error("::error:: One or more of the environment variables test_model_name, test_sku_type, test_queue, test_set, test_trigger_next_model, test_keep_looping are not set")
     #     exit(1)
 
-    queue = get_test_queue()
-    model_list = list(queue.models)
-    for test_model_name in model_list:
+    # queue = get_test_queue()
+    # model_list = list(queue.models)
+    # for test_model_name in model_list:
     
         # sku_override = get_sku_override()
         # if sku_override is None:
@@ -207,6 +239,16 @@ if __name__ == "__main__":
         InferenceAndDeployment.model_infernce_and_deployment(
             instance_type=queue.instance_type
         )
-if test_trigger_next_model:
-    set_next_trigger_model(queue)     
+
+    queue = get_test_queue()
+    model_list = list(queue.models)
+
+    for test_model_name in model_list:
+        if run_model(test_model_name, queue, model_list):
+            break  # Exit loop if a model runs successfully
+
+    else:  # Executed only if all models in the queue failed
+        print("All models in the queue failed.")
+# if test_trigger_next_model:
+#     set_next_trigger_model(queue)     
 
