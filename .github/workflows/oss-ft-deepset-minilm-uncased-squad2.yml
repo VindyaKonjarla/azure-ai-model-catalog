@@ -1,4 +1,4 @@
-name: oss-ft-deepset/minilm-uncased-squad2
+name: hf-ft-deepset/minilm-uncased-squad2
 
 on: 
   workflow_dispatch:
@@ -45,7 +45,7 @@ jobs:
       run: pip install fugashi[unidic-lite]   
     - name: deploy-model-step
       id: deploy-model-step
-      run: python FT_P_All_prl.py
+      run: python FT_P_All_prl_HF.py
       working-directory: tests/src/FT_PC
     - name: trigger-next-model-step
       env:
