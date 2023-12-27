@@ -72,31 +72,54 @@ def get_sku_override():
 
 # finds the next model in the queue and sends it to github step output
 # so that the next step in this job can pick it up and trigger the next model using 'gh workflow run' cli command
+# def set_next_trigger_model(queue):
+#     logger.info("In set_next_trigger_model...")
+# # file the index of test_model_name in models list queue dictionary
+#     model_list = list(queue.models)
+#     #model_name_without_slash = test_model_name.replace('/', '-')
+#     check_mlflow_model = test_model_name.replace('/', '-')
+#     if check_mlflow_model in model_list:
+#         index = model_list.index(check_mlflow_model)
+#     else:
+#         index = model_list.index(test_model_name)
+#     #index = model_list.index(test_model_name)
+#     logger.info(f"index of {test_model_name} in queue: {index}")
+# # if index is not the last element in the list, get the next element in the list
+#     if index < len(model_list) - 1:
+#         next_model = model_list[index + 1]
+#     else:
+#         if (test_keep_looping == "true"):
+#             next_model = queue[0]
+#         else:
+#             logger.warning("::warning:: finishing the queue")
+#             next_model = ""
+# # write the next model to github step output
+#     with open(os.environ['GITHUB_OUTPUT'], 'a') as fh:
+#         logger.info(f'NEXT_MODEL={next_model}')
+#         print(f'NEXT_MODEL={next_model}', file=fh)
+
 def set_next_trigger_model(queue):
     logger.info("In set_next_trigger_model...")
-# file the index of test_model_name in models list queue dictionary
+    
     model_list = list(queue.models)
-    #model_name_without_slash = test_model_name.replace('/', '-')
     check_mlflow_model = test_model_name.replace('/', '-')
+    
     if check_mlflow_model in model_list:
         index = model_list.index(check_mlflow_model)
     else:
         index = model_list.index(test_model_name)
-    #index = model_list.index(test_model_name)
-    logger.info(f"index of {test_model_name} in queue: {index}")
-# if index is not the last element in the list, get the next element in the list
-    if index < len(model_list) - 1:
-        next_model = model_list[index + 1]
-    else:
-        if (test_keep_looping == "true"):
-            next_model = queue[0]
-        else:
-            logger.warning("::warning:: finishing the queue")
-            next_model = ""
-# write the next model to github step output
+    
+    logger.info(f"Index of {test_model_name} in queue: {index}")
+
+    # Get the next model
+    next_index = (index + 1) % len(model_list) if test_keep_looping == "true" else index + 1
+    next_model = model_list[next_index] if next_index < len(model_list) else None
+
+    # Write the next model to GitHub step output
     with open(os.environ['GITHUB_OUTPUT'], 'a') as fh:
         logger.info(f'NEXT_MODEL={next_model}')
         print(f'NEXT_MODEL={next_model}', file=fh)
+
 
 
 def create_or_get_compute_target(ml_client,  compute):
