@@ -165,8 +165,31 @@ def run_model(test_model_name, queue, model_list):
 
     return True  # Indicate model success
 
+def run_all_models(queue, model_list):
+    success = False
+    for test_model_name in model_list:
+        success = run_model(test_model_name, queue)
+        if success:
+            break  # Exit loop if a model runs successfully
+
+    return success
+
+
 
 if __name__ == "__main__":
+    queue = get_test_queue()
+    model_list = list(queue.models)
+
+    # Run all models in the list
+    success = run_all_models(queue, model_list)
+
+    # If no models were successful, print a message
+    if not success:
+        print("All models in the queue failed.")
+    
+    # Trigger next model if needed
+    if test_trigger_next_model == "true":
+        set_next_trigger_model(queue)
     # if any of the above are not set, exit with error
     # if test_model_name is None or test_sku_type is None or test_queue is None or test_set is None or test_trigger_next_model is None or test_keep_looping is None:
     #     logger.error("::error:: One or more of the environment variables test_model_name, test_sku_type, test_queue, test_set, test_trigger_next_model, test_keep_looping are not set")
@@ -240,15 +263,15 @@ if __name__ == "__main__":
             instance_type=queue.instance_type
         )
     
-queue = get_test_queue()
-model_list = list(queue.models)
+# queue = get_test_queue()
+# model_list = list(queue.models)
 
-for test_model_name in model_list:
-    if run_model(test_model_name, queue, model_list):
-        break  # Exit loop if a model runs successfully
+# for test_model_name in model_list:
+#     if run_model(test_model_name, queue, model_list):
+#         break  # Exit loop if a model runs successfully
 
-else:
-    print("All models in the queue failed.")
+# else:
+#     print("All models in the queue failed.")
     
     
      
