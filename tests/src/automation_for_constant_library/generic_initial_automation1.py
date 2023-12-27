@@ -30,7 +30,7 @@ def get_error_messages():
 error_messages = get_error_messages()
 
 # model to test
-# test_model_name = os.environ.get('test_model_name')
+ test_model_name = os.environ.get('test_model_name')
 
 # test cpu or gpu template
 test_sku_type = os.environ.get('test_sku_type')
