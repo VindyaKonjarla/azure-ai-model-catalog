@@ -208,8 +208,8 @@ if __name__ == "__main__":
             InferenceAndDeployment.model_infernce_and_deployment(
                 instance_type=queue.instance_type
             )
-       except Exception as e:
-            # Log the exception, you can customize this part based on your needs
-            logger.error(f"Error processing model {model_name}: {str(e)}")
-            # Continue to the next model
-            continue
+       # except Exception as e:
+       #      # Log the exception, you can customize this part based on your needs
+       #      logger.error(f"Error processing model {model_name}: {str(e)}")
+       #      # Continue to the next model
+        continue
