@@ -240,15 +240,15 @@ if __name__ == "__main__":
             instance_type=queue.instance_type
         )
     
-    queue = get_test_queue()
-    model_list = list(queue.models)
+queue = get_test_queue()
+model_list = list(queue.models)
 
-    for test_model_name in model_list:
-        if run_model(test_model_name, queue, model_list):
-            break  # Exit loop if a model runs successfully
+for test_model_name in model_list:
+    if run_model(test_model_name, queue, model_list):
+        break  # Exit loop if a model runs successfully
 
-        else:
-            print("All models in the queue failed.")
+else:
+    print("All models in the queue failed.")
     
     
      
