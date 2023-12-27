@@ -135,7 +135,7 @@ def create_and_get_job_studio_url(command_job, workspace_ml_client):
     return returned_job.studio_url
 
 
-def run_model(test_model_name, queue, model_list):
+def run_model(test_model_name, queue):
     try:
         # Code to run the model (using generic_model_download_and_register1.py)
         command_job = run_azure_ml_job(
