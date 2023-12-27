@@ -197,9 +197,9 @@ if __name__ == "__main__":
         logger.info(f"Latest Environment : {latest_env}")
         command_job = run_azure_ml_job(code="./", command_to_run="python generic_model_download_and_register1.py",
                                         environment=latest_env, compute=queue.compute, environment_variables=environment_variables)
-        create_and_get_job_studio_url(command_job, workspace_ml_client)
 
         try:
+            create_and_get_job_studio_url(command_job, workspace_ml_client)
             InferenceAndDeployment = ModelInferenceAndDeployemnt(
                 test_model_name=test_model_name.lower(),
                 workspace_ml_client=workspace_ml_client,
