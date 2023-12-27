@@ -82,7 +82,7 @@ def set_next_trigger_model(queue):
     if check_mlflow_model in model_list:
         index = model_list.index(check_mlflow_model)
     else:
-        index = model_list.index("MLFlow-MP-"+test_model_name)
+        index = model_list.index(test_model_name)
     #index = model_list.index(test_model_name)
     logger.info(f"index of {test_model_name} in queue: {index}")
 # if index is not the last element in the list, get the next element in the list
