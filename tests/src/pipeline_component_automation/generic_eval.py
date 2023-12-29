@@ -319,7 +319,7 @@ if __name__ == "__main__":
         registered_model_detail = ModelDetail(workspace_ml_client=workspace_ml_client)
         if test_model_name=="meta-llama/Llama-2-13b":
             test_model_name="Llama-2-13b"
-            elif test_model_name=="meta-llama/llama-2-13b-chat"
+        elif test_model_name=="meta-llama/llama-2-13b-chat":
                 test_model_name="llama-2-13b-chat"
             else:
                 test_model_name
