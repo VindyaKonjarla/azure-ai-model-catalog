@@ -2,8 +2,8 @@
     "queue_name": "test-eastus-7",
     "models": [
      
-"tiiuae/falcon-7b"
-,"sshleifer/distilbart-cnn-12-6"
+"llama-2-13b",
+        "llama-2-13b-chat"
 
 
 
