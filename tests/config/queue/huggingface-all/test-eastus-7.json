@@ -2,8 +2,8 @@
     "queue_name": "test-eastus-7",
     "models": [
      
-"llama-2-13b",
-        "llama-2-13b-chat"
+"meta-llama/Llama-2-13b",
+        "meta-llama/Llama-2-13b-chat"
 
 
 
