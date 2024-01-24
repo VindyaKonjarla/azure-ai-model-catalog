@@ -311,7 +311,8 @@ def create_and_run_azure_ml_pipeline(
 ):
     # Fetch the pipeline component
     pipeline_component_func = registry_ml_client.components.get(
-        name="text_classification_pipeline", label="latest"
+        # name="text_classification_pipeline", label="latest"
+        name="text_classification_pipeline", label="0.0.1.mixtral"
     )
     print("Pipeline Component ID:", pipeline_component_func.id)
 
