@@ -33,7 +33,7 @@ TASK_NAME = ['fill-mask', 'token-classification', 'question-answering',
              'summarization', 'text-generation', 'text-classification', 'translation','automatic-speech-recognition']
 STRING_TO_CHECK = 'transformers'
 FILE_NAME = "task_and_library.json"
-ACCESS_TOKEN = os.environ.get('access_token')
+#ACCESS_TOKEN = os.environ.get('access_token')
 
 test_model_name = os.environ.get('test_model_name')
 logger = get_logger(__name__)
@@ -173,15 +173,15 @@ class Model:
         try:
             # Load the library from the transformer
             model_library = getattr(transformers, model_library_name)
-            login(token=ACCESS_TOKEN)
+            #login(token=ACCESS_TOKEN)
             logger.info("Started loading the model from library")
             # From the library load the model
-            # model = model_library.from_pretrained(self.model_name)
-            # tokenizer = AutoTokenizer.from_pretrained(self.model_name)
-            model = model_library.from_pretrained(
-                self.model_name, trust_remote_code=True, use_auth_token=True)
-            tokenizer = AutoTokenizer.from_pretrained(
-                self.model_name, trust_remote_code=True, use_auth_token=True)
+            model = model_library.from_pretrained(self.model_name)
+            tokenizer = AutoTokenizer.from_pretrained(self.model_name)
+            # model = model_library.from_pretrained(
+            #     self.model_name, trust_remote_code=True, use_auth_token=True)
+            # tokenizer = AutoTokenizer.from_pretrained(
+            #     self.model_name, trust_remote_code=True, use_auth_token=True)
         except Exception as ex:
             logger.error(
                 f"::Error:: This model : {self.model_name} or related tokenizer can not downloaded from the AutoModel or Autotokenizer\n {ex}")
