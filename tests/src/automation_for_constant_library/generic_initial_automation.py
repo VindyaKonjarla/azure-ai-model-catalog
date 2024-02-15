@@ -73,6 +73,7 @@ def set_next_trigger_model(queue):
 # file the index of test_model_name in models list queue dictionary
     model_list = list(queue.models)
     #model_name_without_slash = test_model_name.replace('/', '-')
+    model_name = test_model_name.replace('/', '-')
     check_mlflow_model = "MLFlow-"+test_model_name
     if check_mlflow_model in model_list:
         index = model_list.index(check_mlflow_model)
@@ -199,6 +200,6 @@ if __name__ == "__main__":
             workspace_ml_client=workspace_ml_client,
             registry=queue.registry
         )
-        # InferenceAndDeployment.model_infernce_and_deployment(
-        #     instance_type=queue.instance_type
-        # )
+        InferenceAndDeployment.model_infernce_and_deployment(
+            instance_type=queue.instance_type
+        )
